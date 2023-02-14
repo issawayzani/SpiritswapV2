@@ -55,7 +55,6 @@ import {
 
 import {
   ANALYTICS,
-  BRIDGE,
   DOCS,
   FARMS,
   HOME,
@@ -87,7 +86,6 @@ import useWallets from 'app/hooks/useWallets';
 const navMenus = [
   { ...HOME, icon: <HomeIcon /> },
   { ...SWAP, icon: <SwapIcon /> },
-  { ...BRIDGE, icon: <BridgeIcon /> },
   { ...LIQUIDITY, icon: <MoneyHandIcon /> },
   { ...FARMS, icon: <FarmsIcon /> },
   { ...INSPIRIT, icon: <InSpiritIcon /> },

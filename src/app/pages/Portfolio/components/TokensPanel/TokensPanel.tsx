@@ -43,7 +43,7 @@ import { balanceReturnData, tokenData } from 'utils/data';
 import { selectTokens } from 'store/user/selectors';
 import { ArrowDiagonalIcon } from 'app/assets/icons';
 import { Button } from 'app/components/Button';
-import { BRIDGE, SWAP } from 'app/router/routes';
+import { SWAP } from 'app/router/routes';
 
 interface Props {
   tokensData: balanceReturnData;
@@ -117,9 +117,6 @@ const TokensPanel = ({ tokensData }: Props) => {
 
   const renderFooter = (): ReactNode => (
     <StyledFooter>
-      <Button variant="secondary" onClick={() => navigate(BRIDGE.path)}>
-        {t(`${translationPath}.footer.bridge`)}
-      </Button>
       <Button
         variant="secondary"
         onClick={() => navigate(`${SWAP.path}/FTM/SPIRIT`)}
@@ -201,9 +198,6 @@ const TokensPanel = ({ tokensData }: Props) => {
           t(`${translationPath}.noTokens.message.UNVERIFIED`)}
       </StyledNoTokensMessage>
       <Stack spacing={4} direction="row" align="center">
-        <Button variant="primary" onClick={() => navigate(BRIDGE.path)}>
-          {t(`${translationPath}.noTokens.action`)}
-        </Button>
         <ChakraButton
           rightIcon={<ArrowDiagonalIcon w="20px" h="auto" color="inherit" />}
           bg="ciDark"

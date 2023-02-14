@@ -10,11 +10,6 @@ export const SWAP = {
   path: 'swap',
 };
 
-export const BRIDGE = {
-  key: 'bridge',
-  path: 'bridge',
-};
-
 export const LIQUIDITY = {
   key: 'liquidity',
   path: 'liquidity',
@@ -99,7 +94,6 @@ export const APEMODE_V1 = {
 export const ROUTE_LOOKUP = {
   [HOME.key]: HOME,
   [SWAP.key]: SWAP,
-  [BRIDGE.key]: BRIDGE,
   [LIQUIDITY.key]: LIQUIDITY,
   [FARMS.key]: FARMS,
   [INSPIRIT.key]: INSPIRIT,

@@ -47,7 +47,6 @@ import {
   LENDANDBORROW,
   SWAP,
   FARMS,
-  BRIDGE,
   INSPIRIT,
   resolveRoutePath,
 } from 'app/router/routes';
@@ -197,14 +196,6 @@ const Home = () => {
       buttonNavPath: { path: FARMS.path },
       image: Earn,
       animation: FarmAnimation,
-    },
-    {
-      id: 'bridge',
-      titleIcon: <BridgeIcon />,
-      translationPath: 'home.about.bridge',
-      buttonNavPath: { path: BRIDGE.path },
-      image: Bridge,
-      animation: BridgeAnimation,
     },
     {
       id: 'inSpirit',
@@ -395,7 +386,7 @@ const Home = () => {
                           onButtonClick={
                             portfolioAmount
                               ? () => navigate(SWAP.path)
-                              : () => navigate(BRIDGE.path)
+                              : () => navigate(SWAP.path)
                           }
                         />
                         <WalletPanel

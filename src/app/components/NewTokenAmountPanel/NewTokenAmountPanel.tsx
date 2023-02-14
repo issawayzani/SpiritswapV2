@@ -35,7 +35,7 @@ import { TOKENS_BRIDGE } from 'constants/bridgeTokens';
 import useLogin from 'app/connectors/EthersConnector/login';
 import { selectIsLoggedIn } from 'store/user/selectors';
 import { useAppSelector } from 'store/hooks';
-import { LIQUIDITY, BRIDGE, resolveRoutePath } from 'app/router/routes';
+import { LIQUIDITY, resolveRoutePath } from 'app/router/routes';
 
 const NewTokenAmountPanel = ({
   token,
@@ -245,9 +245,6 @@ const NewTokenAmountPanel = ({
 
   const commonTokens = () => {
     if (notShowCommonBase) return [];
-    if (pathname === resolveRoutePath(BRIDGE.path)) {
-      return [];
-    }
     if (pathname === resolveRoutePath(LIQUIDITY.path)) return LIQUIDITY_TOKENS;
     return isOutput ? SECOND_TOKEN_AMOUNT_PANEL : FIRST_TOKEN_AMOUNT_PANEL;
   };

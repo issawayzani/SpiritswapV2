@@ -6,7 +6,6 @@ import { InspiritPage } from 'app/pages/Inspirit/Loadable';
 import { LiquidityPage } from 'app/pages/Liquidity/Loadable';
 import { FarmsPage } from 'app/pages/Farms/Loadable';
 import { SwapPage } from 'app/pages/Swap/Loadable';
-import { BridgePage } from 'app/pages/Bridge/Loadable';
 import { HomePage } from 'app/pages/Home/Loadable';
 import { ApeModePage } from 'app/pages/ApeMode/Loadable';
 import { TopBar } from 'app/layouts/TopBar';
@@ -19,7 +18,6 @@ import ScrollToTop from 'app/components/ScrollToTop';
 import { SpiritWars } from 'app/pages/SpiritWars';
 import {
   APEMODE,
-  BRIDGE,
   FARMS,
   HOME,
   INSPIRIT,
@@ -58,10 +56,6 @@ const SiteRouting = () => {
           <Route
             path={`${resolveRoutePath(SWAP.path)}/:token1/:token2`}
             element={<SwapPage />}
-          />
-          <Route
-            path={resolveRoutePath(BRIDGE.path)}
-            element={<BridgePage />}
           />
           <Route
             path={resolveRoutePath(LIQUIDITY.path)}
