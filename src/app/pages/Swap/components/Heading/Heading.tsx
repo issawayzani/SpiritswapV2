@@ -26,12 +26,12 @@ export default function Heading({ toggleSettings, helperModal, toggleChart }) {
           as={SettingSwap}
           aria-label="settings"
         />
-        <StyledIcon
+        {/* <StyledIcon
           onClick={toggleChart}
           size="sm"
           as={BusinessProductIcon}
           aria-label="business"
-        />
+        /> */}
       </HStack>
     </HStack>
   );
