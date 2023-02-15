@@ -5,7 +5,7 @@ import { useSuggestionsProps, SuggestionsTypes } from './Suggestion';
 import {
   FARMS,
   HOME,
-  INSPIRIT,
+  VSOULC,
   LIQUIDITY,
   SWAP,
   resolveRoutePath,
@@ -113,7 +113,7 @@ export function useSuggestion() {
               block: 'end',
             });
           }
-          openInSelfTab(resolveRoutePath(INSPIRIT.path));
+          openInSelfTab(resolveRoutePath(VSOULC.path));
         }}
       >
         {t(`${translationPath}.buttons.${textContent}`)}

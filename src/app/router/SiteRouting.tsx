@@ -20,7 +20,7 @@ import {
   APEMODE,
   FARMS,
   HOME,
-  INSPIRIT,
+  VSOULC,
   LIQUIDITY,
   SPIRITWARS,
   SWAP,
@@ -80,7 +80,7 @@ const SiteRouting = () => {
             />
           </Route>
           <Route
-            path={resolveRoutePath(INSPIRIT.path)}
+            path={resolveRoutePath(VSOULC.path)}
             element={<InspiritPage />}
           />
           {/* <Route path={APEMODE.path} element={<ApeModePage />} /> */}

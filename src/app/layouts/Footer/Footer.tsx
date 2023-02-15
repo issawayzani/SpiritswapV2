@@ -40,13 +40,13 @@ import {
   FARMS,
   GOVERNANCE,
   HOME,
-  INSPIRIT,
   LENDANDBORROW,
   LIQUIDITY,
   NFTS,
   SWAP,
   SPIRITWARS,
   resolveRoutePath,
+  VSOULC,
 } from 'app/router/routes';
 import { useAppDispatch } from 'store/hooks';
 import { setUnexpectedError } from 'store/errors';
@@ -55,7 +55,7 @@ const navMenus = [
   { ...HOME, image: HomeIcon },
   { ...SWAP, image: SwapIcon },
   { ...LIQUIDITY, image: LiquidityIcon },
-  { ...INSPIRIT, image: InSpiritIcon },
+  { ...VSOULC, image: InSpiritIcon },
 ];
 
 const navDropdownMenus = [

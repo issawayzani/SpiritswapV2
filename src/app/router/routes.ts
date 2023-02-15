@@ -20,8 +20,8 @@ export const FARMS = {
   path: 'farms',
 };
 
-export const INSPIRIT = {
-  key: 'inSpirit',
+export const VSOULC = {
+  key: 'vsoulc',
   path: 'inspirit',
 };
 
@@ -96,7 +96,7 @@ export const ROUTE_LOOKUP = {
   [SWAP.key]: SWAP,
   [LIQUIDITY.key]: LIQUIDITY,
   [FARMS.key]: FARMS,
-  [INSPIRIT.key]: INSPIRIT,
+  [VSOULC.key]: VSOULC,
   [LENDANDBORROW.key]: LENDANDBORROW,
   [STORE.key]: STORE,
   [ANALYTICS.key]: ANALYTICS,

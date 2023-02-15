@@ -9,7 +9,7 @@ import { truncateTokenValue } from 'app/utils';
 import { useAppSelector } from 'store/hooks';
 import { selectSpiritInfo } from 'store/general/selectors';
 import useWallets from 'app/hooks/useWallets';
-import { INSPIRIT } from 'app/router/routes';
+import { VSOULC } from 'app/router/routes';
 
 const Footer = ({ userClaimableAmount }) => {
   const { t } = useTranslation();
@@ -46,7 +46,7 @@ const Footer = ({ userClaimableAmount }) => {
         <SparklesIcon w="20px" h="20px" mr="6px" />
         {t(`${farmsTranslationPath}.claimRewards`)}
       </Button>
-      <Button onClick={() => navigate(INSPIRIT.path)} variant="secondary">
+      <Button onClick={() => navigate(VSOULC.path)} variant="secondary">
         Dashboard
       </Button>
     </HStack>
