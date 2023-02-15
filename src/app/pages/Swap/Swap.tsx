@@ -817,7 +817,7 @@ const SwapPage = () => {
                           setIndex={setModeIndex}
                           styleIndex={[2]}
                           styleVariant="danger"
-                          names={['Swap', 'Limit Buy', 'Limit Sell', 'TWAP']}
+                          names={['Swap']}
                           panels={panels}
                         />
                       </Stack>
@@ -847,7 +847,7 @@ const SwapPage = () => {
                   )
                 )}
               </SwapContainer>
-              {!swapConfirm
+              {/* {!swapConfirm
                 ? !isLimit &&
                   !showSettings && (
                     <GridItem colSpan={1}>
@@ -895,17 +895,17 @@ const SwapPage = () => {
                       </RouteContainer>
                     </GridItem>
                   )
-                : null}
+                : null} */}
             </Box>
           </GridItem>
-          <GridItem rowSpan={1} colSpan={1}>
+          {/* <GridItem rowSpan={1} colSpan={1}>
             {showChart && memorizedChart()}
             {isLimit && modeIndex !== 3 ? (
               <LimitOrders showChart={showChart} />
             ) : modeIndex === 3 ? (
               <TWAPOrders />
             ) : null}
-          </GridItem>
+          </GridItem> */}
         </Grid>
       </Box>
     </Box>
