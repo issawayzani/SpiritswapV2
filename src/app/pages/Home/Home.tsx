@@ -47,7 +47,7 @@ import {
   LENDANDBORROW,
   SWAP,
   FARMS,
-  INSPIRIT,
+  VSOULC,
   resolveRoutePath,
 } from 'app/router/routes';
 import { ConnectWallet } from 'app/components/ConnectWallet';
@@ -70,7 +70,6 @@ import { Animation } from 'app/components/Animations';
 import browser from 'browser-detect';
 import {
   SwapAnimation,
-  BridgeAnimation,
   InspiritAnimation,
   LandingAnimation,
   LendingAnimation,
@@ -201,7 +200,7 @@ const Home = () => {
       id: 'inSpirit',
       titleIcon: <InspiritIcon />,
       translationPath: 'home.about.inspirit',
-      buttonNavPath: { path: INSPIRIT.path },
+      buttonNavPath: { path: VSOULC.path },
       image: Inspirit,
       animation: InspiritAnimation,
     },
