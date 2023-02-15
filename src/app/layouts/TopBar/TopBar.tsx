@@ -86,7 +86,6 @@ import useWallets from 'app/hooks/useWallets';
 const navMenus = [
   { ...HOME, icon: <HomeIcon /> },
   { ...SWAP, icon: <SwapIcon /> },
-  { ...LIQUIDITY, icon: <MoneyHandIcon /> },
   { ...FARMS, icon: <FarmsIcon /> },
   { ...INSPIRIT, icon: <InSpiritIcon /> },
   {
