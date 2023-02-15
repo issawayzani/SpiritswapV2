@@ -88,10 +88,6 @@ const navMenus = [
   { ...SWAP, icon: <SwapIcon /> },
   { ...FARMS, icon: <FarmsIcon /> },
   { ...INSPIRIT, icon: <InSpiritIcon /> },
-  {
-    ...SPIRITWARS,
-    icon: <MartialArtsSwordFencingIcon />,
-  },
 ];
 
 const navDropdownMenus = [
