@@ -105,7 +105,7 @@ const Help: FC<Props> = ({ onGenerate }: Props) => {
       </StyledListItem>
       <ButtonGroup mt="spacing06" w="full">
         {/* LightBoxModal is a button that open up slider/carousel modal */}
-        <LightBoxModal id={'inSpirit'} width={'50%'} variant={'secondary'} />
+        <LightBoxModal id={'vSOULC'} width={'50%'} variant={'secondary'} />
 
         <Button w="50%" onClick={onGenerate}>
           {t(`${translationPath}.generateInspirit`)}

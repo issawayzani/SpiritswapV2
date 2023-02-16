@@ -197,7 +197,7 @@ const Home = () => {
       animation: FarmAnimation,
     },
     {
-      id: 'inSpirit',
+      id: 'vSOULC',
       titleIcon: <InspiritIcon />,
       translationPath: 'home.about.inspirit',
       buttonNavPath: { path: VSOULC.path },
@@ -415,7 +415,6 @@ const Home = () => {
               </WalletWrapper>
 
               <DexStatistics />
-
               <Flex px="16px" direction="column" alignItems="center">
                 {AboutSectionItems.map((item, index) => (
                   <AboutSectionItem

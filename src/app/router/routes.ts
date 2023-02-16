@@ -21,7 +21,7 @@ export const FARMS = {
 };
 
 export const VSOULC = {
-  key: 'vsoulc',
+  key: 'vSOULC',
   path: 'inspirit',
 };
 
