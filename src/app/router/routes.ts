@@ -5,8 +5,8 @@ export const HOME = {
   path: 'home',
 };
 
-export const SWAP = {
-  key: 'swap',
+export const SOULC = {
+  key: 'SOULC',
   path: 'swap',
 };
 
@@ -93,7 +93,7 @@ export const APEMODE_V1 = {
 
 export const ROUTE_LOOKUP = {
   [HOME.key]: HOME,
-  [SWAP.key]: SWAP,
+  [SOULC.key]: SOULC,
   [LIQUIDITY.key]: LIQUIDITY,
   [FARMS.key]: FARMS,
   [VSOULC.key]: VSOULC,

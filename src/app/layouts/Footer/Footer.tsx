@@ -43,7 +43,7 @@ import {
   LENDANDBORROW,
   LIQUIDITY,
   NFTS,
-  SWAP,
+  SOULC,
   SPIRITWARS,
   resolveRoutePath,
   VSOULC,
@@ -53,7 +53,7 @@ import { setUnexpectedError } from 'store/errors';
 
 const navMenus = [
   { ...HOME, image: HomeIcon },
-  { ...SWAP, image: SwapIcon },
+  { ...SOULC, image: SwapIcon },
   { ...LIQUIDITY, image: LiquidityIcon },
   { ...VSOULC, image: InSpiritIcon },
 ];

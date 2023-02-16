@@ -43,7 +43,7 @@ import { balanceReturnData, tokenData } from 'utils/data';
 import { selectTokens } from 'store/user/selectors';
 import { ArrowDiagonalIcon } from 'app/assets/icons';
 import { Button } from 'app/components/Button';
-import { SWAP } from 'app/router/routes';
+import { SOULC } from 'app/router/routes';
 
 interface Props {
   tokensData: balanceReturnData;
@@ -119,7 +119,7 @@ const TokensPanel = ({ tokensData }: Props) => {
     <StyledFooter>
       <Button
         variant="secondary"
-        onClick={() => navigate(`${SWAP.path}/FTM/SPIRIT`)}
+        onClick={() => navigate(`${SOULC.path}/FTM/SPIRIT`)}
       >
         {t(`${translationPath}.footer.swap`)}
       </Button>

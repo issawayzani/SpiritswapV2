@@ -57,7 +57,7 @@ import { useState } from 'react';
 import addresses from 'constants/contracts';
 import useWallets from 'app/hooks/useWallets';
 import useMobile from 'utils/isMobile';
-import { SWAP } from 'app/router/routes';
+import { SOULC } from 'app/router/routes';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -164,7 +164,7 @@ export default function Dashboard() {
   };
 
   const onBuySpiritClick = () => {
-    navigate(SWAP.path);
+    navigate(SOULC.path);
   };
 
   const balanceFormatted = formatNumber({

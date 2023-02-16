@@ -62,7 +62,7 @@ import {
   LENDANDBORROW,
   LIQUIDITY,
   NFTS,
-  SWAP,
+  SOULC,
   GOVERNANCE,
   APEMODE,
   SPIRITWARS,
@@ -85,7 +85,7 @@ import useWallets from 'app/hooks/useWallets';
 
 const navMenus = [
   { ...HOME, icon: <HomeIcon /> },
-  { ...SWAP, icon: <SwapIcon /> },
+  { ...SOULC, icon: <SwapIcon /> },
   { ...FARMS, icon: <FarmsIcon /> },
   { ...VSOULC, icon: <InSpiritIcon /> },
 ];
@@ -399,7 +399,7 @@ const TopBar: FC<Props> = () => {
           <HStack spacing="spacing03" justify="end" flex="1" mr="spacing04">
             {!isMobile && (
               <StyledMenuItem
-                to={resolveRoutePath(SWAP.path)}
+                to={resolveRoutePath(SOULC.path)}
                 $is_active={false}
               >
                 <Button fontSize="base" fontWeight="normal">

@@ -23,7 +23,7 @@ export const LanguageItems = [
 ];
 
 export const InfoGraphics = {
-  swap: ['swap01', 'swap02', 'swap03', 'swap04'],
+  SOULC: ['swap01', 'swap02', 'swap03', 'swap04'],
   farms: ['farms01', 'farms02', 'farms03', 'farms04', 'farms05'],
   bridge: ['bridge01', 'bridge02'],
   vSOULC: [

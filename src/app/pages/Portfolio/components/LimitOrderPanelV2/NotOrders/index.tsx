@@ -1,7 +1,7 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'app/hooks/Routing';
-import { SWAP } from 'app/router/routes';
+import { SOULC } from 'app/router/routes';
 
 const NotLimitOrders = () => {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const NotLimitOrders = () => {
         <Button
           variant="primary"
           onClick={() =>
-            navigate(`${SWAP.path}/FTM/SPIRIT`, {
+            navigate(`${SOULC.path}/FTM/SPIRIT`, {
               state: { limitOrderPanel: true } as {
                 limitOrderPanel: boolean;
               },

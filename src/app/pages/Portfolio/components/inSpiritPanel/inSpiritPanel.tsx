@@ -22,7 +22,7 @@ import { selectLiquidity } from 'store/user/selectors';
 import moment from 'moment';
 import {
   VSOULC as VSOULC_ROUTE,
-  SWAP,
+  SOULC,
   resolveRoutePath,
 } from 'app/router/routes';
 
@@ -93,7 +93,7 @@ const InSpiritPanel = ({ spiritData, inSpiritData }: inSpiritPanel) => {
   const navigateTo =
     amount && !inSpiritBalance
       ? VSOULC_ROUTE.path
-      : `${SWAP.path}/address/${address}`;
+      : `${SOULC.path}/address/${address}`;
 
   const showLoader = isLoading;
 

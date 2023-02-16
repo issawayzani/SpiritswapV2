@@ -45,7 +45,7 @@ import {
 } from 'store/user/selectors';
 import {
   LENDANDBORROW,
-  SWAP,
+  SOULC,
   FARMS,
   VSOULC,
   resolveRoutePath,
@@ -181,10 +181,10 @@ const Home = () => {
 
   const AboutSectionItems = [
     {
-      id: 'swap',
+      id: 'SOULC',
       titleIcon: <SwapIcon />,
       translationPath: 'home.about.swap',
-      buttonNavPath: { path: SWAP.path },
+      buttonNavPath: { path: SOULC.path },
       image: Swap,
       animation: SwapAnimation,
     },
@@ -384,8 +384,8 @@ const Home = () => {
                           }
                           onButtonClick={
                             portfolioAmount
-                              ? () => navigate(SWAP.path)
-                              : () => navigate(SWAP.path)
+                              ? () => navigate(SOULC.path)
+                              : () => navigate(SOULC.path)
                           }
                         />
                         <WalletPanel
