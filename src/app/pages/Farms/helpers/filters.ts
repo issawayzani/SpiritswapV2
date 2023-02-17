@@ -4,10 +4,10 @@ export const handleFarmData = (data, index) => {
   switch (index) {
     case 0:
       return data;
-    case FarmType.CLASSIC:
-      return data.filter(farm => farm.type === 'variable');
-    case FarmType.STABLE:
-      return data.filter(farm => farm.type === 'stable');
+    case FarmType.CANTO:
+      return data.filter(farm => farm.type === 'canto');
+    case FarmType.FORTE:
+      return data.filter(farm => farm.type === 'forte');
     // case FarmType.ADMIN:
     //   return data.filter(farm => farm.type === 'admin');
 

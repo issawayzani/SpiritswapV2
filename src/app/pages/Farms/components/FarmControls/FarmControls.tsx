@@ -38,8 +38,8 @@ export default function FarmControls({
           // t(`${translationPath}.weighted`),
           // t(`${translationPath}.ecosystem`),
           t(`${translationPath}.all`),
-          t(`${translationPath}.classicV2`),
-          t(`${translationPath}.stable`),
+          t(`${translationPath}.canto`),
+          t(`${translationPath}.forte`),
           //t(`${translationPath}.admin`),
         ]}
         onChange={onFarmTabChange}

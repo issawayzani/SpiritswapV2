@@ -1,6 +1,6 @@
 import { WhiteList } from './types';
 
-export const STABLE_BASE: WhiteList = {
+export const FORTE_BASE: WhiteList = {
   USDC: {
     name: 'USD Coin',
     symbol: 'USDC',
@@ -10,7 +10,7 @@ export const STABLE_BASE: WhiteList = {
   },
 };
 
-export const STABLE_LIST: WhiteList = {
+export const FORTE_LIST: WhiteList = {
   FUSDT: {
     name: 'Frapped USDT',
     symbol: 'fUSDT',
@@ -69,8 +69,8 @@ export const STABLE_LIST: WhiteList = {
   },
 };
 
-// VARIABLES
-export const VARIABLES_BASE: WhiteList = {
+// CANTO
+export const CANTO_BASE: WhiteList = {
   WFTM: {
     name: 'Wrapped Fantom',
     symbol: 'WFTM',
@@ -80,7 +80,7 @@ export const VARIABLES_BASE: WhiteList = {
   },
 };
 
-export const VARIABLES_LIST: WhiteList = {
+export const CANTO_LIST: WhiteList = {
   BTC: {
     name: 'Wrapped BTC',
     symbol: 'WBTC',

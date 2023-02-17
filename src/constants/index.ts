@@ -163,7 +163,10 @@ export const FTM_TOKEN_NULL_ADDRESS = {
   chainId: CHAIN_ID,
   name: 'Fantom',
 };
-export const VARIABLE = 'Variable';
-export const STABLE = 'Stable';
+// export const VARIABLE = 'Variable';
+// export const STABLE = 'Stable';
+
+export const CANTO = 'CantoDex';
+export const FORTE = 'ForteSwap';
 
 export const TOKENS_WITH_HIGH_SLIPPAGE = [wBOMB.address.toLowerCase()];
