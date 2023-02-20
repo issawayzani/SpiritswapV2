@@ -127,7 +127,7 @@
     "about": {
       "swap": {
         "title": "Swap your favourite tokens",
-        "description": "SpiritSwap is a decentralized exchange (DEX) on the Fantom Opera Chain.</br></br>Our current AMM architecture is proprietary, combining our upgraded uniV2 AMM with our brand new stable swap. This combination delivers the unique ability to achieve lightning quick swaps at the best rates the market has to offer.",
+        "description": "SoullyCanto is a decentralized exchange (DEX) on the Canto Chain.</br></br>Our current AMM architecture is proprietary, combining our upgraded uniV2 AMM with our brand new stable swap. This combination delivers the unique ability to achieve lightning quick swaps at the best rates the market has to offer.",
         "button": "Swap",
         "trading": {
           "max": "Max",
