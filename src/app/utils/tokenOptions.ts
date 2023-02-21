@@ -2,7 +2,7 @@ import { CHAIN_ID, FTM } from 'constants/index';
 import { NETWORK } from 'constants/networks';
 import { verifiedTokenData } from 'utils/data/balances';
 import { verifiedLpTokenData } from 'utils/data/pools';
-import { SWAP, FARMS, ROUTE_LOOKUP } from 'app/router/routes';
+import { SOULC, FARMS, ROUTE_LOOKUP } from 'app/router/routes';
 
 const Tokens = verifiedTokenData();
 const LPTokens = verifiedLpTokenData();
@@ -52,9 +52,9 @@ export const TokenOptions = (
         }
 
         if (tokenAddress === FTM.address) {
-          return navigate(SWAP.path);
+          return navigate(SOULC.path);
         }
-        navigate(`${SWAP.path}/${token.symbol}/FTM`);
+        navigate(`${SOULC.path}/${token.symbol}/FTM`);
       },
     };
 
@@ -94,7 +94,7 @@ export const TokenOptions = (
         }
 
         if (tokenAddress === FTM.address) {
-          return navigate(SWAP.path);
+          return navigate(SOULC.path);
         }
 
         const targetPath = ROUTE_LOOKUP[target]?.path;

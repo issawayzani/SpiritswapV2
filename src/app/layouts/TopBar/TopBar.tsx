@@ -58,11 +58,11 @@ import {
   DOCS,
   FARMS,
   HOME,
-  INSPIRIT,
+  VSOULC,
   LENDANDBORROW,
   LIQUIDITY,
   NFTS,
-  SWAP,
+  SOULC,
   GOVERNANCE,
   APEMODE,
   SPIRITWARS,
@@ -85,9 +85,9 @@ import useWallets from 'app/hooks/useWallets';
 
 const navMenus = [
   { ...HOME, icon: <HomeIcon /> },
-  { ...SWAP, icon: <SwapIcon /> },
+  { ...SOULC, icon: <SwapIcon /> },
   { ...FARMS, icon: <FarmsIcon /> },
-  { ...INSPIRIT, icon: <InSpiritIcon /> },
+  { ...VSOULC, icon: <InSpiritIcon /> },
 ];
 
 const navDropdownMenus = [
@@ -288,7 +288,7 @@ const TopBar: FC<Props> = () => {
           ...Array.from(
             new Set([
               ...navDropdownMenus,
-              INSPIRIT,
+              VSOULC,
               FARMS,
               LIQUIDITY,
               SPIRITWARS,
@@ -301,7 +301,7 @@ const TopBar: FC<Props> = () => {
         setNavMenuItems(navMenus.slice(0, -3));
         setNavDropdownItems([
           ...Array.from(
-            new Set([...navDropdownMenus, INSPIRIT, FARMS, SPIRITWARS]),
+            new Set([...navDropdownMenus, VSOULC, FARMS, SPIRITWARS]),
           ),
         ]);
       }, 100);
@@ -309,7 +309,7 @@ const TopBar: FC<Props> = () => {
       setTimeout(() => {
         setNavMenuItems(navMenus.slice(0, -2));
         setNavDropdownItems([
-          ...Array.from(new Set([...navDropdownMenus, INSPIRIT, SPIRITWARS])),
+          ...Array.from(new Set([...navDropdownMenus, VSOULC, SPIRITWARS])),
         ]);
       }, 100);
     } else if (isLg2) {
@@ -399,7 +399,7 @@ const TopBar: FC<Props> = () => {
           <HStack spacing="spacing03" justify="end" flex="1" mr="spacing04">
             {!isMobile && (
               <StyledMenuItem
-                to={resolveRoutePath(SWAP.path)}
+                to={resolveRoutePath(SOULC.path)}
                 $is_active={false}
               >
                 <Button fontSize="base" fontWeight="normal">

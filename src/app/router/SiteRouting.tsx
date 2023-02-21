@@ -20,10 +20,10 @@ import {
   APEMODE,
   FARMS,
   HOME,
-  INSPIRIT,
+  VSOULC,
   LIQUIDITY,
   SPIRITWARS,
-  SWAP,
+  SOULC,
   resolveRoutePath,
 } from './routes';
 
@@ -44,17 +44,17 @@ const SiteRouting = () => {
             element={<Navigate to={resolveRoutePath(HOME.path)} />}
           />
           <Route path={resolveRoutePath(HOME.path)} element={<HomePage />} />
-          <Route path={resolveRoutePath(SWAP.path)} element={<SwapPage />} />
+          <Route path={resolveRoutePath(SOULC.path)} element={<SwapPage />} />
           <Route
-            path={`${resolveRoutePath(SWAP.path)}/address/:address`}
+            path={`${resolveRoutePath(SOULC.path)}/address/:address`}
             element={<SwapPage />}
           />
           <Route
-            path={`${resolveRoutePath(SWAP.path)}/:token1`}
+            path={`${resolveRoutePath(SOULC.path)}/:token1`}
             element={<SwapPage />}
           />{' '}
           <Route
-            path={`${resolveRoutePath(SWAP.path)}/:token1/:token2`}
+            path={`${resolveRoutePath(SOULC.path)}/:token1/:token2`}
             element={<SwapPage />}
           />
           <Route
@@ -80,7 +80,7 @@ const SiteRouting = () => {
             />
           </Route>
           <Route
-            path={resolveRoutePath(INSPIRIT.path)}
+            path={resolveRoutePath(VSOULC.path)}
             element={<InspiritPage />}
           />
           {/* <Route path={APEMODE.path} element={<ApeModePage />} /> */}

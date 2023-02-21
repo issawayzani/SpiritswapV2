@@ -40,6 +40,8 @@ export default function FarmControls({
           t(`${translationPath}.all`),
           t(`${translationPath}.canto`),
           t(`${translationPath}.forte`),
+          // t(`${translationPath}.CantoDex`),
+          // t(`${translationPath}.ForteSwap`),
           //t(`${translationPath}.admin`),
         ]}
         onChange={onFarmTabChange}

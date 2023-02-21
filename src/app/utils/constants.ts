@@ -23,16 +23,16 @@ export const LanguageItems = [
 ];
 
 export const InfoGraphics = {
-  swap: ['swap01', 'swap02', 'swap03', 'swap04'],
+  SOULC: ['swap01', 'swap02', 'swap03', 'swap04'],
   farms: ['farms01', 'farms02', 'farms03', 'farms04', 'farms05'],
   bridge: ['bridge01', 'bridge02'],
-  inSpirit: [
-    'inspirit01',
-    'inspirit02',
-    'inspirit03',
-    'inspirit04',
-    'inspirit05',
-    'inspirit06',
+  vSOULC: [
+    'vSOULC01',
+    'vSOULC02',
+    'vSOULC03',
+    'vSOULC04',
+    'vSOULC05',
+    'vSOULC06',
   ],
   leverage: ['ape01', 'ape02', 'ape03', 'ape04'],
   lend: ['lend01', 'lend02', 'lend03', 'lend04', 'lend05', 'lend06'],

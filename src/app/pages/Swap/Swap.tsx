@@ -57,7 +57,7 @@ import useSettings from 'app/hooks/useSettings';
 import { useTokenBalance } from 'app/hooks/useTokenBalance';
 import TWAPPanel from 'app/components/TWAP/TWAPPanel';
 import TWAPOrders from 'app/components/TWAP/TWAPOrders';
-import { SWAP } from 'app/router/routes';
+import { SOULC } from 'app/router/routes';
 
 const SwapPage = () => {
   const { t } = useTranslation();
@@ -98,7 +98,7 @@ const SwapPage = () => {
   const setToken = (inputToken: Token, outputToken: Token) => {
     try {
       if (inputToken.symbol === outputToken.symbol) {
-        navigate(`${SWAP.path}/FTM/SPIRIT`, { replace: true });
+        navigate(`${SOULC.path}/FTM/SPIRIT`, { replace: true });
         return [allTokens[0], allTokens[1]];
       }
       return [inputToken, outputToken];
@@ -194,14 +194,14 @@ const SwapPage = () => {
   useEffect(() => {
     if (queriedTokenOne && !queriedTokenTwo) {
       return navigate(
-        `${SWAP.path}/${queriedTokenOne.symbol}/${
+        `${SOULC.path}/${queriedTokenOne.symbol}/${
           queriedTokenOne.symbol === 'SPIRIT' ? 'FTM' : 'SPIRIT'
         }`,
         { replace: true },
       );
     }
     if (!queriedTokenOne) {
-      return navigate(`${SWAP.path}/FTM/SPIRIT`, { replace: true });
+      return navigate(`${SOULC.path}/FTM/SPIRIT`, { replace: true });
     }
   }, [queriedTokenOne, queriedTokenTwo, navigate]);
 
@@ -575,7 +575,7 @@ const SwapPage = () => {
         changeRateParams(firstToken.value, type, txType, newToken, secondToken);
       }
       navigate(
-        `${SWAP.path}/${newToken.tokenSelected.symbol}/${
+        `${SOULC.path}/${newToken.tokenSelected.symbol}/${
           firstIsSameAsSecond
             ? defaultOtherToken
             : secondToken.tokenSelected.symbol
@@ -602,7 +602,7 @@ const SwapPage = () => {
       }
 
       navigate(
-        `${SWAP.path}/${
+        `${SOULC.path}/${
           secondIsSameAsFirst
             ? defaultOtherToken
             : firstToken.tokenSelected.symbol
@@ -658,7 +658,7 @@ const SwapPage = () => {
     setFirstToken(token2);
     setSecondToken(token1);
     navigate(
-      `${SWAP.path}/${token2.tokenSelected.symbol}/${token1.tokenSelected.symbol}`,
+      `${SOULC.path}/${token2.tokenSelected.symbol}/${token1.tokenSelected.symbol}`,
       { replace: true },
     );
     changeRateParams(firstToken.value, 0, 'swap', token2, token1);
@@ -817,7 +817,7 @@ const SwapPage = () => {
                           setIndex={setModeIndex}
                           styleIndex={[2]}
                           styleVariant="danger"
-                          names={['Swap', 'Limit Buy', 'Limit Sell', 'TWAP']}
+                          names={['Swap']}
                           panels={panels}
                         />
                       </Stack>
@@ -847,7 +847,7 @@ const SwapPage = () => {
                   )
                 )}
               </SwapContainer>
-              {!swapConfirm
+              {/* {!swapConfirm
                 ? !isLimit &&
                   !showSettings && (
                     <GridItem colSpan={1}>
@@ -895,17 +895,17 @@ const SwapPage = () => {
                       </RouteContainer>
                     </GridItem>
                   )
-                : null}
+                : null} */}
             </Box>
           </GridItem>
-          <GridItem rowSpan={1} colSpan={1}>
+          {/* <GridItem rowSpan={1} colSpan={1}>
             {showChart && memorizedChart()}
             {isLimit && modeIndex !== 3 ? (
               <LimitOrders showChart={showChart} />
             ) : modeIndex === 3 ? (
               <TWAPOrders />
             ) : null}
-          </GridItem>
+          </GridItem> */}
         </Grid>
       </Box>
     </Box>

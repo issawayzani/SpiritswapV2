@@ -1,5 +1,20 @@
 import { Token } from 'app/interfaces/General';
 
+export const SOULC = {
+  name: 'Soul C',
+  symbol: 'SOULC',
+  // address: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83',
+  // chainId: 250,
+  // decimals: 18,
+};
+export const WCANTO = {
+  name: 'Wrapped Canto',
+  symbol: 'WCANTO',
+  // address: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83',
+  // chainId: 250,
+  // decimals: 18,
+};
+
 export const WFTM = {
   name: 'Wrapped Fantom',
   symbol: 'WFTM',

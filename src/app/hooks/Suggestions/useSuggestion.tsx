@@ -5,9 +5,9 @@ import { useSuggestionsProps, SuggestionsTypes } from './Suggestion';
 import {
   FARMS,
   HOME,
-  INSPIRIT,
+  VSOULC,
   LIQUIDITY,
-  SWAP,
+  SOULC,
   resolveRoutePath,
 } from 'app/router/routes';
 import { openInSelfTab } from 'app/utils/redirectTab';
@@ -96,7 +96,7 @@ export function useSuggestion() {
   // );
 
   const swapButton = (
-    <Button onClick={() => openInSelfTab(resolveRoutePath(SWAP.path))}>
+    <Button onClick={() => openInSelfTab(resolveRoutePath(SOULC.path))}>
       {t(`${translationPath}.buttons.swap`)}
     </Button>
   );
@@ -113,7 +113,7 @@ export function useSuggestion() {
               block: 'end',
             });
           }
-          openInSelfTab(resolveRoutePath(INSPIRIT.path));
+          openInSelfTab(resolveRoutePath(VSOULC.path));
         }}
       >
         {t(`${translationPath}.buttons.${textContent}`)}

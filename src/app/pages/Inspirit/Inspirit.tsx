@@ -33,7 +33,7 @@ const InspiritPage = () => {
           gap=".5rem"
           p={{ base: '0rem .5rem', md: 0 }}
         >
-          <Aside spiritLocked={!spiritLocked} />
+          {/* <Aside spiritLocked={!spiritLocked} /> */}
           <Stats />
         </Flex>
 

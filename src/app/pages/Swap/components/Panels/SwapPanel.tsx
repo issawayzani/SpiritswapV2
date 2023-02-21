@@ -341,7 +341,7 @@ export default function SwapPanel({ panelProps, isWrapped }) {
           </Button>
         </Text>
       </SimpleGrid>
-      <Box textAlign="right" mt="16px">
+      {/* <Box textAlign="right" mt="16px">
         <Text
           fontSize="12px"
           _hover={{
@@ -352,7 +352,7 @@ export default function SwapPanel({ panelProps, isWrapped }) {
           Powered by {''}
           <ParaSwapLogo h="auto" w="90px" />
         </Text>
-      </Box>
+      </Box> */}
       <ConnectWallet isOpen={isOpen} dismiss={onClose} />
     </Box>
   );

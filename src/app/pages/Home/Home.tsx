@@ -45,9 +45,9 @@ import {
 } from 'store/user/selectors';
 import {
   LENDANDBORROW,
-  SWAP,
+  SOULC,
   FARMS,
-  INSPIRIT,
+  VSOULC,
   resolveRoutePath,
 } from 'app/router/routes';
 import { ConnectWallet } from 'app/components/ConnectWallet';
@@ -70,7 +70,6 @@ import { Animation } from 'app/components/Animations';
 import browser from 'browser-detect';
 import {
   SwapAnimation,
-  BridgeAnimation,
   InspiritAnimation,
   LandingAnimation,
   LendingAnimation,
@@ -182,10 +181,10 @@ const Home = () => {
 
   const AboutSectionItems = [
     {
-      id: 'swap',
+      id: 'SOULC',
       titleIcon: <SwapIcon />,
       translationPath: 'home.about.swap',
-      buttonNavPath: { path: SWAP.path },
+      buttonNavPath: { path: SOULC.path },
       image: Swap,
       animation: SwapAnimation,
     },
@@ -198,10 +197,10 @@ const Home = () => {
       animation: FarmAnimation,
     },
     {
-      id: 'inSpirit',
+      id: 'vSOULC',
       titleIcon: <InspiritIcon />,
       translationPath: 'home.about.inspirit',
-      buttonNavPath: { path: INSPIRIT.path },
+      buttonNavPath: { path: VSOULC.path },
       image: Inspirit,
       animation: InspiritAnimation,
     },
@@ -385,8 +384,8 @@ const Home = () => {
                           }
                           onButtonClick={
                             portfolioAmount
-                              ? () => navigate(SWAP.path)
-                              : () => navigate(SWAP.path)
+                              ? () => navigate(SOULC.path)
+                              : () => navigate(SOULC.path)
                           }
                         />
                         <WalletPanel
@@ -416,7 +415,6 @@ const Home = () => {
               </WalletWrapper>
 
               <DexStatistics />
-
               <Flex px="16px" direction="column" alignItems="center">
                 {AboutSectionItems.map((item, index) => (
                   <AboutSectionItem
