@@ -107,8 +107,8 @@
   "home": {
     "common": {
       "header": "Embrace your <b style='color: #60E6C5'>DeFi SPIRIT</b>",
-      "description": "The SpiritSwap protocol captures the essence of everything Defi 2.0 on the Fantom network, delivering a complete hub for <b style='color: white'>trading</b>, <b style='color: white'>lending</b> and <b style='color: white'>borrowing</b>, <b style='color: white'>reward sharing</b>, <b style='color: white'>staking delegations</b>, and <b style='color: white'>farming</b>.<br/><br/>Scroll below and click on <b style='color: white'>“Learn more”</b> to learn more about SpiritSwap’s unique features and lucrative investment options.",
-      "descriptionFull": "The SpiritSwap protocol captures the essence of everything Defi 2.0 on the Fantom network, delivering a complete hub for <b style='color: white'>trading</b>, <b style='color: white'>lending</b> and <b style='color: white'>borrowing</b>, <b style='color: white'>reward sharing</b>, <b style='color: white'>staking delegations</b>, and <b style='color: white'>farming</b>.<br/><br/>Scroll below and click on <b style='color: white'>“Learn more”</b> to learn more about SpiritSwap’s unique features and lucrative investment options.",
+      "description": "The SoullyCanto protocol captures the essence of everything Defi 2.0 on the Fantom network, delivering a complete hub for <b style='color: white'>trading</b>, <b style='color: white'>lending</b> and <b style='color: white'>borrowing</b>, <b style='color: white'>reward sharing</b>, <b style='color: white'>staking delegations</b>, and <b style='color: white'>farming</b>.<br/><br/>Scroll below and click on <b style='color: white'>“Learn more”</b> to learn more about SoullyCanto’s unique features and lucrative investment options.",
+      "descriptionFull": "The SoullyCanto protocol captures the essence of everything Defi 2.0 on the Fantom network, delivering a complete hub for <b style='color: white'>trading</b>, <b style='color: white'>lending</b> and <b style='color: white'>borrowing</b>, <b style='color: white'>reward sharing</b>, <b style='color: white'>staking delegations</b>, and <b style='color: white'>farming</b>.<br/><br/>Scroll below and click on <b style='color: white'>“Learn more”</b> to learn more about SoullyCanto’s unique features and lucrative investment options.",
       "showPortfolio": "Show Portfolio",
       "connectWallet": "Connect Wallet",
       "howTo": "How To",
@@ -146,9 +146,9 @@
         "button": "Bridge"
       },
       "inspirit": {
-        "title": "Benefit from inSPIRIT",
-        "description": "When locking up SPIRIT for inSPIRIT, participants are provided with three value propositions.</br></br>1. inSPIRIT allows you to boost your farming emissions</br></br>2. Receive a share of revenue from DEX swaps</br></br>3. Participate in governance via voting on farm emissions and community proposals via our DAO forum",
-        "button": "inSPIRIT",
+        "title": "Benefit from vSOUL",
+        "description": "When locking up SOUL for vSOUL, participants are provided with three value propositions.</br></br>1. inSPIRIT allows you to boost your farming emissions</br></br>2. Receive a share of revenue from DEX swaps</br></br>3. Participate in governance via voting on farm emissions and community proposals via our DAO forum",
+        "button": "vSOUL",
 
         "buySpirit": "Buy SPIRIT",
         "buySpiritText": "Buy SPIRIT to generate inSPIRIT",
