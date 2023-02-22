@@ -11,6 +11,10 @@ const initialState: {
     price: number;
     percentajeChange24: number;
   };
+  cantoInfo: {
+    price: number;
+    percentajeChange24: number;
+  };
   marketCap: number;
   tvl: number;
   liquidity_pools: Array<any>;
@@ -41,6 +45,10 @@ const initialState: {
     percentajeChange24: 0,
   },
   ftmInfo: {
+    price: 0,
+    percentajeChange24: 0,
+  },
+  cantoInfo: {
     price: 0,
     percentajeChange24: 0,
   },
@@ -76,6 +84,9 @@ export const generalReducer = createSlice({
   reducers: {
     setFtmInfo: (state, action) => {
       state.ftmInfo = action.payload;
+    },
+    setCantoInfo: (state, action) => {
+      state.cantoInfo = action.payload;
     },
     setMarketCap: (state, action) => {
       state.marketCap = action.payload;
@@ -187,6 +198,7 @@ export const {
   setTVL,
   setFtmInfo,
   setLpPrices,
+  setCantoInfo,
   setSpiritPerBlock,
   setSpiritTotalSupply,
 } = generalReducer.actions;

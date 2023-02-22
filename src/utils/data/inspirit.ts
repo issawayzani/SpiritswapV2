@@ -27,7 +27,7 @@ import {
   getFormattedBribes,
   getSplitBribesCallsV2,
 } from './formatters';
-import { SPIRIT, tokens, WFTM } from 'constants/tokens';
+import { SPIRIT, tokens, WFTM, WCANTO } from 'constants/tokens';
 import { checkAddress, getDaysUntilFriday } from 'app/utils';
 import { getMappedTokens } from './generalStats';
 
@@ -59,7 +59,11 @@ export const getInspiritStatistics = async (
   const inspiritAddress = addresses.inspirit[CHAIN_ID];
 
   const [ftm, spirit] = await getTokensDetails([SPIRIT.address, WFTM.address]);
-
+  const [canto] = await getTokensDetails([WCANTO.address], 7700);
+  const cantoInfo = {
+    price: canto ? (canto.rate ? canto.rate : 0) : 0,
+    percentajeChange24: canto?.percentaje_change_24 || 0,
+  };
   const spiritInfo = {
     price: spirit ? (spirit.rate ? spirit.rate : 0) : 0,
     percentajeChange24: spirit?.percentaje_change_24 || 0,
@@ -146,6 +150,7 @@ export const getInspiritStatistics = async (
     totalLocked,
     spiritInfo,
     ftmInfo,
+    cantoInfo,
     avgTime,
     totalSpiritValue,
     totalLockedValue,

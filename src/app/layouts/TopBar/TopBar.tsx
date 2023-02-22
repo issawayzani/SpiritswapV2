@@ -78,6 +78,7 @@ import { setGlobalSwapModeIndex, setIsHomePage } from 'store/general';
 import {
   selectFtmInfo,
   selectMarketCap,
+  selectCantoInfo,
   selectSpiritInfo,
   selectTVL,
 } from 'store/general/selectors';
@@ -146,14 +147,17 @@ const TopBar: FC<Props> = () => {
   const marketCap = useAppSelector(selectMarketCap);
   const spiritPriceData = useAppSelector(selectSpiritInfo);
   const ftmPriceData = useAppSelector(selectFtmInfo);
-
+  const cantoPriceData = useAppSelector(selectCantoInfo);
   const spiritPrice: number = spiritPriceData ? spiritPriceData.price : 0;
-  const ftmPrice: number = ftmPriceData ? ftmPriceData.price : 0;
+  const cantoPrice: number = cantoPriceData ? cantoPriceData.price : 0;
   const percentaje24hsSpirit: number = spiritPriceData
     ? spiritPriceData.percentajeChange24
     : 0;
   const percentaje24hsFtm: number = ftmPriceData
     ? ftmPriceData.percentajeChange24
+    : 0;
+  const percentaje24hsCanto: number = cantoPriceData
+    ? cantoPriceData.percentajeChange24
     : 0;
   const tokenInfos = () => {
     let info = [
@@ -164,10 +168,10 @@ const TopBar: FC<Props> = () => {
       },
       { name: 'TVL', priceCurrency: '$', price: TVL ?? 0 },
       {
-        name: 'FTM',
+        name: 'CANTO',
         priceCurrency: '$',
-        price: !ftmPrice ? null : ftmPrice,
-        rate: !percentaje24hsFtm ? null : percentaje24hsFtm,
+        price: !cantoPrice ? null : cantoPrice,
+        rate: !percentaje24hsCanto ? null : percentaje24hsCanto,
       },
       {
         name: 'SPIRIT',

@@ -17,10 +17,13 @@ const TokenInfoBar = ({
 }: Props) => {
   const isSpirit = tokenName === 'SPIRIT';
   const isFTM = tokenName === 'FTM';
+  const isCANTO = tokenName === 'CANTO';
 
   const skeletonWidth = () => {
     switch (tokenName) {
       case 'FTM':
+        return '88px';
+      case 'CANT0':
         return '88px';
       case 'TVL':
         return '58px';
@@ -38,7 +41,7 @@ const TokenInfoBar = ({
         <Flex justifyContent="center">
           <StyledPriceLabel>
             {tokenPriceCurrency}
-            {isFTM || isSpirit
+            {isFTM || isSpirit || isCANTO
               ? getRoundedSFs(tokenPrice.toString())
               : convertTokenPrice(tokenPrice, 1)}
           </StyledPriceLabel>
