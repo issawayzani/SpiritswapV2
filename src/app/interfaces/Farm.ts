@@ -19,8 +19,8 @@ export interface IFarm {
 
   /* Type */
   boosted: boolean;
-  classic?: boolean;
-  stable?: boolean;
+  canto?: boolean;
+  forte?: boolean;
   weighted?: boolean;
 
   /* Info */
@@ -75,8 +75,10 @@ export interface GaugeFarm {
 
 export enum FarmType {
   ALL,
-  CLASSIC,
-  STABLE,
+  CANTO,
+  FORTE,
+  // CLASSIC,
+  // STABLE,
   ADMIN,
 }
 

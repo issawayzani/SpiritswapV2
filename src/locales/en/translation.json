@@ -146,9 +146,9 @@
         "button": "Bridge"
       },
       "inspirit": {
-        "title": "Benefit from inSPIRIT",
-        "description": "When locking up SPIRIT for inSPIRIT, participants are provided with three value propositions.</br></br>1. inSPIRIT allows you to boost your farming emissions</br></br>2. Receive a share of revenue from DEX swaps</br></br>3. Participate in governance via voting on farm emissions and community proposals via our DAO forum",
-        "button": "inSPIRIT",
+        "title": "Benefit from vSOUL",
+        "description": "When locking up SOUL for vSOUL, participants are provided with three value propositions.</br></br>1. inSPIRIT allows you to boost your farming emissions</br></br>2. Receive a share of revenue from DEX swaps</br></br>3. Participate in governance via voting on farm emissions and community proposals via our DAO forum",
+        "button": "vSOUL",
 
         "buySpirit": "Buy SPIRIT",
         "buySpiritText": "Buy SPIRIT to generate inSPIRIT",
@@ -454,6 +454,7 @@
       "deposit": "Deposit",
       "withdraw": "Withdraw",
       "addLiquidity": "Add liquidity",
+      "wrap": "Wrap",
       "cancel": "Cancel",
       "hide": "Show less",
       "show": "Show more",
@@ -463,6 +464,7 @@
       "confirmWithdraw": "Confirm",
       "lpTokens": "LP tokens",
       "stakedLPTokens": "Staked LP Tokens",
+      "stakedTokens": "Staked Tokens",
       "stakedLPTokensMoney": "USD Value",
       "yourApr": "Your APR",
       "maxApr": "Max APR",
@@ -470,6 +472,8 @@
       "classic": "Classic",
       "classicV2": "Variable",
       "variable": "Variable",
+      "canto": "CantoDex",
+      "forte": "ForteSwap",
       "stable": "Stable",
       "admin": "Admin",
       "weighted": "Weighted",

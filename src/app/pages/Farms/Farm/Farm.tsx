@@ -169,23 +169,23 @@ export const Farm = ({
     });
   };
 
-  if (!ecosystem && aprRange) {
-    if (aprRange[0] !== aprRange[1]) {
-      infoPanelItems.push({
-        label: t(`farms.iconTooltipPanel.aprRange`),
-        value: `${compactifyValue(aprRange[0])}% ~ ${compactifyValue(
-          aprRange[1],
-        )}%`,
-        tooltip: 'aprRange',
-      });
-    } else {
-      infoPanelItems.push({
-        label: t(`farms.iconTooltipPanel.apr`),
-        value: `${aprRange[0]}%`,
-        tooltip: 'apr',
-      });
-    }
-  }
+  // if (!ecosystem && aprRange) {
+  //   if (aprRange[0] !== aprRange[1]) {
+  //     infoPanelItems.push({
+  //       label: t(`farms.iconTooltipPanel.aprRange`),
+  //       value: `${compactifyValue(aprRange[0])}% ~ ${compactifyValue(
+  //         aprRange[1],
+  //       )}%`,
+  //       tooltip: 'aprRange',
+  //     });
+  //   } else {
+  //     infoPanelItems.push({
+  //       label: t(`farms.iconTooltipPanel.apr`),
+  //       value: `${aprRange[0]}%`,
+  //       tooltip: 'apr',
+  //     });
+  //   }
+  // }
 
   if (ecosystem) {
     infoPanelItems.push({
@@ -220,7 +220,7 @@ export const Farm = ({
     });
   }
   infoPanelItems.push({
-    label: t(`${translationPath}.stakedLPTokens`),
+    label: t(`${translationPath}.stakedTokens`),
     value: checkSmallValue(+farmUserData.lpTokens),
   });
 
@@ -375,7 +375,7 @@ export const Farm = ({
 
               <SimpleGrid spacing="8px" columns={2}>
                 <Button variant="secondary" onClick={() => navigate(getUrl())}>
-                  {t(`${translationPath}.addLiquidity`)}
+                  {t(`${translationPath}.wrap`)}
                 </Button>
 
                 <Button variant="inverted" onClick={handleDeposit}>

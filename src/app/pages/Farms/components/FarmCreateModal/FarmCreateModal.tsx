@@ -15,13 +15,17 @@ import {
 import { Token } from '@lifi/sdk';
 import { ArrowRightIcon, LinkIcon } from 'app/assets/icons';
 import { CardHeader } from 'app/components/CardHeader';
-import { VARIABLE, STABLE, BASE_TOKEN_ADDRESS } from 'constants/index';
+import { CANTO, FORTE, BASE_TOKEN_ADDRESS } from 'constants/index';
 import { EDITING } from 'constants/icons';
 import {
-  STABLE_BASE,
-  STABLE_LIST,
-  VARIABLES_BASE,
-  VARIABLES_LIST,
+  // STABLE_BASE,
+  // STABLE_LIST,
+  // VARIABLES_BASE,
+  // VARIABLES_LIST,
+  FORTE_BASE,
+  FORTE_LIST,
+  CANTO_BASE,
+  CANTO_LIST,
 } from 'constants/whitelistToken';
 import { FC, useState } from 'react';
 import StepsFarms from '../StepsFarms/StepsFarms';
@@ -60,14 +64,14 @@ const FarmCreateModal: FC<Props> = ({ isOpen, onClose, isConnected }) => {
   } = UseIsLoading();
   const { boostedV2, boostedStable } = useAppSelector(selectSaturatedGauges);
   const [activeStep, setActiveStep] = useState<number>(0);
-  const [selectedBase, setSelectedBase] = useState<Token>(VARIABLES_BASE.WFTM);
-  const [selectedToken, setSelectedToken] = useState<Token>(VARIABLES_LIST.BNB);
+  const [selectedBase, setSelectedBase] = useState<Token>(CANTO_BASE.WFTM);
+  const [selectedToken, setSelectedToken] = useState<Token>(CANTO_LIST.BNB);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [addressFarm, setAddressFarm] = useState<string>('');
-  const [farmType, setFarmType] = useState(VARIABLE);
+  const [farmType, setFarmType] = useState(CANTO);
   const [listTokens, setListTokens] = useState({
-    base: VARIABLES_BASE,
-    list: VARIABLES_LIST,
+    base: CANTO_BASE,
+    list: CANTO_LIST,
   });
   const [inspiritData, setInspiritData] = useState({
     totalSupply: '0',
@@ -80,15 +84,15 @@ const FarmCreateModal: FC<Props> = ({ isOpen, onClose, isConnected }) => {
 
   const onSelectType = (type: string) => {
     if (type === farmType) return;
-    if (type === VARIABLE) {
-      selectBase(VARIABLES_BASE.WFTM, () => {});
-      selectToken(VARIABLES_LIST.BNB, () => {});
-      setListTokens({ base: VARIABLES_BASE, list: VARIABLES_LIST });
+    if (type === CANTO) {
+      selectBase(CANTO_BASE.WFTM, () => {});
+      selectToken(CANTO_LIST.BNB, () => {});
+      setListTokens({ base: CANTO_BASE, list: CANTO_LIST });
     }
-    if (type === STABLE) {
-      selectBase(STABLE_BASE.USDC, () => {});
-      selectToken(STABLE_LIST.FUSDT, () => {});
-      setListTokens({ base: STABLE_BASE, list: STABLE_LIST });
+    if (type === FORTE) {
+      selectBase(FORTE_BASE.USDC, () => {});
+      selectToken(FORTE_LIST.FUSDT, () => {});
+      setListTokens({ base: FORTE_BASE, list: FORTE_LIST });
     }
     setFarmType(type);
     resetVerification();
@@ -97,7 +101,7 @@ const FarmCreateModal: FC<Props> = ({ isOpen, onClose, isConnected }) => {
   const checkPair = async (): Promise<string> => {
     try {
       checkingOn();
-      const isStable = farmType === STABLE;
+      const isStable = farmType === FORTE;
       const addressPair: string = await getPairs(
         isStable,
         selectedBase.address,
@@ -138,7 +142,7 @@ const FarmCreateModal: FC<Props> = ({ isOpen, onClose, isConnected }) => {
   };
 
   const checkFarmExist = (pairAddress: string): boolean => {
-    const farms = farmType === VARIABLE ? boostedV2 : boostedStable;
+    const farms = farmType === CANTO ? boostedV2 : boostedStable;
     const findFarm = farms.find(farm =>
       checkAddress(farm?.fulldata?.farmAddress, pairAddress),
     );

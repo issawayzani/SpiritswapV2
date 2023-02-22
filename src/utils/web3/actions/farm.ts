@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { CHAIN_ID, VARIABLE } from 'constants/index';
+import { CHAIN_ID, CANTO } from 'constants/index';
 import contracts from 'constants/contracts';
 import PAIR_ABI from '../abis/IUniswapV2Pair.json';
 import { Contract } from '../contracts';
@@ -214,7 +214,7 @@ export const getPairs = async (
 };
 export const createFarm = async (typeProxy: string, farmAddress: string) => {
   try {
-    const version = typeProxy === VARIABLE ? 2 : 3;
+    const version = typeProxy === CANTO ? 2 : 3;
     const contract = await gaugeContractProxy({ version });
     const tx = await contract.addGauge(farmAddress);
     return tx;

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Box, Button, HStack, Stack, Text, VStack } from '@chakra-ui/react';
 import { Token } from '@lifi/sdk';
 import NewTokenAmountPanel from 'app/components/NewTokenAmountPanel/NewTokenAmountPanel';
-import { VARIABLE, STABLE } from 'constants/index';
+import { CANTO, FORTE } from 'constants/index';
 
 import { WhiteList } from 'constants/types';
 import useMobile from 'utils/isMobile';
@@ -69,20 +69,20 @@ const Selections: FC<Props> = ({
           ) : (
             <>
               <Button
-                variant={farmType === VARIABLE ? 'primary' : 'inverted'}
+                variant={farmType === CANTO ? 'primary' : 'inverted'}
                 w="full"
-                disabled={farmType === VARIABLE}
-                onClick={() => onSelectType(VARIABLE)}
+                disabled={farmType === CANTO}
+                onClick={() => onSelectType(CANTO)}
               >
-                {VARIABLE}
+                {CANTO}
               </Button>
               <Button
-                variant={farmType === STABLE ? 'primary' : 'inverted'}
+                variant={farmType === FORTE ? 'primary' : 'inverted'}
                 w="full"
-                disabled={farmType === STABLE}
-                onClick={() => onSelectType(STABLE)}
+                disabled={farmType === FORTE}
+                onClick={() => onSelectType(FORTE)}
               >
-                {STABLE}
+                {FORTE}
               </Button>
             </>
           )}

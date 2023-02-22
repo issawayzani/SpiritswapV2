@@ -19,6 +19,7 @@ import {
   setTotalSpiritLockedValue,
   setMarketCap,
   setTVL,
+  setCantoInfo,
   setLpPrices,
   setSaturatedGauges,
   setSpiritPerBlock,
@@ -55,6 +56,7 @@ export const listenToAppWorker = (
 ) => {
   return (worker.onmessage = event => {
     const type = event.data.type;
+    console.log(type);
     const payload = event.data.payload;
     switch (type) {
       case 'setEcosystemFarms':
@@ -74,6 +76,7 @@ export const listenToAppWorker = (
         break;
       case 'setSpiritStatistics':
         dispatch(setFtmInfo(payload.ftmInfo));
+        dispatch(setCantoInfo(payload.cantoInfo));
         dispatch(setMarketCap(payload.marketCap));
         dispatch(setTVL(payload.tvl));
         dispatch(setSpiritInfo(payload.spiritInfo));

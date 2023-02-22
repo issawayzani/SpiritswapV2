@@ -10,8 +10,8 @@ export const SOULC = {
 export const WCANTO = {
   name: 'Wrapped Canto',
   symbol: 'WCANTO',
-  // address: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83',
-  // chainId: 250,
+  address: '0x826551890Dc65655a0Aceca109aB11AbDbD7a07B',
+  chainId: 7700,
   // decimals: 18,
 };
 
