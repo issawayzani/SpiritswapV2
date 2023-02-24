@@ -130,6 +130,17 @@ export const NETWORK = {
     blockExp: ['https://moonriver.moonscan.io/'],
     decimals: 18,
   },
+  7700: {
+    chainId: 7700,
+    network: 'Canto Mainnet',
+    hex: '1E14',
+    rpc: ['https://canto.gravitychain.io/k'],
+    wss: [''],
+    name: 'Canto Mainnet',
+    symbol: 'CANTO',
+    blockExp: ['https://tuber.build/'],
+    decimals: 18,
+  },
   42161: {
     chainId: 42161,
     network: 'Arbitrum',
