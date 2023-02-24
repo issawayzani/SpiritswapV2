@@ -1,18 +1,18 @@
 import { Token } from 'app/interfaces/General';
 
 export const SOULC = {
-  name: 'Soul C',
+  name: 'SoulC',
   symbol: 'SOULC',
-  // address: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83',
-  // chainId: 250,
-  // decimals: 18,
+  address: '0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1',
+  chainId: 7700,
+  decimals: 18,
 };
 export const WCANTO = {
   name: 'Wrapped Canto',
   symbol: 'WCANTO',
   address: '0x826551890Dc65655a0Aceca109aB11AbDbD7a07B',
   chainId: 7700,
-  // decimals: 18,
+  decimals: 18,
 };
 
 export const WFTM = {
@@ -187,6 +187,8 @@ export const tokens: Token[] = [
   FTM,
   SPIRIT,
   WFTM,
+  WCANTO,
+  SOULC,
   {
     name: 'Wrapped BTC',
     symbol: 'WBTC',
