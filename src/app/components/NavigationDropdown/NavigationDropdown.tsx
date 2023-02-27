@@ -71,6 +71,8 @@ const NavigationDropdown: FC<Props> = ({
         return <BuyCryptoIcon {...props} />;
       case 'Liquidity':
         return <MoneyHandIcon {...props} />;
+      case 'vSOULC':
+        return <MenuInspirit {...props} />;
       default:
         return <QuestionIcon {...props} />;
     }
