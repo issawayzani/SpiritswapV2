@@ -99,6 +99,7 @@ const navDropdownMenus = [
   GOVERNANCE,
   // APEMODE,
   BUYFTM,
+  SOULC,
 ];
 
 const NavMenuItem = ({ menu, is_active }: NavMenuProps) => {
