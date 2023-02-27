@@ -99,7 +99,6 @@ const navDropdownMenus = [
   GOVERNANCE,
   // APEMODE,
   BUYFTM,
-  SOULC,
 ];
 
 const NavMenuItem = ({ menu, is_active }: NavMenuProps) => {
@@ -297,6 +296,7 @@ const TopBar: FC<Props> = () => {
               FARMS,
               LIQUIDITY,
               SPIRITWARS,
+              SOULC,
             ]),
           ),
         ]);
