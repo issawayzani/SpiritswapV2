@@ -24,6 +24,7 @@ import {
   MartialArtsSwordFencingIcon,
   BuyCryptoIcon,
   MoneyHandIcon,
+  SwapTokenIcon,
 } from 'app/assets/icons';
 import { openInNewTab } from 'app/utils/redirectTab';
 import { resolveRoutePath } from 'app/router/routes';
@@ -71,6 +72,10 @@ const NavigationDropdown: FC<Props> = ({
         return <BuyCryptoIcon {...props} />;
       case 'Liquidity':
         return <MoneyHandIcon {...props} />;
+      case 'vSOULC':
+        return <MenuInspirit {...props} />;
+      case 'SOULC':
+        return <SwapTokenIcon {...props} />;
       default:
         return <QuestionIcon {...props} />;
     }

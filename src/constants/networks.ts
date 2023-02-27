@@ -130,6 +130,17 @@ export const NETWORK = {
     blockExp: ['https://moonriver.moonscan.io/'],
     decimals: 18,
   },
+  7700: {
+    chainId: 7700,
+    network: 'Canto Mainnet',
+    hex: '1E14',
+    rpc: ['https://canto.gravitychain.io/k'],
+    wss: [''],
+    name: 'Canto Mainnet',
+    symbol: 'CANTO',
+    blockExp: ['https://tuber.build/'],
+    decimals: 18,
+  },
   42161: {
     chainId: 42161,
     network: 'Arbitrum',
@@ -212,6 +223,11 @@ export const networkList = [
     value: 'Fantom',
     type: 'network',
   },
+  {
+    id: 7700,
+    value: 'Canto',
+    type: 'network',
+  },
   // {
   //   id: 1284,
   //   value: 'Moonbeam',
@@ -248,6 +264,7 @@ export const networkColor = {
   250: 'rgba(19, 181, 236, 0.25)', // FTM
   1284: 'rgba(83, 203, 200, 0.25)', // MoonBeam NEED A COLOR
   1285: 'rgba(83, 203, 200, 0.25)', // Moonriver
+  7700: 'rgba(6,252,153, 0.25)', // Canto
   42161: 'rgba(40, 160, 240, 0.25)', // ARB
   43114: 'rgba(232, 65, 66, 0.25)', // AVL
   1666600000: 'rgba(232, 65, 66, 0.25)', // Harmony NEED A COLOR
