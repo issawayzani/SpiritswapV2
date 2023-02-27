@@ -9,6 +9,7 @@ import {
   Flex,
   useMediaQuery,
 } from '@chakra-ui/react';
+import { TopCard } from './components/TopCard';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
@@ -774,6 +775,17 @@ const SwapPage = () => {
           maxW={{ md: breakpoints.xl }}
         >
           <GridItem rowSpan={1} colSpan={1}>
+            <div className="container">
+              <TopCard
+                icon="fa-users"
+                TVL="0"
+                Volume="0"
+                APR="0"
+                Supply="0"
+                LTV="0"
+                Ratio="0"
+              />
+            </div>
             <Box>
               <SpiritsBackground
                 islimit={isLimit}
