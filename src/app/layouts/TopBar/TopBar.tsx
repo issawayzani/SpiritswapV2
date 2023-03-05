@@ -64,9 +64,6 @@ import {
   NFTS,
   SOULC,
   GOVERNANCE,
-  APEMODE,
-  SPIRITWARS,
-  BUYFTM,
   resolveRoutePath,
 } from 'app/router/routes';
 import { openInNewTab } from 'app/utils/redirectTab';
@@ -91,15 +88,7 @@ const navMenus = [
   { ...VSOULC, icon: <InSpiritIcon /> },
 ];
 
-const navDropdownMenus = [
-  LENDANDBORROW,
-  ANALYTICS,
-  NFTS,
-  DOCS,
-  GOVERNANCE,
-  // APEMODE,
-  BUYFTM,
-];
+const navDropdownMenus = [LENDANDBORROW, ANALYTICS, NFTS, DOCS, GOVERNANCE];
 
 const NavMenuItem = ({ menu, is_active }: NavMenuProps) => {
   const dispatch = useAppDispatch();
@@ -290,14 +279,7 @@ const TopBar: FC<Props> = () => {
         setNavMenuItems(navMenus.slice(0, -4));
         setNavDropdownItems([
           ...Array.from(
-            new Set([
-              ...navDropdownMenus,
-              VSOULC,
-              FARMS,
-              LIQUIDITY,
-              SPIRITWARS,
-              SOULC,
-            ]),
+            new Set([...navDropdownMenus, VSOULC, FARMS, LIQUIDITY, SOULC]),
           ),
         ]);
       }, 100);
@@ -305,24 +287,20 @@ const TopBar: FC<Props> = () => {
       setTimeout(() => {
         setNavMenuItems(navMenus.slice(0, -3));
         setNavDropdownItems([
-          ...Array.from(
-            new Set([...navDropdownMenus, VSOULC, FARMS, SPIRITWARS]),
-          ),
+          ...Array.from(new Set([...navDropdownMenus, VSOULC, FARMS])),
         ]);
       }, 100);
     } else if (isLg) {
       setTimeout(() => {
         setNavMenuItems(navMenus.slice(0, -2));
         setNavDropdownItems([
-          ...Array.from(new Set([...navDropdownMenus, VSOULC, SPIRITWARS])),
+          ...Array.from(new Set([...navDropdownMenus, VSOULC])),
         ]);
       }, 100);
     } else if (isLg2) {
       setTimeout(() => {
         setNavMenuItems(navMenus.slice(0, -1));
-        setNavDropdownItems([
-          ...Array.from(new Set([...navDropdownMenus, SPIRITWARS])),
-        ]);
+        setNavDropdownItems([...Array.from(new Set([...navDropdownMenus]))]);
       }, 100);
     } else {
       setTimeout(() => {

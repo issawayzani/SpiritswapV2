@@ -79,17 +79,11 @@ export const SPIRITWARS = {
   url: '',
 };
 
-export const BUYFTM = {
-  key: 'buyftm',
-  path: '',
-  url: 'https://spiritswap.banxa.com/',
-};
-
-export const APEMODE_V1 = {
-  key: 'apemode',
-  path: '',
-  url: 'https://swap.spiritswap.finance/#/exchange/apemode',
-};
+// export const APEMODE_V1 = {
+//   key: 'apemode',
+//   path: '',
+//   url: 'https://swap.spiritswap.finance/#/exchange/apemode',
+// };
 
 export const ROUTE_LOOKUP = {
   [HOME.key]: HOME,
@@ -106,7 +100,6 @@ export const ROUTE_LOOKUP = {
   [APEMODE.key]: APEMODE,
   [GOVERNANCE.key]: GOVERNANCE,
   [SPIRITWARS.key]: SPIRITWARS,
-  [BUYFTM.key]: BUYFTM,
 };
 
 export const resolveRoutePath = (path?: string) => {
