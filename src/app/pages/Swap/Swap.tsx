@@ -739,7 +739,7 @@ const SwapPage = () => {
       return columns;
     }
 
-    columns['md'] = showChart ? '520px 1fr' : '520px';
+    columns['md'] = '700px 1fr';
     return columns;
   };
 
@@ -775,17 +775,20 @@ const SwapPage = () => {
           maxW={{ md: breakpoints.xl }}
         >
           <GridItem rowSpan={1} colSpan={1}>
-            <div className="container">
-              <TopCard
-                icon="fa-users"
-                TVL="0"
-                Volume="0"
-                APR="0"
-                Supply="0"
-                LTV="0"
-                Ratio="0"
-              />
-            </div>
+            {
+              <div className="container">
+                <TopCard
+                  icon="fa-users"
+                  TVL="0"
+                  Volume="0"
+                  APR="0"
+                  Supply="0"
+                  LTV="0"
+                  Ratio="0"
+                />
+              </div>
+            }
+
             <Box>
               <SpiritsBackground
                 islimit={isLimit}
@@ -859,6 +862,7 @@ const SwapPage = () => {
                   )
                 )}
               </SwapContainer>
+
               {/* {!swapConfirm
                 ? !isLimit &&
                   !showSettings && (
@@ -910,14 +914,39 @@ const SwapPage = () => {
                 : null} */}
             </Box>
           </GridItem>
-          {/* <GridItem rowSpan={1} colSpan={1}>
-            {showChart && memorizedChart()}
-            {isLimit && modeIndex !== 3 ? (
+          <GridItem rowSpan={1} colSpan={1}>
+            <Box>
+              {
+                <SwapContainer islimit={`${isLimit}`}>
+                  <Flex
+                    bg="bgBoxLighter"
+                    py="spacing05"
+                    px="spacing04"
+                    flexDirection="column"
+                    w="full"
+                    borderRadius="md"
+                  >
+                    <p> SOULC</p>
+                  </Flex>
+                  <Flex
+                    bg="bgBoxLighter"
+                    py="spacing05"
+                    px="spacing04"
+                    flexDirection="column"
+                    w="full"
+                    borderRadius="md"
+                  >
+                    <p> WCANTO</p>
+                  </Flex>
+                </SwapContainer> /*memorizedChart()*/
+              }
+              {/* {isLimit && modeIndex !== 3 ? (
               <LimitOrders showChart={showChart} />
             ) : modeIndex === 3 ? (
               <TWAPOrders />
-            ) : null}
-          </GridItem> */}
+            ) : null} */}
+            </Box>
+          </GridItem>
         </Grid>
       </Box>
     </Box>
