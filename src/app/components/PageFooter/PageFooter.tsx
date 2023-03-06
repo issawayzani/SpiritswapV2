@@ -193,7 +193,7 @@ export default function PageFooter() {
 
               <VStack align="stretch">
                 <Box color="ci" fontWeight="bold">
-                  SPIRIT Token
+                  Soul Token
                 </Box>
                 <Link
                   target="_blank"
