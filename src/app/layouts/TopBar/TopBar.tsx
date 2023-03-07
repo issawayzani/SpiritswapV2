@@ -327,17 +327,6 @@ const TopBar: FC<Props> = () => {
               tokenRate={info?.rate}
             />
           ))}
-
-          {!isMobile && (
-            <Button
-              variant="topBar"
-              fontSize="14px"
-              paddingInline="8px"
-              onClick={() => openInNewTab('https://app.spiritswap.finance/#/')}
-            >
-              {t(`${translationPath}.switchV1`)}
-            </Button>
-          )}
         </TopWrapper>
         <BottomWrapper>
           <Box
