@@ -14,7 +14,7 @@ import {
   getUserInspiritBalances,
   saturateGauges,
 } from 'utils/data';
-import { getLimitOrders } from 'utils/swap/gelato';
+
 import { checkSpiritAllowance, formatFrom } from 'utils/web3';
 import { UNIDEX_ETH_ADDRESS } from 'utils/swap';
 import { formatUnits } from 'ethers/lib/utils';
@@ -35,9 +35,9 @@ onmessage = ({ data: { type, provider, userAddress, signer, params } }) => {
     case 'updatePortfolioData':
       updatePortfolioData(userAddress, loadedProvider);
       break;
-    case 'checkLimitOrders':
-      checkLimitOrders(userAddress, JSON.parse(signer));
-      break;
+    // case 'checkLimitOrders':
+    //   checkLimitOrders(userAddress, JSON.parse(signer));
+    //   break;
     case 'checkAllowances':
       checkAllowances(userAddress, loadedProvider);
       break;
@@ -296,21 +296,21 @@ const updatePortfolioData = async (userWalletAddress, provider) => {
  *  - userWalletAddress: Address of user in the blockchain
  *  - dispatch: callback hook method that allows update of app state
  */
-const checkLimitOrders = async (userWalletAddress, signer) => {
-  // Checks if allowance exists for
-  const limitOrders = await getLimitOrders(
-    userWalletAddress,
-    undefined,
-    undefined,
-    signer,
-  );
+// const checkLimitOrders = async (userWalletAddress, signer) => {
+//   // Checks if allowance exists for
+//   const limitOrders = await getLimitOrders(
+//     userWalletAddress,
+//     undefined,
+//     undefined,
+//     signer,
+//   );
 
-  self.postMessage({
-    type: 'setLimitOrders',
-    payload: limitOrders,
-    userWalletAddress,
-  });
-};
+//   self.postMessage({
+//     type: 'setLimitOrders',
+//     payload: limitOrders,
+//     userWalletAddress,
+//   });
+// };
 
 /**
  * Helper method - Updates allowance related data

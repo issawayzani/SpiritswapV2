@@ -17,7 +17,7 @@ import { useNavigate } from 'app/hooks/Routing';
 import Heading from './components/Heading';
 import Settings from './components/Settings';
 import SpiritsBackground from './components/Background';
-import { SwapPanel, LimitPanel } from './components/Panels';
+import { SwapPanel } from './components/Panels';
 import { RouteContainer, SwapContainer } from './styles';
 import TabSelect from 'app/components/TabSelect';
 import { useTranslation } from 'react-i18next';
@@ -30,7 +30,6 @@ import { SwapProps } from './Swap.d';
 import { Chart } from './components/Chart';
 import { breakpoints } from 'theme/base/breakpoints';
 import SwapConfirm from './components/Confirm';
-import { LimitOrders } from './components/LimitOrders';
 import { QuoteParams, SwapQuote } from 'utils/swap';
 import UseIsLoading from 'app/hooks/UseIsLoading';
 import useMobile from 'utils/isMobile';
@@ -57,7 +56,6 @@ import useWallets from 'app/hooks/useWallets';
 import useSettings from 'app/hooks/useSettings';
 import { useTokenBalance } from 'app/hooks/useTokenBalance';
 import TWAPPanel from 'app/components/TWAP/TWAPPanel';
-import TWAPOrders from 'app/components/TWAP/TWAPOrders';
 import { SOULC } from 'app/router/routes';
 
 const SwapPage = () => {
@@ -701,26 +699,6 @@ const SwapPage = () => {
     {
       key: 0,
       children: <SwapPanel panelProps={panelProps} isWrapped={isWrapped()} />,
-    },
-    {
-      key: 1,
-      children: (
-        <LimitPanel
-          panelProps={panelProps}
-          isLimitBuy={true}
-          isWrapped={isWrapped()}
-        />
-      ),
-    },
-    {
-      key: 2,
-      children: (
-        <LimitPanel
-          panelProps={panelProps}
-          isLimitBuy={false}
-          isWrapped={isWrapped()}
-        />
-      ),
     },
     {
       key: 3,
