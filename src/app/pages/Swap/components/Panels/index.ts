@@ -1,4 +1,3 @@
-export { default as LimitPanel } from './LimitPanel';
 export { default as SwapPanel } from './SwapPanel';
 export { default as StatisticsPanel } from './StatisticsPanel';
 export { default as StakePanel } from './StakePanel';

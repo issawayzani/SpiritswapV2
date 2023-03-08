@@ -135,7 +135,6 @@ export const NETWORK = {
     network: 'Canto Mainnet',
     hex: '1E14',
     rpc: ['https://canto.gravitychain.io/k'],
-    wss: [''],
     name: 'Canto Mainnet',
     symbol: 'CANTO',
     blockExp: ['https://tuber.build/'],

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { PositionsContainer, HeaderContainer } from './styles';
 import { CardHeader } from 'app/components/CardHeader';
-import TablePositions from './components/Table';
+
 import { PositionsQuantity } from './styles';
 import { useTranslation } from 'react-i18next';
 import { POSITIONS } from 'constants/icons';
@@ -67,11 +67,6 @@ const Positions = () => {
           5 {t(`${translationPath}.laveraged`, 'leveraged positions')}
         </PositionsQuantity>
       ) : null}
-      <TablePositions
-        columns={columns}
-        isMobile={isMobile}
-        variantTable={isMobile ? 'mobile' : 'default'}
-      />
     </PositionsContainer>
   );
 };

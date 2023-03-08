@@ -18,9 +18,9 @@ export const DEFAULT_HANDLER = 'spiritswap';
 
 export const COVALENT_API_KEY = 'ckey_ce0907ce545344edb6d203df10e';
 
-export const GELATO_ADDRESS = '0x59e61b95f20e940ac777e88fa2dfa0a6a4c40fa0';
-export const GELATO_APPROVE_ADDRESS =
-  '0x97C1af451407e266fD57168e61D4B5af31894244';
+// export const GELATO_ADDRESS = '0x59e61b95f20e940ac777e88fa2dfa0a6a4c40fa0';
+// export const GELATO_APPROVE_ADDRESS =
+//   '0x97C1af451407e266fD57168e61D4B5af31894244';
 // 20 minutes, denominated in seconds
 export const DEFAULT_DEADLINE_FROM_NOW = 60 * 20;
 export const CONNECTOR_LOCAL_STORAGE_KEY = 'SPIRIT_CONNECTOR_KEY';

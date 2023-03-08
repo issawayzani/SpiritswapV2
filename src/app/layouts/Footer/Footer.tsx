@@ -34,8 +34,6 @@ import {
 
 import {
   ANALYTICS,
-  APEMODE,
-  BUYFTM,
   DOCS,
   FARMS,
   GOVERNANCE,
@@ -64,10 +62,7 @@ const navDropdownMenus = [
   NFTS,
   ANALYTICS,
   LENDANDBORROW,
-  // APEMODE,
   FARMS,
-  SPIRITWARS,
-  BUYFTM,
 ];
 
 const NavMenuItem = ({ menu, is_active }: NavMenuProps) => {

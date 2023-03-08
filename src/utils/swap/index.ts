@@ -106,56 +106,56 @@ export const quoteRate = async (_params: QuoteParams, signal?: AbortSignal) => {
 
 // Creates a data representing a LIMIT ORDER.
 // Transaction should be submitted to the blockchain to be created
-export const createLimitOrderTx = async (_params: OrderLimitParams) => {
-  const fetchParams = _params;
+// // export const createLimitOrderTx = async (_params: OrderLimitParams) => {
+// //   const fetchParams = _params;
 
-  if (!fetchParams.sellToken) {
-    fetchParams.sellToken = UNIDEX_ETH_ADDRESS;
-  }
+//   if (!fetchParams.sellToken) {
+//     fetchParams.sellToken = UNIDEX_ETH_ADDRESS;
+//   }
 
-  if (!fetchParams.buyToken) {
-    fetchParams.buyToken = UNIDEX_ETH_ADDRESS;
-  }
+//   if (!fetchParams.buyToken) {
+//     fetchParams.buyToken = UNIDEX_ETH_ADDRESS;
+//   }
 
-  fetchParams.chainId = CHAIN_ID;
+//   fetchParams.chainId = CHAIN_ID;
 
-  const call = `/orders/limit${formatQuery(fetchParams)}`;
+//   const call = `/orders/limit${formatQuery(fetchParams)}`;
 
-  const response: SwapQuote = await unidex(call);
-  return response;
-};
+//   const response: SwapQuote = await unidex(call);
+//   return response;
+// };
 
 // Lists Open Limit Orders
-export const listLimitOrders = async (
-  _walletAddress: string,
-  _chainId = CHAIN_ID,
-) => {
-  const fetchParams = {
-    chainId: _chainId,
-    account: _walletAddress,
-  };
+// export const listLimitOrders = async (
+//   _walletAddress: string,
+//   _chainId = CHAIN_ID,
+// ) => {
+//   const fetchParams = {
+//     chainId: _chainId,
+//     account: _walletAddress,
+//   };
 
-  const call = `/orders/limit/list${formatQuery(fetchParams)}`;
+//   const call = `/orders/limit/list${formatQuery(fetchParams)}`;
 
-  const response: OpenOrderLimit[] = await unidex(call);
+//   const response: OpenOrderLimit[] = await unidex(call);
 
-  return response;
-};
+//   return response;
+// };
 
 // Returns representation of transaction data meant to cancel and order limit
-export const cancelLimitOrderTx = async (_params: CancelOrderLimitParams) => {
-  const fetchParams = _params;
+// export const cancelLimitOrderTx = async (_params: CancelOrderLimitParams) => {
+//   const fetchParams = _params;
 
-  if (!fetchParams.chainId) {
-    fetchParams.chainId = CHAIN_ID;
-  }
+//   if (!fetchParams.chainId) {
+//     fetchParams.chainId = CHAIN_ID;
+//   }
 
-  const call = `/orders/limit/cancel${formatQuery(fetchParams)}`;
+//   const call = `/orders/limit/cancel${formatQuery(fetchParams)}`;
 
-  const response: TransactionData = await unidex(call);
+//   const response: TransactionData = await unidex(call);
 
-  return response;
-};
+//   return response;
+// };
 
 export type {
   QuoteParams,
