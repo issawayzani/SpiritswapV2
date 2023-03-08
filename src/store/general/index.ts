@@ -34,6 +34,10 @@ const initialState: {
   isHomePage: boolean;
   tokensToShow: string;
   swapModeIndex: number;
+  bottomCardIndex: number;
+  stakeIndex: number;
+  borrowIndex: number;
+  optionsIndex: number;
   spiritWarsStatistics: StatisticsProps;
   spiritWarsData: Token[];
   lp_prices: {};
@@ -71,6 +75,10 @@ const initialState: {
   isHomePage: false,
   tokensToShow: '',
   swapModeIndex: 0,
+  bottomCardIndex: 0,
+  stakeIndex: 0,
+  borrowIndex: 0,
+  optionsIndex: 0,
   spiritWarsStatistics: {},
   spiritWarsData: [],
   lp_prices: {},
@@ -153,6 +161,19 @@ export const generalReducer = createSlice({
     setGlobalSwapModeIndex: (state, action) => {
       state.swapModeIndex = action.payload;
     },
+    setGlobalBottomCardIndex: (state, action) => {
+      state.bottomCardIndex = action.payload;
+    },
+    setGlobalStakeIndex: (state, action) => {
+      state.stakeIndex = action.payload;
+    },
+    setGlobalBorrowIndex: (state, action) => {
+      state.borrowIndex = action.payload;
+    },
+    setGlobalOptionsIndex: (state, action) => {
+      state.optionsIndex = action.payload;
+    },
+
     setSpiritWarsStatistics: (state, action) => {
       state.spiritWarsStatistics = action.payload;
     },
@@ -192,6 +213,10 @@ export const {
   removeUserCustomToken,
   setTokensToShow,
   setGlobalSwapModeIndex,
+  setGlobalBottomCardIndex,
+  setGlobalStakeIndex,
+  setGlobalBorrowIndex,
+  setGlobalOptionsIndex,
   setSpiritWarsStatistics,
   setSpiritWarsData,
   setMarketCap,

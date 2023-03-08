@@ -34,6 +34,13 @@ export const selectTokensToShow = (state: RootState) =>
   state.general.tokensToShow;
 export const selectSwapModeIndex = (state: RootState) =>
   state.general.swapModeIndex;
+export const selectBottomCardIndex = (state: RootState) =>
+  state.general.bottomCardIndex;
+export const selectStakeIndex = (state: RootState) => state.general.stakeIndex;
+export const selectBorrowIndex = (state: RootState) =>
+  state.general.borrowIndex;
+export const selectOptionsIndex = (state: RootState) =>
+  state.general.optionsIndex;
 export const selectSpiritWarsStatistics = (state: RootState) =>
   state.general.spiritWarsStatistics;
 export const selectSpiritWarsData = (state: RootState) =>
