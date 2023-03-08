@@ -20,7 +20,6 @@ import Settings from './components/Settings';
 import SpiritsBackground from './components/Background';
 import {
   SwapPanel,
-  LimitPanel,
   StakePanel,
   BorrowPanel,
   OptionsPanel,
