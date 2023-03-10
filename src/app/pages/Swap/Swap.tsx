@@ -113,7 +113,7 @@ const SwapPage = () => {
   const setToken = (inputToken: Token, outputToken: Token) => {
     try {
       if (inputToken.symbol === outputToken.symbol) {
-        navigate(`${SOULC.path}/FTM/SPIRIT`, { replace: true });
+        navigate(`${SOULC.path}`, { replace: true });
         return [allTokens[0], allTokens[1]];
       }
       return [inputToken, outputToken];
@@ -205,6 +205,20 @@ const SwapPage = () => {
     secondToken.tokenSelected.address,
     makeCallToTheGraph,
   );
+
+  useEffect(() => {
+    if (queriedTokenOne && !queriedTokenTwo) {
+      return navigate(
+        `${SOULC.path}/${queriedTokenOne.symbol}/${
+          queriedTokenOne.symbol === 'SPIRIT' ? 'FTM' : 'SPIRIT'
+        }`,
+        { replace: true },
+      );
+    }
+    if (!queriedTokenOne) {
+      return navigate(`${SOULC.path}/FTM/SPIRIT`, { replace: true });
+    }
+  }, [queriedTokenOne, queriedTokenTwo, navigate]);
 
   useEffect(() => {
     if (firstToken.value === '0' || firstToken.value === '') {
