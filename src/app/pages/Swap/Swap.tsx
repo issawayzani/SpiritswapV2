@@ -207,20 +207,6 @@ const SwapPage = () => {
   );
 
   useEffect(() => {
-    if (queriedTokenOne && !queriedTokenTwo) {
-      return navigate(
-        `${SOULC.path}/${queriedTokenOne.symbol}/${
-          queriedTokenOne.symbol === 'SPIRIT' ? 'FTM' : 'SPIRIT'
-        }`,
-        { replace: true },
-      );
-    }
-    if (!queriedTokenOne) {
-      return navigate(`${SOULC.path}/FTM/SPIRIT`, { replace: true });
-    }
-  }, [queriedTokenOne, queriedTokenTwo, navigate]);
-
-  useEffect(() => {
     if (firstToken.value === '0' || firstToken.value === '') {
       setSecondToken({ ...secondToken, value: '' });
       loadingOff();
