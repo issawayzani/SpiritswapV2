@@ -28,6 +28,7 @@ const FarmTransaction = ({
   onCancelTransaction,
   onApproveTransaction,
   onConfirmWithdraw,
+  onConfirmWrap,
   onConfirmDeposit,
   onOpen,
   TokenList,
@@ -49,6 +50,7 @@ const FarmTransaction = ({
   useEffect(() => {}, [account]);
 
   const isWithdraw = type === FarmTransactionType.WITHDRAW;
+  const isWrap = type === FarmTransactionType.WRAP;
   const lowerLp = farm.lpAddress ? farm.lpAddress.toLowerCase() : '';
 
   const { tokens, lpAddress, gaugeAddress, title } = farm;
@@ -148,6 +150,51 @@ const FarmTransaction = ({
     }
   };
 
+  const handleWrap = async () => {
+    if (!isLoggedIn && onOpen) {
+      return onOpen();
+    }
+    if (hasError()) return;
+    setErrorMessage(undefined);
+    try {
+      loadingOn();
+      setLoadingText('Checking approve');
+      const status = await farmStatus(lpAddress, gaugeAddress, account);
+      setLoadingText('Approve');
+      if (status.toString() === '0') {
+        const txApprove = await onApproveTransaction();
+        setLoadingText('Approving');
+        await txApprove.wait();
+      }
+      setLoadingText('Pending');
+      const tx = await onConfirmWrap(inputValue);
+      const response = transactionResponse('farm.deposit', {
+        tx: tx,
+        inputSymbol: `${title} LP`,
+        inputValue: inputValue,
+        operation: 'FARM',
+        update: 'portfolio',
+        updateTarget: 'user',
+      });
+
+      const suggestionData = {
+        id: tx.hash,
+        type: SuggestionsTypes.FARMS,
+        data: {
+          depositLp: true,
+        },
+      };
+      addToQueue(response, suggestionData);
+      setLoadingText('Wrapping');
+      await tx.wait();
+      loadingOff();
+      onCancelTransaction && onCancelTransaction();
+    } catch (error) {
+      console.error(error);
+      loadingOff();
+    }
+  };
+
   const handleDeposit = async () => {
     if (!isLoggedIn && onOpen) {
       return onOpen();
@@ -194,9 +241,12 @@ const FarmTransaction = ({
   };
 
   const getTitle = () => {
+    console.log(type);
     switch (type) {
       case FarmTransactionType.DEPOSIT:
         return `${t('farms.common.deposit')} ${t('farms.common.lpTokens')}`;
+      case FarmTransactionType.WRAP:
+        return `${t('farms.common.wrap')} ${t('farms.common.tokens')}`;
       case FarmTransactionType.WITHDRAW:
         return `${t('farms.common.withdraw')} ${t('farms.common.lpTokens')}`;
     }
@@ -247,6 +297,20 @@ const FarmTransaction = ({
               onClick={handleWithdraw}
             >
               {t(`farms.common.confirmWithdraw`)}
+            </Button>
+          ) : isWrap ? (
+            <Button
+              isLoading={isLoading}
+              loadingText={loadingText}
+              ml="2px"
+              w="full"
+              variant="inverted"
+              mt="0.5rem"
+              onClick={handleWrap}
+            >
+              {isLoggedIn
+                ? t(`farms.common.confirmWrap`)
+                : t('farms.common.connectWallet')}
             </Button>
           ) : (
             <Button

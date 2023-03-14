@@ -209,6 +209,7 @@ export const Farms = () => {
 
       result = onFarmFilterChange(result);
       result = handleFarmData(result, selectedTab);
+      console.log(result);
       if (searchTerm.length > 0) {
         result = onFilterByQueryChange(result, searchTerm);
       }

@@ -56,6 +56,7 @@ export interface IFarmTransaction {
   value: string;
   moneyValue: string;
   type?: FarmTransactionType;
+  onConfirmWrap: (_amount: string) => Promise<any> | void;
   onConfirmDeposit: (_amount: string) => Promise<any> | void;
   onConfirmWithdraw: (_amount: string, isMax: boolean) => Promise<any> | void;
   onCancelTransaction?: () => void;

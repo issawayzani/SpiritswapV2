@@ -8,6 +8,10 @@ export const useFarmActions = () => {
     setStatus(FarmTransactionStatus.DEPOSITING);
   }, []);
 
+  const onWrapHandler = useCallback(() => {
+    setStatus(FarmTransactionStatus.WRAPPING);
+  }, []);
+
   const onWithdrawHandler = useCallback(() => {
     setStatus(FarmTransactionStatus.WITHDRAWING);
   }, []);
@@ -19,6 +23,7 @@ export const useFarmActions = () => {
   return {
     status,
     onDepositHandler,
+    onWrapHandler,
     onWithdrawHandler,
     onCancelTransaction,
   };
