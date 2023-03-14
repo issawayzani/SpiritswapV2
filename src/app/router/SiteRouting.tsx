@@ -22,7 +22,6 @@ import {
   HOME,
   VSOULC,
   LIQUIDITY,
-  SPIRITWARS,
   SOULC,
   resolveRoutePath,
 } from './routes';
@@ -82,11 +81,6 @@ const SiteRouting = () => {
           <Route
             path={resolveRoutePath(VSOULC.path)}
             element={<InspiritPage />}
-          />
-          {/* <Route path={APEMODE.path} element={<ApeModePage />} /> */}
-          <Route
-            path={resolveRoutePath(SPIRITWARS.path)}
-            element={<SpiritWars />}
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

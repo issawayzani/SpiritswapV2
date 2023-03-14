@@ -6,24 +6,26 @@ import { SiteRouting, RootPathContext } from 'app/router';
 
 import Layers from './assets/background';
 import { Box } from '@chakra-ui/react';
-import { CHAIN_ID, SPIRIT } from 'constants/index';
+import { CHAIN_ID, SPIRIT, WCANTO } from 'constants/index';
 import { getTokenUsdPrice } from 'utils/data';
 import { useEffect, useState } from 'react';
+import { getInspiritStatistics } from '../utils/data/inspirit';
 
 const GlobalStyleProxy: any = GlobalStyle;
 
 export function App() {
   const { i18n } = useTranslation();
-  const [spiritPrice, setSpiritPrice] = useState(0);
+  const [cantoPrice, setCantoPrice] = useState(0);
   const rootPath = document.documentElement.dataset['rootPath'] || '/';
+
   useEffect(() => {
     const fetchPrice = async () => {
-      const data = await getTokenUsdPrice(SPIRIT.address, CHAIN_ID);
-      if (data) {
-        setSpiritPrice(data);
+      const prices = await getInspiritStatistics();
+      const { cantoInfo } = prices;
+      if (prices && cantoInfo) {
+        setCantoPrice(cantoInfo.price);
       }
     };
-
     fetchPrice();
   }, []);
 
@@ -32,8 +34,8 @@ export function App() {
   return (
     <RootPathContext.Provider value={rootPath}>
       <Helmet
-        titleTemplate={`SoullyCanto - $${spiritPrice.toFixed(3)}`}
-        defaultTitle={`SoullyCanto - $${spiritPrice.toFixed(3)}`}
+        titleTemplate={`SoullyCanto - $${cantoPrice.toFixed(3)}`}
+        defaultTitle={`SoullyCanto - $${cantoPrice.toFixed(3)}`}
         htmlAttributes={{ lang: i18n.language }}
       >
         <meta name="description" content="SoullyCanto webapp" />

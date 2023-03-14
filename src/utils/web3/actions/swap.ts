@@ -6,9 +6,9 @@ import { WFTM } from 'constants/tokens';
 import { BigNumber } from 'ethers';
 import { parseEther, parseUnits } from 'ethers/lib/utils';
 import { SLIPPAGE_TOLERANCES, SwapQuote } from 'utils/swap';
-import { placeLimitOrder } from 'utils/swap/gelato';
+// import { placeLimitOrder } from 'utils/swap/gelato';
 import { buildSwapForParaSwap } from 'utils/swap/paraswap';
-import { GeletoLimitParams } from 'utils/swap/types';
+// import { GeletoLimitParams } from 'utils/swap/types';
 import { connect } from '../connection';
 import { Contract } from '../contracts';
 import { transactionResponse } from './utils';
@@ -89,28 +89,28 @@ export const swapTransaction = async (
   });
 };
 
-export const placeOrderLimit = async (
-  _userAddress,
-  _trade: GeletoLimitParams,
-  _handler = undefined,
-  _chainId = undefined,
-) => {
-  const _connection = getProvider();
-  const { signer } = await connect(_connection);
+// export const placeOrderLimit = async (
+//   _userAddress,
+//   _trade: GeletoLimitParams,
+//   _handler = undefined,
+//   _chainId = undefined,
+// ) => {
+//   const _connection = getProvider();
+//   const { signer } = await connect(_connection);
 
-  const inputAmount = parseUnits(_trade.inputAmount, _trade.inputDecimals);
-  const outputAmount = parseUnits(_trade.minReturn, _trade.outputDecimals);
+//   const inputAmount = parseUnits(_trade.inputAmount, _trade.inputDecimals);
+//   const outputAmount = parseUnits(_trade.minReturn, _trade.outputDecimals);
 
-  return placeLimitOrder(
-    _userAddress,
-    signer,
-    _trade.inputToken,
-    _trade.outputToken,
-    inputAmount,
-    outputAmount,
-    parseUnits(_trade.inputAmount, _trade.inputDecimals).toString(),
-  );
-};
+//   return placeLimitOrder(
+//     _userAddress,
+//     signer,
+//     _trade.inputToken,
+//     _trade.outputToken,
+//     inputAmount,
+//     outputAmount,
+//     parseUnits(_trade.inputAmount, _trade.inputDecimals).toString(),
+//   );
+// };
 
 export const wrappedFTMaction = async (
   isDeposit: boolean,

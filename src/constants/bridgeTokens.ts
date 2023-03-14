@@ -1,7 +1,6 @@
 import { ListToken } from 'app/interfaces/Bridge';
 
 export const tokens: ListToken = {
-  // Tokens from Fantom
   250: [
     {
       name: 'USD Coin',
@@ -139,7 +138,7 @@ export const tokens: ListToken = {
       decimals: 6,
     },
     {
-      name: 'Wrapped ETH',
+      name: '  ETH',
       symbol: 'WETH',
       address: '0x82af49447d8a07e3bd95bd0d56f35241523fbab1',
       chainId: 42161,

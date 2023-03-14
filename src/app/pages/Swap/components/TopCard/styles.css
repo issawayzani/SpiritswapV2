@@ -1,0 +1,18 @@
+.text-container {
+  display: flex;
+  gap: 80px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 10px;
+}
+.container {
+  display: flex;
+  gap: 170px;
+}
+
+.item {
+  font-size: medium;
+}
+.space {
+  gap: 5px;
+}

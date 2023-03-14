@@ -5,6 +5,7 @@ import { LpRewardData } from 'app/interfaces/General';
 
 export interface Address {
   4002?: string;
+  7700?: string;
   250: string;
 }
 

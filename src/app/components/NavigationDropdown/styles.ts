@@ -38,7 +38,7 @@ export const StyledNavLink = styled(NavLink)`
 
 export const DropdownWrapper = styled.div<{ width }>`
   display: flex;
-  width: ${({ width }) => width}px;
+  width: ${({ width }) => width + 205}px;
   justify-content: center;
   background: ${({ theme }) => theme.color.bgBox};
   border-radius: ${({ theme }) => theme.borderRadius.md};

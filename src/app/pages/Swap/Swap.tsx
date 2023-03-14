@@ -9,6 +9,8 @@ import {
   Flex,
   useMediaQuery,
 } from '@chakra-ui/react';
+import { TopCard } from './components/TopCard';
+
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
@@ -16,7 +18,12 @@ import { useNavigate } from 'app/hooks/Routing';
 import Heading from './components/Heading';
 import Settings from './components/Settings';
 import SpiritsBackground from './components/Background';
-import { SwapPanel, LimitPanel } from './components/Panels';
+import {
+  SwapPanel,
+  StakePanel,
+  BorrowPanel,
+  OptionsPanel,
+} from './components/Panels';
 import { RouteContainer, SwapContainer } from './styles';
 import TabSelect from 'app/components/TabSelect';
 import { useTranslation } from 'react-i18next';
@@ -29,7 +36,6 @@ import { SwapProps } from './Swap.d';
 import { Chart } from './components/Chart';
 import { breakpoints } from 'theme/base/breakpoints';
 import SwapConfirm from './components/Confirm';
-import { LimitOrders } from './components/LimitOrders';
 import { QuoteParams, SwapQuote } from 'utils/swap';
 import UseIsLoading from 'app/hooks/UseIsLoading';
 import useMobile from 'utils/isMobile';
@@ -46,18 +52,23 @@ import ImageLogo from 'app/components/ImageLogo';
 import useGetLpFromApollo from 'app/hooks/useGetLpFromApollo';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import {
+  selectBottomCardIndex,
   selectSwapModeIndex,
   selectUserCustomTokens,
 } from 'store/general/selectors';
-import { setGlobalSwapModeIndex } from 'store/general';
+import {
+  setGlobalSwapModeIndex,
+  setGlobalBottomCardIndex,
+} from 'store/general';
 import useQuoteRate from 'app/hooks/useQuoteRate';
 import useGetGasPrice from 'app/hooks/useGetGasPrice';
 import useWallets from 'app/hooks/useWallets';
 import useSettings from 'app/hooks/useSettings';
 import { useTokenBalance } from 'app/hooks/useTokenBalance';
 import TWAPPanel from 'app/components/TWAP/TWAPPanel';
-import TWAPOrders from 'app/components/TWAP/TWAPOrders';
 import { SOULC } from 'app/router/routes';
+import TopRightCard from './components/TopCard/TopRightCard';
+import { StablePanel } from '../Liquidity/components/Panels';
 
 const SwapPage = () => {
   const { t } = useTranslation();
@@ -65,8 +76,12 @@ const SwapPage = () => {
   const { isLoggedIn } = useWallets();
 
   const globalSwapModeIndex = useAppSelector(selectSwapModeIndex);
+  const globalBottomCardIndex = useAppSelector(selectBottomCardIndex);
   const translationPath = 'swap.questionHelper';
   const [modeIndex, setModeIndex] = useState<number>(globalSwapModeIndex || 0);
+  const [cardIndex, setCardIndex] = useState<number>(
+    globalBottomCardIndex || 0,
+  );
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const { handlers, states } = useSettings();
   const [swapConfirm, setSwapConfirm] = useState<boolean>(false);
@@ -247,6 +262,7 @@ const SwapPage = () => {
   useEffect(() => {
     setIsLimit(modeIndex !== 0);
     dispatch(setGlobalSwapModeIndex(modeIndex));
+    dispatch(setGlobalBottomCardIndex(cardIndex));
     if (!isLoggedIn) {
       setShowSettings(false);
       setSwapConfirm(false);
@@ -255,7 +271,14 @@ const SwapPage = () => {
       setChartUrl('');
       setMakeCallToTheGraph(false);
     }
-  }, [modeIndex, globalSwapModeIndex, dispatch, isLoggedIn]);
+  }, [
+    modeIndex,
+    cardIndex,
+    globalBottomCardIndex,
+    globalSwapModeIndex,
+    dispatch,
+    isLoggedIn,
+  ]);
 
   const asignTokenValues = (
     txType,
@@ -696,34 +719,24 @@ const SwapPage = () => {
     return [ipToken, opToken];
   }, [firstToken, secondToken, trade, routes]);
 
+  const bottompanels = [
+    {
+      key: 0,
+      children: <StakePanel />,
+    },
+    {
+      key: 1,
+      children: <BorrowPanel />,
+    },
+    {
+      key: 2,
+      children: <OptionsPanel />,
+    },
+  ];
   const panels = [
     {
       key: 0,
       children: <SwapPanel panelProps={panelProps} isWrapped={isWrapped()} />,
-    },
-    {
-      key: 1,
-      children: (
-        <LimitPanel
-          panelProps={panelProps}
-          isLimitBuy={true}
-          isWrapped={isWrapped()}
-        />
-      ),
-    },
-    {
-      key: 2,
-      children: (
-        <LimitPanel
-          panelProps={panelProps}
-          isLimitBuy={false}
-          isWrapped={isWrapped()}
-        />
-      ),
-    },
-    {
-      key: 3,
-      children: <TWAPPanel panelProps={panelProps} gasPrice={gasPrice} />,
     },
   ];
 
@@ -738,7 +751,7 @@ const SwapPage = () => {
       return columns;
     }
 
-    columns['md'] = showChart ? '520px 1fr' : '520px';
+    columns['md'] = '700px 1fr';
     return columns;
   };
 
@@ -774,6 +787,20 @@ const SwapPage = () => {
           maxW={{ md: breakpoints.xl }}
         >
           <GridItem rowSpan={1} colSpan={1}>
+            {
+              <div className="container">
+                <TopCard
+                  icon="fa-users"
+                  TVL="0"
+                  Volume="0"
+                  APR="0"
+                  Supply="0"
+                  LTV="0"
+                  Ratio="0"
+                />
+              </div>
+            }
+
             <Box>
               <SpiritsBackground
                 islimit={isLimit}
@@ -847,6 +874,7 @@ const SwapPage = () => {
                   )
                 )}
               </SwapContainer>
+
               {/* {!swapConfirm
                 ? !isLimit &&
                   !showSettings && (
@@ -898,14 +926,29 @@ const SwapPage = () => {
                 : null} */}
             </Box>
           </GridItem>
-          {/* <GridItem rowSpan={1} colSpan={1}>
-            {showChart && memorizedChart()}
-            {isLimit && modeIndex !== 3 ? (
+          <GridItem rowSpan={1} colSpan={1}>
+            <Box ml="10px">
+              <TopRightCard />
+              <GridItem colSpan={1}>
+                <SwapContainer>
+                  <TabSelect
+                    index={cardIndex}
+                    setIndex={setCardIndex}
+                    styleIndex={[2]}
+                    styleVariant="danger"
+                    names={['Stake', 'Borrow', 'Options']}
+                    panels={bottompanels}
+                  />
+                </SwapContainer>
+              </GridItem>
+
+              {/* { {isLimit && modeIndex !== 3 ? (
               <LimitOrders showChart={showChart} />
             ) : modeIndex === 3 ? (
               <TWAPOrders />
-            ) : null}
-          </GridItem> */}
+            ) : null}  */}
+            </Box>
+          </GridItem>
         </Grid>
       </Box>
     </Box>

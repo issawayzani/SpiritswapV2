@@ -1,7 +1,9 @@
 // Types and interfaces for data
 import { Token, TokenAmount, TokenPool } from 'app/interfaces/General';
+import { ChainId } from '@lifi/sdk';
 import BigNumber from 'bignumber.js';
 import { PoolData } from 'utils/data/covalent';
+import { CHAIN_ID } from 'constants/index';
 import { MulticallSingleResponse } from 'utils/web3';
 
 export enum QuoteToken {

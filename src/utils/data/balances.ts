@@ -498,22 +498,22 @@ export const reconciliateBalances = async (
   return reconciliatedData;
 };
 
-export const getV2Earnings = async (_address: string, _network = CHAIN_ID) => {
-  const calls: Call[] = farmsV2.map(farm => {
-    const call: Call = {
-      address: farm.gaugeAddress,
-      name: 'earned',
-      params: [_address],
-      data: farm,
-    };
+// export const getV2Earnings = async (_address: string, _network = CHAIN_ID) => {
+//   const calls: Call[] = farmsV2.map(farm => {
+//     const call: Call = {
+//       address: farm.gaugeAddress,
+//       name: 'earned',
+//       params: [_address],
+//       data: farm,
+//     };
 
-    return call;
-  });
+//     return call;
+//   });
 
-  const rawEarnings = await Multicall(calls, 'gauge');
+//   const rawEarnings = await Multicall(calls, 'gauge');
 
-  return rawEarnings;
-};
+//   return rawEarnings;
+// };
 
 export const getPendingRewards = async (
   _userAddress: string,

@@ -1,21 +1,36 @@
 const contracts = {
+  CTokenPlugin: {
+    7700: '',
+  },
+  FortePairPlugin: {
+    7700: '',
+  },
+  Minter: {
+    7700: '',
+  },
+  Voter: {
+    7700: '',
+  },
   factory: {
     250: '0xEF45d134b73241eDa7703fa787148D9C9F4950b0',
   },
   factoryV2: {
     250: '0x9d3591719038752db0c8bEEe2040FfcC3B2c6B9c',
+    7700: '',
   },
   twilight_farm_factory: {
     250: '0xce7415170c47afe3837b67b6b352a55367a2489a',
   },
   distributor: {
     250: '0xc07bC04720A37AA9d8DAd18635620d86c4a37d97',
+    7700: '',
   },
   router: {
     250: '0x16327E3FbDaCA3bcF7E38F5Af2599D2DDc33aE52',
   },
   routerV2: {
     250: '0x09855B4ef0b9df961ED097EF50172be3e6F13665',
+    7700: '',
   },
   bonusDistributor: {
     250: '0x7628316ECD43fD870692Ef6e52c580d4A3a092C1',
@@ -31,6 +46,7 @@ const contracts = {
   },
   gaugeV3: {
     250: '0xfe1C8A68351B52E391e10106BD3bf2d0759AFf4e',
+    7700: '',
   },
   variableProxy: {
     250: '0xfe1C8A68351B52E391e10106BD3bf2d0759AFf4e',
@@ -40,11 +56,13 @@ const contracts = {
   },
   adminProxy: {
     250: '0x41AC759D04f51736F0f71da8b029aAC17267a1BB',
+    7700: '',
   },
   feedistributor: {
     250: '0x19F236eaADa7b47C1bCCD5CC6671fC247bffcC21',
     // TODO: Review below contract. It's causing error
     // 250: '0xD5A2a2d1d35724396bBB547554AD73b52C0f4993',
+    7700: '',
   },
   masterChefEcosystem: {
     250: '0xcF58A57B60914f07ce48FC09CF8Ab734d6D6e918',
@@ -54,6 +72,7 @@ const contracts = {
   },
   masterchef2: {
     250: '0xb3bf8AAabAd162f6f4F7A19f769c6ad2ddaC0418',
+    7700: '',
   },
   sobVault: {
     // 250: '0x8951B163a2CFfa4A19d4285d5293203C0ca3dC54', // -- spirit
@@ -64,12 +83,15 @@ const contracts = {
   },
   spirit: {
     250: '0x5Cc61A78F164885776AA610fb0FE1257df78E59B',
+    7700: '',
   },
   inspirit: {
     250: '0x2FBFf41a9efAEAE77538bd63f1ea489494acdc08',
+    7700: '',
   },
   inspiritLp: {
     250: '0xd687dd4b2dca486ab4aafed87990ecef4b28c5a1',
+    7700: '',
   },
   mInSpirit: {
     250: '0x3554f3369a3530ABC031D938d2f717006Fe01fA1',

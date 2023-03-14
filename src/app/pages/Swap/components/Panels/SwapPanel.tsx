@@ -21,7 +21,7 @@ import Web3Monitoring from 'app/connectors/EthersConnector/transactions';
 import UseIsLoading from 'app/hooks/UseIsLoading';
 import { NON_ZERO, NOT_ENOUGH_FUNDS } from 'constants/errors';
 import { GetBalanceByToken } from 'app/utils/methods';
-import { ParaSwapLogo, SlippageIcon, SwapIconButton } from 'app/assets/icons';
+import { SlippageIcon, SwapIconButton } from 'app/assets/icons';
 import { QuestionHelper } from 'app/components/QuestionHelper';
 import { ConnectWallet } from 'app/components/ConnectWallet';
 import { useCheckAllowance } from 'app/hooks/useCheckAllowance';
@@ -341,18 +341,7 @@ export default function SwapPanel({ panelProps, isWrapped }) {
           </Button>
         </Text>
       </SimpleGrid>
-      {/* <Box textAlign="right" mt="16px">
-        <Text
-          fontSize="12px"
-          _hover={{
-            cursor: 'pointer',
-          }}
-          onClick={() => openInNewTab('https://www.paraswap.io/')}
-        >
-          Powered by {''}
-          <ParaSwapLogo h="auto" w="90px" />
-        </Text>
-      </Box> */}
+
       <ConnectWallet isOpen={isOpen} dismiss={onClose} />
     </Box>
   );
