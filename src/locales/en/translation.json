@@ -453,6 +453,7 @@
       "connectWallet": "Connect Wallet",
       "deposit": "Deposit",
       "withdraw": "Withdraw",
+      "unwrap": "Unwrap",
       "addLiquidity": "Add liquidity",
       "wrap": "Wrap",
       "cancel": "Cancel",
@@ -462,23 +463,25 @@
       "claim": "Claim ",
       "claimRewards": "Claim Rewards",
       "confirmWithdraw": "Confirm",
+      "confirmWrap": "Confirm",
       "lpTokens": "LP tokens",
+      "tokens": "tokens",
       "stakedLPTokens": "Staked LP Tokens",
       "stakedTokens": "Staked Tokens",
+      "wrappedTokens": "Wrapped Tokens",
       "stakedLPTokensMoney": "USD Value",
       "yourApr": "Your APR",
       "maxApr": "Max APR",
       "all": "All",
       "classic": "Classic",
-      "classicV2": "Variable",
-      "variable": "Variable",
+
       "canto": "CantoDex",
       "forte": "ForteSwap",
-      "stable": "Stable",
+
       "admin": "Admin",
       "weighted": "Weighted",
       "ecosystem": "Eco",
-      "spiritEarned": "SPIRIT rewards"
+      "spiritEarned": "oSOUL rewards"
     },
     "aprPopover": {
       "header": "APR Breakdown",

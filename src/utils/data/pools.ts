@@ -350,7 +350,7 @@ export const getGaugesPoolInfoWithMulticall = async (
         stable: chainResponse[x + 3][doubleCountOdd].response[0],
         token0: unionTokens[x][doubleCountEven],
         token1: unionTokens[x][doubleCountOdd],
-        type: ['variable', 'stable', 'admin'][x],
+        type: ['CantoDex', 'ForteSwap', 'admin'][x],
       });
       doubleCountOdd += 2;
       doubleCountEven += 2;
@@ -661,9 +661,9 @@ export const loadFarmsList = async (
       farm.multiplier = gaugeWeight
         .div(totalLocked)
         .times(
-          farm.type === 'variable'
+          farm.type === 'CantoDex'
             ? variableShare
-            : farm.type === 'stable'
+            : farm.type === 'ForteSwap'
             ? stableShare
             : adminShare,
         )
@@ -691,7 +691,7 @@ export const loadFarmsList = async (
         .times(rate)
         .toNumber();
 
-      const type = farm?.stable ? 'stable' : 'variable';
+      const type = farm?.stable ? 'ForteSwap' : 'CantoDex';
 
       const lp: IFarm = {
         title: farm?.lpSymbol

@@ -98,7 +98,7 @@ export const stableSobPools: SobTokenPool[] = [
       pid: 41,
       abi: 'beetmasterchef',
     },
-    type: 'stable',
+    type: 'canto',
     chainId: 250,
     decimals: 18,
     tokens: [DAI, USDC],

@@ -85,7 +85,7 @@ export const formatReturnData = (
       tokenItems = [token0?.symbol, token1?.symbol];
       symbol = name;
     } else if (item.symbol && item.symbol.includes('V1 AMM -')) {
-      const isStable = item.symbol.includes('Stable');
+      const isStable = item.symbol.includes('ForteSwap');
       const base_name = item.symbol
         .replace('VolatileV1 AMM - ', '')
         .replace('StableV1 AMM - ', '');

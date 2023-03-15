@@ -6,7 +6,7 @@ import { YourApr } from '../components/YourApr';
 import { IconButton } from 'app/components/IconButton';
 import { StyledContainer } from './styles';
 import { ReactComponent as SparklesIcon } from 'app/assets/images/sparkles.svg';
-import { BoostFactor } from '../components/BoostFactor';
+// import { BoostFactor } from '../components/BoostFactor';
 import Web3Monitoring from 'app/connectors/EthersConnector/transactions';
 import { transactionResponse } from 'utils/web3/actions/utils';
 import { checkAddress, getRoundedSFs } from 'app/utils';
@@ -47,6 +47,7 @@ export const Farm = ({
   isOpen,
   TokenList,
   onDeposit,
+  onWrap,
   onWithdraw,
   onClaim,
 }: Props) => {
@@ -219,6 +220,7 @@ export const Farm = ({
       tooltip: 'votingWeight',
     });
   }
+
   infoPanelItems.push({
     label: t(`${translationPath}.stakedTokens`),
     value: checkSmallValue(+farmUserData.lpTokens),
@@ -240,6 +242,9 @@ export const Farm = ({
 
   const handleDeposit = () => {
     onDeposit(defaultAmount);
+  };
+  const handleWrap = () => {
+    onWrap(defaultAmount);
   };
   const handleWithdraw = () => {
     onWithdraw(defaultAmount);
@@ -315,11 +320,29 @@ export const Farm = ({
               <IconTooltipPanel staked={staked} items={infoPanelItems} />
               <AccordionPanel p={0}>
                 <RetrieveTokens
+                  key="retrieveToken3"
+                  highlight={true}
+                  value={checkSmallValue(+farmUserData.lpTokens)}
+                  moneyValue={farmUserData.lpTokensMoney}
+                  title={t(`${translationPath}.wrappedTokens`)}
+                  style={{ marginTop: '0.5rem' }}
+                  button={
+                    <Button
+                      variant="secondary"
+                      onClick={handleWithdraw}
+                      disabled={!staked}
+                    >
+                      {t(`${translationPath}.unwrap`)}
+                    </Button>
+                  }
+                />
+
+                <RetrieveTokens
                   key="retrieveToken2"
                   highlight={true}
                   value={checkSmallValue(+farmUserData.lpTokens)}
                   moneyValue={farmUserData.lpTokensMoney}
-                  title={t(`${translationPath}.stakedLPTokens`)}
+                  title={t(`${translationPath}.stakedTokens`)}
                   style={{ marginTop: '0.5rem' }}
                   button={
                     <Button
@@ -350,7 +373,7 @@ export const Farm = ({
                     />
                   }
                 />
-                {boosted && (
+                {/* {boosted && (
                   <BoostFactor
                     key="boostfactor"
                     currentBoost={farmUserData.currentBoost || '0'}
@@ -359,7 +382,7 @@ export const Farm = ({
                     }
                     lpTokens={farmUserData.lpTokens}
                   />
-                )}
+                )} */}
               </AccordionPanel>
               <AccordionButton
                 justifyContent={'center'}
@@ -374,7 +397,7 @@ export const Farm = ({
               </AccordionButton>
 
               <SimpleGrid spacing="8px" columns={2}>
-                <Button variant="secondary" onClick={() => navigate(getUrl())}>
+                <Button variant="inverted" onClick={handleWrap}>
                   {t(`${translationPath}.wrap`)}
                 </Button>
 

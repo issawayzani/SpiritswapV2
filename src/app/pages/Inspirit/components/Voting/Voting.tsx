@@ -45,7 +45,7 @@ function Voting() {
   const [selectedFarmType, setSelectedFarmType] = useState<{
     index: number;
     value: string;
-  }>({ index: 0, value: 'Stable' });
+  }>({ index: 0, value: 'ForteSwap' });
 
   let versionId = 1;
   if (selectedFarmType.index === 0) {
@@ -132,7 +132,7 @@ function Voting() {
         <Flex flexDir="column" marginY="spacing06">
           <Heading level={5}>{t(`${translationPath}.farmType.label`)}</Heading>
           <Select
-            labels={['Stable', 'Variable']}
+            labels={['ForteSwap', 'CantoDex']}
             onChange={onChangeFarmType}
             selected={selectedFarmType.index}
           />

@@ -44,8 +44,13 @@ export const FarmController = ({
   farm: IFarm;
   onOpen: () => void;
 }) => {
-  const { status, onDepositHandler, onWithdrawHandler, onCancelTransaction } =
-    useFarmActions();
+  const {
+    status,
+    onDepositHandler,
+    onWrapHandler,
+    onWithdrawHandler,
+    onCancelTransaction,
+  } = useFarmActions();
   const [currentStatus, setCurrentStatus] = useState<any>();
   const { addToQueue } = Web3Monitoring();
   const { isOpen, onOpen: openFarm, onClose: closeFarm } = useDisclosure();
@@ -72,6 +77,22 @@ export const FarmController = ({
       return null;
     },
     onConfirmDeposit: async (_value: string) => {
+      if (!_value) {
+        // TODO: Possibly add a message for user input error
+        return null;
+      }
+
+      let tx;
+
+      if (farm.gaugeAddress) {
+        tx = await stakeGaugePoolToken(farm?.gaugeAddress, _value);
+      } else {
+        tx = await stakePoolToken(farm.pid, _value);
+      }
+
+      return tx;
+    },
+    onConfirmWrap: async (_value: string) => {
       if (!_value) {
         // TODO: Possibly add a message for user input error
         return null;
@@ -150,9 +171,19 @@ export const FarmController = ({
           farm={farm}
           onWithdraw={onWithdrawHandler}
           onDeposit={onDepositHandler}
+          onWrap={onWrapHandler}
           onClaim={farmTrasactionData.onClaimTransaction}
           isTransitioning={isOpen}
           isOpen={currentStatus !== FarmTransactionStatus.DEFAULT}
+          TokenList={MemorizeTokenList}
+        />
+      )}
+
+      {currentStatus === FarmTransactionStatus.WRAPPING && !isOpen && (
+        <FarmTransaction
+          {...farmTrasactionData}
+          type={FarmTransactionType.WRAP}
+          onCancelTransaction={onCancelTransaction}
           TokenList={MemorizeTokenList}
         />
       )}

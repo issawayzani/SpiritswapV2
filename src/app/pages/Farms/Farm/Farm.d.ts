@@ -7,5 +7,6 @@ export interface Props {
   TokenList: MemoExoticComponent<() => Element>;
   onWithdraw: (_amount: string) => Promise<any> | void;
   onDeposit: (_amount: string) => Promise<any> | void;
+  onWrap: (_amount: string) => Promise<any> | void;
   onClaim: () => any;
 }
