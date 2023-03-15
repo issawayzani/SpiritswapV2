@@ -238,7 +238,7 @@ export default function SwapPanel({ panelProps, isWrapped }) {
 
     return '-';
   };
-
+  console.log(firstToken.value);
   return (
     <Box mt="20px">
       <NewTokenAmountPanel

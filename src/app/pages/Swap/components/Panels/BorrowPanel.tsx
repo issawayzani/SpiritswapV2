@@ -16,11 +16,23 @@ export default function BorrowPanel(props) {
   const borrowPanels = [
     {
       key: 0,
-      children: <BorrowRepayPanel borrow={true} />,
+      children: (
+        <BorrowRepayPanel
+          borrow={true}
+          buttonText="Borrow"
+          balanceText="Credit : "
+        />
+      ),
     },
     {
       key: 1,
-      children: <BorrowRepayPanel repay={true} />,
+      children: (
+        <BorrowRepayPanel
+          repay={true}
+          buttonText="Repay"
+          balanceText="Debt: "
+        />
+      ),
     },
   ];
   useEffect(() => {
