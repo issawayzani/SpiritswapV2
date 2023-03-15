@@ -6,7 +6,7 @@ import { StyledIcon } from '../../styles';
 
 import { SWAP } from 'constants/icons';
 
-export default function Heading({ toggleSettings, helperModal, toggleChart }) {
+export default function Heading({ toggleSettings, helperModal }) {
   return (
     <HStack justifyContent="space-between" mb="15px">
       <CardHeader

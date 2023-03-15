@@ -362,6 +362,7 @@ const NewTokenAmountPanel = ({
           </Skeleton>
         ) : null}
       </HStack>
+
       {showBalance ? (
         <Flex w="full" align="center" justify="space-between">
           <Flex>
