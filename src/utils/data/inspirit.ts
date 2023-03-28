@@ -308,16 +308,16 @@ export const getUserVotingData = async (
     stableWeights,
     v2Weights,
   ] = await Promise.all([
-    Multicall(v2VotingCalls, 'gaugeproxyV3', CHAIN_ID, 'rpc'),
+    Multicall(v2VotingCalls, 'voter', CHAIN_ID, 'rpc'),
     Multicall(stableVotingCalls, 'stableproxy', CHAIN_ID, 'rpc'),
-    Multicall(v2BribesCalls, 'gaugeproxyV3', CHAIN_ID, 'rpc'),
+    Multicall(v2BribesCalls, 'voter', CHAIN_ID, 'rpc'),
     Multicall(stableBribesCalls, 'stableproxy', CHAIN_ID, 'rpc'),
     Multicall(v2Rewards0Calls, 'pair', CHAIN_ID, 'rpc'),
     Multicall(v2Rewards1Calls, 'pair', CHAIN_ID, 'rpc'),
     Multicall(stableRewards0Calls, 'pair', CHAIN_ID, 'rpc'),
     Multicall(stableRewards1Calls, 'pair', CHAIN_ID, 'rpc'),
-    Multicall(stableWeightsCalls, 'gaugeproxyV3', CHAIN_ID, 'rpc'),
-    Multicall(v2WeightsCalls, 'gaugeproxyV3', CHAIN_ID, 'rpc'),
+    Multicall(stableWeightsCalls, 'voter', CHAIN_ID, 'rpc'),
+    Multicall(v2WeightsCalls, 'voter', CHAIN_ID, 'rpc'),
   ]);
 
   return {

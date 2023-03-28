@@ -152,7 +152,7 @@ export const EMPY_FARM = {
   },
   gaugeAddress: '',
   bribeAddress: '',
-  gaugeproxy: contracts.gaugeV3[250],
+  gaugeproxy: contracts.voter[250],
   bribeRewards: ['', ''],
 };
 

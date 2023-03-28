@@ -54,9 +54,9 @@ export const getGaugeBasicInfo = async (_provider = null) => {
   const adminAddress = Contracts.adminProxy[CHAIN_ID];
 
   const [variableContract, stableContract, adminContract] = await Promise.all([
-    Contract(variableAddress, 'gaugeproxyV3', undefined, undefined, _provider),
-    Contract(stableAddress, 'gaugeproxyV3', undefined, undefined, _provider),
-    Contract(adminAddress, 'gaugeproxyV3', undefined, undefined, _provider),
+    Contract(variableAddress, 'voter', undefined, undefined, _provider),
+    Contract(stableAddress, 'voter', undefined, undefined, _provider),
+    Contract(adminAddress, 'voter', undefined, undefined, _provider),
   ]);
 
   const [variableLps, stableLps, adminLps] = await Promise.all([
@@ -121,9 +121,9 @@ export const getGaugeBasicInfo = async (_provider = null) => {
     stableTokens,
     adminTokens,
   ] = await Promise.all([
-    Multicall(variableGaugeCalls, 'gaugeproxyV3', CHAIN_ID, 'rpc', _provider),
-    Multicall(stableGaugeCalls, 'gaugeproxyV3', CHAIN_ID, 'rpc', _provider),
-    Multicall(adminGaugeCalls, 'gaugeproxyV3', CHAIN_ID, 'rpc', _provider),
+    Multicall(variableGaugeCalls, 'voter', CHAIN_ID, 'rpc', _provider),
+    Multicall(stableGaugeCalls, 'voter', CHAIN_ID, 'rpc', _provider),
+    Multicall(adminGaugeCalls, 'voter', CHAIN_ID, 'rpc', _provider),
     Multicall(variableTokensCalls, 'pairV2', CHAIN_ID, 'rpc', _provider),
     Multicall(stableTokensCalls, 'pairV2', CHAIN_ID, 'rpc', _provider),
     Multicall(adminTokensCalls, 'pairV2', CHAIN_ID, 'rpc', _provider),
@@ -290,21 +290,9 @@ export const getGaugesPoolInfoWithMulticall = async (
     Multicall(variableERC20Calls, 'pairV2', CHAIN_ID, 'rpc', _provider),
     Multicall(stableERC20Calls, 'pairV2', CHAIN_ID, 'rpc', _provider),
     Multicall(adminERC20Calls, 'pairV2', CHAIN_ID, 'rpc', _provider),
-    Multicall(
-      variableLockedWeightsCalls,
-      'gaugeproxyV3',
-      CHAIN_ID,
-      'rpc',
-      _provider,
-    ),
-    Multicall(
-      stableLockedWeightsCalls,
-      'gaugeproxyV3',
-      CHAIN_ID,
-      'rpc',
-      _provider,
-    ),
-    Multicall(adminWeightsCalls, 'gaugeproxyV3', CHAIN_ID, 'rpc', _provider),
+    Multicall(variableLockedWeightsCalls, 'voter', CHAIN_ID, 'rpc', _provider),
+    Multicall(stableLockedWeightsCalls, 'voter', CHAIN_ID, 'rpc', _provider),
+    Multicall(adminWeightsCalls, 'voter', CHAIN_ID, 'rpc', _provider),
     variableContract.lockedTotalWeight(),
     stableContract.lockedTotalWeight(),
     adminContract.totalWeight(),
@@ -739,10 +727,10 @@ export const loadFarmsList = async (
 export const getGauges = async provider => {
   if (provider && provider._network.chainId === CHAIN_ID) {
     const gaugeProxy = 'gaugeproxy';
-    const gaugeProxyV2 = 'gaugeproxyV3';
+    const gaugeProxyV2 = 'voter';
     const gaugeProxyStable = 'stableproxy';
     const gaugeAddress = addresses.gauge[CHAIN_ID];
-    const gaugeAddressV2 = addresses.gaugeV3[CHAIN_ID];
+    const gaugeAddressV2 = addresses.voter[CHAIN_ID];
     const gaugeAddressStable = addresses.stableProxy[CHAIN_ID];
 
     const promiseV1 = Contract(

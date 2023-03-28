@@ -14,16 +14,16 @@ import { BoostedFarm } from 'app/interfaces/Inspirit';
 import moment from 'moment';
 
 export const getGaugeV2Contract = async (_provider = null) => {
-  const gaugeV2Address = addresses.gaugeV3[CHAIN_ID];
+  const gaugeV2Address = addresses.voter[CHAIN_ID];
 
   if (!_provider) {
     const provider = getProvider();
-    return await Contract(gaugeV2Address, 'gaugeproxyV3', provider);
+    return await Contract(gaugeV2Address, 'voter', provider);
   }
 
   return await Contract(
     gaugeV2Address,
-    'gaugeproxyV3',
+    'voter',
     undefined,
     undefined,
     _provider,

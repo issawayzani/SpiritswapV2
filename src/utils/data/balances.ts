@@ -167,9 +167,9 @@ export const getGaugeBalances = async (
   const adminAddress = Contracts.adminProxy[CHAIN_ID];
 
   const [variableContract, stableContract, adminContract] = await Promise.all([
-    Contract(variableAddress, 'gaugeproxyV3', undefined, undefined, _provider),
-    Contract(stableAddress, 'gaugeproxyV3', undefined, undefined, _provider),
-    Contract(adminAddress, 'gaugeproxyV3', undefined, undefined, _provider),
+    Contract(variableAddress, 'voter', undefined, undefined, _provider),
+    Contract(stableAddress, 'voter', undefined, undefined, _provider),
+    Contract(adminAddress, 'voter', undefined, undefined, _provider),
   ]);
 
   const [variableLps, stableLps, adminLps] = await Promise.all([
@@ -228,27 +228,9 @@ export const getGaugeBalances = async (
 
   const [variableGauges, stableGauges, adminGauges, tokens] = await Promise.all(
     [
-      Multicall(
-        variableGaugeCalls,
-        'gaugeproxyV3',
-        undefined,
-        undefined,
-        _provider,
-      ),
-      Multicall(
-        stableGaugeCalls,
-        'gaugeproxyV3',
-        undefined,
-        undefined,
-        _provider,
-      ),
-      Multicall(
-        adminGaugeCalls,
-        'gaugeproxyV3',
-        undefined,
-        undefined,
-        _provider,
-      ),
+      Multicall(variableGaugeCalls, 'voter', undefined, undefined, _provider),
+      Multicall(stableGaugeCalls, 'voter', undefined, undefined, _provider),
+      Multicall(adminGaugeCalls, 'voter', undefined, undefined, _provider),
       Multicall(tokenCalls, 'pairV2', undefined, undefined, _provider),
     ],
   );

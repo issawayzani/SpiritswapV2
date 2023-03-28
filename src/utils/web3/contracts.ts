@@ -16,7 +16,7 @@ import inSpiritABI from './abis/inspirit.json';
 import inSpiritLPABI from './abis/inspiritLp.json';
 import feeDistributorABI from './abis/feeDistributor.json';
 import gaugeProxyABI from './abis/gaugeproxy.json';
-import gaugeProxyV3ABI from './abis/gaugeproxyV3.json';
+import voterAbi from './abis/voter.json';
 import stableProxyABI from './abis/stableproxy.json';
 import pairABI from './abis/IUniswapV2Pair.json';
 import pairV2ABI from './abis/pairV2.json';
@@ -54,7 +54,7 @@ export const ABIS = {
   inspiritLp: inSpiritLPABI,
   feedistributor: feeDistributorABI,
   gaugeproxy: gaugeProxyABI,
-  gaugeproxyV3: gaugeProxyV3ABI,
+  voter: voterAbi,
   stableproxy: stableProxyABI,
   sobVault: sobVaultABI,
   wVault: sobVaultABI,

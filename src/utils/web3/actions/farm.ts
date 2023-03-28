@@ -39,8 +39,8 @@ export const gaugeContractProxy = async ({ version }) => {
 
   /* TODO Better version handling */
   if (version === 2) {
-    gauge = contracts.gaugeV3[CHAIN_ID];
-    gaugeProxy = 'gaugeproxyV3';
+    gauge = contracts.voter[CHAIN_ID];
+    gaugeProxy = 'voter';
   }
   if (version === 3) {
     gauge = contracts.stableProxy[CHAIN_ID];

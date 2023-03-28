@@ -44,9 +44,9 @@ const contracts = {
   gaugeV2: {
     250: '0x5b3e653c0832e24a86413b1dc03926319e6f8d52',
   },
-  gaugeV3: {
+  voter: {
     250: '0xfe1C8A68351B52E391e10106BD3bf2d0759AFf4e',
-    7700: '',
+    7700: '0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f',
   },
   variableProxy: {
     250: '0xfe1C8A68351B52E391e10106BD3bf2d0759AFf4e',
@@ -117,6 +117,7 @@ const contracts = {
     137: '0x275617327c958bD06b5D6b871E7f491D76113dd8',
     250: '0x7f1AAcF8c4D33983d1460Da7ff55aE4e64eCb651',
     1285: '0xaeF00A0Cf402D9DEdd54092D9cA179Be6F9E5cE3',
+
     42161: '0x7a7443f8c577d537f1d8cd4a629d40a3148dd7ee',
     43114: '0xed386Fe855C1EFf2f843B910923Dd8846E45C5A4',
   },
