@@ -16,7 +16,7 @@ import inSpiritABI from './abis/inspirit.json';
 import inSpiritLPABI from './abis/inspiritLp.json';
 import feeDistributorABI from './abis/feeDistributor.json';
 import gaugeProxyABI from './abis/gaugeproxy.json';
-import voterAbi from './abis/voter.json';
+import voterAbi from './abis/Voter.json';
 import stableProxyABI from './abis/stableproxy.json';
 import pairABI from './abis/IUniswapV2Pair.json';
 import pairV2ABI from './abis/pairV2.json';
