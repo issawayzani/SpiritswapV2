@@ -203,6 +203,7 @@ export default function RedeemPanel(props) {
         <p> {0} WCANTO </p>
       </Flex>
       <Flex>
+        <Spacer />
         <Text as="div" fontSize="h5" color="grayDarker" mr="spacing02">
           <Flex align="center" justify="center" sx={{ gap: '0.2rem' }}>
             <Text
