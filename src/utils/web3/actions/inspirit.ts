@@ -3,6 +3,7 @@ import { BigNumber, utils } from 'ethers';
 import { BigNumber as BigNum } from '@ethersproject/bignumber';
 import { CHAIN_ID } from 'constants/index';
 import { DEFAULT_GAS_LIMIT, approve } from './general';
+import type { AbiItem } from 'web3-utils';
 import { Contract } from '../contracts';
 import { gaugeContractProxy } from './farm';
 import { transactionResponse } from './utils';
@@ -11,7 +12,18 @@ import { isPossibleToVote } from 'utils/data';
 import { ERROR_NOT_SUM_100 } from 'constants/errors';
 import { getProvider } from 'app/connectors/EthersConnector/login';
 import { BoostedFarm } from 'app/interfaces/Inspirit';
+import multicalcontract from '.././abis/Multicall.json';
 import moment from 'moment';
+import Web3 from 'web3';
+import { useEffect, useState } from 'react';
+const web3 = new Web3('http://localhost:8545');
+
+export const multicallv3 = async (): Promise<any> => {
+  return new web3.eth.Contract(
+    multicalcontract.abi as AbiItem[],
+    '0x7a2088a1bFc9d81c55368AE168C2C02570cB814F',
+  );
+};
 
 export const getGaugeV2Contract = async (_provider = null) => {
   const gaugeV2Address = addresses.gaugeV3[CHAIN_ID];
@@ -20,7 +32,7 @@ export const getGaugeV2Contract = async (_provider = null) => {
     const provider = getProvider();
     return await Contract(gaugeV2Address, 'gaugeproxyV3', provider);
   }
-
+  // Contract (addresses.mulltiCall,'Multicall',provider);
   return await Contract(
     gaugeV2Address,
     'gaugeproxyV3',

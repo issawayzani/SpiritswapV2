@@ -16,6 +16,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useNavigate } from 'app/hooks/Routing';
 import Heading from './components/Heading';
+import { Test } from 'utils/web3';
 import Settings from './components/Settings';
 import SpiritsBackground from './components/Background';
 import {
@@ -135,12 +136,10 @@ const SwapPage = () => {
   const [queriedTokenOne] = allTokens.filter(token =>
     matchesToken(token, token1),
   );
-  console.log(queriedTokenOne);
 
   const [queriedTokenTwo] = allTokens.filter(token =>
     matchesToken(token, token2),
   );
-  console.log(queriedTokenTwo);
   const [inputValue, outputValue] = setToken(queriedTokenOne, queriedTokenTwo);
   const initialState = {
     value: '',
@@ -776,6 +775,8 @@ const SwapPage = () => {
         </Helmet>
       </HelmetProvider>
       <Box>
+        <Test />
+
         <Grid
           display={{ base: 'grid', lg: 'grid' }}
           top={isMobile ? '124px' : '170px'}

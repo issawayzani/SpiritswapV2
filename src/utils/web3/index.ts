@@ -17,3 +17,5 @@ export * from './types';
 
 // Export all action related methods used in the app
 export * from './actions';
+
+export { default as Test } from './actions/Test';
