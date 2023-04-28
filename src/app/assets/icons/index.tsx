@@ -7,6 +7,7 @@ import { ReactComponent as ArrowDownCircle } from 'app/assets/images/arrow-down-
 import { ReactComponent as ArrowDown } from 'app/assets/images/arrow-down.svg';
 import { ReactComponent as ArrowRight } from 'app/assets/images/arrow-right.svg';
 import { ReactComponent as Swap } from 'app/assets/images/swap.svg';
+import { ReactComponent as PlusSign } from 'app/assets/images/plusicon.svg';
 import { ReactComponent as Back } from 'app/assets/images/back.svg';
 import { ReactComponent as Adjust } from 'app/assets/images/adjust.svg';
 import { ReactComponent as Backspace } from 'app/assets/images/backspace-delete-button.svg';
@@ -358,6 +359,28 @@ export const SwapIconButton = ({
       icon={<Swap />}
       color="ci"
       aria-label="Swap token"
+      transform={transformStyle}
+      _hover={elementEnable(!showConfirmModal)}
+    />
+  );
+};
+
+export const plusExerciseIcon = ({
+  horizontalRotateOnMdScreenSize = true,
+  showConfirmModal = false,
+  ...rest
+}) => {
+  const transformStyle = horizontalRotateOnMdScreenSize
+    ? { base: 'rotate(90deg)', md: 'rotate(0deg)' }
+    : { base: 'rotate(90deg)' };
+
+  return (
+    <IconButton
+      {...rest}
+      variant="iconButton"
+      icon={<PlusSign />}
+      color="ci"
+      aria-label="plus icon"
       transform={transformStyle}
       _hover={elementEnable(!showConfirmModal)}
     />
