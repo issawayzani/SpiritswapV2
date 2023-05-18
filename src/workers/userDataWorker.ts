@@ -14,7 +14,10 @@ import {
   getUserInspiritBalances,
   saturateGauges,
 } from 'utils/data';
-
+import type { AbiItem } from 'web3-utils';
+import multicalcontract from '../utils/web3/abis/Multicall.json';
+import Web3 from 'web3';
+import { useEffect, useState } from 'react';
 import { checkSpiritAllowance, formatFrom } from 'utils/web3';
 import { UNIDEX_ETH_ADDRESS } from 'utils/swap';
 import { formatUnits } from 'ethers/lib/utils';
@@ -41,11 +44,37 @@ onmessage = ({ data: { type, provider, userAddress, signer, params } }) => {
     case 'checkAllowances':
       checkAllowances(userAddress, loadedProvider);
       break;
+    case 'bondingCurveData':
+      getBondingCurveData(loadedProvider);
+      break;
     case 'fetchIndividualLP':
       fetchIndividualLP(userAddress, params, loadedProvider);
       break;
   }
 };
+
+export async function getBondingCurveData(provider) {
+  const web3 = new Web3('https://rpc.ftm.tools/');
+  const multicallv3 = async (): Promise<any> => {
+    return new web3.eth.Contract(
+      multicalcontract.abi as AbiItem[],
+      '0x6F67748881DCce8238042370c3f9659379775886',
+    );
+  };
+  const contractInstance = await multicallv3();
+  contractInstance.methods
+    .bondingCurveData('0x992651bde478421Be71475E1d58ed50AD793da0e')
+    .call()
+    .then(result => {
+      self.postMessage({
+        type: 'setBondingCurveInfo',
+        payload: result,
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
 
 const getStakedBalance = async (
   userWalletAddress,
