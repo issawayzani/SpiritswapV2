@@ -54,6 +54,8 @@ export const selectShowPortfolio = (state: RootState) =>
   state.user.showPortfolio;
 export const selectHistoricalPortfolioValue = (state: RootState) =>
   state.user.historical_portfolio_value;
+export const selectBondingCurveInfo = (state: RootState) =>
+  state.general.bondingCurveInfo;
 export const selectLimitOrdersTotalValue = (state: RootState) =>
   state.user.limitOrdersTotalValue;
 export const selectLendAndBorrowData = (state: RootState) =>
