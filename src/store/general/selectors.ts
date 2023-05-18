@@ -49,6 +49,9 @@ export const selectMarketCap = (state: RootState) => state.general.marketCap;
 export const selectTVL = (state: RootState) => state.general.tvl;
 export const selectFtmInfo = (state: RootState) => state.general.ftmInfo;
 export const selectCantoInfo = (state: RootState) => state.general.cantoInfo;
+export const selectBondingCurveInfo = (state: RootState) =>
+  state.general.bondingCurveInfo;
+export const selectSis = (state: RootState) => state.general.sis;
 export const selectLpPrices = (state: RootState) => state.general.lp_prices;
 export const selectSpiritPerBlock = (state: RootState) =>
   state.general.spiritperblock;
