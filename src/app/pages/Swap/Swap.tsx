@@ -57,6 +57,7 @@ import {
   selectSwapModeIndex,
   selectUserCustomTokens,
 } from 'store/general/selectors';
+import { selectBondingCurveInfo } from 'store/user/selectors';
 import {
   setGlobalSwapModeIndex,
   setGlobalBottomCardIndex,
@@ -99,6 +100,7 @@ const SwapPage = () => {
   const navigate = useNavigate();
   const { gasPrice, txGweiCost } = useGetGasPrice({ speed: states.txSpeed });
   const userCustomTokens = useAppSelector(selectUserCustomTokens);
+  const BondingCurveData = useAppSelector(selectBondingCurveInfo);
   const allTokens = [...tokens, ...(userCustomTokens || [])];
   const [showChart, setShowChart] = useState<boolean>(
     states.showChart ?? false,
@@ -775,8 +777,6 @@ const SwapPage = () => {
         </Helmet>
       </HelmetProvider>
       <Box>
-        <Test />
-
         <Grid
           display={{ base: 'grid', lg: 'grid' }}
           top={isMobile ? '124px' : '170px'}
@@ -794,7 +794,7 @@ const SwapPage = () => {
               <div className="container">
                 <TopCard
                   icon="fa-users"
-                  TVL="0"
+                  TVL={BondingCurveData?.tvl}
                   Volume="0"
                   APR="0"
                   Supply="0"
