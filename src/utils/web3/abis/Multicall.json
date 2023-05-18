@@ -5,76 +5,66 @@
   "abi": [
     {
       "inputs": [
-        {
-          "internalType": "address",
-          "name": "_voter",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "_SOUL",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "_vSOUL",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "_oSOUL",
-          "type": "address"
-        }
+        { "internalType": "address", "name": "_voter", "type": "address" },
+        { "internalType": "address", "name": "_TOKEN", "type": "address" },
+        { "internalType": "address", "name": "_VTOKEN", "type": "address" },
+        { "internalType": "address", "name": "_OTOKEN", "type": "address" }
       ],
       "stateMutability": "nonpayable",
       "type": "constructor"
     },
     {
       "inputs": [],
-      "name": "ROUTER",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
+      "name": "BASE",
+      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [],
-      "name": "SOUL",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
+      "name": "DIVISOR",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [],
-      "name": "WCANTO",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
+      "name": "FEE",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "OTOKEN",
+      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "PRICE_ORACLE_BASE",
+      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "TOKEN",
+      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "VTOKEN",
+      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        {
-          "internalType": "address",
-          "name": "account",
-          "type": "address"
-        }
+        { "internalType": "address", "name": "account", "type": "address" }
       ],
       "name": "bondingCurveData",
       "outputs": [
@@ -82,17 +72,17 @@
           "components": [
             {
               "internalType": "uint256",
-              "name": "priceWCANTO",
+              "name": "priceBASE",
               "type": "uint256"
             },
             {
               "internalType": "uint256",
-              "name": "priceSOUL",
+              "name": "priceTOKEN",
               "type": "uint256"
             },
             {
               "internalType": "uint256",
-              "name": "priceOSOUL",
+              "name": "priceOTOKEN",
               "type": "uint256"
             },
             {
@@ -100,74 +90,63 @@
               "name": "maxMarketSell",
               "type": "uint256"
             },
+            { "internalType": "uint256", "name": "tvl", "type": "uint256" },
             {
               "internalType": "uint256",
-              "name": "tvl",
+              "name": "supplyTOKEN",
               "type": "uint256"
             },
             {
               "internalType": "uint256",
-              "name": "supplySOUL",
+              "name": "supplyVTOKEN",
+              "type": "uint256"
+            },
+            { "internalType": "uint256", "name": "apr", "type": "uint256" },
+            { "internalType": "uint256", "name": "ltv", "type": "uint256" },
+            { "internalType": "uint256", "name": "ratio", "type": "uint256" },
+            {
+              "internalType": "uint256",
+              "name": "accountBASE",
               "type": "uint256"
             },
             {
               "internalType": "uint256",
-              "name": "supplyVSOUL",
+              "name": "accountTOKEN",
               "type": "uint256"
             },
             {
               "internalType": "uint256",
-              "name": "apr",
+              "name": "accountOTOKEN",
               "type": "uint256"
             },
             {
               "internalType": "uint256",
-              "name": "ltv",
+              "name": "accountEarnedBASE",
               "type": "uint256"
             },
             {
               "internalType": "uint256",
-              "name": "ratio",
+              "name": "accountEarnedTOKEN",
               "type": "uint256"
             },
             {
               "internalType": "uint256",
-              "name": "accountWCANTO",
+              "name": "accountEarnedOTOKEN",
               "type": "uint256"
             },
             {
               "internalType": "uint256",
-              "name": "accountSOUL",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "accountOSOUL",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "accountEarnedWCANTO",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "accountEarnedSOUL",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "accountEarnedOSOUL",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "accountVSOUL",
+              "name": "accountVTOKEN",
               "type": "uint256"
             },
             {
               "internalType": "uint256",
               "name": "accountVotingPower",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "accountUsedWeights",
               "type": "uint256"
             },
             {
@@ -196,31 +175,15 @@
     },
     {
       "inputs": [
-        {
-          "internalType": "address",
-          "name": "plugin",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "account",
-          "type": "address"
-        }
+        { "internalType": "address", "name": "plugin", "type": "address" },
+        { "internalType": "address", "name": "account", "type": "address" }
       ],
       "name": "bribeCardData",
       "outputs": [
         {
           "components": [
-            {
-              "internalType": "string",
-              "name": "protocol",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "symbol",
-              "type": "string"
-            },
+            { "internalType": "string", "name": "protocol", "type": "string" },
+            { "internalType": "string", "name": "symbol", "type": "string" },
             {
               "internalType": "address[]",
               "name": "rewardTokens",
@@ -261,45 +224,16 @@
       "type": "function"
     },
     {
-      "inputs": [],
-      "name": "cWCANTO",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
       "inputs": [
-        {
-          "internalType": "address",
-          "name": "plugin",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "account",
-          "type": "address"
-        }
+        { "internalType": "address", "name": "plugin", "type": "address" },
+        { "internalType": "address", "name": "account", "type": "address" }
       ],
       "name": "gaugeCardData",
       "outputs": [
         {
           "components": [
-            {
-              "internalType": "string",
-              "name": "protocol",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "symbol",
-              "type": "string"
-            },
+            { "internalType": "string", "name": "protocol", "type": "string" },
+            { "internalType": "string", "name": "symbol", "type": "string" },
             {
               "internalType": "address[]",
               "name": "tokensInUnderlying",
@@ -312,19 +246,11 @@
             },
             {
               "internalType": "uint256",
-              "name": "priceOSOUL",
+              "name": "priceOTOKEN",
               "type": "uint256"
             },
-            {
-              "internalType": "uint256",
-              "name": "apr",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "tvl",
-              "type": "uint256"
-            },
+            { "internalType": "uint256", "name": "apr", "type": "uint256" },
+            { "internalType": "uint256", "name": "tvl", "type": "uint256" },
             {
               "internalType": "uint256",
               "name": "votingWeight",
@@ -347,7 +273,7 @@
             },
             {
               "internalType": "uint256",
-              "name": "accountEarnedOSOUL",
+              "name": "accountEarnedOTOKEN",
               "type": "uint256"
             }
           ],
@@ -363,67 +289,23 @@
       "inputs": [],
       "name": "getPools",
       "outputs": [
-        {
-          "internalType": "address[]",
-          "name": "",
-          "type": "address[]"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "getname",
-      "outputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "oSOUL",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
+        { "internalType": "address[]", "name": "", "type": "address[]" }
       ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "index",
-          "type": "uint256"
-        }
+        { "internalType": "uint256", "name": "index", "type": "uint256" }
       ],
       "name": "pool",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
+      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "input",
-          "type": "uint256"
-        },
+        { "internalType": "uint256", "name": "input", "type": "uint256" },
         {
           "internalType": "uint256",
           "name": "slippageTolerance",
@@ -432,32 +314,16 @@
       ],
       "name": "quoteBuyIn",
       "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "output",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "slippage",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "minOutput",
-          "type": "uint256"
-        }
+        { "internalType": "uint256", "name": "output", "type": "uint256" },
+        { "internalType": "uint256", "name": "slippage", "type": "uint256" },
+        { "internalType": "uint256", "name": "minOutput", "type": "uint256" }
       ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "input",
-          "type": "uint256"
-        },
+        { "internalType": "uint256", "name": "input", "type": "uint256" },
         {
           "internalType": "uint256",
           "name": "slippageTolerance",
@@ -466,32 +332,16 @@
       ],
       "name": "quoteBuyOut",
       "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "output",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "slippage",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "minOutput",
-          "type": "uint256"
-        }
+        { "internalType": "uint256", "name": "output", "type": "uint256" },
+        { "internalType": "uint256", "name": "slippage", "type": "uint256" },
+        { "internalType": "uint256", "name": "minOutput", "type": "uint256" }
       ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "input",
-          "type": "uint256"
-        },
+        { "internalType": "uint256", "name": "input", "type": "uint256" },
         {
           "internalType": "uint256",
           "name": "slippageTolerance",
@@ -500,32 +350,16 @@
       ],
       "name": "quoteSellIn",
       "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "output",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "slippage",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "minOutput",
-          "type": "uint256"
-        }
+        { "internalType": "uint256", "name": "output", "type": "uint256" },
+        { "internalType": "uint256", "name": "slippage", "type": "uint256" },
+        { "internalType": "uint256", "name": "minOutput", "type": "uint256" }
       ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "input",
-          "type": "uint256"
-        },
+        { "internalType": "uint256", "name": "input", "type": "uint256" },
         {
           "internalType": "uint256",
           "name": "slippageTolerance",
@@ -534,33 +368,43 @@
       ],
       "name": "quoteSellOut",
       "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "output",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "slippage",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "minOutput",
-          "type": "uint256"
-        }
+        { "internalType": "uint256", "name": "output", "type": "uint256" },
+        { "internalType": "uint256", "name": "slippage", "type": "uint256" },
+        { "internalType": "uint256", "name": "minOutput", "type": "uint256" }
       ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [],
-      "name": "vSOUL",
+      "name": "rewarder",
+      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "swapCardData",
       "outputs": [
         {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
+          "components": [
+            { "internalType": "uint256", "name": "frBASE", "type": "uint256" },
+            { "internalType": "uint256", "name": "mrvBASE", "type": "uint256" },
+            { "internalType": "uint256", "name": "mrrBASE", "type": "uint256" },
+            {
+              "internalType": "uint256",
+              "name": "mrrTOKEN",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "marketMaxTOKEN",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct Multicall.SwapCard",
+          "name": "swapCard",
+          "type": "tuple"
         }
       ],
       "stateMutability": "view",
@@ -569,13 +413,7 @@
     {
       "inputs": [],
       "name": "voter",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
+      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
       "stateMutability": "view",
       "type": "function"
     }
