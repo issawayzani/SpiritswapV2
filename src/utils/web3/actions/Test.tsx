@@ -6,7 +6,7 @@ import multicalcontract from '../abis/Multicall.json';
 import Web3 from 'web3';
 import { useEffect, useState } from 'react';
 
-const web3 = new Web3('http://localhost:8545');
+const web3 = new Web3('https://rpc.ftm.tools/');
 
 export default function Test() {
   const [bondingCurveData, setBondingCurveData] = useState(null);
@@ -14,7 +14,7 @@ export default function Test() {
   const multicallv3 = async (): Promise<any> => {
     return new web3.eth.Contract(
       multicalcontract.abi as AbiItem[],
-      '0x7a2088a1bFc9d81c55368AE168C2C02570cB814F',
+      '0x6F67748881DCce8238042370c3f9659379775886',
     );
   };
 
@@ -22,8 +22,8 @@ export default function Test() {
     const contractInstance = await multicallv3();
     if (contractInstance) {
       contractInstance.methods
-        .getname()
-        .call({ from: '0x70997970C51812dc3A010C7d01b50e0d17dc79C8' })
+        .bondingCurveData('0x992651bde478421Be71475E1d58ed50AD793da0e')
+        .call()
         .then(result => {
           setBondingCurveData(result);
         })
