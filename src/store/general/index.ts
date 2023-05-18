@@ -15,6 +15,30 @@ const initialState: {
     price: number;
     percentajeChange24: number;
   };
+  bondingCurveInfo: {
+    priceBASE: number; // Base token like FTM or OP in USD
+    priceTOKEN: number; // Price of GLOVE and xGLOVE in USD
+    priceOTOKEN: number; // Price of POWER in USD
+    maxMarketSell: number;
+    tvl: number;
+    supplyTOKEN: number; // supply of GLOVE
+    supplyVTOKEN: number; // supply of xGLOVE
+    apr: number;
+    ltv: number;
+    ratio: number;
+    accountBASE: number; // OP or FTM amount that account has
+    accountTOKEN: number; // user balance of GLOVE
+    accountOTOKEN: number; // user balance of POWER
+    accountEarnedBASE: number; // Base token rewards like OP and FTM
+    accountEarnedTOKEN: number; // GLOVE rewards
+    accountEarnedOTOKEN: number; // POWER rewards
+    accountVTOKEN: number; // user balance of xGLOVE
+    accountVotingPower: number;
+    accountUsedWeights: number;
+    accountBorrowCredit: number; // amount of base (OP or FTM) a user can borrow
+    accountBorrowDebt: number; // amount of base (OP or FTM) a user owess
+    accountMaxWithdraw: number; // max amount of GLOVE a user can unstake from xGLOVE
+  };
   marketCap: number;
   tvl: number;
   liquidity_pools: Array<any>;
@@ -56,6 +80,30 @@ const initialState: {
     price: 0,
     percentajeChange24: 0,
   },
+  bondingCurveInfo: {
+    priceBASE: 0,
+    priceTOKEN: 0,
+    priceOTOKEN: 0,
+    maxMarketSell: 0,
+    tvl: 0,
+    supplyTOKEN: 0,
+    supplyVTOKEN: 0,
+    apr: 0,
+    ltv: 0,
+    ratio: 0,
+    accountBASE: 0,
+    accountTOKEN: 0,
+    accountOTOKEN: 0,
+    accountEarnedBASE: 0,
+    accountEarnedTOKEN: 0,
+    accountEarnedOTOKEN: 0,
+    accountVTOKEN: 0,
+    accountVotingPower: 0,
+    accountUsedWeights: 0,
+    accountBorrowCredit: 0,
+    accountBorrowDebt: 0,
+    accountMaxWithdraw: 0,
+  },
   marketCap: 0,
   tvl: 0,
   liquidity_pools: [],
@@ -95,6 +143,9 @@ export const generalReducer = createSlice({
     },
     setCantoInfo: (state, action) => {
       state.cantoInfo = action.payload;
+    },
+    setBondingCurveInfo: (state, action) => {
+      state.bondingCurveInfo = action.payload;
     },
     setMarketCap: (state, action) => {
       state.marketCap = action.payload;
@@ -224,6 +275,7 @@ export const {
   setFtmInfo,
   setLpPrices,
   setCantoInfo,
+  setBondingCurveInfo,
   setSpiritPerBlock,
   setSpiritTotalSupply,
 } = generalReducer.actions;
