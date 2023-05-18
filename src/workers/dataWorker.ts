@@ -2,6 +2,9 @@ import {
   addressToToken,
   tokensNames,
 } from 'app/pages/SpiritWars/spiritWarsHelpers';
+import type { AbiItem } from 'web3-utils';
+import multicalcontract from '../utils/web3/abis/Multicall.json';
+import Web3 from 'web3';
 import {
   StatisticsProps,
   StatisticsToken,
@@ -52,6 +55,9 @@ onmessage = ({ data: { type, provider, isLoggedIn } }) => {
     case 'getSpiritStatistics':
       getSpiritStatistics(loadedProvider);
       break;
+    case 'getBondingCurveData':
+      getBondingCurveData(loadedProvider);
+      break;
     case 'getBoostedGauges':
       if (isLoggedIn) break;
       saturateGauges(gaugesPromise, BASE_TOKEN_ADDRESS).then(data => {
@@ -79,7 +85,6 @@ export async function getSpiritStatistics(provider) {
     spiritInfo.price,
   );
   const TVL = await getTVL(totalLockedValue);
-
   data['marketCap'] = marketCap;
   data['tvl'] = TVL;
   data['spiritperblock'] = spiritPerBlock;
@@ -91,6 +96,29 @@ export async function getSpiritStatistics(provider) {
   });
 }
 
+// BondingCurveData
+export async function getBondingCurveData(provider) {
+  const web3 = new Web3('https://rpc.ftm.tools/');
+  const multicallv3 = async (): Promise<any> => {
+    return new web3.eth.Contract(
+      multicalcontract.abi as AbiItem[],
+      '0x6F67748881DCce8238042370c3f9659379775886',
+    );
+  };
+  const contractInstance = await multicallv3();
+  contractInstance.methods
+    .bondingCurveData('0x992651bde478421Be71475E1d58ed50AD793da0e')
+    .call()
+    .then(result => {
+      self.postMessage({
+        type: 'setBondingCurveInfo',
+        payload: result,
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
 // =========================
 // ======== Farms ==========
 // =========================
