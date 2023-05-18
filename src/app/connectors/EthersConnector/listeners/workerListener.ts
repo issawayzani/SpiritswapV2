@@ -46,6 +46,7 @@ import {
   setUserSobLiquidityWallet,
   setUserWallet,
   setUserWeightedLiquidityWallet,
+  setBondingCurveInfo,
 } from 'store/user';
 import { formatFrom } from 'utils/web3';
 
@@ -74,9 +75,11 @@ export const listenToAppWorker = (
       case 'setLpPrices':
         dispatch(setLpPrices(JSON.parse(payload)));
         break;
+
       case 'setSpiritStatistics':
         dispatch(setFtmInfo(payload.ftmInfo));
         dispatch(setCantoInfo(payload.cantoInfo));
+        // dispatch(setBondingCurveInfo(payload.bondingCurveInfo));
         dispatch(setMarketCap(payload.marketCap));
         dispatch(setTVL(payload.tvl));
         dispatch(setSpiritInfo(payload.spiritInfo));
@@ -117,6 +120,9 @@ export const listenToUserworker = (worker: Worker, dispatch) => {
     switch (type) {
       case 'setHistoricalPortfolioValue':
         dispatch(setHistoricalPortfolioValue(payload));
+        break;
+      case 'setBondingCurveInfo':
+        dispatch(setBondingCurveInfo(payload));
         break;
       case 'setTokens':
         dispatch(setTokens(payload.tokens));
