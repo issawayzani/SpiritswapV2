@@ -3,25 +3,81 @@ import { SwapContainer } from '../../styles';
 import './styles.css';
 import { StatisticsPanel } from '../Panels';
 export default function TopRightCard(props) {
+  const powerPrice =
+    (props.bondingCurveData?.priceOTOKEN *
+      props.bondingCurveData?.accountOTOKEN) /
+    1e18;
+  const glovePrice =
+    (props.bondingCurveData?.priceTOKEN *
+      props.bondingCurveData?.accountTOKEN) /
+    1e18;
+  const OPPrice =
+    (props.bondingCurveData?.priceBASE * props.bondingCurveData?.accountBASE) /
+    1e18;
+  const xGLOVEPrice =
+    (props.bondingCurveData?.priceTOKEN *
+      props.bondingCurveData?.accountVTOKEN) /
+    1e18;
+  const creditPrice =
+    (props.bondingCurveData?.priceBASE *
+      props.bondingCurveData?.accountBorrowCredit) /
+    1e18;
+  const debtPrice =
+    (props.bondingCurveData?.priceBASE *
+      props.bondingCurveData?.accountBorrowCredit) /
+    1e18;
   const buttonAction = async () => {
     //need to get the rewards here
   };
   return (
     <Box mb="10px">
       <SwapContainer>
-        <StatisticsPanel name="SOULC" rewards="0" value="0" check={true} />
+        <StatisticsPanel
+          name="POW3R"
+          rewards={props.bondingCurveData?.accountEarnedOTOKEN / 1e18}
+          value={props.bondingCurveData?.accountOTOKEN / 1e18}
+          valueUSD={powerPrice}
+          check={true}
+        />
 
-        <StatisticsPanel name="WCANTO" rewards="0" value="0" check={true} />
-        <StatisticsPanel name="vSOULC" value="0" check={false} />
+        <StatisticsPanel
+          name="GLOV3"
+          rewards={props.bondingCurveData?.accountEarnedTOKEN / 1e18}
+          value={props.bondingCurveData?.accountTOKEN / 1e18}
+          valueUSD={glovePrice}
+          check={true}
+        />
+        <StatisticsPanel
+          name="OP"
+          rewards={props.bondingCurveData?.accountEarnedBASE / 1e18}
+          value={props.bondingCurveData?.accountBASE / 1e18}
+          valueUSD={OPPrice}
+          check={true}
+        />
 
-        <StatisticsPanel name="Voting Power" value="0" check={false} />
+        <StatisticsPanel
+          name="XGLOV3"
+          value={props.bondingCurveData?.accountVTOKEN / 1e18}
+          valueUSD={xGLOVEPrice}
+          check={false}
+        />
 
-        <StatisticsPanel name="Borrow Credit" value="0" check={false} />
+        <StatisticsPanel
+          name="Credit"
+          value={props.bondingCurveData?.accountBorrowCredit / 1e18}
+          valueUSD={creditPrice}
+          check={false}
+        />
 
-        <StatisticsPanel name="Borrow Debt" value="0" check={false} />
+        <StatisticsPanel
+          name="Debt"
+          value={props.bondingCurveData?.accountBorrowDebt / 1e18}
+          valueUSD={debtPrice}
+          check={false}
+        />
 
         <Button size="lg" mt="16px" w="full" onClick={buttonAction}>
-          Claim Rewards
+          Harvest
         </Button>
       </SwapContainer>
     </Box>

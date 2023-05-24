@@ -83,11 +83,9 @@ const contracts = {
   },
   spirit: {
     250: '0x5Cc61A78F164885776AA610fb0FE1257df78E59B',
-    7700: '',
   },
   inspirit: {
     250: '0x2FBFf41a9efAEAE77538bd63f1ea489494acdc08',
-    7700: '',
   },
   inspiritLp: {
     250: '0xd687dd4b2dca486ab4aafed87990ecef4b28c5a1',

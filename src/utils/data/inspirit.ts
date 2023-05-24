@@ -98,52 +98,67 @@ export const getInspiritStatistics = async (
       data: {},
     },
   ];
+  let totalSupply = 0;
+  let totalLocked = 0;
+  let beginningPeriod = 0;
+  let avgTime = 0;
+  let lastDistributionSpirits = 0;
+  let totalLockedValue = 0;
+  let totalSpiritValue = 0;
+  let nextDistribution = 0;
+  let lastDistributionValue = 0;
+  let aprLDbased = 0;
+  let inspiritPerSpirit = 0;
+  try {
+    const [multicall, feeDistributorMulticall] = await Promise.all([
+      Multicall(balanceParams, 'inspirit', CHAIN_ID, 'rpc', provider),
+      Multicall(feeDisCalls, 'feedistributor', CHAIN_ID, 'rpc', provider),
+    ]);
+    const totalSupply = formatUnits(multicall[0]?.response[0], 18);
+    const totalLocked = formatUnits(multicall[1]?.response[0], 18);
 
-  const [multicall, feeDistributorMulticall] = await Promise.all([
-    Multicall(balanceParams, 'inspirit', CHAIN_ID, 'rpc', provider),
-    Multicall(feeDisCalls, 'feedistributor', CHAIN_ID, 'rpc', provider),
-  ]);
+    const [timeCursor] = feeDistributorMulticall;
+    const beginningPeriod = BigNumber.from(timeCursor.response[0])
+      .sub(period)
+      .toNumber();
 
-  const totalSupply = formatUnits(multicall[0]?.response[0], 18);
-  const totalLocked = formatUnits(multicall[1]?.response[0], 18);
+    const tokensPerWeekCall = [
+      {
+        address: feeDistributorAddress,
+        name: 'tokens_per_week',
+        params: [`${beginningPeriod}`],
+      },
+    ];
 
-  const [timeCursor] = feeDistributorMulticall;
-  const beginningPeriod = BigNumber.from(timeCursor.response[0])
-    .sub(period)
-    .toNumber();
+    const [lastDistributionCall] = await Multicall(
+      tokensPerWeekCall,
+      'feedistributor',
+      CHAIN_ID,
+      'rpc',
+      provider,
+    );
 
-  const tokensPerWeekCall = [
-    {
-      address: feeDistributorAddress,
-      name: 'tokens_per_week',
-      params: [`${beginningPeriod}`],
-    },
-  ];
+    const lastDistribution = lastDistributionCall.response[0];
 
-  const [lastDistributionCall] = await Multicall(
-    tokensPerWeekCall,
-    'feedistributor',
-    CHAIN_ID,
-    'rpc',
-    provider,
-  );
+    const avgTime = (
+      (1460 / parseFloat(totalLocked)) *
+      parseFloat(totalSupply)
+    ).toFixed(0);
 
-  const lastDistribution = lastDistributionCall.response[0];
+    const totalLockedValue = spiritInfo.price * parseFloat(totalSupply) || 0;
+    const totalSpiritValue = spiritInfo.price * parseFloat(totalLocked) || 0;
 
-  const avgTime = (
-    (1460 / parseFloat(totalLocked)) *
-    parseFloat(totalSupply)
-  ).toFixed(0);
-
-  const totalLockedValue = spiritInfo.price * parseFloat(totalSupply) || 0;
-  const totalSpiritValue = spiritInfo.price * parseFloat(totalLocked) || 0;
-
-  const nextDistribution = timeCursor.response[0].toNumber();
-  const lastDistributionSpirits = parseFloat(formatUnits(lastDistribution, 18));
-  const lastDistributionValue = spiritInfo.price * lastDistributionSpirits;
-  const aprLDbased =
-    (lastDistributionSpirits * 52 * 100) / parseFloat(totalSupply);
-  const inspiritPerSpirit = lastDistributionSpirits / parseFloat(totalSupply);
+    const nextDistribution = timeCursor.response[0].toNumber();
+    const lastDistributionSpirits = parseFloat(
+      formatUnits(lastDistribution, 18),
+    );
+    const lastDistributionValue = spiritInfo.price * lastDistributionSpirits;
+    const aprLDbased =
+      (lastDistributionSpirits * 52 * 100) / parseFloat(totalSupply);
+    const inspiritPerSpirit = lastDistributionSpirits / parseFloat(totalSupply);
+  } catch (e) {
+    console.log('error in inspirit');
+  }
 
   return {
     totalSupply,

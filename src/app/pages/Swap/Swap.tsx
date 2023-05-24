@@ -56,11 +56,12 @@ import {
   selectBottomCardIndex,
   selectSwapModeIndex,
   selectUserCustomTokens,
+  selectBondingCurveInfo,
 } from 'store/general/selectors';
-import { selectBondingCurveInfo } from 'store/user/selectors';
 import {
   setGlobalSwapModeIndex,
   setGlobalBottomCardIndex,
+  setBondingCurveInfo,
 } from 'store/general';
 import useQuoteRate from 'app/hooks/useQuoteRate';
 import useGetGasPrice from 'app/hooks/useGetGasPrice';
@@ -263,6 +264,12 @@ const SwapPage = () => {
   ]);
 
   useEffect(() => {
+    const fetch = async () => {
+      const data = await Test();
+      console.log(data);
+      dispatch(setBondingCurveInfo(data));
+    };
+    fetch();
     setIsLimit(modeIndex !== 0);
     dispatch(setGlobalSwapModeIndex(modeIndex));
     dispatch(setGlobalBottomCardIndex(cardIndex));
@@ -656,24 +663,24 @@ const SwapPage = () => {
         text: t(`${translationPath}.swapExplanation`),
       };
     }
-    // if (mode === 1) {
-    //   return {
-    //     title: t(`${translationPath}.limitBuy`),
-    //     text: t(`${translationPath}.limitBuyExplanation`),
-    //   };
-    // }
-    // if (mode === 2) {
-    //   return {
-    //     title: t(`${translationPath}.limitSell`),
-    //     text: t(`${translationPath}.limitSellExplanation`),
-    //   };
-    // }
-    // if (mode === 3) {
-    //   return {
-    //     title: t(`${translationPath}.twap`),
-    //     text: t(`${translationPath}.twapExplanation`),
-    //   };
-    // }
+    if (mode === 1) {
+      return {
+        title: t(`${translationPath}.limitBuy`),
+        text: t(`${translationPath}.limitBuyExplanation`),
+      };
+    }
+    if (mode === 2) {
+      return {
+        title: t(`${translationPath}.limitSell`),
+        text: t(`${translationPath}.limitSellExplanation`),
+      };
+    }
+    if (mode === 3) {
+      return {
+        title: t(`${translationPath}.twap`),
+        text: t(`${translationPath}.twapExplanation`),
+      };
+    }
   };
 
   const helperContent = getHelperContentSwap(modeIndex);
@@ -741,6 +748,18 @@ const SwapPage = () => {
       key: 0,
       children: <SwapPanel panelProps={panelProps} isWrapped={isWrapped()} />,
     },
+    {
+      key: 1,
+      children: <StakePanel />,
+    },
+    {
+      key: 2,
+      children: <BorrowPanel />,
+    },
+    {
+      key: 3,
+      children: <OptionsPanel />,
+    },
   ];
 
   const [isLessThan1100px] = useMediaQuery('(max-width: 1100px)');
@@ -776,6 +795,7 @@ const SwapPage = () => {
           <meta name="SpiritSwap" content="Swap page" />
         </Helmet>
       </HelmetProvider>
+
       <Box>
         <Grid
           display={{ base: 'grid', lg: 'grid' }}
@@ -789,21 +809,20 @@ const SwapPage = () => {
           placeContent="center"
           maxW={{ md: breakpoints.xl }}
         >
+          <GridItem rowSpan={1} colSpan={2}>
+            <div className="container">
+              <TopCard
+                icon="fa-users"
+                TVL={BondingCurveData?.tvl / 1e18}
+                supplyVTOKEN={BondingCurveData?.supplyVTOKEN}
+                APR={BondingCurveData?.apr / 1e18}
+                supplyTOKEN={BondingCurveData?.supplyTOKEN / 1e18}
+                LTV={BondingCurveData?.ltv / 1e18}
+                Ratio={BondingCurveData?.ratio / 1e18}
+              />
+            </div>
+          </GridItem>
           <GridItem rowSpan={1} colSpan={1}>
-            {
-              <div className="container">
-                <TopCard
-                  icon="fa-users"
-                  TVL={BondingCurveData?.tvl}
-                  Volume="0"
-                  APR="0"
-                  Supply="0"
-                  LTV="0"
-                  Ratio="0"
-                />
-              </div>
-            }
-
             <Box>
               <SpiritsBackground
                 islimit={isLimit}
@@ -847,7 +866,7 @@ const SwapPage = () => {
                           setIndex={setModeIndex}
                           styleIndex={[2]}
                           styleVariant="danger"
-                          names={['Swap']}
+                          names={['Swap', 'Stake', 'Borrow', 'Options']}
                           panels={panels}
                         />
                       </Stack>
@@ -931,8 +950,8 @@ const SwapPage = () => {
           </GridItem>
           <GridItem rowSpan={1} colSpan={1}>
             <Box ml="10px">
-              <TopRightCard />
-              <GridItem colSpan={1}>
+              <TopRightCard bondingCurveData={BondingCurveData} />
+              {/* <GridItem colSpan={1}>
                 <SwapContainer>
                   <TabSelect
                     index={cardIndex}
@@ -943,13 +962,7 @@ const SwapPage = () => {
                     panels={bottompanels}
                   />
                 </SwapContainer>
-              </GridItem>
-
-              {/* { {isLimit && modeIndex !== 3 ? (
-              <LimitOrders showChart={showChart} />
-            ) : modeIndex === 3 ? (
-              <TWAPOrders />
-            ) : null}  */}
+              </GridItem> */}
             </Box>
           </GridItem>
         </Grid>

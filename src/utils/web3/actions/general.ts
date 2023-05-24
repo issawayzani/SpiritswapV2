@@ -106,10 +106,10 @@ export const getNativeTokenBalance = async (
   return formatEther(balance);
 };
 
-export const signMessage = async (tx, account) => {
-  const signature = await window.ethereum.request({
-    method: 'personal_sign',
-    params: [tx, account],
-  });
-  return signature;
-};
+// export const signMessage = async (tx, account) => {
+//   const signature = await window.ethereum.request({
+//     method: 'personal_sign',
+//     params: [tx, account],
+//   });
+//   return signature;
+// };

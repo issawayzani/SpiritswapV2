@@ -1,9 +1,13 @@
 .text-container {
   display: flex;
-  gap: 80px;
-  margin-left: 30px;
-  margin-right: 30px;
-  margin-bottom: 10px;
+  gap: 170px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  background: #101726;
+  border: 1px solid #374151; /* Border color */
+  border-radius: 8px; /* Border radius */
+  padding: 5px; /* Padding inside the container */
 }
 .container {
   display: flex;

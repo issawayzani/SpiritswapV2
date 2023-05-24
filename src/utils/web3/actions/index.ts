@@ -12,3 +12,5 @@ export * from './inspirit';
 
 // Export inspirit utils
 export * from './utils';
+
+export * from './Test';
