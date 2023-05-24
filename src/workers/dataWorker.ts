@@ -30,10 +30,10 @@ import {
   loadFarmsList,
   saturateGauges,
 } from 'utils/data';
-import {
-  getHistoricalPegForWinSpirits,
-  handleSpiritWarsCache,
-} from 'utils/data/spiritwars';
+// import {
+//   getHistoricalPegForWinSpirits,
+//   handleSpiritWarsCache,
+// } from 'utils/data/spiritwars';
 
 onmessage = ({ data: { type, provider, isLoggedIn } }) => {
   const loadedProvider = JSON.parse(provider);
@@ -49,9 +49,9 @@ onmessage = ({ data: { type, provider, isLoggedIn } }) => {
     case 'getFarms':
       getFarms(loadedProvider, gaugesPromise);
       break;
-    case 'getSpiritWarsData':
-      getSpiritWarsData(loadedProvider);
-      break;
+    // case 'getSpiritWarsData':
+    //   getSpiritWarsData(loadedProvider);
+    //   break;
     case 'getSpiritStatistics':
       getSpiritStatistics(loadedProvider);
       break;
@@ -172,108 +172,108 @@ async function getFarms(provider, gaugesPromise) {
 // ===== Spirit Wars =======
 // =========================
 
-async function getSpiritWarsData(provider) {
-  const data = await handleSpiritWarsCache(
-    'https://www.defiwars.xyz/api/spirit/inspirit-balances',
-    ONE_HOUR, // 1 hour
-  );
+// async function getSpiritWarsData(provider) {
+//   const data = await handleSpiritWarsCache(
+//     'https://www.defiwars.xyz/api/spirit/inspirit-balances',
+//     ONE_HOUR, // 1 hour
+//   );
 
-  const stats: StatisticsProps = {
-    totalInSpiritSupply: format(data.inSpirit.supply),
-    circulatingSpirit: format(data.spirit.circulating),
-    averagePeg: 0,
-    projects: data.holders.length,
-  };
+//   const stats: StatisticsProps = {
+//     totalInSpiritSupply: format(data.inSpirit.supply),
+//     circulatingSpirit: format(data.spirit.circulating),
+//     averagePeg: 0,
+//     projects: data.holders.length,
+//   };
 
-  await extractSpiritWarsData(data, stats);
-}
+//   await extractSpiritWarsData(data, stats);
+// }
 
-async function extractSpiritWarsData({ holders: tokens }, stats) {
-  let tokenDistribution: StatisticsToken[] = [];
-  let sumPercentajes = 0;
-  let sumPercetajePerPeg = 0;
+// async function extractSpiritWarsData({ holders: tokens }, stats) {
+//   let tokenDistribution: StatisticsToken[] = [];
+//   let sumPercentajes = 0;
+//   let sumPercetajePerPeg = 0;
 
-  const listProjectTokens = tokens
-    .map(project => project.holder.tokenAddress)
-    .filter(item => item);
+//   const listProjectTokens = tokens
+//     .map(project => project.holder.tokenAddress)
+//     .filter(item => item);
 
-  const pegChartData = await getHistoricalPegForWinSpirits(listProjectTokens);
+//   const pegChartData = await getHistoricalPegForWinSpirits(listProjectTokens);
 
-  const data: Token[] = await Promise.all(
-    tokens.map(async token => {
-      let {
-        projectLink,
-        color,
-        tokenAddress = '',
-        tokenName = '',
-      } = token.holder;
+//   const data: Token[] = await Promise.all(
+//     tokens.map(async token => {
+//       let {
+//         projectLink,
+//         color,
+//         tokenAddress = '',
+//         tokenName = '',
+//       } = token.holder;
 
-      const inSpiritHoldings = format(token.balance);
-      const projectName = addressToToken[tokenAddress] || 'Millennium Club';
+//       const inSpiritHoldings = format(token.balance);
+//       const projectName = addressToToken[tokenAddress] || 'Millennium Club';
 
-      tokenDistribution.push({
-        name: tokenName,
-        distribution: token.percentOfTotal,
-        color,
-        project: projectName,
-      });
+//       tokenDistribution.push({
+//         name: tokenName,
+//         distribution: token.percentOfTotal,
+//         color,
+//         project: projectName,
+//       });
 
-      const inSpiritHoldingPercent = (
-        Number(token.percentOfTotal) * 100
-      ).toFixed(2);
-      const inSpiritHolderAddress = token.holder.addresses[0];
+//       const inSpiritHoldingPercent = (
+//         Number(token.percentOfTotal) * 100
+//       ).toFixed(2);
+//       const inSpiritHolderAddress = token.holder.addresses[0];
 
-      let pegFor100k = '';
+//       let pegFor100k = '';
 
-      if (tokenAddress !== '') {
-        ({ peg: pegFor100k } = await getPegFor100KOfToken(tokenAddress));
+//       if (tokenAddress !== '') {
+//         ({ peg: pegFor100k } = await getPegFor100KOfToken(tokenAddress));
 
-        pegFor100k = (Number(pegFor100k) * 100).toFixed(2);
+//         pegFor100k = (Number(pegFor100k) * 100).toFixed(2);
 
-        sumPercetajePerPeg += +inSpiritHoldingPercent * +pegFor100k;
+//         sumPercetajePerPeg += +inSpiritHoldingPercent * +pegFor100k;
 
-        sumPercentajes += +inSpiritHoldingPercent;
-      }
+//         sumPercentajes += +inSpiritHoldingPercent;
+//       }
 
-      return {
-        tokenAddress,
-        projectName,
-        tokenName: tokensNames[token.holder.tokenName],
-        inSpiritHoldings,
-        inSpiritHoldingPercent,
-        pegFor100k,
-        inSpiritHolderAddress,
-        projectLink,
-        color,
-      };
-    }),
-  );
+//       return {
+//         tokenAddress,
+//         projectName,
+//         tokenName: tokensNames[token.holder.tokenName],
+//         inSpiritHoldings,
+//         inSpiritHoldingPercent,
+//         pegFor100k,
+//         inSpiritHolderAddress,
+//         projectLink,
+//         color,
+//       };
+//     }),
+//   );
 
-  const averagePeg = (sumPercetajePerPeg / sumPercentajes).toFixed(2);
+//   const averagePeg = (sumPercetajePerPeg / sumPercentajes).toFixed(2);
 
-  self.postMessage({
-    type: 'setSpiritWarsStatistics',
-    payload: {
-      ...stats,
-      averagePeg,
-      tokenDistribution,
-      pegChartData,
-    },
-  });
+//   self.postMessage({
+//     type: 'setSpiritWarsStatistics',
+//     payload: {
+//       ...stats,
+//       averagePeg,
+//       tokenDistribution,
+//       pegChartData,
+//     },
+//   });
 
-  self.postMessage({
-    type: 'setSpiritWarsData',
-    payload: data,
-  });
-}
+//   self.postMessage({
+//     type: 'setSpiritWarsData',
+//     payload: data,
+//   });
+// }
 
-async function getPegFor100KOfToken(token: string) {
-  return await handleSpiritWarsCache(
-    `https://www.defiwars.xyz/api/quote?network=Fantom&fromAddress=${token}&toAddress=0x5cc61a78f164885776aa610fb0fe1257df78e59b&amount=100000&source=firebird`,
-    0.5 * ONE_HOUR, // half hour
-  );
-}
+// async function getPegFor100KOfToken(token: string) {
+//   return await handleSpiritWarsCache(
+//     `https://www.defiwars.xyz/api/quote?network=Fantom&fromAddress=${token}&toAddress=0x5cc61a78f164885776aa610fb0fe1257df78e59b&amount=100000&source=firebird`,
+//     0.5 * ONE_HOUR, // half hour
+//   );
+// }
 
-function format(value: string, decimals: number = 0): string {
-  return Number(formatAmount(value, decimals)).toLocaleString('en-US');
-}
+// function format(value: string, decimals: number = 0): string {
+//   return Number(formatAmount(value, decimals)).toLocaleString('en-US');
+// }
