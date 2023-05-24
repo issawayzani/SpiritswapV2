@@ -23,7 +23,7 @@ import { UNIDEX_ETH_ADDRESS } from 'utils/swap';
 import { formatUnits } from 'ethers/lib/utils';
 import { getRoundedSFs } from 'app/utils';
 import { LendAndBorrowItem } from 'app/pages/Portfolio/components/LendAndBorrowPanel/LendAndBorrowPanel.d';
-import { getOlaFinanceData } from 'utils/web3/actions/lendandborrow';
+// import { getOlaFinanceData } from 'utils/web3/actions/lendandborrow';
 import { getPricesByPools } from 'utils/apollo/queries';
 
 onmessage = ({ data: { type, provider, userAddress, signer, params } }) => {
@@ -222,73 +222,73 @@ const updatePortfolioData = async (userWalletAddress, provider) => {
       });
     };
 
-    const getLendAndBorrowData = async () => {
-      const suppliedTokens: LendAndBorrowItem[] = [];
-      const borrowedTokens: LendAndBorrowItem[] = [];
+    // const getLendAndBorrowData = async () => {
+    //   const suppliedTokens: LendAndBorrowItem[] = [];
+    //   const borrowedTokens: LendAndBorrowItem[] = [];
 
-      const { lendAndBorrowData, borrowAPYValues, supplyAPYValues } =
-        await getOlaFinanceData(userWalletAddress);
+    //   const { lendAndBorrowData, borrowAPYValues, supplyAPYValues } =
+    //     await getOlaFinanceData(userWalletAddress);
 
-      const mappedTokens = await getMappedTokens('address');
+    //   const mappedTokens = await getMappedTokens('address');
 
-      lendAndBorrowData.forEach(data => {
-        const addressUnderlying =
-          data.underlying === UNIDEX_ETH_ADDRESS
-            ? FTM.address
-            : data.underlying;
+    //   lendAndBorrowData.forEach(data => {
+    //     const addressUnderlying =
+    //       data.underlying === UNIDEX_ETH_ADDRESS
+    //         ? FTM.address
+    //         : data.underlying;
 
-        const { symbol } = mappedTokens[addressUnderlying.toLowerCase()] || {
-          symbol: '',
-        };
-        const decimalsToFormat = 18;
+    //     const { symbol } = mappedTokens[addressUnderlying.toLowerCase()] || {
+    //       symbol: '',
+    //     };
+    //     const decimalsToFormat = 18;
 
-        // Borrow
-        if (parseFloat(data.borrowBalanceInUsd) > 0) {
-          const borrowBalance = formatUnits(
-            data.borrowBalanceInUnits.toString(),
-            decimalsToFormat,
-          ).toString();
+    //     // Borrow
+    //     if (parseFloat(data.borrowBalanceInUsd) > 0) {
+    //       const borrowBalance = formatUnits(
+    //         data.borrowBalanceInUnits.toString(),
+    //         decimalsToFormat,
+    //       ).toString();
 
-          const borrowBalanceUSD = formatUnits(
-            data.borrowBalanceInUsd.toString(),
-            decimalsToFormat,
-          ).toString();
+    //       const borrowBalanceUSD = formatUnits(
+    //         data.borrowBalanceInUsd.toString(),
+    //         decimalsToFormat,
+    //       ).toString();
 
-          borrowedTokens.push({
-            symbol: symbol,
-            apy: borrowAPYValues[data.oToken],
-            amountInUSD: parseFloat(borrowBalanceUSD).toFixed(2),
-            amount: getRoundedSFs(borrowBalance),
-          });
-        }
+    //       borrowedTokens.push({
+    //         symbol: symbol,
+    //         apy: borrowAPYValues[data.oToken],
+    //         amountInUSD: parseFloat(borrowBalanceUSD).toFixed(2),
+    //         amount: getRoundedSFs(borrowBalance),
+    //       });
+    //     }
 
-        // Supply
-        if (parseFloat(data.supplyBalanceInUsd) > 0) {
-          const supplyBalance = formatUnits(
-            data.supplyBalanceInUnits.toString(),
-            decimalsToFormat,
-          ).toString();
+    //     // Supply
+    //     if (parseFloat(data.supplyBalanceInUsd) > 0) {
+    //       const supplyBalance = formatUnits(
+    //         data.supplyBalanceInUnits.toString(),
+    //         decimalsToFormat,
+    //       ).toString();
 
-          const supplyBalanceUSD = formatUnits(
-            data.supplyBalanceInUsd.toString(),
-            decimalsToFormat,
-          ).toString();
+    //       const supplyBalanceUSD = formatUnits(
+    //         data.supplyBalanceInUsd.toString(),
+    //         decimalsToFormat,
+    //       ).toString();
 
-          suppliedTokens.push({
-            symbol: symbol,
-            apy: supplyAPYValues[data.oToken],
-            amount: getRoundedSFs(supplyBalance),
-            amountInUSD: parseFloat(supplyBalanceUSD).toFixed(2),
-          });
-        }
-      });
+    //       suppliedTokens.push({
+    //         symbol: symbol,
+    //         apy: supplyAPYValues[data.oToken],
+    //         amount: getRoundedSFs(supplyBalance),
+    //         amountInUSD: parseFloat(supplyBalanceUSD).toFixed(2),
+    //       });
+    //     }
+    //   });
 
-      self.postMessage({
-        type: 'setLendAndBorrowData',
-        payload: { suppliedTokens, borrowedTokens },
-        userWalletAddress,
-      });
-    };
+    //   self.postMessage({
+    //     type: 'setLendAndBorrowData',
+    //     payload: { suppliedTokens, borrowedTokens },
+    //     userWalletAddress,
+    //   });
+    // };
 
     /**
      * Helper method - Checks user rewards
@@ -314,7 +314,7 @@ const updatePortfolioData = async (userWalletAddress, provider) => {
       stakesAndLiquidity(),
       inSpiritData(),
       getHistoricalData(),
-      getLendAndBorrowData(),
+      // getLendAndBorrowData(),
       checkRewards(),
     ]);
   }

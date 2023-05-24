@@ -38,55 +38,55 @@ const getBorrowAPY = (borrowRate: BigNumber) => {
   return final;
 };
 
-export const getOlaFinanceData = async (userAddress: string) => {
-  const contract = await Contract(
-    contracts.olaLendingLend[CHAIN_ID],
-    'lendAndBorrow',
-  );
+// export const getOlaFinanceData = async (userAddress: string) => {
+//   const contract = await Contract(
+//     contracts.olaLendingLend[CHAIN_ID],
+//     'lendAndBorrow',
+//   );
 
-  const lendAndBorrowData = await contract.callStatic.viewMarketBalancesInLeN(
-    SPIRITSWAP_UNITROLLER_OLA_FINANCE,
-    userAddress,
-  );
+//   const lendAndBorrowData = await contract.callStatic.viewMarketBalancesInLeN(
+//     SPIRITSWAP_UNITROLLER_OLA_FINANCE,
+//     userAddress,
+//   );
 
-  const markets = await Promise.all(
-    lendAndBorrowData.map(async market => {
-      const info = await contract.callStatic.viewMarket(market.oToken);
-      return { oToken: market.oToken, data: info };
-    }),
-  );
+//   const markets = await Promise.all(
+//     lendAndBorrowData.map(async market => {
+//       const info = await contract.callStatic.viewMarket(market.oToken);
+//       return { oToken: market.oToken, data: info };
+//     }),
+//   );
 
-  const borrowAPYValues: { [oToken: string]: string } = {};
-  const supplyAPYValues: { [oToken: string]: string } = {};
+//   const borrowAPYValues: { [oToken: string]: string } = {};
+//   const supplyAPYValues: { [oToken: string]: string } = {};
 
-  lendAndBorrowData.forEach(market => {
-    const marketInfo = markets.find(item => item.oToken === market.oToken);
-    if (!marketInfo) throw new Error('MarketInfo not found');
+//   lendAndBorrowData.forEach(market => {
+//     const marketInfo = markets.find(item => item.oToken === market.oToken);
+//     if (!marketInfo) throw new Error('MarketInfo not found');
 
-    // Borrowed tokens
-    if (parseFloat(market.borrowBalanceInUsd) > 0) {
-      const borrowAPY = getBorrowAPY(marketInfo.data.borrowRate);
+//     // Borrowed tokens
+//     if (parseFloat(market.borrowBalanceInUsd) > 0) {
+//       const borrowAPY = getBorrowAPY(marketInfo.data.borrowRate);
 
-      borrowAPYValues[market.oToken] = `-${borrowAPY
-        .multipliedBy(100)
-        .toFixed(4)}%`;
-    }
+//       borrowAPYValues[market.oToken] = `-${borrowAPY
+//         .multipliedBy(100)
+//         .toFixed(4)}%`;
+//     }
 
-    // Supplied tokens
-    if (parseFloat(market.supplyBalanceInUsd) > 0) {
-      const { borrowRate, reserveFactor, supplyUnits, borrowsUnits } =
-        marketInfo.data;
+//     // Supplied tokens
+//     if (parseFloat(market.supplyBalanceInUsd) > 0) {
+//       const { borrowRate, reserveFactor, supplyUnits, borrowsUnits } =
+//         marketInfo.data;
 
-      const supplyAPY = getSupplyAPY(
-        borrowRate,
-        borrowsUnits,
-        reserveFactor,
-        supplyUnits,
-      );
+//       const supplyAPY = getSupplyAPY(
+//         borrowRate,
+//         borrowsUnits,
+//         reserveFactor,
+//         supplyUnits,
+//       );
 
-      supplyAPYValues[market.oToken] = `${supplyAPY.toFixed(4)}%`;
-    }
-  });
+//       supplyAPYValues[market.oToken] = `${supplyAPY.toFixed(4)}%`;
+//     }
+//   });
 
-  return { lendAndBorrowData, borrowAPYValues, supplyAPYValues };
-};
+//   return { lendAndBorrowData, borrowAPYValues, supplyAPYValues };
+// };
