@@ -57,7 +57,7 @@ const DexStatistics = () => {
           setTotalVolume(total);
         }
       } catch (error) {
-        console.error(error);
+        console.log('error in dex statistics');
       }
     };
 
