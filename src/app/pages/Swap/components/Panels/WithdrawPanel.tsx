@@ -13,47 +13,23 @@ import { PriceDiffIndicator } from 'app/components/PriceDiffIndicator';
 import { TokenSelection } from 'app/components/TokenSelection';
 import { resolveRoutePath } from 'app/router/routes';
 import { getRoundedSFs } from 'app/utils';
+import { useState } from 'react';
 
 export default function WithdrawPanel(props) {
-  const handleInput = (value: string) => {
-    //   if (!isLoggedIn) {
-    //     handleLogin();
-    //   }
-    //   if (bridge === 'to') return;
-    //   if (showConfirm) return;
-    //   const numberValue = parseFloat(value);
-    //   if (maxValue && numberValue > maxValue) {
-    //     return (
-    //       onChange && onChange({ tokenSymbol: token?.symbol, value: maxValue })
-    //     );
-    //   }
-    //   const validInput = validateInput(value, token?.decimals);
-    //   onChange &&
-    //     onChange({
-    //       tokenSymbol: token?.symbol,
-    //       value: validInput,
-    //     });
-    //   if (balance) {
-    //     handleCheckBalance?.({
-    //       hasBalance:
-    //         validInput !== ''
-    //           ? parseFloat(validInput) <= parseFloat(balance)
-    //           : true,
-    //       symbol: token?.symbol,
-    //       isOutput: isOutput,
-    //     });
-    //   }
-  };
-  const getBalanceValue = () => {
-    if (true) {
-      return `≈ $${getRoundedSFs('0')}`;
-    }
-    // if (usd && +usd > 0 && +usd < 0.01) return '<$0.01';
-    // return `≈ $${parseFloat(usd).toFixed(2)}`;
+  const [numberInputValue, setNumberInputValue] = useState('0');
+  const [price, setPrice] = useState('≈ $0');
+  const balance = props.bondingCurveData?.accountMaxWithdraw;
+  const setPriceValue = input => {
+    const price = (props.bondingCurveData?.priceTOKEN * input) / 1e36;
+    setPrice(`≈ $${price}`);
   };
 
   const buttonAction = async () => {
     //need to deposit here
+  };
+  const handleBalanceClick = () => {
+    setPriceValue(balance);
+    setNumberInputValue(balance);
   };
   return (
     <Box>
@@ -81,14 +57,11 @@ export default function WithdrawPanel(props) {
                 clampValueOnBlur={false}
                 // max={maxValue}
                 border="none"
-                // value={
-                //   // inputValue === 'NaN'
-                //   //   ? 0
-                //   //   : showInputInUSD
-                //   //   ? formatInputUSD()
-                //   //   : inputValue
-                // }
-                onChange={value => handleInput(value)}
+                value={numberInputValue}
+                onChange={value => {
+                  setNumberInputValue(value);
+                  setPriceValue(value);
+                }}
                 // onKeyDown={e => {
                 //   if (e.code === 'End' || e.code === 'Home') {
                 //     return handleInput(inputValue);
@@ -113,57 +86,15 @@ export default function WithdrawPanel(props) {
             src={resolveRoutePath(`images/tokens/SOULC.png`)}
           />
         </HStack>
-        {/* {poolPercentage && (
-        <Text ml="4px" color="grayDarker" fontSize="h5">
-          {poolPercentage}
-        </Text>
-      )} */}
-        {/* {isSelectable && token ? (
-        isOpen ? (
-          <ModalToken
-            tokens={tokens}
-            commonTokens={commonTokens()}
-            tokenSelected={token}
-            bridge={bridge}
-            onSelect={handleSelect}
-            isOpen={isOpen}
-            onClose={onClose}
-            chainID={chainID}
-            notSearchToken={notSearchToken}
-          />
-        ) : (
-          ''
-        )
-      ) : isSelectable && bridge ? (
-        <Skeleton
-          startColor="grayBorderBox"
-          endColor="bgBoxLighter"
-          h="36px"
-          w="120px"
-        >
-          <span>Loading</span>
-        </Skeleton>
-      ) : null}
-    </HStack> 
-
-      */}
 
         {true ? (
           <Flex w="full" align="center" justify="space-between">
             <Flex>
               <Text as="div" fontSize="h5" color="grayDarker" mr="spacing02">
                 <Flex align="center" justify="center" sx={{ gap: '0.2rem' }}>
-                  <Text
-                    _hover={{ cursor: 'pointer' }}
-                    // onClick={() =>
-                    //   setShowInputInUSD && setShowInputInUSD(!showInputInUSD)
-                    // }
-                  >
-                    {getBalanceValue()}
-                  </Text>
+                  <Text>{price}</Text>
                 </Flex>
               </Text>
-              {/* {showDiff ? <PriceDiffIndicator amount={priceDiff || 0} /> : null} */}
             </Flex>
             <Skeleton isLoaded={true}>
               <Text
@@ -171,10 +102,10 @@ export default function WithdrawPanel(props) {
                 fontSize="sm"
                 color="gray"
                 mr="spacing04"
-                // cursor={showCursorPointer()}
-                // onClick={() => handleInput(balance)}
+                cursor="pointer"
+                onClick={handleBalanceClick}
               >
-                {'Available: ' + 0}
+                Available: {balance}
               </Text>
             </Skeleton>
           </Flex>
@@ -188,10 +119,13 @@ export default function WithdrawPanel(props) {
         )} */}
         {/* {mustShowPercentage && !showConfirm && token && ( */}
         <Percentages
-          onChange={value => handleInput(value.value)}
+          onChange={({ value }) => {
+            setNumberInputValue(value);
+            setPriceValue(value);
+          }}
           decimals={18}
           symbol={'SOULC'}
-          balance={'0'}
+          balance={balance}
         />
 
         {/* {children} */}

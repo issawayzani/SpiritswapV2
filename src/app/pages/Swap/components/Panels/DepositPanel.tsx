@@ -13,47 +13,23 @@ import { PriceDiffIndicator } from 'app/components/PriceDiffIndicator';
 import { TokenSelection } from 'app/components/TokenSelection';
 import { resolveRoutePath } from 'app/router/routes';
 import { getRoundedSFs } from 'app/utils';
+import { useState } from 'react';
 
 export default function DepositPanel(props) {
-  const handleInput = (value: string) => {
-    //   if (!isLoggedIn) {
-    //     handleLogin();
-    //   }
-    //   if (bridge === 'to') return;
-    //   if (showConfirm) return;
-    //   const numberValue = parseFloat(value);
-    //   if (maxValue && numberValue > maxValue) {
-    //     return (
-    //       onChange && onChange({ tokenSymbol: token?.symbol, value: maxValue })
-    //     );
-    //   }
-    //   const validInput = validateInput(value, token?.decimals);
-    //   onChange &&
-    //     onChange({
-    //       tokenSymbol: token?.symbol,
-    //       value: validInput,
-    //     });
-    //   if (balance) {
-    //     handleCheckBalance?.({
-    //       hasBalance:
-    //         validInput !== ''
-    //           ? parseFloat(validInput) <= parseFloat(balance)
-    //           : true,
-    //       symbol: token?.symbol,
-    //       isOutput: isOutput,
-    //     });
-    //   }
-  };
-  const getBalanceValue = () => {
-    if (true) {
-      return `≈ $${getRoundedSFs('0')}`;
-    }
-    // if (usd && +usd > 0 && +usd < 0.01) return '<$0.01';
-    // return `≈ $${parseFloat(usd).toFixed(2)}`;
+  const [numberInputValue, setNumberInputValue] = useState('0');
+  const [price, setPrice] = useState('≈ $0');
+  const balance = props.bondingCurveData?.accountTOKEN;
+  const setPriceValue = input => {
+    const price = (props.bondingCurveData?.priceTOKEN * input) / 1e36;
+    setPrice(`≈ $${price}`);
   };
 
   const buttonAction = async () => {
     //need to deposit here
+  };
+  const handleBalanceClick = () => {
+    setPriceValue(balance);
+    setNumberInputValue(balance);
   };
   return (
     <Box>
@@ -81,14 +57,11 @@ export default function DepositPanel(props) {
                 clampValueOnBlur={false}
                 // max={maxValue}
                 border="none"
-                // value={
-                //   // inputValue === 'NaN'
-                //   //   ? 0
-                //   //   : showInputInUSD
-                //   //   ? formatInputUSD()
-                //   //   : inputValue
-                // }
-                onChange={value => handleInput(value)}
+                value={numberInputValue}
+                onChange={value => {
+                  setNumberInputValue(value);
+                  setPriceValue(value);
+                }}
                 // onKeyDown={e => {
                 //   if (e.code === 'End' || e.code === 'Home') {
                 //     return handleInput(inputValue);
@@ -154,12 +127,9 @@ export default function DepositPanel(props) {
               <Text as="div" fontSize="h5" color="grayDarker" mr="spacing02">
                 <Flex align="center" justify="center" sx={{ gap: '0.2rem' }}>
                   <Text
-                    _hover={{ cursor: 'pointer' }}
-                    // onClick={() =>
-                    //   setShowInputInUSD && setShowInputInUSD(!showInputInUSD)
-                    // }
+                  // _hover={{ cursor: 'pointer' }}
                   >
-                    {getBalanceValue()}
+                    {price}
                   </Text>
                 </Flex>
               </Text>
@@ -171,10 +141,10 @@ export default function DepositPanel(props) {
                 fontSize="sm"
                 color="gray"
                 mr="spacing04"
-                // cursor={showCursorPointer()}
-                // onClick={() => handleInput(balance)}
+                cursor="pointer"
+                onClick={handleBalanceClick}
               >
-                {'Balance: ' + 0}
+                Balance: {balance}
               </Text>
             </Skeleton>
           </Flex>
@@ -188,10 +158,13 @@ export default function DepositPanel(props) {
         )} */}
         {/* {mustShowPercentage && !showConfirm && token && ( */}
         <Percentages
-          onChange={value => handleInput(value.value)}
+          onChange={({ value }) => {
+            setNumberInputValue(value);
+            setPriceValue(value);
+          }}
           decimals={18}
           symbol={'SOULC'}
-          balance={'0'}
+          balance={balance}
         />
 
         {/* {children} */}

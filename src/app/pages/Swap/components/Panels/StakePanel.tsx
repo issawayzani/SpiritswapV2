@@ -14,15 +14,15 @@ export default function StakePanel(props) {
   const stakePanels = [
     {
       key: 0,
-      children: <DepositPanel />,
+      children: <DepositPanel bondingCurveData={props?.bondingCurveData} />,
     },
     {
       key: 1,
-      children: <WithdrawPanel />,
+      children: <WithdrawPanel bondingCurveData={props?.bondingCurveData} />,
     },
     {
       key: 2,
-      children: <BurnPanel />,
+      children: <BurnPanel bondingCurveData={props?.bondingCurveData} />,
     },
   ];
   useEffect(() => {
