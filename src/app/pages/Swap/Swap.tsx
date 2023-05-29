@@ -750,15 +750,15 @@ const SwapPage = () => {
     },
     {
       key: 1,
-      children: <StakePanel />,
+      children: <StakePanel bondingCurveData={BondingCurveData} />,
     },
     {
       key: 2,
-      children: <BorrowPanel />,
+      children: <BorrowPanel bondingCurveData={BondingCurveData} />,
     },
     {
       key: 3,
-      children: <OptionsPanel />,
+      children: <OptionsPanel bondingCurveData={BondingCurveData} />,
     },
   ];
 

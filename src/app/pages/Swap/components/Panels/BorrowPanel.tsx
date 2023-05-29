@@ -21,6 +21,7 @@ export default function BorrowPanel(props) {
           borrow={true}
           buttonText="Borrow"
           balanceText="Credit : "
+          bondingCurveData={props?.bondingCurveData}
         />
       ),
     },
@@ -31,6 +32,7 @@ export default function BorrowPanel(props) {
           repay={true}
           buttonText="Repay"
           balanceText="Debt: "
+          bondingCurveData={props?.bondingCurveData}
         />
       ),
     },
