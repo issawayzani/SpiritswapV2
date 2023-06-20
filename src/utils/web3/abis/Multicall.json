@@ -6,9 +6,11 @@
     {
       "inputs": [
         { "internalType": "address", "name": "_voter", "type": "address" },
+        { "internalType": "address", "name": "_BASE", "type": "address" },
         { "internalType": "address", "name": "_TOKEN", "type": "address" },
+        { "internalType": "address", "name": "_OTOKEN", "type": "address" },
         { "internalType": "address", "name": "_VTOKEN", "type": "address" },
-        { "internalType": "address", "name": "_OTOKEN", "type": "address" }
+        { "internalType": "address", "name": "_rewarder", "type": "address" }
       ],
       "stateMutability": "nonpayable",
       "type": "constructor"
@@ -43,8 +45,8 @@
     },
     {
       "inputs": [],
-      "name": "PRICE_ORACLE_BASE",
-      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "name": "PRECISION",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
       "stateMutability": "view",
       "type": "function"
     },
@@ -104,6 +106,11 @@
             { "internalType": "uint256", "name": "apr", "type": "uint256" },
             { "internalType": "uint256", "name": "ltv", "type": "uint256" },
             { "internalType": "uint256", "name": "ratio", "type": "uint256" },
+            {
+              "internalType": "uint256",
+              "name": "accountNATIVE",
+              "type": "uint256"
+            },
             {
               "internalType": "uint256",
               "name": "accountBASE",
@@ -182,12 +189,20 @@
       "outputs": [
         {
           "components": [
+            { "internalType": "address", "name": "plugin", "type": "address" },
+            { "internalType": "address", "name": "bribe", "type": "address" },
+            { "internalType": "bool", "name": "isAlive", "type": "bool" },
             { "internalType": "string", "name": "protocol", "type": "string" },
             { "internalType": "string", "name": "symbol", "type": "string" },
             {
               "internalType": "address[]",
               "name": "rewardTokens",
               "type": "address[]"
+            },
+            {
+              "internalType": "uint8[]",
+              "name": "rewardTokenDecimals",
+              "type": "uint8[]"
             },
             {
               "internalType": "uint256[]",
@@ -232,6 +247,19 @@
       "outputs": [
         {
           "components": [
+            { "internalType": "address", "name": "plugin", "type": "address" },
+            {
+              "internalType": "address",
+              "name": "underlying",
+              "type": "address"
+            },
+            {
+              "internalType": "uint8",
+              "name": "underlyingDecimals",
+              "type": "uint8"
+            },
+            { "internalType": "address", "name": "gauge", "type": "address" },
+            { "internalType": "bool", "name": "isAlive", "type": "bool" },
             { "internalType": "string", "name": "protocol", "type": "string" },
             { "internalType": "string", "name": "symbol", "type": "string" },
             {
@@ -241,7 +269,7 @@
             },
             {
               "internalType": "uint256",
-              "name": "pluginPrice",
+              "name": "priceUnderlying",
               "type": "uint256"
             },
             {
@@ -258,17 +286,17 @@
             },
             {
               "internalType": "uint256",
-              "name": "accountUnderlyingTokens",
+              "name": "totalSupply",
               "type": "uint256"
             },
             {
               "internalType": "uint256",
-              "name": "accountUnstakedTokens",
+              "name": "accountUnderlyingBalance",
               "type": "uint256"
             },
             {
               "internalType": "uint256",
-              "name": "accountStakedTokens",
+              "name": "accountStakedBalance",
               "type": "uint256"
             },
             {
@@ -286,10 +314,136 @@
       "type": "function"
     },
     {
-      "inputs": [],
-      "name": "getPools",
+      "inputs": [
+        { "internalType": "uint256", "name": "start", "type": "uint256" },
+        { "internalType": "uint256", "name": "stop", "type": "uint256" },
+        { "internalType": "address", "name": "account", "type": "address" }
+      ],
+      "name": "getBribeCards",
       "outputs": [
-        { "internalType": "address[]", "name": "", "type": "address[]" }
+        {
+          "components": [
+            { "internalType": "address", "name": "plugin", "type": "address" },
+            { "internalType": "address", "name": "bribe", "type": "address" },
+            { "internalType": "bool", "name": "isAlive", "type": "bool" },
+            { "internalType": "string", "name": "protocol", "type": "string" },
+            { "internalType": "string", "name": "symbol", "type": "string" },
+            {
+              "internalType": "address[]",
+              "name": "rewardTokens",
+              "type": "address[]"
+            },
+            {
+              "internalType": "uint8[]",
+              "name": "rewardTokenDecimals",
+              "type": "uint8[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "rewardsPerToken",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "accountRewardsEarned",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256",
+              "name": "voteWeight",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "votePercent",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "accountVotePercent",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct Multicall.BribeCard[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "uint256", "name": "start", "type": "uint256" },
+        { "internalType": "uint256", "name": "stop", "type": "uint256" },
+        { "internalType": "address", "name": "account", "type": "address" }
+      ],
+      "name": "getGaugeCards",
+      "outputs": [
+        {
+          "components": [
+            { "internalType": "address", "name": "plugin", "type": "address" },
+            {
+              "internalType": "address",
+              "name": "underlying",
+              "type": "address"
+            },
+            {
+              "internalType": "uint8",
+              "name": "underlyingDecimals",
+              "type": "uint8"
+            },
+            { "internalType": "address", "name": "gauge", "type": "address" },
+            { "internalType": "bool", "name": "isAlive", "type": "bool" },
+            { "internalType": "string", "name": "protocol", "type": "string" },
+            { "internalType": "string", "name": "symbol", "type": "string" },
+            {
+              "internalType": "address[]",
+              "name": "tokensInUnderlying",
+              "type": "address[]"
+            },
+            {
+              "internalType": "uint256",
+              "name": "priceUnderlying",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "priceOTOKEN",
+              "type": "uint256"
+            },
+            { "internalType": "uint256", "name": "apr", "type": "uint256" },
+            { "internalType": "uint256", "name": "tvl", "type": "uint256" },
+            {
+              "internalType": "uint256",
+              "name": "votingWeight",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalSupply",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "accountUnderlyingBalance",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "accountStakedBalance",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "accountEarnedOTOKEN",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct Multicall.GaugeCard[]",
+          "name": "",
+          "type": "tuple[]"
+        }
       ],
       "stateMutability": "view",
       "type": "function"
@@ -298,8 +452,24 @@
       "inputs": [
         { "internalType": "uint256", "name": "index", "type": "uint256" }
       ],
-      "name": "pool",
+      "name": "getPlugin",
       "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPlugins",
+      "outputs": [
+        { "internalType": "address[]", "name": "", "type": "address[]" }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "priceBASE",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
       "stateMutability": "view",
       "type": "function"
     },
@@ -380,6 +550,15 @@
       "name": "rewarder",
       "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "uint256", "name": "_priceBASE", "type": "uint256" }
+      ],
+      "name": "setPriceBase",
+      "outputs": [],
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
