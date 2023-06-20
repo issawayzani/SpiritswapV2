@@ -18,7 +18,7 @@ import type { AbiItem } from 'web3-utils';
 import multicalcontract from '../utils/web3/abis/Multicall.json';
 import Web3 from 'web3';
 import { useEffect, useState } from 'react';
-import { checkSpiritAllowance, formatFrom } from 'utils/web3';
+import { formatFrom } from 'utils/web3';
 import { UNIDEX_ETH_ADDRESS } from 'utils/swap';
 import { formatUnits } from 'ethers/lib/utils';
 import { getRoundedSFs } from 'app/utils';
@@ -41,9 +41,9 @@ onmessage = ({ data: { type, provider, userAddress, signer, params } }) => {
     // case 'checkLimitOrders':
     //   checkLimitOrders(userAddress, JSON.parse(signer));
     //   break;
-    case 'checkAllowances':
-      checkAllowances(userAddress, loadedProvider);
-      break;
+    // case 'checkAllowances':
+    //   checkAllowances(userAddress, loadedProvider);
+    //   break;
     case 'bondingCurveData':
       getBondingCurveData(loadedProvider);
       break;
@@ -346,21 +346,21 @@ const updatePortfolioData = async (userWalletAddress, provider) => {
  *  - userWalletAddress: Address of user in the blockchain
  *  - dispatch: callback hook method that allows update of app state
  */
-const checkAllowances = async (userWalletAddress, provider) => {
-  // Checks if allowance exists for
-  const inspiritAllowance = await checkSpiritAllowance(
-    userWalletAddress,
-    addresses.inspirit[CHAIN_ID],
-    undefined,
-    provider,
-  );
+// const checkAllowances = async (userWalletAddress, provider) => {
+//   // Checks if allowance exists for
+//   const inspiritAllowance = await checkSpiritAllowance(
+//     userWalletAddress,
+//     addresses.inspirit[CHAIN_ID],
+//     undefined,
+//     provider,
+//   );
 
-  self.postMessage({
-    type: 'setInspiritAllowance',
-    payload: inspiritAllowance,
-    userWalletAddress,
-  });
-};
+//   self.postMessage({
+//     type: 'setInspiritAllowance',
+//     payload: inspiritAllowance,
+//     userWalletAddress,
+//   });
+// };
 
 const fetchIndividualLP = async (userWalletAddress, params, provider) => {
   const { token0, token1, stable } = params;

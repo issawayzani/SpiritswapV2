@@ -8,7 +8,7 @@ import { formatEther } from 'ethers/lib/utils';
 import { getProvider } from 'app/connectors/EthersConnector/login';
 import { BigNumber } from 'ethers';
 
-export const DEFAULT_GAS_LIMIT = 5000000;
+export const DEFAULT_GAS_LIMIT = 350000;
 
 export const transaction = async (
   txHash: string,
@@ -78,7 +78,7 @@ export const checkAllowance = async (
   return allowance;
 };
 
-export const checkSpiritAllowance = async (
+export const checkBaseAllowance = async (
   _userAddress: string,
   _allowanceTarget: string,
   _chainId = CHAIN_ID,
@@ -86,9 +86,9 @@ export const checkSpiritAllowance = async (
 ) => {
   const allowance = await checkAllowance(
     _userAddress,
-    addresses.spirit[_chainId],
+    '0xAa171Ad6f4eD52ED74707300aD90bDAEE8398773',
     _allowanceTarget,
-    'spirit',
+    'fakeBASE',
     _chainId,
     _provider,
   );

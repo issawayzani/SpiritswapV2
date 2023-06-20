@@ -7,6 +7,8 @@ import {
   Provider as MulticallProvider,
 } from 'ethcall';
 import multicallABI from './abis/Multicall.json';
+import tokenABI from './abis/token.json';
+import fakeBASEABI from './abis/fakeBASE.json';
 import masterchefABI from './abis/masterchef.json';
 import souschefABI from './abis/sousChef.json';
 import masterChefABI2 from './abis/masterchefV2.json';
@@ -44,6 +46,8 @@ const { mulltiCall } = addresses;
 
 export const ABIS = {
   spirit: spiritABI,
+  fakeBASE: fakeBASEABI,
+  token: tokenABI,
   multicall: multicallABI,
   masterchef: masterchefABI,
   masterchef2: masterChefABI2,

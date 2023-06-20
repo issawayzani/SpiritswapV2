@@ -41,6 +41,7 @@ export const selectBorrowIndex = (state: RootState) =>
   state.general.borrowIndex;
 export const selectOptionsIndex = (state: RootState) =>
   state.general.optionsIndex;
+export const selectSwapIndex = (state: RootState) => state.general.optionsIndex;
 export const selectSpiritWarsStatistics = (state: RootState) =>
   state.general.spiritWarsStatistics;
 export const selectSpiritWarsData = (state: RootState) =>

@@ -164,7 +164,32 @@ export const inspiritContract = async () => {
 
   return inspiritContract;
 };
+export const TokenContract = async () => {
+  const _connector = getProvider();
+  const tokenContract = await Contract(
+    '0x8d6abe4176f262F79317a1ec60B9C6e070a2142a',
+    'token',
+    _connector,
+    CHAIN_ID,
+  );
 
+  return tokenContract;
+};
+export const buyToken = async (output, minOutput, deadline, userAddress) => {
+  const contract = await TokenContract();
+  const currentUnixEpochTime = Date.now();
+  const timeStamp = currentUnixEpochTime + deadline * 60;
+  await contract.buy(
+    output,
+    minOutput,
+    timeStamp,
+    userAddress,
+    '0x992651bde478421Be71475E1d58ed50AD793da0e',
+    {
+      gasLimit: DEFAULT_GAS_LIMIT,
+    },
+  );
+};
 export const approveSpirit = async (
   _address: string,
   _allowableAmount: string,
