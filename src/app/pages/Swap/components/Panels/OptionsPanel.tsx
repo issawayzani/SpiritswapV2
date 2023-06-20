@@ -16,11 +16,11 @@ export default function OptionsPanel(props) {
   const optionsPanels = [
     {
       key: 0,
-      children: <ExercisePanel />,
+      children: <ExercisePanel bondingCurveData={props?.bondingCurveData} />,
     },
     {
       key: 1,
-      children: <RedeemPanel />,
+      children: <RedeemPanel bondingCurveData={props?.bondingCurveData} />,
     },
   ];
   useEffect(() => {

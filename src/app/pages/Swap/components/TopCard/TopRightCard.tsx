@@ -33,7 +33,7 @@ export default function TopRightCard(props) {
     <Box mb="10px">
       <SwapContainer>
         <StatisticsPanel
-          name="POW3R"
+          name="oSOUL"
           rewards={props.bondingCurveData?.accountEarnedOTOKEN / 1e18}
           value={props.bondingCurveData?.accountOTOKEN / 1e18}
           valueUSD={powerPrice}
@@ -41,14 +41,14 @@ export default function TopRightCard(props) {
         />
 
         <StatisticsPanel
-          name="GLOV3"
+          name="SOUL"
           rewards={props.bondingCurveData?.accountEarnedTOKEN / 1e18}
           value={props.bondingCurveData?.accountTOKEN / 1e18}
           valueUSD={glovePrice}
           check={true}
         />
         <StatisticsPanel
-          name="OP"
+          name="WFTM"
           rewards={props.bondingCurveData?.accountEarnedBASE / 1e18}
           value={props.bondingCurveData?.accountBASE / 1e18}
           valueUSD={OPPrice}
@@ -56,7 +56,7 @@ export default function TopRightCard(props) {
         />
 
         <StatisticsPanel
-          name="XGLOV3"
+          name="vSOUL"
           value={props.bondingCurveData?.accountVTOKEN / 1e18}
           valueUSD={xGLOVEPrice}
           check={false}

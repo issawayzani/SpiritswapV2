@@ -16,47 +16,28 @@ import { PriceDiffIndicator } from 'app/components/PriceDiffIndicator';
 import { TokenSelection } from 'app/components/TokenSelection';
 import { resolveRoutePath } from 'app/router/routes';
 import { getRoundedSFs } from 'app/utils';
+import { useState } from 'react';
 
 export default function ExercisePanel(props) {
-  const handleInput = (value: string) => {
-    //   if (!isLoggedIn) {
-    //     handleLogin();
-    //   }
-    //   if (bridge === 'to') return;
-    //   if (showConfirm) return;
-    //   const numberValue = parseFloat(value);
-    //   if (maxValue && numberValue > maxValue) {
-    //     return (
-    //       onChange && onChange({ tokenSymbol: token?.symbol, value: maxValue })
-    //     );
-    //   }
-    //   const validInput = validateInput(value, token?.decimals);
-    //   onChange &&
-    //     onChange({
-    //       tokenSymbol: token?.symbol,
-    //       value: validInput,
-    //     });
-    //   if (balance) {
-    //     handleCheckBalance?.({
-    //       hasBalance:
-    //         validInput !== ''
-    //           ? parseFloat(validInput) <= parseFloat(balance)
-    //           : true,
-    //       symbol: token?.symbol,
-    //       isOutput: isOutput,
-    //     });
-    //   }
-  };
-  const getBalanceValue = () => {
-    if (true) {
-      return `≈ $${getRoundedSFs('0')}`;
-    }
-    // if (usd && +usd > 0 && +usd < 0.01) return '<$0.01';
-    // return `≈ $${parseFloat(usd).toFixed(2)}`;
+  const [numberInputValue, setNumberInputValue] = useState('0');
+  const [price, setPrice] = useState('≈ $0');
+  const balance = props.bondingCurveData?.accountOTOKEN / 1e18;
+  const balanceBase = props.bondingCurveData?.accountBASE / 1e18;
+  const priceToken =
+    (Number(numberInputValue) * props.bondingCurveData?.priceTOKEN) / 1e36;
+  const priceBase =
+    (Number(numberInputValue) * props.bondingCurveData?.priceOTOKEN) / 1e36;
+  const setPriceValue = input => {
+    const price = (props.bondingCurveData?.priceOTOKEN * input) / 1e36;
+    setPrice(`≈ $${price}`);
   };
 
   const buttonAction = async () => {
     //need to deposit here
+  };
+  const handleBalanceClick = () => {
+    setPriceValue(balance);
+    setNumberInputValue(balance.toString());
   };
   return (
     <Box>
@@ -84,14 +65,11 @@ export default function ExercisePanel(props) {
                 clampValueOnBlur={false}
                 // max={maxValue}
                 border="none"
-                // value={
-                //   // inputValue === 'NaN'
-                //   //   ? 0
-                //   //   : showInputInUSD
-                //   //   ? formatInputUSD()
-                //   //   : inputValue
-                // }
-                onChange={value => handleInput(value)}
+                value={numberInputValue}
+                onChange={value => {
+                  setNumberInputValue(value);
+                  setPriceValue(value);
+                }}
                 // onKeyDown={e => {
                 //   if (e.code === 'End' || e.code === 'Home') {
                 //     return handleInput(inputValue);
@@ -112,44 +90,10 @@ export default function ExercisePanel(props) {
           )}
 
           <TokenSelection
-            symbol={'oSOULC'}
+            symbol={'oSOUL'}
             src={resolveRoutePath(`images/tokens/SOULC.png`)}
           />
         </HStack>
-        {/* {poolPercentage && (
-        <Text ml="4px" color="grayDarker" fontSize="h5">
-          {poolPercentage}
-        </Text>
-      )} */}
-        {/* {isSelectable && token ? (
-        isOpen ? (
-          <ModalToken
-            tokens={tokens}
-            commonTokens={commonTokens()}
-            tokenSelected={token}
-            bridge={bridge}
-            onSelect={handleSelect}
-            isOpen={isOpen}
-            onClose={onClose}
-            chainID={chainID}
-            notSearchToken={notSearchToken}
-          />
-        ) : (
-          ''
-        )
-      ) : isSelectable && bridge ? (
-        <Skeleton
-          startColor="grayBorderBox"
-          endColor="bgBoxLighter"
-          h="36px"
-          w="120px"
-        >
-          <span>Loading</span>
-        </Skeleton>
-      ) : null}
-    </HStack> 
-
-      */}
 
         {true ? (
           <Flex w="full" align="center" justify="space-between">
@@ -157,12 +101,9 @@ export default function ExercisePanel(props) {
               <Text as="div" fontSize="h5" color="grayDarker" mr="spacing02">
                 <Flex align="center" justify="center" sx={{ gap: '0.2rem' }}>
                   <Text
-                    _hover={{ cursor: 'pointer' }}
-                    // onClick={() =>
-                    //   setShowInputInUSD && setShowInputInUSD(!showInputInUSD)
-                    // }
+                  // _hover={{ cursor: 'pointer' }}
                   >
-                    {getBalanceValue()}
+                    {price}
                   </Text>
                 </Flex>
               </Text>
@@ -174,27 +115,23 @@ export default function ExercisePanel(props) {
                 fontSize="sm"
                 color="gray"
                 mr="spacing04"
-                // cursor={showCursorPointer()}
-                // onClick={() => handleInput(balance)}
+                cursor="pointer"
+                onClick={handleBalanceClick}
               >
-                {'Balance: ' + 0}
+                Balance: {balance}
               </Text>
             </Skeleton>
           </Flex>
         ) : null}
-        {/* {isLoading
-      ? null
-      : errorMessage && (
-          <Text color="red.500" padding="spacing03 0">
-            {t(errorMessage)}
-          </Text>
-        )} */}
-        {/* {mustShowPercentage && !showConfirm && token && ( */}
+
         <Percentages
-          onChange={value => handleInput(value.value)}
+          onChange={({ value }) => {
+            setNumberInputValue(value);
+            setPriceValue(value);
+          }}
           decimals={18}
-          symbol={'SOULC'}
-          balance={'0'}
+          symbol={'FTM'}
+          balance={balance.toString()}
         />
 
         {/* {children} */}
@@ -232,7 +169,7 @@ export default function ExercisePanel(props) {
                 //   //   ? formatInputUSD()
                 //   //   : inputValue
                 // }
-                onChange={value => handleInput(value)}
+                // onChange={value => handleInput(value)}
                 // onKeyDown={e => {
                 //   if (e.code === 'End' || e.code === 'Home') {
                 //     return handleInput(inputValue);
@@ -253,90 +190,34 @@ export default function ExercisePanel(props) {
           )}
 
           <TokenSelection
-            symbol={'WCANTO'}
-            src={resolveRoutePath(`images/tokens/WCANTO.png`)}
+            symbol={'FTM'}
+            src={resolveRoutePath(`images/tokens/FTM.png`)}
           />
         </HStack>
-        {/* {poolPercentage && (
-        <Text ml="4px" color="grayDarker" fontSize="h5">
-          {poolPercentage}
-        </Text>
-      )} */}
-        {/* {isSelectable && token ? (
-        isOpen ? (
-          <ModalToken
-            tokens={tokens}
-            commonTokens={commonTokens()}
-            tokenSelected={token}
-            bridge={bridge}
-            onSelect={handleSelect}
-            isOpen={isOpen}
-            onClose={onClose}
-            chainID={chainID}
-            notSearchToken={notSearchToken}
-          />
-        ) : (
-          ''
-        )
-      ) : isSelectable && bridge ? (
-        <Skeleton
-          startColor="grayBorderBox"
-          endColor="bgBoxLighter"
-          h="36px"
-          w="120px"
-        >
-          <span>Loading</span>
-        </Skeleton>
-      ) : null}
-    </HStack> 
-
-      */}
 
         {true ? (
           <Flex w="full" align="center" justify="space-between">
             <Flex>
               <Text as="div" fontSize="h5" color="grayDarker" mr="spacing02">
                 <Flex align="center" justify="center" sx={{ gap: '0.2rem' }}>
-                  <Text
-                    _hover={{ cursor: 'pointer' }}
-                    // onClick={() =>
-                    //   setShowInputInUSD && setShowInputInUSD(!showInputInUSD)
-                    // }
-                  >
-                    {getBalanceValue()}
-                  </Text>
+                  <Text>~${priceBase}</Text>
                 </Flex>
               </Text>
-              {/* {showDiff ? <PriceDiffIndicator amount={priceDiff || 0} /> : null} */}
             </Flex>
             <Skeleton isLoaded={true}>
-              <Text
-                as="div"
-                fontSize="sm"
-                color="gray"
-                mr="spacing04"
-                // cursor={showCursorPointer()}
-                // onClick={() => handleInput(balance)}
-              >
-                {'Balance: ' + 0}
+              <Text as="div" fontSize="sm" color="gray" mr="spacing04">
+                Balance: {balanceBase}
               </Text>
             </Skeleton>
           </Flex>
         ) : null}
-        {/* {isLoading
-      ? null
-      : errorMessage && (
-          <Text color="red.500" padding="spacing03 0">
-            {t(errorMessage)}
-          </Text>
-        )} */}
-        {/* {mustShowPercentage && !showConfirm && token && ( */}
-        <Percentages
+
+        {/* <Percentages
           onChange={value => handleInput(value.value)}
           decimals={18}
           symbol={'SOULC'}
           balance={'0'}
-        />
+        /> */}
 
         {/* {children} */}
       </Flex>
@@ -344,20 +225,13 @@ export default function ExercisePanel(props) {
       <Flex>
         <p>You will recieve </p>
         <Spacer />
-        <p> {0} WCANTO </p>
+        <p> {numberInputValue} SOUL </p>
       </Flex>
       <Flex>
         <Spacer />
         <Text as="div" fontSize="h5" color="grayDarker" mr="spacing02">
           <Flex align="center" justify="center" sx={{ gap: '0.2rem' }}>
-            <Text
-              _hover={{ cursor: 'pointer' }}
-              // onClick={() =>
-              //   setShowInputInUSD && setShowInputInUSD(!showInputInUSD)
-              // }
-            >
-              {getBalanceValue()}
-            </Text>
+            <Text>~${priceToken}</Text>
           </Flex>
         </Text>
       </Flex>

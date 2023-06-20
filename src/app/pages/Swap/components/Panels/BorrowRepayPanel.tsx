@@ -18,11 +18,11 @@ import { useState } from 'react';
 export default function BorrowRepayPanel(props) {
   const [numberInputValue, setNumberInputValue] = useState('0');
   const [price, setPrice] = useState('≈ $0');
-  let balance = '0';
+  let balance = 0;
   if (props.borrow) {
-    balance = props.bondingCurveData?.accountBorrowCredit;
+    balance = props.bondingCurveData?.accountBorrowCredit / 1e18;
   } else {
-    balance = props.bondingCurveData?.accountBorrowDebt;
+    balance = props.bondingCurveData?.accountBorrowDebt / 1e18;
   }
 
   const setPriceValue = input => {
@@ -35,18 +35,18 @@ export default function BorrowRepayPanel(props) {
   };
   const handleBalanceClick = () => {
     setPriceValue(balance);
-    setNumberInputValue(balance);
+    setNumberInputValue(balance.toString());
   };
   return (
     <Box>
       {props.borrow && (
         <div>
-          <p> Borrow WCANTO against staked position </p>
+          <p> Borrow FTM against staked position </p>
         </div>
       )}
       {props.repay && (
         <div>
-          <p> Repay WCANTO to unlock staked position </p>
+          <p> Repay FTM to unlock staked position </p>
         </div>
       )}
 
@@ -97,44 +97,10 @@ export default function BorrowRepayPanel(props) {
           )}
 
           <TokenSelection
-            symbol={'WCANTO'}
-            src={resolveRoutePath(`images/tokens/WCANTO.png`)}
+            symbol={'FTM'}
+            src={resolveRoutePath(`images/tokens/FTM.png`)}
           />
         </HStack>
-        {/* {poolPercentage && (
-        <Text ml="4px" color="grayDarker" fontSize="h5">
-          {poolPercentage}
-        </Text>
-      )} */}
-        {/* {isSelectable && token ? (
-        isOpen ? (
-          <ModalToken
-            tokens={tokens}
-            commonTokens={commonTokens()}
-            tokenSelected={token}
-            bridge={bridge}
-            onSelect={handleSelect}
-            isOpen={isOpen}
-            onClose={onClose}
-            chainID={chainID}
-            notSearchToken={notSearchToken}
-          />
-        ) : (
-          ''
-        )
-      ) : isSelectable && bridge ? (
-        <Skeleton
-          startColor="grayBorderBox"
-          endColor="bgBoxLighter"
-          h="36px"
-          w="120px"
-        >
-          <span>Loading</span>
-        </Skeleton>
-      ) : null}
-    </HStack> 
-
-      */}
 
         {true ? (
           <Flex w="full" align="center" justify="space-between">
@@ -178,8 +144,8 @@ export default function BorrowRepayPanel(props) {
             setPriceValue(value);
           }}
           decimals={18}
-          symbol={'BASE'}
-          balance={balance}
+          symbol={'FTM'}
+          balance={balance.toString()}
         />
 
         {/* {children} */}

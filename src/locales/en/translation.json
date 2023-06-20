@@ -3,10 +3,10 @@
     "name": "SpiritSwap",
     "menu": {
       "home": "Home",
-      "SOULC": "SOULC",
+      "SOULC": "SOUL",
       "liquidity": "Liquidity",
       "farms": "Farms",
-      "vSOULC": "vSOULC",
+      "vSOULC": "Vote",
       "bridge": "Bridge",
       "lendBorrow": "Lend/Borrow",
       "staking": "Staking",

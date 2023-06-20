@@ -18,7 +18,7 @@ import { useState } from 'react';
 export default function BurnPanel(props) {
   const [numberInputValue, setNumberInputValue] = useState('0');
   const [price, setPrice] = useState('≈ $0');
-  const balance = props.bondingCurveData?.accountOTOKEN;
+  const balance = props.bondingCurveData?.accountBASE / 1e18;
   const setPriceValue = input => {
     const price = (props.bondingCurveData?.priceOTOKEN * input) / 1e36;
     setPrice(`≈ $${price}`);
@@ -29,7 +29,7 @@ export default function BurnPanel(props) {
   };
   const handleBalanceClick = () => {
     setPriceValue(balance);
-    setNumberInputValue(balance);
+    setNumberInputValue(balance.toString());
   };
   return (
     <Box>
@@ -82,44 +82,10 @@ export default function BurnPanel(props) {
           )}
 
           <TokenSelection
-            symbol={'oSOULC'}
+            symbol={'oSOUL'}
             src={resolveRoutePath(`images/tokens/SOULC.png`)}
           />
         </HStack>
-        {/* {poolPercentage && (
-        <Text ml="4px" color="grayDarker" fontSize="h5">
-          {poolPercentage}
-        </Text>
-      )} */}
-        {/* {isSelectable && token ? (
-        isOpen ? (
-          <ModalToken
-            tokens={tokens}
-            commonTokens={commonTokens()}
-            tokenSelected={token}
-            bridge={bridge}
-            onSelect={handleSelect}
-            isOpen={isOpen}
-            onClose={onClose}
-            chainID={chainID}
-            notSearchToken={notSearchToken}
-          />
-        ) : (
-          ''
-        )
-      ) : isSelectable && bridge ? (
-        <Skeleton
-          startColor="grayBorderBox"
-          endColor="bgBoxLighter"
-          h="36px"
-          w="120px"
-        >
-          <span>Loading</span>
-        </Skeleton>
-      ) : null}
-    </HStack> 
-
-      */}
 
         {true ? (
           <Flex w="full" align="center" justify="space-between">
@@ -133,7 +99,6 @@ export default function BurnPanel(props) {
                   </Text>
                 </Flex>
               </Text>
-              {/* {showDiff ? <PriceDiffIndicator amount={priceDiff || 0} /> : null} */}
             </Flex>
             <Skeleton isLoaded={true}>
               <Text
@@ -149,25 +114,16 @@ export default function BurnPanel(props) {
             </Skeleton>
           </Flex>
         ) : null}
-        {/* {isLoading
-      ? null
-      : errorMessage && (
-          <Text color="red.500" padding="spacing03 0">
-            {t(errorMessage)}
-          </Text>
-        )} */}
-        {/* {mustShowPercentage && !showConfirm && token && ( */}
+
         <Percentages
           onChange={({ value }) => {
             setNumberInputValue(value);
             setPriceValue(value);
           }}
           decimals={18}
-          symbol={'oSOULC'}
-          balance={balance}
+          symbol={'oSOUL'}
+          balance={balance.toString()}
         />
-
-        {/* {children} */}
       </Flex>
       <Button size="lg" mt="16px" w="full" onClick={buttonAction}>
         Burn

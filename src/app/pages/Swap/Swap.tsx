@@ -76,7 +76,7 @@ import { StablePanel } from '../Liquidity/components/Panels';
 const SwapPage = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { isLoggedIn } = useWallets();
+  const { account, isLoggedIn } = useWallets();
 
   const globalSwapModeIndex = useAppSelector(selectSwapModeIndex);
   const globalBottomCardIndex = useAppSelector(selectBottomCardIndex);
@@ -265,11 +265,13 @@ const SwapPage = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      const data = await Test();
+      const data = await Test(account, null, null, false);
       console.log(data);
-      dispatch(setBondingCurveInfo(data));
+      dispatch(setBondingCurveInfo(data?.result));
     };
     fetch();
+    console.log('issa');
+    console.log(BondingCurveData);
     setIsLimit(modeIndex !== 0);
     dispatch(setGlobalSwapModeIndex(modeIndex));
     dispatch(setGlobalBottomCardIndex(cardIndex));
@@ -746,7 +748,14 @@ const SwapPage = () => {
   const panels = [
     {
       key: 0,
-      children: <SwapPanel panelProps={panelProps} isWrapped={isWrapped()} />,
+      children: (
+        <SwapPanel
+          panelProps={panelProps}
+          deadline={states.deadline}
+          bondingCurveData={BondingCurveData}
+          isWrapped={isWrapped()}
+        />
+      ),
     },
     {
       key: 1,

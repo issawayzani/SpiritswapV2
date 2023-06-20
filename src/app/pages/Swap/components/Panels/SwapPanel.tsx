@@ -27,21 +27,21 @@ import { ConnectWallet } from 'app/components/ConnectWallet';
 import { useCheckAllowance } from 'app/hooks/useCheckAllowance';
 import useWallets from 'app/hooks/useWallets';
 import { openInNewTab } from 'app/utils/redirectTab';
+import { setGlobalOptionsIndex, setGlobalSwapIndex } from 'store/general';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { BuyPanel } from './';
+import { selectSwapIndex } from 'store/general/selectors';
+import TabSelect from 'app/components/TabSelect';
 
-const mockInputToken = {
-  name: 'USD Coin',
-  symbol: 'USDC',
-  address: '0x2791bca1f2de4661ed88a30c99a7a9449aa84174',
-  chainId: 137,
-  decimals: 6,
-};
-
-export default function SwapPanel({ panelProps, isWrapped }) {
-  const { t } = useTranslation();
-  const translationsPath = 'swap.panels.swap';
-  const [isApproving, setIsApproving] = useState<boolean>(false);
-  const settingsTranslationPath = 'swap.settings';
-  const { addToQueue } = Web3Monitoring();
+export default function SwapPanel({
+  panelProps,
+  isWrapped,
+  bondingCurveData,
+  deadline,
+}) {
+  const dispatch = useAppDispatch();
+  const globalSwapIndex = useAppSelector(selectSwapIndex);
+  const [swapIndex, setSwapIndex] = useState<number>(globalSwapIndex || 0);
   const { isLoggedIn, account } = useWallets();
   const {
     trade,
@@ -59,6 +59,29 @@ export default function SwapPanel({ panelProps, isWrapped }) {
     approveMax,
     apiCallError,
   }: SwapProps = panelProps;
+  const swapPanels = [
+    {
+      key: 0,
+      children: (
+        <BuyPanel
+          deadline={deadline}
+          slippage={slippage}
+          account={account}
+          bondingCurveData={bondingCurveData}
+        />
+      ),
+    },
+  ];
+  useEffect(() => {
+    dispatch(setGlobalSwapIndex(swapIndex));
+  }, [swapIndex, globalSwapIndex]);
+
+  const { t } = useTranslation();
+  const translationsPath = 'swap.panels.swap';
+  const [isApproving, setIsApproving] = useState<boolean>(false);
+  const settingsTranslationPath = 'swap.settings';
+  const { addToQueue } = Web3Monitoring();
+
   const { isLoading: txLoading, loadingOff, loadingOn } = UseIsLoading();
   const [loaderText, setLoaderText] = useState('Loading');
   const [loadAmountInput1, setLoadAmountInput1] = useState(false);
@@ -228,20 +251,28 @@ export default function SwapPanel({ panelProps, isWrapped }) {
     [firstToken],
   );
 
-  const estimateRate = () => {
-    const { symbol: inputSymbol } = firstToken.tokenSelected;
-    const { symbol: outputSymbol } = secondToken.tokenSelected;
-    if (trade)
-      return `1  ${inputSymbol} ≈ ${
-        isWrapped ? '1' : parseFloat(trade.price).toFixed(5)
-      } ${outputSymbol}`;
+  // const estimateRate = () => {
+  //   const { symbol: inputSymbol } = firstToken.tokenSelected;
+  //   const { symbol: outputSymbol } = secondToken.tokenSelected;
+  //   if (trade)
+  //     return `1  ${inputSymbol} ≈ ${
+  //       isWrapped ? '1' : parseFloat(trade.price).toFixed(5)
+  //     } ${outputSymbol}`;
 
-    return '-';
-  };
+  //   return '-';
+  // };
 
   return (
     <Box mt="20px">
-      <NewTokenAmountPanel
+      <TabSelect
+        index={swapIndex}
+        setIndex={setSwapIndex}
+        styleIndex={[2]}
+        styleVariant="danger"
+        names={['Buy']}
+        panels={swapPanels}
+      />
+      {/* <NewTokenAmountPanel
         onSelect={(item: Token, onClose) => handleChangeToken(item, onClose, 0)}
         inputValue={firstToken.value || ''}
         showPercentage
@@ -291,7 +322,7 @@ export default function SwapPanel({ panelProps, isWrapped }) {
         onChange={({ value }) => {
           onChangeNumberInput(value, 1);
         }}
-      />
+      /> */}
 
       {apiCallError ? (
         <Alert mt="16px" status="error" borderRadius="4px" bg="dangerBg">
@@ -313,14 +344,14 @@ export default function SwapPanel({ panelProps, isWrapped }) {
       </Button>
 
       <SimpleGrid columns={2} spacing="5px" w="full" mt="20px">
-        <Text>{t(`${translationsPath}.rate`)}</Text>
+        {/* <Text>{t(`${translationsPath}.rate`)}</Text>
         <Skeleton
           startColor="grayBorderBox"
           endColor="bgBoxLighter"
           isLoaded={!isLoading}
         >
           <Text textAlign="right">{estimateRate()}</Text>
-        </Skeleton>
+        </Skeleton> */}
 
         <Flex align="center" sx={{ gap: '0.3rem' }}>
           <Text>{t(`${settingsTranslationPath}.slippageToleranceLabel`)} </Text>

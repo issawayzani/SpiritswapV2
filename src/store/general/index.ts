@@ -26,6 +26,7 @@ const initialState: {
     apr: number;
     ltv: number;
     ratio: number;
+    accountNATIVE: number;
     accountBASE: number; // OP or FTM amount that account has
     accountTOKEN: number; // user balance of GLOVE
     accountOTOKEN: number; // user balance of POWER
@@ -62,6 +63,7 @@ const initialState: {
   stakeIndex: number;
   borrowIndex: number;
   optionsIndex: number;
+  swapIndex: number;
   spiritWarsStatistics: StatisticsProps;
   spiritWarsData: Token[];
   lp_prices: {};
@@ -91,6 +93,7 @@ const initialState: {
     apr: 0,
     ltv: 0,
     ratio: 0,
+    accountNATIVE: 0,
     accountBASE: 0,
     accountTOKEN: 0,
     accountOTOKEN: 0,
@@ -127,6 +130,7 @@ const initialState: {
   stakeIndex: 0,
   borrowIndex: 0,
   optionsIndex: 0,
+  swapIndex: 0,
   spiritWarsStatistics: {},
   spiritWarsData: [],
   lp_prices: {},
@@ -224,7 +228,9 @@ export const generalReducer = createSlice({
     setGlobalOptionsIndex: (state, action) => {
       state.optionsIndex = action.payload;
     },
-
+    setGlobalSwapIndex: (state, action) => {
+      state.swapIndex = action.payload;
+    },
     setSpiritWarsStatistics: (state, action) => {
       state.spiritWarsStatistics = action.payload;
     },
@@ -268,6 +274,7 @@ export const {
   setGlobalStakeIndex,
   setGlobalBorrowIndex,
   setGlobalOptionsIndex,
+  setGlobalSwapIndex,
   setSpiritWarsStatistics,
   setSpiritWarsData,
   setMarketCap,
