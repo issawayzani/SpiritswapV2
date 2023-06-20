@@ -46,7 +46,6 @@ import {
   setUserSobLiquidityWallet,
   setUserWallet,
   setUserWeightedLiquidityWallet,
-  setBondingCurveInfo,
 } from 'store/user';
 import { formatFrom } from 'utils/web3';
 
@@ -120,9 +119,6 @@ export const listenToUserworker = (worker: Worker, dispatch) => {
     switch (type) {
       case 'setHistoricalPortfolioValue':
         dispatch(setHistoricalPortfolioValue(payload));
-        break;
-      case 'setBondingCurveInfo':
-        dispatch(setBondingCurveInfo(payload));
         break;
       case 'setTokens':
         dispatch(setTokens(payload.tokens));
