@@ -263,15 +263,21 @@ const SwapPage = () => {
     chartCurrency,
   ]);
 
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     const data = await Test(account, null, null);
+  //     dispatch(setBondingCurveInfo(data?.result));
+  //   };
+  //   fetch();
+  // },[account]) ;
   useEffect(() => {
     const fetch = async () => {
-      const data = await Test(account, null, null, false);
-      console.log(data);
+      const data = await Test(account, null, null);
       dispatch(setBondingCurveInfo(data?.result));
     };
-    fetch();
-    console.log('issa');
-    console.log(BondingCurveData);
+    if (account) {
+      fetch();
+    }
     setIsLimit(modeIndex !== 0);
     dispatch(setGlobalSwapModeIndex(modeIndex));
     dispatch(setGlobalBottomCardIndex(cardIndex));
@@ -290,94 +296,8 @@ const SwapPage = () => {
     globalSwapModeIndex,
     dispatch,
     isLoggedIn,
+    account,
   ]);
-
-  // const asignTokenValues = (
-  //   txType,
-  //   changedTokenFrom,
-  //   tokenOne,
-  //   tokenTwo,
-  //   txValue,
-  // ) => {
-  //   if (txType === 'limitbuy' && changedTokenFrom === LIMIT_PAY) {
-  //     if (tokenOne?.limitbuy) {
-  //       const receive = checkInvalidValue(
-  //         `${(parseFloat(txValue) * parseFloat(tokenOne.limitbuy)).toFixed(
-  //           secondToken.tokenSelected.decimals,
-  //         )}`,
-  //       );
-  //       const outputAmount: string = isWrapped() ? txValue : receive;
-  //       setSecondToken({ ...tokenTwo, receive: outputAmount });
-  //     }
-  //     setFirstToken({ ...tokenOne, value: txValue });
-  //     return;
-  //   }
-
-  //   if (txType === 'limitsell' && changedTokenFrom === LIMIT_PAY) {
-  //     if (tokenOne?.limitsell) {
-  //       const receive = checkInvalidValue(
-  //         `${(parseFloat(tokenOne.limitsell) / parseFloat(txValue)).toFixed(
-  //           secondToken.tokenSelected.decimals,
-  //         )}`,
-  //       );
-  //       const outputAmount: string = isWrapped() ? txValue : receive;
-  //       setSecondToken({ ...tokenTwo, receive: outputAmount });
-  //     }
-  //     setFirstToken({ ...tokenOne, value: txValue });
-  //     return;
-  //   }
-
-  //   if (txType === 'limitbuy' && changedTokenFrom === LIMIT_PRICE) {
-  //     const receive = checkInvalidValue(
-  //       `${(parseFloat(tokenOne.value) / parseFloat(txValue)).toFixed(
-  //         secondToken.tokenSelected.decimals,
-  //       )}`,
-  //     );
-  //     const outputAmount: string = isWrapped() ? txValue : receive;
-  //     setFirstToken({ ...tokenOne, limitbuy: txValue });
-  //     setSecondToken({ ...tokenTwo, receive: outputAmount });
-  //     return;
-  //   }
-
-  //   if (txType === 'limitsell' && changedTokenFrom === LIMIT_PRICE) {
-  //     const receive = checkInvalidValue(
-  //       `${(parseFloat(txValue) * parseFloat(tokenOne.value)).toFixed(
-  //         secondToken.tokenSelected.decimals,
-  //       )}`,
-  //     );
-  //     const outputAmount: string = isWrapped() ? txValue : receive;
-  //     setFirstToken({ ...tokenOne, limitsell: txValue });
-  //     setSecondToken({ ...tokenTwo, receive: outputAmount });
-  //     return;
-  //   }
-
-  //   if (txType === 'limitbuy' && changedTokenFrom === LIMIT_RECIEVE) {
-  //     if (tokenOne?.limitbuy) {
-  //       const valuePay = checkInvalidValue(
-  //         `${(parseFloat(txValue) / parseFloat(tokenOne.limitbuy)).toFixed(
-  //           firstToken.tokenSelected.decimals,
-  //         )}`,
-  //       );
-  //       const inputAmount: string = isWrapped() ? txValue : valuePay;
-  //       setFirstToken({ ...tokenTwo, value: inputAmount });
-  //     }
-  //     setSecondToken({ ...tokenTwo, receive: txValue });
-  //     return;
-  //   }
-  //   if (txType === 'limitsell' && changedTokenFrom === LIMIT_RECIEVE) {
-  //     if (tokenOne?.limitsell) {
-  //       const valuePay = checkInvalidValue(
-  //         `${(parseFloat(txValue) * parseFloat(tokenOne.limitsell)).toFixed(
-  //           firstToken.tokenSelected.decimals,
-  //         )}`,
-  //       );
-  //       const inputAmount: string = isWrapped() ? txValue : valuePay;
-  //       setFirstToken({ ...tokenTwo, value: inputAmount });
-  //     }
-  //     setSecondToken({ ...tokenTwo, receive: txValue });
-  //     return;
-  //   }
-  // };
 
   const changeRateParams = (
     value,
@@ -718,33 +638,6 @@ const SwapPage = () => {
     apiCallError: txError,
   };
 
-  // const defaultRoutes = useMemo(() => {
-  //   const { tokenSelected: ipToken } = firstToken;
-  //   const { tokenSelected: opToken } = secondToken;
-  //   if (ipToken.symbol === 'FTM' && opToken.symbol === 'WFTM')
-  //     return [FTM, WFTM];
-  //   if (ipToken.symbol === 'WFTM' && opToken.symbol === 'FTM')
-  //     return [FTM, WFTM];
-  //   if (trade) return routes;
-  //   if (ipToken.symbol === 'FTM') return [WFTM, opToken];
-  //   if (opToken.symbol === 'FTM') return [ipToken, WFTM];
-  //   return [ipToken, opToken];
-  // }, [firstToken, secondToken, trade, routes]);
-
-  const bottompanels = [
-    {
-      key: 0,
-      children: <StakePanel />,
-    },
-    {
-      key: 1,
-      children: <BorrowPanel />,
-    },
-    {
-      key: 2,
-      children: <OptionsPanel />,
-    },
-  ];
   const panels = [
     {
       key: 0,
@@ -785,16 +678,6 @@ const SwapPage = () => {
     columns['md'] = '700px 1fr';
     return columns;
   };
-
-  // const memorizedChart = useCallback(() => {
-  //   return (
-  //     <Chart
-  //       islimit={isLimit}
-  //       url={chartUrl}
-  //       onCurrencyChange={setChartCurrency}
-  //     />
-  //   );
-  // }, [chartUrl, isLimit]);
 
   return (
     <Box overflowX="hidden">

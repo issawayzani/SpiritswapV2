@@ -7,14 +7,13 @@ import { buyToken } from './inspirit';
 import { ethers } from 'ethers';
 import { BigNumber } from 'ethers';
 import { formatUnits, parseUnits } from 'ethers/lib/utils';
-
+import useWallets from 'app/hooks/useWallets';
 const web3 = new Web3('https://rpc.ftm.tools/');
 
 export const Test = async (
   account,
   input: null | undefined | string,
   slippage: null | undefined | number,
-  check: boolean,
 ) => {
   const multicallv3 = new web3.eth.Contract(
     multicalcontract.abi as AbiItem[],
@@ -38,8 +37,8 @@ export const Test = async (
     }
 
     return { result, quoteBuyIn, quoteBuyOut };
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.log(e);
     return null;
   }
 };

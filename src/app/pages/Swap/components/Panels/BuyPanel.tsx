@@ -61,7 +61,7 @@ export default function BuyPanel(props) {
     const newSlippage = 1000 - slippage * 10;
     const validInput = validateInput(input, 18);
 
-    const result = await Test(props.account, validInput, newSlippage, false);
+    const result = await Test(props.account, validInput, newSlippage);
     if (check) {
       return result?.quoteBuyIn;
     } else {
