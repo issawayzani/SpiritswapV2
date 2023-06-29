@@ -8,6 +8,8 @@ import {
   Box,
   Flex,
   useMediaQuery,
+  Button,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { TopCard } from './components/TopCard';
 
@@ -72,12 +74,13 @@ import TWAPPanel from 'app/components/TWAP/TWAPPanel';
 import { SOULC } from 'app/router/routes';
 import TopRightCard from './components/TopCard/TopRightCard';
 import { StablePanel } from '../Liquidity/components/Panels';
+import { ConnectWallet } from 'app/components/ConnectWallet';
 
 const SwapPage = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { account, isLoggedIn } = useWallets();
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const globalSwapModeIndex = useAppSelector(selectSwapModeIndex);
   const globalBottomCardIndex = useAppSelector(selectBottomCardIndex);
   const translationPath = 'swap.questionHelper';
@@ -125,7 +128,9 @@ const SwapPage = () => {
       return [allTokens[0], allTokens[1]];
     }
   };
-
+  const connect = () => {
+    onOpen();
+  };
   const matchesToken = (token, param) => {
     if (!param) {
       return false;
@@ -652,15 +657,21 @@ const SwapPage = () => {
     },
     {
       key: 1,
-      children: <StakePanel bondingCurveData={BondingCurveData} />,
+      children: (
+        <StakePanel account={account} bondingCurveData={BondingCurveData} />
+      ),
     },
     {
       key: 2,
-      children: <BorrowPanel bondingCurveData={BondingCurveData} />,
+      children: (
+        <BorrowPanel account={account} bondingCurveData={BondingCurveData} />
+      ),
     },
     {
       key: 3,
-      children: <OptionsPanel bondingCurveData={BondingCurveData} />,
+      children: (
+        <OptionsPanel account={account} bondingCurveData={BondingCurveData} />
+      ),
     },
   ];
 
@@ -716,14 +727,14 @@ const SwapPage = () => {
           </GridItem>
           <GridItem rowSpan={1} colSpan={1}>
             <Box>
-              <SpiritsBackground
+              {/* <SpiritsBackground
                 islimit={isLimit}
                 showChart={showChart}
                 showSettings={showSettings}
-              />
+              /> */}
 
               <SwapContainer islimit={`${isLimit}`}>
-                {!swapConfirm ? (
+                {isLoggedIn ? (
                   <>
                     {showSettings ? (
                       <Settings
@@ -765,100 +776,50 @@ const SwapPage = () => {
                     )}
                   </>
                 ) : (
-                  trade && (
-                    <SwapConfirm
-                      firstToken={firstToken}
-                      secondToken={secondToken}
-                      setSwapConfirm={setSwapConfirm}
-                      isLimit={isLimit}
-                      trade={trade}
-                      showInputInUSD={showInputInUSD}
-                      isWrapped={isWrapped()}
-                      resetInput={() => {
-                        setFirstToken({
-                          ...firstToken,
-                          value: '',
-                        });
-                        setSecondToken({
-                          ...secondToken,
-                          value: '',
-                        });
-                      }}
-                    />
-                  )
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Button onClick={connect}>Connect Wallet</Button>
+                  </div>
+                  // <SwapConfirm
+                  //   firstToken={firstToken}
+                  //   secondToken={secondToken}
+                  //   setSwapConfirm={setSwapConfirm}
+                  //   isLimit={isLimit}
+                  //   trade={trade}
+                  //   showInputInUSD={showInputInUSD}
+                  //   isWrapped={isWrapped()}
+                  //   resetInput={() => {
+                  //     setFirstToken({
+                  //       ...firstToken,
+                  //       value: '',
+                  //     });
+                  //     setSecondToken({
+                  //       ...secondToken,
+                  //       value: '',
+                  //     });
+                  //   }}
+                  // />
                 )}
               </SwapContainer>
-
-              {/* {!swapConfirm
-                ? !isLimit &&
-                  !showSettings && (
-                    <GridItem colSpan={1}>
-                      <RouteContainer showchart={+showChart}>
-                        <HStack w="16">
-                          <Text>Route</Text>
-                          <QuestionHelper
-                            title={t(`${translationPath}.route`)}
-                            text={t(`${translationPath}.routeExplanation`)}
-                          />
-                        </HStack>
-
-                        <HStack w="full" placeContent="center">
-                          {defaultRoutes.map((route, index) => (
-                            <HStack key={`routes-${route.address}-${index}`}>
-                              <Flex
-                                borderRadius="32px"
-                                border={
-                                  defaultRoutes.length > 3
-                                    ? 'none'
-                                    : '1px solid #1F2937'
-                                }
-                                p="4px 8px 4px 4px"
-                                w="full"
-                                align="center"
-                                justify="center"
-                              >
-                                <ImageLogo symbol={route.symbol} size="24px" />
-                                <Text
-                                  display={
-                                    defaultRoutes.length > 3
-                                      ? 'none'
-                                      : 'inherit'
-                                  }
-                                >
-                                  {route.symbol}
-                                </Text>
-                              </Flex>
-                              {defaultRoutes.length - 1 !== index ? (
-                                <Icon as={ArrowRightIcon1} w="7px" />
-                              ) : null}
-                            </HStack>
-                          ))}
-                        </HStack>
-                      </RouteContainer>
-                    </GridItem>
-                  )
-                : null} */}
             </Box>
           </GridItem>
+
           <GridItem rowSpan={1} colSpan={1}>
             <Box ml="10px">
-              <TopRightCard bondingCurveData={BondingCurveData} />
-              {/* <GridItem colSpan={1}>
-                <SwapContainer>
-                  <TabSelect
-                    index={cardIndex}
-                    setIndex={setCardIndex}
-                    styleIndex={[2]}
-                    styleVariant="danger"
-                    names={['Stake', 'Borrow', 'Options']}
-                    panels={bottompanels}
-                  />
-                </SwapContainer>
-              </GridItem> */}
+              <TopRightCard
+                account={account}
+                bondingCurveData={BondingCurveData}
+              />
             </Box>
           </GridItem>
         </Grid>
       </Box>
+      <ConnectWallet isOpen={isOpen} dismiss={onClose} />
     </Box>
   );
 };
