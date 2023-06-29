@@ -770,6 +770,46 @@
         "success": "Approve successful",
         "error": "Error approving token for swap"
       },
+      "claim": {
+        "pending": "Claiming rewards pending",
+        "success": "CLaim rewards successful",
+        "error": "Claim rewards failed"
+      },
+      "stake": {
+        "pending": "Stake pending",
+        "success": "Stake successful",
+        "error": "Stake failed"
+      },
+      "unstake": {
+        "pending": "Unstake pending",
+        "success": "Unstake successful",
+        "error": "Unstake failed"
+      },
+      "burn": {
+        "pending": "Burn pending",
+        "success": "Burn successful",
+        "error": "Burn failed"
+      },
+      "borrow": {
+        "pending": "Borrow pending",
+        "success": "Borrow successful",
+        "error": "Borrow failed"
+      },
+      "repay": {
+        "pending": "Repay pending",
+        "success": "Repay successful",
+        "error": "Repay failed"
+      },
+      "exercise": {
+        "pending": "Exercise pending",
+        "success": "Exercise successful",
+        "error": "Exercise failed"
+      },
+      "redeem": {
+        "pending": "Redeem pending",
+        "success": "Redeem  successful",
+        "error": "Redeem  failed"
+      },
       "process": {
         "pending": "Swap pending",
         "success": "Swap successful",
