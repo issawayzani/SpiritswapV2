@@ -11,45 +11,45 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { SwapIconButton } from 'app/assets/icons';
-import { formatAmount } from 'app/utils';
-import { buyToken } from 'utils/web3/actions/inspirit';
+import { buyToken, sellToken } from 'utils/web3/actions/inspirit';
 import { formatUnits, parseUnits } from 'ethers/lib/utils';
 import { Percentages } from 'app/components/Percentages';
 import { PriceDiffIndicator } from 'app/components/PriceDiffIndicator';
 import { TokenSelection } from 'app/components/TokenSelection';
 import { resolveRoutePath } from 'app/router/routes';
-import { getRoundedSFs, validateInput } from 'app/utils';
+import { formatAmount, getRoundedSFs, validateInput } from 'app/utils';
 import { useEffect, useState } from 'react';
 import {
   approve,
   Test,
   checkBaseAllowance,
+  checkTokenAllowance,
   transactionResponse,
 } from 'utils/web3';
-import { BigNumber } from 'ethers';
 import Web3Monitoring from 'app/connectors/EthersConnector/transactions';
 
-export default function BuyPanel(props) {
+export default function SellPanel(props) {
   const [isLoadingOutput, setIsLoadingOutput] = useState(false);
   const [isLoadingInput, setIsLoadingInput] = useState(false);
-  const { addToQueue } = Web3Monitoring();
   const [isLoadingButton, setIsLoadingButton] = useState(false);
-  const [buyIn, setBuyIn] = useState(false);
-  const [buyOut, setBuyOut] = useState(false);
+  const [SellIn, setBuyIn] = useState(false);
+  const { addToQueue } = Web3Monitoring();
   const [numberInputValue, setNumberInputValue] = useState('0');
   const [numberOutputValue, setNumberOutputValue] = useState('0');
   const balance = props.bondingCurveData?.accountBASE / 1e18;
   const balanceToken = props.bondingCurveData?.accountTOKEN / 1e18;
+  const maxMarketSell = props.bondingCurveData?.maxMarketSell / 1e18;
+  const max = Math.min(balanceToken || maxMarketSell);
   const priceBase =
     (props.bondingCurveData?.priceBASE * Number(numberInputValue)) / 1e36;
   const priceToken =
     (props.bondingCurveData?.priceTOKEN * Number(numberOutputValue)) / 1e36;
-  const [quoteBuyIn, setQuoteBuyIn] = useState({
+  const [quoteSellIn, setQuoteSellIn] = useState({
     output: 0,
     slippage: 0,
     minOutput: 0,
   });
-  const [quoteBuyOut, setQuoteBuyOut] = useState({
+  const [quoteSellOut, setQuoteSellOut] = useState({
     output: 0,
     slippage: 0,
     minOutput: 0,
@@ -62,7 +62,7 @@ export default function BuyPanel(props) {
     if (numberOutputValue === '0' || numberOutputValue === '') return DISABLED;
     if (Number(numberInputValue) === 0) return DISABLED;
     if (isLoadingButton) return DISABLED;
-    if (Number(numberInputValue) > balance) return DISABLED;
+    if (Number(numberInputValue) > max) return DISABLED;
 
     return NOT_DISABLED;
   };
@@ -73,9 +73,9 @@ export default function BuyPanel(props) {
 
     const result = await Test(props.account, validInput, newSlippage);
     if (check) {
-      return result?.quoteBuyIn;
+      return result?.quoteSellIn;
     } else {
-      return result?.quoteBuyOut;
+      return result?.quoteSellOut;
     }
   };
 
@@ -87,7 +87,6 @@ export default function BuyPanel(props) {
     let result;
     setIsLoadingInput(true);
     setBuyIn(false);
-    setBuyOut(true);
     try {
       result = await quote(input, props.slippage, false);
     } catch (e) {
@@ -96,7 +95,7 @@ export default function BuyPanel(props) {
       return;
     }
     if (result) {
-      setQuoteBuyOut({
+      setQuoteSellOut({
         output: result.output,
         slippage: result.slippage,
         minOutput: result.minOutput,
@@ -109,15 +108,12 @@ export default function BuyPanel(props) {
   };
 
   const setOutputValue = async input => {
-    console.log(input);
-    console.log(Number(input));
     if (input === '') {
       setNumberOutputValue('');
       return;
     }
     let result;
     setBuyIn(true);
-    setBuyOut(false);
     setIsLoadingOutput(true);
     try {
       result = await quote(input, props.slippage, true);
@@ -127,7 +123,7 @@ export default function BuyPanel(props) {
       return;
     }
     if (result) {
-      setQuoteBuyIn({
+      setQuoteSellIn({
         output: result.output,
         slippage: result.slippage,
         minOutput: result.minOutput,
@@ -138,15 +134,14 @@ export default function BuyPanel(props) {
     }
     setIsLoadingOutput(false);
   };
-
   const approveToken = async number => {
     try {
       // setIsApproving(true);
       const tx = await approve(
-        '0xAa171Ad6f4eD52ED74707300aD90bDAEE8398773',
+        '0x8d6abe4176f262F79317a1ec60B9C6e070a2142a',
         '0x8d6abe4176f262F79317a1ec60B9C6e070a2142a',
         number,
-        'fakeBASE',
+        'token',
       );
 
       const response = transactionResponse('swap.approve', {
@@ -154,7 +149,7 @@ export default function BuyPanel(props) {
         tx: tx,
         uniqueMessage: {
           text: 'Approving',
-          secondText: 'BASE',
+          secondText: 'TOKEN',
         },
       });
 
@@ -168,20 +163,21 @@ export default function BuyPanel(props) {
 
   const buttonAction = async () => {
     let approveSuccess: boolean | undefined = true;
-    setIsLoadingButton(true);
     let number;
     let minOutput;
     let output;
     let numberInput;
-    if (buyIn) {
+    setIsLoadingButton(true);
+
+    if (SellIn) {
       number = parseUnits(numberInputValue, 18);
-      minOutput = quoteBuyIn.minOutput;
-      output = quoteBuyIn.output;
+      minOutput = quoteSellIn.minOutput;
+      output = quoteSellIn.output;
       numberInput = numberInputValue;
     } else {
       number = parseUnits(numberOutputValue, 18);
-      minOutput = quoteBuyOut.minOutput;
-      output = quoteBuyOut.output;
+      minOutput = quoteSellOut.minOutput;
+      output = quoteSellOut.output;
       numberInput = numberOutputValue;
     }
     try {
@@ -189,7 +185,7 @@ export default function BuyPanel(props) {
 
       if (approveSuccess) {
         await new Promise(resolve => setTimeout(resolve, 2000));
-        const allowance = await checkBaseAllowance(
+        const allowance = await checkTokenAllowance(
           props.account,
           '0x8d6abe4176f262F79317a1ec60B9C6e070a2142a',
         );
@@ -201,21 +197,18 @@ export default function BuyPanel(props) {
               'Insufficient allowance. Please approve a higher allowance.',
             );
           } else {
-            const tx = await buyToken(
+            const tx = await sellToken(
               number,
               minOutput,
               props.deadline,
               props.account,
             );
-
             const response = transactionResponse('swap.process', {
               operation: 'SWAP',
               tx: tx,
-              inputSymbol: 'WFTM',
-              inputValue: buyIn
-                ? formatAmount(numberInputValue, 18)
-                : formatAmount(numberOutputValue, 18),
-              outputSymbol: 'TOKEN',
+              inputSymbol: 'Token',
+              inputValue: formatAmount(numberInput, 18),
+              outputSymbol: 'WFTM',
               outputValue: formatAmount(output, 18),
             });
             addToQueue(response);
@@ -257,11 +250,11 @@ export default function BuyPanel(props) {
             >
               <NumberInput
                 clampValueOnBlur={false}
-                max={balance}
+                max={max}
                 border="none"
                 value={numberInputValue}
                 onChange={value => {
-                  if (Number(value) <= balance) {
+                  if (Number(value) <= max) {
                     const validInput = validateInput(value, 18);
                     if (validInput === '0') {
                       setNumberInputValue('0.');
@@ -271,7 +264,7 @@ export default function BuyPanel(props) {
                     if (Number(validInput) === 0) {
                       setNumberOutputValue('');
                     } else {
-                      setOutputValue(value);
+                      setOutputValue(validInput);
                     }
                   }
                 }}
@@ -303,8 +296,8 @@ export default function BuyPanel(props) {
           )}
 
           <TokenSelection
-            symbol={'WFTM'}
-            src={resolveRoutePath(`images/tokens/FTM.png`)}
+            symbol={'SOUL'}
+            src={resolveRoutePath(`images/tokens/SOULC.png`)}
           />
         </HStack>
 
@@ -326,7 +319,7 @@ export default function BuyPanel(props) {
                 cursor="pointer"
                 onClick={handleBalanceClick}
               >
-                Balance: {balance}
+                Balance: {max}
               </Text>
             </Skeleton>
           </Flex>
@@ -338,8 +331,8 @@ export default function BuyPanel(props) {
             setNumberInputValue(value);
           }}
           decimals={18}
-          symbol={'WFTM'}
-          balance={balance.toString()}
+          symbol={'SOUL'}
+          balance={max.toString()}
         />
       </Flex>
 
@@ -347,7 +340,6 @@ export default function BuyPanel(props) {
         <SwapIconButton horizontalRotateOnMdScreenSize={false} m="8px auto" />
       </Center>
       <p> To receive</p>
-
       <Flex
         bg="bgBoxLighter"
         py="spacing05"
@@ -370,11 +362,11 @@ export default function BuyPanel(props) {
             >
               <NumberInput
                 clampValueOnBlur={false}
-                max={balance}
+                max={max + 0.5 * 1e18}
                 border="none"
-                value={numberOutputValue}
+                value={numberOutputValue === '0' ? '' : numberOutputValue}
                 onChange={value => {
-                  if (Number(value) <= balance && value !== '0') {
+                  if (Number(value) <= max + 0.5 * 1e18) {
                     const validInput = validateInput(value, 18);
                     if (validInput === '0') {
                       setNumberOutputValue('0.');
@@ -384,7 +376,7 @@ export default function BuyPanel(props) {
                     if (Number(validInput) === 0) {
                       setNumberInputValue('');
                     } else {
-                      setInputValue(value);
+                      setInputValue(validInput);
                     }
                   }
                 }}
@@ -415,8 +407,8 @@ export default function BuyPanel(props) {
           )}
 
           <TokenSelection
-            symbol={'SOUL'}
-            src={resolveRoutePath(`images/tokens/SOULC.png`)}
+            symbol={'WFTM'}
+            src={resolveRoutePath(`images/tokens/FTM.png`)}
           />
         </HStack>
 
@@ -425,24 +417,24 @@ export default function BuyPanel(props) {
             <Flex>
               <Text as="div" fontSize="h5" color="grayDarker" mr="spacing02">
                 <Flex align="center" justify="center" sx={{ gap: '0.2rem' }}>
-                  <Text>≈ ${priceToken}</Text>
+                  <Text>≈ ${priceBase}</Text>
                 </Flex>
               </Text>
             </Flex>
             <Skeleton isLoaded={true}>
               <Text as="div" fontSize="sm" color="gray" mr="spacing04">
-                Balance: {balanceToken}
+                Balance: {balance}
               </Text>
             </Skeleton>
           </Flex>
         ) : null}
 
         {/* <Percentages
-          onChange={value => handleInput(value.value)}
-          decimals={18}
-          symbol={'SOULC'}
-          balance={'0'}
-        /> */}
+            onChange={value => handleInput(value.value)}
+            decimals={18}
+            symbol={'SOULC'}
+            balance={'0'}
+          /> */}
 
         {/* {children} */}
       </Flex>
@@ -454,7 +446,7 @@ export default function BuyPanel(props) {
         w="full"
         onClick={buttonAction}
       >
-        Buy
+        Sell
       </Button>
     </Box>
   );

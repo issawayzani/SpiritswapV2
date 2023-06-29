@@ -29,7 +29,7 @@ import useWallets from 'app/hooks/useWallets';
 import { openInNewTab } from 'app/utils/redirectTab';
 import { setGlobalOptionsIndex, setGlobalSwapIndex } from 'store/general';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { BuyPanel } from './';
+import { BuyPanel, SellPanel } from './';
 import { selectSwapIndex } from 'store/general/selectors';
 import TabSelect from 'app/components/TabSelect';
 
@@ -40,6 +40,7 @@ export default function SwapPanel({
   deadline,
 }) {
   const dispatch = useAppDispatch();
+  const [quoteSlippage, setQuoteSlippage] = useState(0);
   const globalSwapIndex = useAppSelector(selectSwapIndex);
   const [swapIndex, setSwapIndex] = useState<number>(globalSwapIndex || 0);
   const { isLoggedIn, account } = useWallets();
@@ -65,6 +66,19 @@ export default function SwapPanel({
       children: (
         <BuyPanel
           deadline={deadline}
+          setQuoteSlippage={setQuoteSlippage}
+          slippage={slippage}
+          account={account}
+          bondingCurveData={bondingCurveData}
+        />
+      ),
+    },
+    {
+      key: 1,
+      children: (
+        <SellPanel
+          deadline={deadline}
+          setQuoteSlippage={setQuoteSlippage}
           slippage={slippage}
           account={account}
           bondingCurveData={bondingCurveData}
@@ -269,7 +283,7 @@ export default function SwapPanel({
         setIndex={setSwapIndex}
         styleIndex={[2]}
         styleVariant="danger"
-        names={['Buy']}
+        names={['Buy', 'Sell']}
         panels={swapPanels}
       />
       {/* <NewTokenAmountPanel
@@ -331,27 +345,26 @@ export default function SwapPanel({
         </Alert>
       ) : null}
 
-      <Button
+      {/* <Button
         size="lg"
         mt="16px"
         w="full"
         isLoading={isLoading || txLoading}
         loadingText={loaderText}
-        disabled={getDisabledStatus()}
         onClick={buttonAction}
       >
         {isLoggedIn ? swapLegend() : t(`home.common.connectWallet`)}
-      </Button>
+      </Button>  */}
 
       <SimpleGrid columns={2} spacing="5px" w="full" mt="20px">
-        {/* <Text>{t(`${translationsPath}.rate`)}</Text>
+        <Text>Slippage</Text>
         <Skeleton
           startColor="grayBorderBox"
           endColor="bgBoxLighter"
           isLoaded={!isLoading}
         >
-          <Text textAlign="right">{estimateRate()}</Text>
-        </Skeleton> */}
+          <Text textAlign="right">{quoteSlippage}</Text>
+        </Skeleton>
 
         <Flex align="center" sx={{ gap: '0.3rem' }}>
           <Text>{t(`${settingsTranslationPath}.slippageToleranceLabel`)} </Text>
