@@ -18,6 +18,7 @@ export default function BorrowPanel(props) {
       key: 0,
       children: (
         <BorrowRepayPanel
+          account={props?.account}
           borrow={true}
           buttonText="Borrow"
           balanceText="Credit : "
@@ -29,6 +30,7 @@ export default function BorrowPanel(props) {
       key: 1,
       children: (
         <BorrowRepayPanel
+          account={props?.account}
           repay={true}
           buttonText="Repay"
           balanceText="Debt: "
