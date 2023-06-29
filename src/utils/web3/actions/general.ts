@@ -95,6 +95,57 @@ export const checkBaseAllowance = async (
 
   return allowance;
 };
+export const checkTokenAllowance = async (
+  _userAddress: string,
+  _allowanceTarget: string,
+  _chainId = CHAIN_ID,
+  _provider: any = null,
+) => {
+  const allowance = await checkAllowance(
+    _userAddress,
+    '0x8d6abe4176f262F79317a1ec60B9C6e070a2142a',
+    _allowanceTarget,
+    'token',
+    _chainId,
+    _provider,
+  );
+
+  return allowance;
+};
+export const checkVTokenAllowance = async (
+  _userAddress: string,
+  _allowanceTarget: string,
+  _chainId = CHAIN_ID,
+  _provider: any = null,
+) => {
+  const allowance = await checkAllowance(
+    _userAddress,
+    '0x8d6abe4176f262F79317a1ec60B9C6e070a2142a',
+    _allowanceTarget,
+    'VTOKEN',
+    _chainId,
+    _provider,
+  );
+
+  return allowance;
+};
+export const checkOTokenAllowance = async (
+  _userAddress: string,
+  _allowanceTarget: string,
+  _chainId = CHAIN_ID,
+  _provider: any = null,
+) => {
+  const allowance = await checkAllowance(
+    _userAddress,
+    '0xc7a80762B3dcA438E81Ef6daA92E7323BE2e7C13',
+    _allowanceTarget,
+    'OTOKEN',
+    _chainId,
+    _provider,
+  );
+
+  return allowance;
+};
 
 export const getNativeTokenBalance = async (
   _address: string,

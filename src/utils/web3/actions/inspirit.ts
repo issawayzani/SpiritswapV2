@@ -164,21 +164,87 @@ export const TokenContract = async () => {
 
   return tokenContract;
 };
+export const VTOKENContract = async () => {
+  const _connector = getProvider();
+  const tokenContract = await Contract(
+    '0x0a5D71AbF79daaeE3853Db43c1Fb9c20195585f9',
+    'VTOKEN',
+    _connector,
+    CHAIN_ID,
+  );
+
+  return tokenContract;
+};
+
+export const VTOKENRewarderContract = async () => {
+  const _connector = getProvider();
+  const tokenContract = await Contract(
+    '0xc759291f52cA29d754cb071Cc7BC41F3E029b045',
+    'VTOKENRewarder',
+    _connector,
+    CHAIN_ID,
+  );
+
+  return tokenContract;
+};
+export const getReward = async userAddress => {
+  const contract = await VTOKENRewarderContract();
+  return await contract.getReward(userAddress);
+};
+export const deposit = async amount => {
+  const contract = await VTOKENContract();
+  return await contract.deposit(amount);
+};
+export const withdraw = async amount => {
+  const contract = await VTOKENContract();
+  return await contract.withdraw(amount);
+};
+export const burn = async (userAddress, amount) => {
+  const contract = await VTOKENContract();
+  return await contract.burnFor(userAddress, amount);
+};
+
 export const buyToken = async (output, minOutput, deadline, userAddress) => {
   const contract = await TokenContract();
   const currentUnixEpochTime = Date.now();
   const timeStamp = currentUnixEpochTime + deadline * 60;
-  await contract.buy(
+  return await contract.buy(
     output,
     minOutput,
     timeStamp,
     userAddress,
     '0x992651bde478421Be71475E1d58ed50AD793da0e',
-    {
-      gasLimit: DEFAULT_GAS_LIMIT,
-    },
   );
 };
+export const sellToken = async (output, minOutput, deadline, userAddress) => {
+  const contract = await TokenContract();
+  const currentUnixEpochTime = Date.now();
+  const timeStamp = currentUnixEpochTime + deadline * 60;
+  return await contract.sell(
+    output,
+    minOutput,
+    timeStamp,
+    userAddress,
+    '0x992651bde478421Be71475E1d58ed50AD793da0e',
+  );
+};
+export const borrow = async amount => {
+  const contract = await TokenContract();
+  return await contract.borrow(amount);
+};
+export const repay = async amount => {
+  const contract = await TokenContract();
+  return await contract.repay(amount);
+};
+export const exercise = async (amount, userAddress) => {
+  const contract = await TokenContract();
+  return await contract.exercise(amount, userAddress);
+};
+export const redeem = async (amount, userAddress) => {
+  const contract = await TokenContract();
+  return await contract.redeem(amount, userAddress);
+};
+
 export const approveSpirit = async (
   _address: string,
   _allowableAmount: string,

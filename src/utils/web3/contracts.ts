@@ -33,10 +33,14 @@ import factoryABIV3 from './abis/factoryV3.json';
 import twilightFarmFactoryABI from './abis/twilightFarmFactory.json';
 import twilightFarmABI from './abis/twilightFarm.json';
 import olaLensABI from './abis/olaLens.json';
+import VTOKENRewarderABI from './abis/VTOKENRewarder.json';
+import VTOKENABI from './abis/VTOKEN.json';
+import OTOKENABI from './abis/OTOKEN.json';
 import WeightedPoolABI from './abis/WeightedPool.json';
 import WeightedPool2TokensABI from './abis/WeightedPool.json';
 import BeethovenMasterChefABI from './abis/temp/BeethovenxMasterChef.json';
 import LendAndBorrowABI from './abis/lendAndBorrow.json';
+
 import wrappedFTMABI from './abis/wrappedFTM.json';
 import { connect } from './connection';
 import { Call, MulticallSingleResponse, Web3Provider } from './types';
@@ -47,6 +51,9 @@ const { mulltiCall } = addresses;
 export const ABIS = {
   spirit: spiritABI,
   fakeBASE: fakeBASEABI,
+  VTOKEN: VTOKENABI,
+  OTOKEN: OTOKENABI,
+  VTOKENRewarder: VTOKENRewarderABI,
   token: tokenABI,
   multicall: multicallABI,
   masterchef: masterchefABI,

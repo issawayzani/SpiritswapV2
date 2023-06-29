@@ -25,6 +25,8 @@ export const Test = async (
 
     let quoteBuyIn = null;
     let quoteBuyOut = null;
+    let quoteSellIn = null;
+    let quoteSellOut = null;
     if (input != null && slippage != null) {
       const number1 = parseUnits(input);
 
@@ -34,9 +36,15 @@ export const Test = async (
       quoteBuyOut = await multicallv3.methods
         .quoteBuyOut(number1, slippage)
         .call();
+      quoteSellIn = await multicallv3.methods
+        .quoteSellIn(number1, slippage)
+        .call();
+      quoteSellOut = await multicallv3.methods
+        .quoteSellOut(number1, slippage)
+        .call();
     }
 
-    return { result, quoteBuyIn, quoteBuyOut };
+    return { result, quoteBuyIn, quoteBuyOut, quoteSellIn, quoteSellOut };
   } catch (e) {
     console.log(e);
     return null;
