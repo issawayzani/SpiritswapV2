@@ -14,15 +14,30 @@ export default function StakePanel(props) {
   const stakePanels = [
     {
       key: 0,
-      children: <DepositPanel bondingCurveData={props?.bondingCurveData} />,
+      children: (
+        <DepositPanel
+          account={props?.account}
+          bondingCurveData={props?.bondingCurveData}
+        />
+      ),
     },
     {
       key: 1,
-      children: <WithdrawPanel bondingCurveData={props?.bondingCurveData} />,
+      children: (
+        <WithdrawPanel
+          account={props?.account}
+          bondingCurveData={props?.bondingCurveData}
+        />
+      ),
     },
     {
       key: 2,
-      children: <BurnPanel bondingCurveData={props?.bondingCurveData} />,
+      children: (
+        <BurnPanel
+          account={props?.account}
+          bondingCurveData={props?.bondingCurveData}
+        />
+      ),
     },
   ];
   useEffect(() => {
@@ -36,7 +51,7 @@ export default function StakePanel(props) {
         setIndex={setStakeIndex}
         styleIndex={[2]}
         styleVariant="danger"
-        names={['Deposit', 'Withdraw', 'Burn']}
+        names={['Stake', 'Unstake', 'Burn']}
         panels={stakePanels}
       />
     </Box>

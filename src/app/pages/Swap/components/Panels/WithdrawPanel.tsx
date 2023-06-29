@@ -6,34 +6,108 @@ import {
   NumberInput,
   NumberInputField,
   Skeleton,
+  Spacer,
   Text,
 } from '@chakra-ui/react';
 import { Percentages } from 'app/components/Percentages';
 import { PriceDiffIndicator } from 'app/components/PriceDiffIndicator';
 import { TokenSelection } from 'app/components/TokenSelection';
+import Web3Monitoring from 'app/connectors/EthersConnector/transactions';
 import { resolveRoutePath } from 'app/router/routes';
-import { getRoundedSFs } from 'app/utils';
+import { getRoundedSFs, validateInput } from 'app/utils';
+import { parseUnits } from 'ethers/lib/utils';
 import { useState } from 'react';
+import {
+  approve,
+  checkVTokenAllowance,
+  transactionResponse,
+  withdraw,
+} from 'utils/web3';
 
 export default function WithdrawPanel(props) {
   const [numberInputValue, setNumberInputValue] = useState('0');
-  const [price, setPrice] = useState('≈ $0');
-  const balance = props.bondingCurveData?.accountMaxWithdraw;
-  const setPriceValue = input => {
-    const price = (props.bondingCurveData?.priceTOKEN * input) / 1e36;
-    setPrice(`≈ $${price}`);
+  const balance = props.bondingCurveData?.accountMaxWithdraw / 1e18;
+  const balanceToken = props.bondingCurveData?.accountTOKEN / 1e18;
+  const { addToQueue } = Web3Monitoring();
+  const [loaderText, setLoaderText] = useState('Loading');
+  const [isLoadingButton, setIsLoadingButton] = useState(false);
+  const getDisabledStatus = (): boolean => {
+    const DISABLED = true;
+    const NOT_DISABLED = false;
+    if (numberInputValue === '0' || numberInputValue === '') return DISABLED;
+    if (Number(numberInputValue) === 0) return DISABLED;
+    if (isLoadingButton) return DISABLED;
+    if (Number(numberInputValue) > balance) return DISABLED;
+    return NOT_DISABLED;
   };
+  const approveToken = async number => {
+    setLoaderText('Approving');
+    try {
+      const tx = await approve(
+        '0x0a5D71AbF79daaeE3853Db43c1Fb9c20195585f9',
+        '0x0a5D71AbF79daaeE3853Db43c1Fb9c20195585f9',
+        number,
+        'VTOKEN',
+      );
 
+      const response = transactionResponse('swap.approve', {
+        operation: 'APPROVE',
+        tx: tx,
+        uniqueMessage: {
+          text: 'Approving',
+          secondText: 'VTOKEN',
+        },
+      });
+
+      addToQueue(response);
+      await tx.wait();
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
   const buttonAction = async () => {
-    //need to deposit here
+    setIsLoadingButton(true);
+    let approveSuccess: boolean | undefined = true;
+    const number = parseUnits(numberInputValue, 18);
+    approveSuccess = await approveToken(number);
+
+    if (approveSuccess) {
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      const allowance = await checkVTokenAllowance(
+        props.account,
+        '0x0a5D71AbF79daaeE3853Db43c1Fb9c20195585f9',
+      );
+      if (allowance) {
+        try {
+          setLoaderText('Unstaking');
+          const tx = await withdraw(number);
+          const response = transactionResponse('swap.unstake', {
+            operation: 'SWAP',
+            tx: tx,
+            uniqueMessage: {
+              text: 'UnStake',
+              secondText: numberInputValue,
+            },
+          });
+
+          addToQueue(response);
+          await tx.wait();
+        } catch {
+          setLoaderText('loading');
+          setIsLoadingButton(false);
+        }
+      }
+      setIsLoadingButton(false);
+      setLoaderText('loading');
+    }
   };
   const handleBalanceClick = () => {
-    setPriceValue(balance);
-    setNumberInputValue(balance);
+    setNumberInputValue(balance.toString());
   };
   return (
     <Box>
-      <p> Withdraw vSOULC to get SOULC</p>
+      <p> You're withdrawing</p>
 
       <Flex
         bg="bgBoxLighter"
@@ -55,19 +129,30 @@ export default function WithdrawPanel(props) {
             >
               <NumberInput
                 clampValueOnBlur={false}
-                // max={maxValue}
+                max={balance}
                 border="none"
                 value={numberInputValue}
                 onChange={value => {
-                  setNumberInputValue(value);
-                  setPriceValue(value);
+                  if (Number(value) <= balance) {
+                    const validInput = validateInput(value, 18);
+                    if (validInput === '0') {
+                      setNumberInputValue('0.');
+                    } else {
+                      setNumberInputValue(validInput);
+                    }
+                  }
                 }}
-                // onKeyDown={e => {
-                //   if (e.code === 'End' || e.code === 'Home') {
-                //     return handleInput(inputValue);
-                //   }
-                // }}
-                // isInvalid={!!errorMessage}
+                onKeyDown={event => {
+                  if (event.key === 'Backspace' && numberInputValue === '0.') {
+                    setNumberInputValue('');
+                  } else if (
+                    event.key === 'Backspace' &&
+                    numberInputValue.startsWith('.') &&
+                    numberInputValue.length === 2
+                  ) {
+                    setNumberInputValue('');
+                  }
+                }}
               >
                 <NumberInputField
                   w="full"
@@ -82,20 +167,14 @@ export default function WithdrawPanel(props) {
           )}
 
           <TokenSelection
-            symbol={'SOULC'}
+            symbol={'VTOKEN'}
             src={resolveRoutePath(`images/tokens/SOULC.png`)}
           />
         </HStack>
 
         {true ? (
           <Flex w="full" align="center" justify="space-between">
-            <Flex>
-              <Text as="div" fontSize="h5" color="grayDarker" mr="spacing02">
-                <Flex align="center" justify="center" sx={{ gap: '0.2rem' }}>
-                  <Text>{price}</Text>
-                </Flex>
-              </Text>
-            </Flex>
+            <Spacer />
             <Skeleton isLoaded={true}>
               <Text
                 as="div"
@@ -110,28 +189,40 @@ export default function WithdrawPanel(props) {
             </Skeleton>
           </Flex>
         ) : null}
-        {/* {isLoading
-      ? null
-      : errorMessage && (
-          <Text color="red.500" padding="spacing03 0">
-            {t(errorMessage)}
-          </Text>
-        )} */}
-        {/* {mustShowPercentage && !showConfirm && token && ( */}
+
         <Percentages
           onChange={({ value }) => {
             setNumberInputValue(value);
-            setPriceValue(value);
           }}
           decimals={18}
           symbol={'SOULC'}
-          balance={balance}
+          balance={balance.toString()}
         />
 
-        {/* {children} */}
+        <Flex>
+          <p>To recieve </p>
+          <Spacer />
+          <p> {numberInputValue ? numberInputValue : '0'} TOKEN </p>
+        </Flex>
+        <Flex>
+          <Spacer />
+          <Text as="div" fontSize="h5" color="grayDarker" mr="spacing02">
+            <Flex align="center" justify="center" sx={{ gap: '0.2rem' }}>
+              <Text>balance: {balanceToken}</Text>
+            </Flex>
+          </Text>
+        </Flex>
       </Flex>
-      <Button size="lg" mt="16px" w="full" onClick={buttonAction}>
-        Withdraw
+      <Button
+        size="lg"
+        mt="16px"
+        w="full"
+        onClick={buttonAction}
+        disabled={getDisabledStatus()}
+        loadingText={loaderText}
+        isLoading={isLoadingButton}
+      >
+        Unstake
       </Button>
     </Box>
   );
