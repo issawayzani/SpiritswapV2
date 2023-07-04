@@ -6,6 +6,7 @@ import { InspiritPage } from 'app/pages/Inspirit/Loadable';
 import { LiquidityPage } from 'app/pages/Liquidity/Loadable';
 import { FarmsPage } from 'app/pages/Farms/Loadable';
 import { SwapPage } from 'app/pages/Swap/Loadable';
+// import { HomePage } from 'app/pages/Home/Loadable';
 import { HomePage } from 'app/pages/Home/Loadable';
 import { ApeModePage } from 'app/pages/ApeMode/Loadable';
 import { TopBar } from 'app/layouts/TopBar';

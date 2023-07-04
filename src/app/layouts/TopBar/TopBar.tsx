@@ -57,6 +57,7 @@ import {
   ANALYTICS,
   DOCS,
   FARMS,
+  // HOME,
   HOME,
   VSOULC,
   LENDANDBORROW,
@@ -82,6 +83,7 @@ import {
 import useWallets from 'app/hooks/useWallets';
 
 const navMenus = [
+  // { ...HOME, icon: <HomeIcon /> },
   { ...HOME, icon: <HomeIcon /> },
   { ...SOULC, icon: <SwapIcon /> },
   { ...FARMS, icon: <FarmsIcon /> },

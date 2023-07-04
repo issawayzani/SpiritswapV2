@@ -37,6 +37,7 @@ import {
   DOCS,
   FARMS,
   GOVERNANCE,
+  // HOME,
   HOME,
   LENDANDBORROW,
   LIQUIDITY,
@@ -50,6 +51,7 @@ import { useAppDispatch } from 'store/hooks';
 import { setUnexpectedError } from 'store/errors';
 
 const navMenus = [
+  // { ...HOME, image: HomeIcon },
   { ...HOME, image: HomeIcon },
   { ...SOULC, image: SwapIcon },
   { ...LIQUIDITY, image: LiquidityIcon },

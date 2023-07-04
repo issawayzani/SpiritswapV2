@@ -3,16 +3,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { balanceReturnData, fiat, getTokenGroupStatistics } from 'utils/data';
-import {
-  Box,
-  Button,
-  Flex,
-  Stack,
-  useDisclosure,
-  Grid,
-  GridItem,
-  useMediaQuery,
-} from '@chakra-ui/react';
+import { Box, Button, Flex, Stack, useDisclosure } from '@chakra-ui/react';
 import PartnersIcons from './PartnersIcons';
 import { useNavigate } from 'app/hooks/Routing';
 import {
@@ -34,7 +25,6 @@ import {
   PartnersSection,
   WalletPanel,
   Portfolio,
-  TopCard,
 } from './components';
 import {
   Wrapper,
@@ -67,11 +57,7 @@ import {
   GetLimitOrders,
   truncateTokenValue,
 } from 'app/utils';
-import {
-  selectSpiritInfo,
-  selectTokensToShow,
-  selectBondingCurveInfo,
-} from 'store/general/selectors';
+import { selectSpiritInfo, selectTokensToShow } from 'store/general/selectors';
 import { SPIRIT, SPIRIT_DOCS_URL, TOKENS_TO_SHOW } from 'constants/index';
 import { setPortfolioValue, setShowPortfolio } from 'store/user';
 import MiniFooter from './components/MiniFooter';
@@ -82,7 +68,6 @@ import { openInNewTab } from 'app/utils/redirectTab';
 import useMobile from 'utils/isMobile';
 import { Animation } from 'app/components/Animations';
 import browser from 'browser-detect';
-import { breakpoints } from 'theme/base/breakpoints';
 import {
   SwapAnimation,
   InspiritAnimation,
@@ -125,7 +110,7 @@ const PartnerItems = [
   { icon: PartnersIcons.MarketXyzIcon, url: 'https://www.market.xyz/' },
 ];
 
-const Home = () => {
+const Homeold = () => {
   const { t } = useTranslation();
   const pageTitle = `${t('common.name')} - ${t('common.menu.home')}`;
   const translationPath = 'home.common';
@@ -318,23 +303,6 @@ const Home = () => {
     );
   }, [isMobile]);
 
-  const BondingCurveData = useAppSelector(selectBondingCurveInfo);
-  const [isLimit, setIsLimit] = useState<boolean>(false);
-  const [isLessThan1100px] = useMediaQuery('(max-width: 1100px)');
-
-  const columns = () => {
-    const columns = { base: '95%' };
-
-    if (isLimit) {
-      if (isLessThan1100px) columns['md'] = '520px';
-      else columns['md'] = '520px 1fr';
-      return columns;
-    }
-
-    columns['md'] = '700px 1fr';
-    return columns;
-  };
-
   return (
     <>
       <HelmetProvider>
@@ -343,40 +311,11 @@ const Home = () => {
           <meta name="description" content="A Boilerplate application home" />
         </Helmet>
       </HelmetProvider>
-
       <Wrapper>
         <ContentWrapper>
           {isLoggedIn && showPortfolio ? (
             <PortfolioWrapper>
-              <Box>
-                <Grid
-                  display={{ base: 'grid', lg: 'grid' }}
-                  top={isMobile ? '124px' : '170px'}
-                  position="relative"
-                  templateRows="1fr"
-                  templateColumns={columns()}
-                  m="0 auto"
-                  mb="250px"
-                  minH="75vh"
-                  placeContent="center"
-                  maxW={{ md: breakpoints.xl }}
-                >
-                  <GridItem rowSpan={1} colSpan={2}>
-                    <div className="container">
-                      <TopCard
-                        icon="fa-users"
-                        TVL={BondingCurveData?.tvl / 1e18}
-                        supplyVTOKEN={BondingCurveData?.supplyVTOKEN}
-                        APR={BondingCurveData?.apr / 1e18}
-                        supplyTOKEN={BondingCurveData?.supplyTOKEN / 1e18}
-                        LTV={BondingCurveData?.ltv / 1e18}
-                        Ratio={BondingCurveData?.ratio / 1e18}
-                      />
-                    </div>
-                  </GridItem>
-                </Grid>
-              </Box>
-              {/* <Portfolio
+              <Portfolio
                 translationPath="home.portfolio"
                 amount={fiat(portfolioAmount)}
                 tokensData={tokenData}
@@ -384,14 +323,112 @@ const Home = () => {
                 inSpiritData={inSpiritData}
                 limitOrdersData={limitOrdersData}
                 onClickLandingButton={handleGoToLanding}
-              /> */}
+              />
             </PortfolioWrapper>
           ) : (
             <>
               <WalletWrapper isMobile={isMobile}>
                 <div></div>
                 <ConnectWallet isOpen={isOpen} dismiss={onClose} />
+                <Stack direction={isMobile ? 'column' : 'row'}>
+                  {landingAnimation()}
+                  <Flex direction="column">
+                    <WalletTitle level={1}>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: t(`${translationPath}.header`),
+                        }}
+                      />
+                    </WalletTitle>
+                    <StyledWalletDescription level={3}>
+                      {isMobile || isLoggedIn ? (
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: t(`${translationPath}.description`),
+                          }}
+                        />
+                      ) : (
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: t(`${translationPath}.descriptionFull`),
+                          }}
+                        />
+                      )}
+                    </StyledWalletDescription>
+
+                    <WalletButtonWrapper>
+                      <Button
+                        onClick={handleConnectButton}
+                        rightIcon={<ArrowRightIcon w="22px" color="white" />}
+                      >
+                        {isLoggedIn
+                          ? t(`${translationPath}.showPortfolio`)
+                          : t(`${translationPath}.connectWallet`)}
+                      </Button>
+                      <Button
+                        variant="inverted"
+                        onClick={() => openInNewTab(SPIRIT_DOCS_URL)}
+                      >
+                        {t(`${translationPath}.learnMore`)}
+                      </Button>
+                    </WalletButtonWrapper>
+                    {isLoggedIn && (
+                      <WalletPanelWrapper>
+                        <WalletPanel
+                          title={t(`${translationPath}.walletBalance`)}
+                          amount={truncateTokenValue(portfolioAmount)}
+                          buttonTitle={
+                            portfolioAmount
+                              ? t(`${translationPath}.swapTokens`)
+                              : t(`${translationPath}.bridgeTokens`)
+                          }
+                          onButtonClick={
+                            portfolioAmount
+                              ? () => navigate(SOULC.path)
+                              : () => navigate(SOULC.path)
+                          }
+                        />
+                        <WalletPanel
+                          title={t(`${translationPath}.farmRewards`)}
+                          amount={truncateTokenValue(
+                            farmRewards * spiritPrice,
+                            spiritPrice,
+                          )}
+                          buttonTitle={t(`${translationPath}.showFarms`)}
+                          onButtonClick={() => navigate(FARMS.path)}
+                        />
+                      </WalletPanelWrapper>
+                    )}
+                  </Flex>
+
+                  <Box h="100%" w="100%">
+                    {!isMobile ? (
+                      isSafariBrowser ? (
+                        <img src={Main} alt="SpiritSwap icon" />
+                      ) : (
+                        Animation(LandingAnimation, Main)
+                      )
+                    ) : null}
+                  </Box>
+                </Stack>
+                <MiniFooter />
               </WalletWrapper>
+
+              <DexStatistics />
+              <Flex px="16px" direction="column" alignItems="center">
+                {AboutSectionItems.map((item, index) => (
+                  <AboutSectionItem
+                    index={index}
+                    key={`${item.id}`}
+                    {...item}
+                  />
+                ))}
+
+                <PartnersSection
+                  isMobile={isMobile}
+                  partnerItems={PartnerItems}
+                />
+              </Flex>
             </>
           )}
         </ContentWrapper>
@@ -400,4 +437,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Homeold;

@@ -52,7 +52,8 @@ const EthersConnector = ({ children }) => {
 
   const pageData = useMemo(() => {
     return {
-      home: ['getSpiritStatistics'],
+      // home: ['getSpiritStatistics'],
+      home: ['getPortfolio'],
       farms: ['getFarms'],
       spiritwars: ['getSpiritWarsData'],
       inspirit: ['getBoostedGauges'],
@@ -61,6 +62,7 @@ const EthersConnector = ({ children }) => {
 
   const pageUserData = useMemo(() => {
     return {
+      // home: ['updatePortfolioData'],
       home: ['updatePortfolioData'],
       swap: ['checkLimitOrders', 'checkAllowances'],
     };

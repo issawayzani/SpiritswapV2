@@ -1,0 +1,22 @@
+.text-container {
+  display: flex;
+  gap: 120px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  background: #101726;
+  border: 1px solid #374151; /* Border color */
+  border-radius: 8px; /* Border radius */
+  padding: 5px; /* Padding inside the container */
+}
+.container {
+  display: flex;
+  gap: 170px;
+}
+
+.item {
+  font-size: medium;
+}
+.space {
+  gap: 5px;
+}

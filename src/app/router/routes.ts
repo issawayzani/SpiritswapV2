@@ -1,5 +1,10 @@
 import { SPIRIT_DOCS_URL } from 'constants/index';
 
+// export const HOME = {
+//   key: 'home',
+//   path: 'home',
+// };
+
 export const HOME = {
   key: 'home',
   path: 'home',
