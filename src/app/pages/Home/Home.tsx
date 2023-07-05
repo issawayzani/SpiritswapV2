@@ -35,6 +35,7 @@ import {
   WalletPanel,
   Portfolio,
   TopCard,
+  TopRightCard,
 } from './components';
 import {
   Wrapper,
@@ -76,6 +77,7 @@ import { SPIRIT, SPIRIT_DOCS_URL, TOKENS_TO_SHOW } from 'constants/index';
 import { setPortfolioValue, setShowPortfolio } from 'store/user';
 import MiniFooter from './components/MiniFooter';
 import DexStatistics from './components/DexStatistics';
+
 import { LendAndBorrowIcon, ApeIcon } from './../../assets/icons/index';
 import { GelattoLimitOrder } from 'utils/swap/types';
 import { openInNewTab } from 'app/utils/redirectTab';
@@ -374,6 +376,14 @@ const Home = () => {
                       />
                     </div>
                   </GridItem>
+                  <GridItem rowSpan={1} colSpan={1}>
+                    <Box ml="10px">
+                      <TopRightCard
+                        account={account}
+                        bondingCurveData={BondingCurveData}
+                      />
+                    </Box>
+                  </GridItem>
                 </Grid>
               </Box>
               {/* <Portfolio
@@ -389,7 +399,42 @@ const Home = () => {
           ) : (
             <>
               <WalletWrapper isMobile={isMobile}>
-                <div></div>
+                <Box>
+                  <Grid
+                    display={{ base: 'grid', lg: 'grid' }}
+                    top={isMobile ? '124px' : '170px'}
+                    position="relative"
+                    templateRows="1fr"
+                    templateColumns={columns()}
+                    m="0 auto"
+                    mb="250px"
+                    minH="75vh"
+                    placeContent="center"
+                    maxW={{ md: breakpoints.xl }}
+                  >
+                    <GridItem rowSpan={1} colSpan={2}>
+                      <div className="container">
+                        <TopCard
+                          icon="fa-users"
+                          TVL={BondingCurveData?.tvl / 1e18}
+                          supplyVTOKEN={BondingCurveData?.supplyVTOKEN}
+                          APR={BondingCurveData?.apr / 1e18}
+                          supplyTOKEN={BondingCurveData?.supplyTOKEN / 1e18}
+                          LTV={BondingCurveData?.ltv / 1e18}
+                          Ratio={BondingCurveData?.ratio / 1e18}
+                        />
+                      </div>
+                    </GridItem>
+                    <GridItem rowSpan={1} colSpan={1}>
+                      <Box ml="10px">
+                        <TopRightCard
+                          account={account}
+                          bondingCurveData={BondingCurveData}
+                        />
+                      </Box>
+                    </GridItem>
+                  </Grid>
+                </Box>
                 <ConnectWallet isOpen={isOpen} dismiss={onClose} />
               </WalletWrapper>
             </>

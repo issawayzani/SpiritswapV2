@@ -18,7 +18,7 @@ export const GlobalStyle = createGlobalStyle`
 
   p,
   label {
-    font-family: Jost, Georgia, Times, 'Times New Roman', serif;
+    font-family: Neometric, Georgia, Times, 'Times New Roman', serif;
     line-height: 1.5em;
   }
 

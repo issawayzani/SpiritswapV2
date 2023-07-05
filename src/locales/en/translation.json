@@ -196,6 +196,7 @@
     },
     "portfolio": {
       "title": "Your portfolio",
+      "homeTitle": "My Portfolio",
       "goToLandingPage": "Go to landing page"
     }
   },

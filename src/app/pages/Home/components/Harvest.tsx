@@ -80,7 +80,7 @@ const Harvest = ({
     [isMobile],
   );
 
-  return <Wrapper></Wrapper>;
+  return <div></div>;
 };
 
 export default Harvest;

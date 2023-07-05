@@ -53,7 +53,7 @@ export const chartOptions = {
       offset: true,
       ticks: {
         font: {
-          family: 'Jost',
+          family: 'Neometric',
           size: 12,
         },
         color: '#D1D5DB',
