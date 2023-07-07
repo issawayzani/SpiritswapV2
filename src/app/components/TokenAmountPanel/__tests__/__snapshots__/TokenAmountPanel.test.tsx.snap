@@ -20,7 +20,7 @@ exports[`TokenAmountPanel-Componenet Matches SnapShot with Values 1`] = `
 }
 
 .c3 {
-  border: 1px solid #374151;
+  border: 1px solid #100F3A;
   background-color: #1F2937;
   border-radius: 8px;
   display: -webkit-box;
@@ -53,7 +53,7 @@ exports[`TokenAmountPanel-Componenet Matches SnapShot with Values 1`] = `
   border: none;
   color: #FFFFFF;
   font-size: 1rem;
-  font-family: Neometric,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-family: Neometric Alt,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   height: 36px;
   width: 100%;
   padding: 0;
@@ -83,7 +83,7 @@ exports[`TokenAmountPanel-Componenet Matches SnapShot with Values 1`] = `
 }
 
 .c14 {
-  border: 1px solid #374151;
+  border: 1px solid #100F3A;
   background-color: #1F2937;
   border-radius: 8px;
   display: -webkit-box;
@@ -116,7 +116,7 @@ exports[`TokenAmountPanel-Componenet Matches SnapShot with Values 1`] = `
   border: none;
   color: #FFFFFF;
   font-size: 1rem;
-  font-family: Neometric,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-family: Neometric Alt,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   height: 36px;
   width: 100%;
   padding: 0;
@@ -147,7 +147,7 @@ exports[`TokenAmountPanel-Componenet Matches SnapShot with Values 1`] = `
 .c0 {
   color: #FFFFFF;
   padding: 1rem 1.25rem;
-  background-color: #17202F;
+  background-color: #100F3A;
   border-radius: 8px;
 }
 
@@ -226,7 +226,7 @@ exports[`TokenAmountPanel-Componenet Matches SnapShot with Values 1`] = `
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  color: #D1D5DB;
+  color: #100F3A;
   font-size: 12px;
   padding: 0.25rem 0 0.125rem 0.5rem;
   line-height: 16px;
@@ -470,7 +470,7 @@ exports[`TokenAmountPanel-Componenet Matches SnapShot with Values 1`] = `
 
 exports[`TokenAmountPanel-Componenet Matches SnapShot without Values 1`] = `
 .c3 {
-  border: 1px solid #374151;
+  border: 1px solid #100F3A;
   background-color: #1F2937;
   border-radius: 8px;
   display: -webkit-box;
@@ -503,7 +503,7 @@ exports[`TokenAmountPanel-Componenet Matches SnapShot without Values 1`] = `
   border: none;
   color: #FFFFFF;
   font-size: 1rem;
-  font-family: Neometric,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-family: Neometric Alt,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   height: 36px;
   width: 100%;
   padding: 0;
@@ -535,7 +535,7 @@ exports[`TokenAmountPanel-Componenet Matches SnapShot without Values 1`] = `
 .c0 {
   color: #FFFFFF;
   padding: 1rem 1.25rem;
-  background-color: #17202F;
+  background-color: #100F3A;
   border-radius: 8px;
 }
 
@@ -614,7 +614,7 @@ exports[`TokenAmountPanel-Componenet Matches SnapShot without Values 1`] = `
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  color: #D1D5DB;
+  color: #100F3A;
   font-size: 12px;
   padding: 0.25rem 0 0.125rem 0.5rem;
   line-height: 16px;

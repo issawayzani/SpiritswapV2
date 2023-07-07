@@ -1,8 +1,9 @@
 export const globalStyles = {
   global: {
     body: {
-      fontFamily: "Neometric, 'Helvetica Neue', Helvetica, Arial, sans-serif",
-      bg: '#000315',
+      fontFamily:
+        "'Neometric Alt', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+      bg: '#100F3A',
       color: 'white',
     },
   },

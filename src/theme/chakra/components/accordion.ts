@@ -21,7 +21,7 @@ const Accordion = {
         borderRadius: '10px',
         margin: '5px',
         boxSizing: 'border-box',
-        border: '1px solid #374151',
+        border: '1px solid #100F3A',
       },
       icon: {
         color: 'ci',

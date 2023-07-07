@@ -4,8 +4,8 @@
   /* margin-left: 20px; */
   /* margin-right: 20px; */
   margin-bottom: 20px;
-  /* background: #101726; */
-  /* border: 1px solid #374151; Border color */
+  /* background: #100F3A; */
+  /* border: 1px solid #100F3A; Border color */
   /* border-radius: 8px; Border radius */
   padding: 5px; /* Padding inside the container */
 }
@@ -16,6 +16,7 @@
 
 .item {
   font-size: medium;
+  background: none !important;
 }
 .space {
   gap: 5px;
@@ -38,4 +39,33 @@
 }
 .card-body {
   width: 20%;
+}
+.portfolio-title {
+  color: #fff;
+  text-align: center;
+  /* Headline/H6 */
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  margin-bottom: 6px;
+}
+.portfolio-subtitle {
+  color: #fff;
+  text-align: center;
+  /* Caption/small 12-18/regular */
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 18px;
+  letter-spacing: 0.24px;
+  margin-bottom: 30px;
+}
+.center-panel {
+  /* display: flex; */
+  padding: 0px 60px;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  align-self: stretch;
 }

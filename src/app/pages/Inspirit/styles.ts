@@ -80,7 +80,7 @@ export const Description = styled.div`
   font-size: 12px;
   line-height: 17.34px;
   font-weight: normal;
-  font-family: 'Neometric', sans-serif;
+  font-family: 'Neometric Alt', sans-serif;
 `;
 
 export const Card = styled.div<{
@@ -111,14 +111,14 @@ export const Card = styled.div<{
 
 export const CardTitle = styled.div`
   color: rgba(156, 163, 175, 1);
-  font-family: 'Neometric', sans-serif;
+  font-family: 'Neometric Alt', sans-serif;
   font-size: 14px;
   line-height: 18px;
 `;
 
 export const CardDescription = styled.div<{ pb12?: boolean }>`
   color: #fff;
-  font-family: 'Neometric', sans-serif;
+  font-family: 'Neometric Alt', sans-serif;
   font-size: 20px;
   padding-bottom: ${props => props.pb12 && '12px'};
   text-align: left;
@@ -127,7 +127,7 @@ export const CardDescription = styled.div<{ pb12?: boolean }>`
 
 export const NumberStyled = styled.div<{ isGreen?: boolean }>`
   color: ${props => (props.isGreen ? props.theme.colors.ci : '#fff')};
-  font-family: 'Neometric', sans-serif;
+  font-family: 'Neometric Alt', sans-serif;
   background: ${props =>
     props.isGreen ? 'rgba(100, 221, 192, 0.15)' : '#1F2937'};
   height: 29px;

@@ -1,6 +1,6 @@
 thead tr:first-child th {
   position: sticky;
   top: 0;
-  background: #17202f;
+  background: #100f3a;
   z-index: 999;
 }

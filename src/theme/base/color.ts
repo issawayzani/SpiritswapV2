@@ -28,7 +28,7 @@ export const colorValues = {
     900: '#0D1321',
   },
   blue: {
-    900: '#000315',
+    900: '#100F3A',
   },
 };
 

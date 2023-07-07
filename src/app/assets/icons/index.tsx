@@ -54,7 +54,7 @@ import { ReactComponent as SwapToken } from 'app/assets/images/swap-token.svg';
 import { ReactComponent as DotsMenu } from 'app/assets/images/dots-menu.svg';
 import { ReactComponent as DotsMenuOutline } from 'app/assets/images/dots-outline.svg';
 import { ReactComponent as AdjustLeverage } from 'app/assets/images/adjust.svg';
-import SpiritLogo from 'app/assets/images/logos/spiritswap.png';
+import SpiritLogo from 'app/assets/images/logos/logo-new.svg';
 import { ReactComponent as MoneyArrowDown } from 'app/assets/images/money-arrow-down.svg';
 import { ReactComponent as CloseIconSvg } from 'app/assets/images/closeApe.svg';
 import { ReactComponent as addLiquidityToast } from 'app/assets/images/addLiquidityToast.svg';

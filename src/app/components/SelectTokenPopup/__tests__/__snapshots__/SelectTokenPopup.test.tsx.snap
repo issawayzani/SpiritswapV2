@@ -22,7 +22,7 @@ Object {
 }
 
 .c6 {
-  border: 1px solid #374151;
+  border: 1px solid #100F3A;
   background-color: #1F2937;
   border-radius: 8px;
   display: -webkit-box;
@@ -55,7 +55,7 @@ Object {
   border: none;
   color: #FFFFFF;
   font-size: 1rem;
-  font-family: Neometric,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-family: Neometric Alt,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   height: 36px;
   width: 100%;
   padding: 0;
@@ -84,9 +84,9 @@ Object {
 }
 
 .c0 {
-  border: 1px solid #374151;
+  border: 1px solid #100F3A;
   border-radius: 8px;
-  background-color: #101726;
+  background-color: #100F3A;
   color: #FFFFFF;
   box-sizing: border-box;
 }

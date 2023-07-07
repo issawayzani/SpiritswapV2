@@ -4,9 +4,9 @@ exports[`<SettingsModal /> should render and match snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": .c0 {
-  border: 1px solid #374151;
+  border: 1px solid #100F3A;
   border-radius: 8px;
-  background-color: #101726;
+  background-color: #100F3A;
   color: #FFFFFF;
   box-sizing: border-box;
 }

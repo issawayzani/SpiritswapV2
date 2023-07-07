@@ -43,7 +43,7 @@ const VotingInput = ({
   return (
     <InputGroup
       w={isMobile ? 'full' : '100px'}
-      border="1px solid #374151"
+      border="1px solid #100F3A"
       borderRadius="8px"
       float="right"
     >

@@ -7,7 +7,7 @@ import { breakpoints } from 'theme/base/breakpoints';
 import { CHART } from 'constants/icons';
 
 const Chart = ({ ...props }) => {
-  const chartUrl = `https://kek.tools/t/0x5Cc61A78F164885776AA610fb0FE1257df78E59B/chart?pair=0x30748322b6e34545dbe0788c421886aeb5297789&exchange=spiritswap&accent=101726&background=101726&theme=dark&fallback=0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83`;
+  const chartUrl = `https://kek.tools/t/0x5Cc61A78F164885776AA610fb0FE1257df78E59B/chart?pair=0x30748322b6e34545dbe0788c421886aeb5297789&exchange=spiritswap&accent=100F3A&background=100F3A&theme=dark&fallback=0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83`;
   const [coin, setCoin] = useState(0);
   const onCoinpSelectChange = ({ index }) => setCoin(index);
   const isMobile = useMediaQuery(`(max-width: ${breakpoints.xs})`);

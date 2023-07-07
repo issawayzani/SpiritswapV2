@@ -220,7 +220,7 @@ const LiquidityPanel = ({
               boxShadow: 'none',
             },
             '&::-webkit-scrollbar-thumb': {
-              backgroundColor: '#374151',
+              backgroundColor: '#100F3A',
               borderRadius: '4px',
             },
           }}

@@ -114,7 +114,7 @@ Object {
 }
 
 .c2:hover {
-  background: #374151;
+  background: #100F3A;
 }
 
 .c3 {
@@ -148,13 +148,13 @@ Object {
 }
 
 .c3:hover {
-  background: #374151;
+  background: #100F3A;
 }
 
 .c12 {
-  background: #374151;
+  background: #100F3A;
   color: #FFFFFF;
-  border: 1px solid #374151;
+  border: 1px solid #100F3A;
   border-radius: 4px;
   font-family: inherit;
   font-size: 18px;

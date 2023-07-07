@@ -478,7 +478,7 @@ export const getChartUrl = ({
   currency,
 }: ChartProps) => {
   let url = '';
-  const defaultUrl = `https://kek.tools/t/${WFTM.address}/chart?pair=0x30748322B6E34545DBe0788C421886AEB5297789&exchange=spiritswap&accent=101726&background=101726&theme=dark&currencyToggle=off&currencyType=${currency}&fallback=
+  const defaultUrl = `https://kek.tools/t/${WFTM.address}/chart?pair=0x30748322B6E34545DBe0788C421886AEB5297789&exchange=spiritswap&accent=100F3A&background=100F3A&theme=dark&currencyToggle=off&currencyType=${currency}&fallback=
   ${SPIRIT.address}`;
 
   if (inTokenAddress && outTokenAddress) {
@@ -487,7 +487,7 @@ export const getChartUrl = ({
     const outputAddress =
       outTokenAddress === BASE_TOKEN_ADDRESS ? WFTM.address : outTokenAddress;
 
-    url = `https://kek.tools/t/${outputAddress}/chart?pair=${pairAddress}&exchange=spiritswap&accent=101726&background=101726&theme=dark&currencyToggle=off&currencyType=${currency}&fallback=
+    url = `https://kek.tools/t/${outputAddress}/chart?pair=${pairAddress}&exchange=spiritswap&accent=100F3A&background=100F3A&theme=dark&currencyToggle=off&currencyType=${currency}&fallback=
     ${inputAddress}`;
   } else return defaultUrl;
 

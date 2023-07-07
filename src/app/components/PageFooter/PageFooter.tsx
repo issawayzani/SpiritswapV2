@@ -56,7 +56,7 @@ export default function PageFooter() {
 
   return (
     <Box bg="#000314" position="relative">
-      <Box p="24px" pt="32px" bg="rgba(100, 221, 192,0.05)" color="gray">
+      <Box p="24px" pt="32px" bg="100F3A" color="gray">
         {isLoggedIn && isPortfolioShown && isHomePage ? (
           <Box w="full" textAlign="center" mb="40px">
             <Button variant="inverted" h="40px" onClick={onClickLandingButton}>

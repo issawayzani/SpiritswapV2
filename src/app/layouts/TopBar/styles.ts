@@ -78,7 +78,8 @@ export const BottomWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 11px;
+  margin-top: 25px;
+  margin-bottom: 25px;
 `;
 
 export const StyledGhostImage = styled(GhostImage)`

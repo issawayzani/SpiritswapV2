@@ -3,9 +3,9 @@
 exports[`TokenPairMaxValue-Component Matches SnapShot with Values 1`] = `
 Array [
   .c6 {
-  background: #374151;
+  background: #100F3A;
   color: #FFFFFF;
-  border: 1px solid #374151;
+  border: 1px solid #100F3A;
   border-radius: 4px;
   font-family: inherit;
   font-size: 14px;
@@ -238,9 +238,9 @@ exports[`TokenPairMaxValue-Component Matches Snapshot without Values 1`] = `<spa
 exports[`TokenPairMaxValue-Component render TokenPairMaxValue with tokens Props and Translated Values 1`] = `
 Array [
   .c6 {
-  background: #374151;
+  background: #100F3A;
   color: #FFFFFF;
-  border: 1px solid #374151;
+  border: 1px solid #100F3A;
   border-radius: 4px;
   font-family: inherit;
   font-size: 14px;

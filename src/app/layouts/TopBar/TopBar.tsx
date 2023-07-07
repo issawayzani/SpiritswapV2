@@ -319,7 +319,7 @@ const TopBar: FC<Props> = () => {
       pr={{ base: '0px', xl: '0', md: '4px' }}
     >
       <ContentWrapper>
-        <TopWrapper>
+        {/* <TopWrapper>
           {tokenInfos().map((info, key) => (
             <StyledTokenInfoBar
               key={`${info.name}-${key}`}
@@ -329,7 +329,7 @@ const TopBar: FC<Props> = () => {
               tokenRate={info?.rate}
             />
           ))}
-        </TopWrapper>
+        </TopWrapper> */}
         <BottomWrapper>
           <Box
             onClick={navigateHome}

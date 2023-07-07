@@ -117,7 +117,9 @@
       "swapTokens": "Swap Tokens",
       "bridgeTokens": "Bridge Tokens",
       "farmRewards": "Farm rewards",
-      "showFarms": "Show Farms"
+      "showFarms": "Show Farms",
+      "portfolio": "My Portfolio",
+      "connect": "Connect wallet to see correct portfolio amounts."
     },
     "dexStatistics": {
       "totalVolume": "Total volume",
@@ -196,7 +198,6 @@
     },
     "portfolio": {
       "title": "Your portfolio",
-      "homeTitle": "My Portfolio",
       "goToLandingPage": "Go to landing page"
     }
   },

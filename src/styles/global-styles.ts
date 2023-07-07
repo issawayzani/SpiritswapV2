@@ -18,7 +18,7 @@ export const GlobalStyle = createGlobalStyle`
 
   p,
   label {
-    font-family: Neometric, Georgia, Times, 'Times New Roman', serif;
+    font-family: 'Neometric Alt', Georgia, Times, 'Times New Roman', serif;
     line-height: 1.5em;
   }
 
@@ -59,6 +59,7 @@ export const GlobalStyle = createGlobalStyle`
     align-items: center;
     width: 100%;
     back-drop-filter: none;
+    border-bottom: 1px solid #2E2A8C;
     background: transparent !important;
     -webkit-transition: all ease-out .3s;
     -moz-transition: all ease-out .3s;
@@ -67,7 +68,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .Header.scrolled {
-    background: rgb(0, 3, 21, .90) !important;
+    background: 100F3A !important;
     backdrop-filter: blur(12px);
   }
  

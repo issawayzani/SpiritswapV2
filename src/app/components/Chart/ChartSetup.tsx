@@ -7,7 +7,7 @@ export const chartOptions = {
       position: 'top' as const,
     },
     tooltip: {
-      backgroundColor: '#101726',
+      backgroundColor: '#100F3A',
       callbacks: {
         label: function (context) {
           let label = context.dataset.label || '';
@@ -53,10 +53,10 @@ export const chartOptions = {
       offset: true,
       ticks: {
         font: {
-          family: 'Neometric',
+          family: 'Neometric Alt',
           size: 12,
         },
-        color: '#D1D5DB',
+        color: '#100F3A',
       },
       grid: {
         display: false,

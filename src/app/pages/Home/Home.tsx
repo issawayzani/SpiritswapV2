@@ -353,7 +353,7 @@ const Home = () => {
               <Box>
                 <Grid
                   display={{ base: 'grid', lg: 'grid' }}
-                  top={isMobile ? '124px' : '170px'}
+                  top={isMobile ? '100px' : '133px'}
                   position="relative"
                   templateRows="1fr"
                   templateColumns={columns()}
@@ -377,7 +377,10 @@ const Home = () => {
                     </div>
                   </GridItem>
                   <GridItem rowSpan={1} colSpan={1}>
-                    <Box ml="10px">
+                    <Box className="center-panel">
+                      <h5 className="portfolio-title">
+                        {t(`${translationPath}.portfolio`)}
+                      </h5>
                       <TopRightCard
                         account={account}
                         bondingCurveData={BondingCurveData}
@@ -402,7 +405,7 @@ const Home = () => {
                 <Box>
                   <Grid
                     display={{ base: 'grid', lg: 'grid' }}
-                    top={isMobile ? '124px' : '170px'}
+                    top={isMobile ? '100px' : '133px'}
                     position="relative"
                     templateRows="1fr"
                     templateColumns={columns()}
@@ -426,7 +429,13 @@ const Home = () => {
                       </div>
                     </GridItem>
                     <GridItem rowSpan={1} colSpan={1}>
-                      <Box ml="10px">
+                      <Box className="center-panel">
+                        <h5 className="portfolio-title">
+                          {t(`${translationPath}.portfolio`)}
+                        </h5>
+                        <div className="portfolio-subtitle">
+                          {t(`${translationPath}.connect`)}
+                        </div>
                         <TopRightCard
                           account={account}
                           bondingCurveData={BondingCurveData}

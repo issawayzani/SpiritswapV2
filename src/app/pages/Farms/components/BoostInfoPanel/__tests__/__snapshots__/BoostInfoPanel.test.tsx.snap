@@ -120,7 +120,7 @@ Object {
 }
 
 .c6 {
-  color: #D1D5DB;
+  color: #100F3A;
 }
 
 .c7 {
@@ -154,12 +154,12 @@ Object {
   flex-direction: column;
   gap: 0.5rem;
   padding: 0.5rem;
-  background-color: #17202F;
+  background-color: #100F3A;
   border-radius: 8px;
 }
 
 .c9 {
-  color: #D1D5DB;
+  color: #100F3A;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;

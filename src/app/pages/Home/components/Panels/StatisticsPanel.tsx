@@ -2,7 +2,7 @@ import { Flex, Spacer, Box } from '@chakra-ui/react';
 
 export default function StatisticsPanel(props) {
   return (
-    <Box mt="10px" bg="bgBoxLighter" borderRadius="md">
+    <Box mt="16px" bg="bgBoxLighter" borderRadius="md">
       <Flex py="spacing05" px="spacing04" w="full">
         <div className="item">{props.name}</div>
         <Spacer />

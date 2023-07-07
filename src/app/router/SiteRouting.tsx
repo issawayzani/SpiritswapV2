@@ -132,8 +132,8 @@ const SiteRouting = () => {
         <TopBar />
         <ScrollToTop />
         <Page />
-        <MidFooter />
-        {showFooter ? <PageFooter /> : null}
+        {/* <MidFooter /> */}
+        {showFooter ? null : null}
       </BrowserRouter>
       <div id="bottom-page" />
     </Box>

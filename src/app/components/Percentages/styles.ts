@@ -20,7 +20,7 @@ export const Button = styled(Box)`
   align-items: center;
   border: none;
   color: #ffff;
-  background-color: #374151;
+  background-color: #100f3a;
   font-size: 14px;
   border-radius: 0.25em;
   text-align: center;
