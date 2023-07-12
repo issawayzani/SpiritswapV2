@@ -64,22 +64,23 @@ export default function TopRightCard(props) {
     <Box mb="10px">
       <SwapContainer>
         <StatisticsPanel
-          name="oSOUL"
+          icon=""
+          name="XGLOV3"
           rewards={OTOKENRewards}
           value={props.bondingCurveData?.accountOTOKEN / 1e18}
           valueUSD={OTOKENPrice}
           check={true}
         />
 
-        <StatisticsPanel
-          name="SOUL"
+        {/* <StatisticsPanel
+          name="Credit"
           rewards={TOKENRewards}
           value={props.bondingCurveData?.accountTOKEN / 1e18}
           valueUSD={TOKENPrice}
           check={true}
         />
         <StatisticsPanel
-          name="WFTM"
+          name="Debit"
           rewards={BASERewards}
           value={props.bondingCurveData?.accountBASE / 1e18}
           valueUSD={BASEPrice}
@@ -91,7 +92,7 @@ export default function TopRightCard(props) {
           value={props.bondingCurveData?.accountVTOKEN / 1e18}
           valueUSD={VTOKENPrice}
           check={false}
-        />
+        /> */}
 
         <StatisticsPanel
           name="Credit"
@@ -101,7 +102,7 @@ export default function TopRightCard(props) {
         />
 
         <StatisticsPanel
-          name="Debt"
+          name="Debit"
           value={props.bondingCurveData?.accountBorrowDebt / 1e18}
           valueUSD={debtPrice}
           check={false}

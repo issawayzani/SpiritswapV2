@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Button } from 'app/components/Button';
-import { ReactComponent as SettingApe } from 'app/assets/images/settings.svg';
+import { ReactComponent as SettingApe } from 'app/assets/images/setting-new.svg';
 import { ReactComponent as BusinessProductIcon } from 'app/assets/images/business-product.svg';
 // import { ReactComponent as SlipPageNameIcon } from 'app/assets/images/question-3-circle.svg';
 

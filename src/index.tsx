@@ -46,7 +46,7 @@ root.render(
                   <App />
                 </EthersConnector>
               </HelmetProvider>
-              <ReactQueryDevtools />
+              {/* <ReactQueryDevtools /> */}
             </DataContextProvider>
           </QueryClientProvider>
         </PersistGate>

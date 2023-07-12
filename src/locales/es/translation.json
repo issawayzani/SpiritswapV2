@@ -641,7 +641,7 @@
   },
   "apeMode": {
     "common": {
-      "connect": "Connect Wallet",
+      "connect": "Connect your wallet",
       "risk": {
         "entry": "from entry",
         "low": "Low Risk"

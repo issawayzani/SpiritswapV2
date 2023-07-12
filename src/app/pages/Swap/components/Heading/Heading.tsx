@@ -1,4 +1,4 @@
-import { ReactComponent as SettingSwap } from 'app/assets/images/settings.svg';
+import { ReactComponent as SettingSwap } from 'app/assets/images/setting-new.svg';
 import { ReactComponent as BusinessProductIcon } from 'app/assets/images/business-product.svg';
 import { HStack } from '@chakra-ui/react';
 import { CardHeader } from 'app/components/CardHeader';

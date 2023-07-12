@@ -4,7 +4,7 @@ import { Box, HStack, IconButton } from '@chakra-ui/react';
 export const SwapContainer = styled(Box)<{ isLimit: boolean }>`
   border-radius: 8px;
   border: 1px solid ${({ theme }) => `${theme.colors.grayBorderBox}`};
-  background: ${({ theme }) => theme.colors.bgBox};
+  // background: ${({ theme }) => theme.colors.bgBox};
   padding: ${({ theme }) => theme.space.spacing03};
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {

@@ -3,6 +3,8 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { balanceReturnData, fiat, getTokenGroupStatistics } from 'utils/data';
+// import "bootstrap/dist/css/bootstrap.css";
+// import "bootstrap/dist/js/bootstrap.js";
 import {
   Box,
   Button,
@@ -377,7 +379,7 @@ const Home = () => {
                     </div>
                   </GridItem>
                   <GridItem rowSpan={1} colSpan={1}>
-                    <Box className="center-panel">
+                    <Box className="h-100 d-flex align-items-center justify-content-center">
                       <h5 className="portfolio-title">
                         {t(`${translationPath}.portfolio`)}
                       </h5>
@@ -429,7 +431,7 @@ const Home = () => {
                       </div>
                     </GridItem>
                     <GridItem rowSpan={1} colSpan={1}>
-                      <Box className="center-panel">
+                      <Box className="h-100 d-flex align-items-center justify-content-center">
                         <h5 className="portfolio-title">
                           {t(`${translationPath}.portfolio`)}
                         </h5>

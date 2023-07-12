@@ -354,7 +354,7 @@ const TopBar: FC<Props> = () => {
                 />
               );
             })}
-            <MoreButtonWrapper>
+            {/* <MoreButtonWrapper>
               <MoreButton clicked={showDropdown} onClick={onMoreButtonClick}>
                 {t(`${menuTranslationPath}.more`)}
                 <CaretDownImage />
@@ -368,10 +368,10 @@ const TopBar: FC<Props> = () => {
                   />
                 )}
               </NavDropdownWrapper>
-            </MoreButtonWrapper>
+            </MoreButtonWrapper> */}
           </MenuWrapper>
           <HStack spacing="spacing03" justify="end" flex="1" mr="spacing04">
-            {!isMobile && (
+            {/* {!isMobile && (
               <StyledMenuItem
                 to={resolveRoutePath(SOULC.path)}
                 $is_active={false}
@@ -389,7 +389,7 @@ const TopBar: FC<Props> = () => {
                   </Skeleton>
                 </Button>
               </StyledMenuItem>
-            )}
+            )} */}
 
             {isLoggedIn ? (
               <Button
@@ -407,18 +407,15 @@ const TopBar: FC<Props> = () => {
                 onClick={openConnectWalletModal}
                 variant="inverted"
                 fontSize="base"
+                className="connect-button"
               >
-                <WalletIcon mr="spacing03" />
+                {/* <WalletIcon mr="spacing03" /> */}
                 {t(`${translationPath}.connect`)}
               </Button>
             )}
 
-            <Button
-              backgroundColor="bgBox"
-              border="1px solid transparent"
-              onClick={onSettingsButtonClick}
-            >
-              <SettingsIcon color="white" />
+            <Button onClick={onSettingsButtonClick}>
+              <SettingsIcon />
             </Button>
             {showSettingsModal && (
               <StyledSettingsModal

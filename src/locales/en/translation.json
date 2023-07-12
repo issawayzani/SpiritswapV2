@@ -24,7 +24,7 @@
     },
     "topBar": {
       "buy": "Buy $SPIRIT Token",
-      "connect": "Connect Wallet",
+      "connect": "Connect your wallet",
       "switchV1": "Switch to V1"
     },
     "footer": {
@@ -73,7 +73,7 @@
       "commomTokens": "Common base tokens"
     },
     "connectWalletModal": {
-      "title": "Connect Wallet",
+      "title": "Connect your wallet",
       "footer": "Learn how to connect a wallet"
     },
     "button": {
@@ -110,7 +110,7 @@
       "description": "The SoullyCanto protocol captures the essence of everything Defi 2.0 on the Fantom network, delivering a complete hub for <b style='color: white'>trading</b>, <b style='color: white'>lending</b> and <b style='color: white'>borrowing</b>, <b style='color: white'>reward sharing</b>, <b style='color: white'>staking delegations</b>, and <b style='color: white'>farming</b>.<br/><br/>Scroll below and click on <b style='color: white'>“Learn more”</b> to learn more about SoullyCanto’s unique features and lucrative investment options.",
       "descriptionFull": "The SoullyCanto protocol captures the essence of everything Defi 2.0 on the Fantom network, delivering a complete hub for <b style='color: white'>trading</b>, <b style='color: white'>lending</b> and <b style='color: white'>borrowing</b>, <b style='color: white'>reward sharing</b>, <b style='color: white'>staking delegations</b>, and <b style='color: white'>farming</b>.<br/><br/>Scroll below and click on <b style='color: white'>“Learn more”</b> to learn more about SoullyCanto’s unique features and lucrative investment options.",
       "showPortfolio": "Show Portfolio",
-      "connectWallet": "Connect Wallet",
+      "connectWallet": "Connect your wallet",
       "howTo": "How To",
       "learnMore": "Learn More",
       "walletBalance": "Total balance",
@@ -119,7 +119,7 @@
       "farmRewards": "Farm rewards",
       "showFarms": "Show Farms",
       "portfolio": "My Portfolio",
-      "connect": "Connect wallet to see correct portfolio amounts."
+      "connect": "Connect your wallet to see correct portfolio amounts."
     },
     "dexStatistics": {
       "totalVolume": "Total volume",
@@ -415,7 +415,7 @@
       "connectText": "Connect you wallet to see your LP tokens",
       "removeLiquidityMobile": "Remove",
       "yourLiquidity": "Your Liquidity",
-      "connectWallet": "Connect Wallet",
+      "connectWallet": "Connect your wallet",
       "poolShare": "Share of Pool",
       "poolValue": "Pool value",
       "APR": "APR",
@@ -452,7 +452,7 @@
       "classicFarm": "Classic",
       "boostedFarm": "Boosted",
       "ecosystemFarm": "Ecosystem",
-      "connectWallet": "Connect Wallet",
+      "connectWallet": "Connect your wallet",
       "deposit": "Deposit",
       "withdraw": "Withdraw",
       "unwrap": "Unwrap",
@@ -644,7 +644,7 @@
       "title": "Voting",
       "votesNotAdding": "Votes need to add up to 100% but are adding up to ",
       "subtitle": "Vote with your received inSPIRIT",
-      "notconnected": "Connect Wallet",
+      "notconnected": "Connect your wallet",
       "globalVoting": "Global voting",
       "votingPanel": "Voting panel",
       "generateButton": "Generate inSPIRIT to vote for boosted farms",
@@ -724,7 +724,7 @@
   },
   "apeMode": {
     "common": {
-      "connect": "Connect Wallet",
+      "connect": "Connect your wallet",
       "risk": {
         "entry": "from entry",
         "low": "Low Risk"

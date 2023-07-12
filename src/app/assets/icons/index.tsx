@@ -38,7 +38,7 @@ import { ReactComponent as SlippageSettings } from 'app/assets/images/slippageSe
 import { ReactComponent as Pending } from 'app/assets/images/pending.svg';
 import { ReactComponent as Success } from 'app/assets/images/success.svg';
 import { ReactComponent as Error } from 'app/assets/images/error.svg';
-import { ReactComponent as Settings } from 'app/assets/images/settings.svg';
+import { ReactComponent as Settings } from 'app/assets/images/setting-new.svg';
 import { ReactComponent as Setting } from 'app/assets/images/setting.svg';
 import { ReactComponent as Ghost } from 'app/assets/images/ghost-circle.svg';
 import { ReactComponent as WalletInput } from 'app/assets/images/wallet-input.svg';

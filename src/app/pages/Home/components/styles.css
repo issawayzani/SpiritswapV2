@@ -36,6 +36,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
+  font-family: 'Neometric Alt';
 }
 .card-body {
   width: 20%;
@@ -62,9 +63,49 @@
   margin-bottom: 30px;
 }
 .center-panel {
-  /* display: flex; */
-  padding: 0px 60px;
+  margin: 0 auto;
+}
+.container-panel {
+  width: 100%;
+  height: 100%;
+}
+.connect-button {
+  display: flex;
+  padding: 21px 12px 21px 12px;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  border: 1px solid #7b61ff;
+  background: none;
+  color: var(--gray-16, #645fd3);
+  /* Paragraph/Semibold */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 1.4px;
+}
+.connect-button:hover {
+  background: var(--gray-18, #4f4ad3);
+  color: var(--gray-2, #f3f2ff);
+  /* Paragraph/Semibold */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 1.4px;
+}
+.connect-button:focus,
+.connect-button:active {
+  background: var(--gray-14, #7974d3);
+  color: var(--gray-2, #f3f2ff);
+}
+.border {
+  border: 1px solid var(--gray-22, #2e2a8c);
+  display: flex;
+  padding: 0px 24px 0px 12px;
+  flex-direction: column;
   align-items: center;
   gap: 20px;
   align-self: stretch;
