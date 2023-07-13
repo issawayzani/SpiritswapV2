@@ -17,6 +17,26 @@
 .item {
   font-size: medium;
   background: none !important;
+  padding: 8px;
+}
+.item-count {
+  color: var(--white, #fff);
+  /* Paragraph/Semibold */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+  letter-spacing: 1.4px;
+  float: right;
+}
+.item-price {
+  color: var(--gray-10, #a19ed3);
+  /* Caption/small 12-16/regular */
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+  float: right;
 }
 .space {
   gap: 5px;
@@ -104,9 +124,31 @@
 .border {
   border: 1px solid var(--gray-22, #2e2a8c);
   display: flex;
-  padding: 0px 24px 0px 12px;
+  padding: 10px 24px 10px 20px;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  /* gap: 20px; */
   align-self: stretch;
+}
+.default-button {
+  border-radius: 24px;
+  border: 1px solid var(--blue-3, #a9cdff);
+  background: none;
+  color: var(--blue-3, #a9cdff);
+  /* Headline/H6 */
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px; /* 140% */
+}
+.default-button:hover {
+  border: none;
+  color: var(--gray-2, #f3f2ff);
+  background: var(--gray-24, #1d1a59);
+}
+.default-button:focus,
+.default-button:active {
+  border: none;
+  color: var(--gray-2, #f3f2ff);
+  background: var(--gray-22, #2e2a8c);
 }

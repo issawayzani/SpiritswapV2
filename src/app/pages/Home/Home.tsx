@@ -38,6 +38,7 @@ import {
   Portfolio,
   TopCard,
   TopRightCard,
+  HarvestCard,
 } from './components';
 import {
   Wrapper,
@@ -360,9 +361,10 @@ const Home = () => {
                   templateRows="1fr"
                   templateColumns={columns()}
                   m="0 auto"
-                  mb="250px"
                   minH="75vh"
-                  placeContent="center"
+                  justifyContent={'center'}
+                  alignContent={'center'}
+                  flexWrap={'wrap'}
                   maxW={{ md: breakpoints.xl }}
                 >
                   <GridItem rowSpan={1} colSpan={2}>
@@ -378,12 +380,32 @@ const Home = () => {
                       />
                     </div>
                   </GridItem>
+                </Grid>
+                <Grid
+                  display={{ base: 'flex', lg: 'flex' }}
+                  templateRows="1fr"
+                  templateColumns={columns()}
+                  // m="0 auto"
+                  mb="250px"
+                  minH="75vh"
+                  justifyContent={'center'}
+                  alignContent={'center'}
+                  flexWrap={'wrap'}
+                  maxW={{ md: breakpoints.xl }}
+                >
                   <GridItem rowSpan={1} colSpan={1}>
                     <Box className="h-100 d-flex align-items-center justify-content-center">
                       <h5 className="portfolio-title">
                         {t(`${translationPath}.portfolio`)}
                       </h5>
                       <TopRightCard
+                        account={account}
+                        bondingCurveData={BondingCurveData}
+                      />
+                      <h5 className="portfolio-title">
+                        {t(`${translationPath}.harvest`)}
+                      </h5>
+                      <HarvestCard
                         account={account}
                         bondingCurveData={BondingCurveData}
                       />
@@ -412,9 +434,10 @@ const Home = () => {
                     templateRows="1fr"
                     templateColumns={columns()}
                     m="0 auto"
-                    mb="250px"
                     minH="75vh"
-                    placeContent="center"
+                    justifyContent={'center'}
+                    alignContent={'center'}
+                    flexWrap={'wrap'}
                     maxW={{ md: breakpoints.xl }}
                   >
                     <GridItem rowSpan={1} colSpan={2}>
@@ -430,6 +453,20 @@ const Home = () => {
                         />
                       </div>
                     </GridItem>
+                  </Grid>
+                  <Grid
+                    display={{ base: 'flex', lg: 'flex' }}
+                    position="relative"
+                    templateRows="1fr"
+                    templateColumns={columns()}
+                    // m="0 auto"
+                    mb="250px"
+                    minH="75vh"
+                    justifyContent={'center'}
+                    alignContent={'center'}
+                    flexWrap={'wrap'}
+                    maxW={{ md: breakpoints.xl }}
+                  >
                     <GridItem rowSpan={1} colSpan={1}>
                       <Box className="h-100 d-flex align-items-center justify-content-center">
                         <h5 className="portfolio-title">
@@ -439,6 +476,16 @@ const Home = () => {
                           {t(`${translationPath}.connect`)}
                         </div>
                         <TopRightCard
+                          account={account}
+                          bondingCurveData={BondingCurveData}
+                        />
+                        <h5 className="portfolio-title">
+                          {t(`${translationPath}.harvest`)}
+                        </h5>
+                        <div className="portfolio-subtitle">
+                          {t(`${translationPath}.connect`)}
+                        </div>
+                        <HarvestCard
                           account={account}
                           bondingCurveData={BondingCurveData}
                         />

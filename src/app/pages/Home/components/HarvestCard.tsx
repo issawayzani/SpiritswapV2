@@ -6,10 +6,11 @@ import { getReward } from 'utils/web3/actions/inspirit';
 import { transactionResponse } from 'utils/web3';
 import Web3Monitoring from 'app/connectors/EthersConnector/transactions';
 import { useState } from 'react';
-import xglov3 from '../../../assets/images/xglov3.svg';
-import fantom from '../../../assets/images/fantom-logo.svg';
+import Pow3r from '../../../assets/images/pow3r.svg';
+import Glov3 from '../../../assets/images/glov3.svg';
+import Wftm from '../../../assets/images/fantom-logo.svg';
 
-export default function TopRightCard(props) {
+export default function HarvestCard(props) {
   const { addToQueue } = Web3Monitoring();
   const [isLoadingButton, setIsLoadingButton] = useState(false);
   const [loaderText, setLoaderText] = useState('Loading Transaction');
@@ -66,8 +67,8 @@ export default function TopRightCard(props) {
     <Box>
       <SwapContainer>
         <StatisticsPanel
-          icon={xglov3}
-          name="XGLOV3"
+          icon={Pow3r}
+          name="POW3R"
           rewards={OTOKENRewards}
           value={props.bondingCurveData?.accountOTOKEN / 1e18}
           valueUSD={OTOKENPrice}
@@ -75,20 +76,32 @@ export default function TopRightCard(props) {
         />
 
         <StatisticsPanel
-          icon={fantom}
-          name="Credit"
+          icon={Glov3}
+          name="GLOV3"
           value={props.bondingCurveData?.accountBorrowCredit / 1e18}
           valueUSD={creditPrice}
           check={false}
         />
 
         <StatisticsPanel
-          icon={fantom}
-          name="Debit"
+          icon={Wftm}
+          name="WFTM"
           value={props.bondingCurveData?.accountBorrowDebt / 1e18}
           valueUSD={debtPrice}
           check={false}
         />
+
+        <Button
+          size="lg"
+          mt="16px"
+          w="full"
+          className="default-button"
+          onClick={buttonAction}
+          isLoading={isLoadingButton}
+          loadingText={loaderText}
+        >
+          Harvest All
+        </Button>
       </SwapContainer>
     </Box>
   );
