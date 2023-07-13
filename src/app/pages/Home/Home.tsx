@@ -353,66 +353,33 @@ const Home = () => {
         <ContentWrapper>
           {isLoggedIn && showPortfolio ? (
             <PortfolioWrapper>
-              <Box>
-                <Grid
-                  display={{ base: 'grid', lg: 'grid' }}
-                  top={isMobile ? '100px' : '133px'}
-                  position="relative"
-                  templateRows="1fr"
-                  templateColumns={columns()}
-                  m="0 auto"
-                  minH="75vh"
-                  justifyContent={'center'}
-                  alignContent={'center'}
-                  flexWrap={'wrap'}
-                  maxW={{ md: breakpoints.xl }}
-                >
-                  <GridItem rowSpan={1} colSpan={2}>
-                    <div className="container">
-                      <TopCard
-                        icon="fa-users"
-                        TVL={BondingCurveData?.tvl / 1e18}
-                        supplyVTOKEN={BondingCurveData?.supplyVTOKEN}
-                        APR={BondingCurveData?.apr / 1e18}
-                        supplyTOKEN={BondingCurveData?.supplyTOKEN / 1e18}
-                        LTV={BondingCurveData?.ltv / 1e18}
-                        Ratio={BondingCurveData?.ratio / 1e18}
-                      />
-                    </div>
-                  </GridItem>
-                </Grid>
-                <Grid
-                  display={{ base: 'flex', lg: 'flex' }}
-                  templateRows="1fr"
-                  templateColumns={columns()}
-                  // m="0 auto"
-                  mb="250px"
-                  minH="75vh"
-                  justifyContent={'center'}
-                  alignContent={'center'}
-                  flexWrap={'wrap'}
-                  maxW={{ md: breakpoints.xl }}
-                >
-                  <GridItem rowSpan={1} colSpan={1}>
-                    <Box className="h-100 d-flex align-items-center justify-content-center">
-                      <h5 className="portfolio-title">
-                        {t(`${translationPath}.portfolio`)}
-                      </h5>
-                      <TopRightCard
-                        account={account}
-                        bondingCurveData={BondingCurveData}
-                      />
-                      <h5 className="portfolio-title">
-                        {t(`${translationPath}.harvest`)}
-                      </h5>
-                      <HarvestCard
-                        account={account}
-                        bondingCurveData={BondingCurveData}
-                      />
-                    </Box>
-                  </GridItem>
-                </Grid>
-              </Box>
+              <div className="top">
+                <TopCard
+                  icon="fa-users"
+                  TVL={BondingCurveData?.tvl / 1e18}
+                  supplyVTOKEN={BondingCurveData?.supplyVTOKEN}
+                  APR={BondingCurveData?.apr / 1e18}
+                  supplyTOKEN={BondingCurveData?.supplyTOKEN / 1e18}
+                  LTV={BondingCurveData?.ltv / 1e18}
+                  Ratio={BondingCurveData?.ratio / 1e18}
+                />
+                <div className="portfolio-section">
+                  <h5 className="portfolio-title">
+                    {t(`${translationPath}.portfolio`)}
+                  </h5>
+                  <TopRightCard
+                    account={account}
+                    bondingCurveData={BondingCurveData}
+                  />
+                  <h5 className="portfolio-title">
+                    {t(`${translationPath}.harvest`)}
+                  </h5>
+                  <HarvestCard
+                    account={account}
+                    bondingCurveData={BondingCurveData}
+                  />
+                </div>
+              </div>
               {/* <Portfolio
                 translationPath="home.portfolio"
                 amount={fiat(portfolioAmount)}
@@ -427,71 +394,39 @@ const Home = () => {
             <>
               <WalletWrapper isMobile={isMobile}>
                 <Box>
-                  <Grid
-                    display={{ base: 'grid', lg: 'grid' }}
-                    top={isMobile ? '100px' : '133px'}
-                    position="relative"
-                    templateRows="1fr"
-                    templateColumns={columns()}
-                    m="0 auto"
-                    minH="75vh"
-                    justifyContent={'center'}
-                    alignContent={'center'}
-                    flexWrap={'wrap'}
-                    maxW={{ md: breakpoints.xl }}
-                  >
-                    <GridItem rowSpan={1} colSpan={2}>
-                      <div className="container">
-                        <TopCard
-                          icon="fa-users"
-                          TVL={BondingCurveData?.tvl / 1e18}
-                          supplyVTOKEN={BondingCurveData?.supplyVTOKEN}
-                          APR={BondingCurveData?.apr / 1e18}
-                          supplyTOKEN={BondingCurveData?.supplyTOKEN / 1e18}
-                          LTV={BondingCurveData?.ltv / 1e18}
-                          Ratio={BondingCurveData?.ratio / 1e18}
-                        />
+                  <div className="top">
+                    <TopCard
+                      icon="fa-users"
+                      TVL={BondingCurveData?.tvl / 1e18}
+                      supplyVTOKEN={BondingCurveData?.supplyVTOKEN}
+                      APR={BondingCurveData?.apr / 1e18}
+                      supplyTOKEN={BondingCurveData?.supplyTOKEN / 1e18}
+                      LTV={BondingCurveData?.ltv / 1e18}
+                      Ratio={BondingCurveData?.ratio / 1e18}
+                    />
+                    <div className="portfolio-section">
+                      <h5 className="portfolio-title">
+                        {t(`${translationPath}.portfolio`)}
+                      </h5>
+                      <div className="portfolio-subtitle">
+                        {t(`${translationPath}.connect`)}
                       </div>
-                    </GridItem>
-                  </Grid>
-                  <Grid
-                    display={{ base: 'flex', lg: 'flex' }}
-                    position="relative"
-                    templateRows="1fr"
-                    templateColumns={columns()}
-                    // m="0 auto"
-                    mb="250px"
-                    minH="75vh"
-                    justifyContent={'center'}
-                    alignContent={'center'}
-                    flexWrap={'wrap'}
-                    maxW={{ md: breakpoints.xl }}
-                  >
-                    <GridItem rowSpan={1} colSpan={1}>
-                      <Box className="h-100 d-flex align-items-center justify-content-center">
-                        <h5 className="portfolio-title">
-                          {t(`${translationPath}.portfolio`)}
-                        </h5>
-                        <div className="portfolio-subtitle">
-                          {t(`${translationPath}.connect`)}
-                        </div>
-                        <TopRightCard
-                          account={account}
-                          bondingCurveData={BondingCurveData}
-                        />
-                        <h5 className="portfolio-title">
-                          {t(`${translationPath}.harvest`)}
-                        </h5>
-                        <div className="portfolio-subtitle">
-                          {t(`${translationPath}.connect`)}
-                        </div>
-                        <HarvestCard
-                          account={account}
-                          bondingCurveData={BondingCurveData}
-                        />
-                      </Box>
-                    </GridItem>
-                  </Grid>
+                      <TopRightCard
+                        account={account}
+                        bondingCurveData={BondingCurveData}
+                      />
+                      <h5 className="portfolio-title">
+                        {t(`${translationPath}.harvest`)}
+                      </h5>
+                      <div className="portfolio-subtitle">
+                        {t(`${translationPath}.connect`)}
+                      </div>
+                      <HarvestCard
+                        account={account}
+                        bondingCurveData={BondingCurveData}
+                      />
+                    </div>
+                  </div>
                 </Box>
                 <ConnectWallet isOpen={isOpen} dismiss={onClose} />
               </WalletWrapper>

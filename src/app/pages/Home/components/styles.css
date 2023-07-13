@@ -152,3 +152,11 @@
   color: var(--gray-2, #f3f2ff);
   background: var(--gray-22, #2e2a8c);
 }
+.top {
+  margin-top: 133px;
+  position: relative;
+}
+.portfolio-section {
+  margin: 0 auto;
+  width: 50%;
+}
