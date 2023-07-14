@@ -34,11 +34,11 @@ export function App() {
   return (
     <RootPathContext.Provider value={rootPath}>
       <Helmet
-        titleTemplate={`SoullyCanto - $${cantoPrice.toFixed(3)}`}
-        defaultTitle={`SoullyCanto - $${cantoPrice.toFixed(3)}`}
+        titleTemplate={`Coveragex - $${cantoPrice.toFixed(3)}`}
+        defaultTitle={`Coveragex - $${cantoPrice.toFixed(3)}`}
         htmlAttributes={{ lang: i18n.language }}
       >
-        <meta name="description" content="SoullyCanto webapp" />
+        <meta name="description" content="Coveragex webapp" />
       </Helmet>
       <GlobalStyleProxy />
 

@@ -141,7 +141,7 @@ export const MenuLabel = styled.span`
   background: transparent;
   border: none;
   color: ${({ theme }) => theme.color.white};
-  font-family: ${({ theme }) => theme.fontFamily.sans};
+  // font-family: ${({ theme }) => theme.fontFamily.sans};
   font-size: 10px;
   font-weight: ${({ theme }) => theme.fontWeight.normal};
   line-height: ${({ theme }) => theme.lineHeight.h4};
@@ -161,7 +161,7 @@ export const MoreButtonWrapper = styled.div<MenuButtonProps>`
 
 export const MoreButtonLabel = styled.span`
   color: ${({ theme }) => theme.color.white};
-  font-family: ${({ theme }) => theme.fontFamily.sans};
+  // font-family: ${({ theme }) => theme.fontFamily.sans};
   font-size: 10px;
   font-weight: ${({ theme }) => theme.fontWeight.normal};
   line-height: ${({ theme }) => theme.lineHeight.h4};

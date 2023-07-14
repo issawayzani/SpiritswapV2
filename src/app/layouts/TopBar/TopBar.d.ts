@@ -21,7 +21,6 @@ export interface NavMenuProps {
   is_active: boolean;
 }
 export interface navMenusType {
-  icon: JSX.Element;
   key: string;
   path: string;
 }

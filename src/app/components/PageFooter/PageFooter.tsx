@@ -260,7 +260,7 @@ export default function PageFooter() {
 
           <Flex p="40px 0px 0px 0px" mb={isMobile ? 10 : 0} alignItems="center">
             <Text mr="15px" minW="fit-content" color="grayDarker">
-              © 2022 SpiritSwap
+              © 2023 Coveragex
             </Text>
             <Box bg="ciTrans15" mr={isMobile ? 4 : 0} h="2px" flexGrow={1} />
 

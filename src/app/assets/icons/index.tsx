@@ -417,7 +417,7 @@ export const SettingsIconButton = ({ ...rest }) => {
       {...rest}
       variant="iconButton"
       icon={<Settings />}
-      color="ci"
+      backgroundColor="transparent"
       aria-label="settings"
     />
   );

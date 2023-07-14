@@ -1,9 +1,9 @@
 export const colorValues = {
   teal: {
-    ciTrans15: '#22ABAC',
-    400: '#22ABAC', //hover
+    ciTrans15: '#7974D3',
+    400: '#7974D3', //hover
     600: '#32CEC0', //click
-    800: '#22ABAC',
+    800: '#7974D3',
   },
   red: {
     dangerBg: 'rgba(240, 19, 19, 0.15)',
@@ -37,7 +37,7 @@ const { blue, gray, red, teal, yellow } = colorValues;
 export const colors = {
   white: gray.white,
   ciTrans15: teal.ciTrans15,
-  ci: teal[400],
+  ci: '#7974D3',
   ciDark: teal[600],
   dangerBg: red.dangerBg,
   danger: red[500],

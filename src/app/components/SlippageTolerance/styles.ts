@@ -23,7 +23,7 @@ export const StyledInput = styled.input`
   border-radius: ${({ theme }) => theme.borderRadius.md};
   outline: none;
 
-  font-family: ${({ theme }) => theme.fontFamily.sans};
+  // font-family: ${({ theme }) => theme.fontFamily.sans};
   font-size: ${({ theme }) => theme.fontSize.sm};
   font-weight: normal;
   line-height: ${({ theme }) => theme.lineHeight.base};

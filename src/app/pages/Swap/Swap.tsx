@@ -694,8 +694,8 @@ const SwapPage = () => {
     <Box overflowX="hidden">
       <HelmetProvider>
         <Helmet>
-          <title>SpiritSwap - Swap</title>
-          <meta name="SpiritSwap" content="Swap page" />
+          <title>Coveragex - Swap</title>
+          <meta name="Coveragex" content="Swap page" />
         </Helmet>
       </HelmetProvider>
 

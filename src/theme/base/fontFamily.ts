@@ -1,5 +1,5 @@
 export const fontFamily = {
-  sans: 'Neometric Regular',
+  sans: 'NeometricAltBlack',
   serif: '',
   mono: '',
 };

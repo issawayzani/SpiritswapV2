@@ -32,7 +32,7 @@ export const AboutSectionTitleSpan = styled.span`
     font-size: ${({ theme }) => theme.fontSizes.h2};
     line-height: ${({ theme }) => theme.lineHeights.h2};
   }
-  font-family: ${({ theme }) => theme.fontFamily.sans};
+  // font-family: ${({ theme }) => theme.fontFamily.sans};
   font-size: 40px;
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   line-height: 64px;

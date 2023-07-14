@@ -102,6 +102,8 @@ export const MenuWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
+  width: 50%;
 `;
 export const MenuButton = styled.button<MenuButtonProps>`
   background: transparent;
@@ -109,11 +111,12 @@ export const MenuButton = styled.button<MenuButtonProps>`
   border: none;
   gap: ${({ theme }) => theme.spacing.spacing02};
   color: ${({ is_active, theme }) =>
-    is_active ? theme.color.ci : theme.color.white};
-  font-family: ${({ theme }) => theme.fontFamily.sans};
-  font-size: ${({ theme }) => theme.fontSize.h3};
+    is_active ? theme.color.white : theme.color.ci};
+  // font-family: ${({ theme }) => theme.fontFamily.sans};
+  font-size: ${({ theme }) => theme.fontSize.h5};
   font-weight: ${({ theme }) => theme.fontWeight.normal};
-  line-height: ${({ theme }) => theme.lineHeight.h3};
+  line-height: ${({ theme }) => theme.lineHeight.h1};
+  letter-spacing: 1.4px;
   padding: 4px 8px;
   cursor: pointer;
 `;
@@ -127,7 +130,7 @@ export const MoreButton = styled.button<MoreButtonProps>`
   border: none;
   color: ${({ clicked, theme }) =>
     clicked ? theme.color.ci : theme.color.white};
-  font-family: ${({ theme }) => theme.fontFamily.sans};
+  // font-family: ${({ theme }) => theme.fontFamily.sans};
   font-size: ${({ theme }) => theme.fontSize.h3};
   font-weight: ${({ theme }) => theme.fontWeight.normal};
   line-height: ${({ theme }) => theme.lineHeight.h3};
@@ -151,10 +154,8 @@ export const NavDropdownWrapper = styled.div`
   }
 `;
 export const StyledMenuItem = styled(NavLink)<{ $is_active: boolean }>`
-  margin-right: 8px;
-  background: ${({ theme, $is_active }) =>
-    $is_active ? theme.color.ciTrans15 : 'transparent'};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  // margin-right: 8px;
+  // border-radius: ${({ theme }) => theme.borderRadius.sm};
 `;
 
 export const StyledSettingsModal = styled(SettingsModal)`
@@ -165,4 +166,18 @@ export const StyledSettingsModal = styled(SettingsModal)`
   right: 8px;
   top: 100px;
   z-index: 1;
+  border-radius: 8px;
+  border: 4px solid #2e2a8c;
+  background: rgba(29, 26, 89, 0.9);
+  box-shadow: 0px 34px 88px 0px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(7.5px);
+  display: flex;
+  width: 410px;
+  padding: 30px 0px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+  color: #f3f2ff;
 `;

@@ -7,7 +7,7 @@ import { Text } from '@chakra-ui/react';
 export const StyledHeading = styled(HeadingBase)<HeadingProps>`
   color: ${({ theme }) => theme.colors.white};
   color: ${props => props.color};
-  font-family: ${({ theme }) => theme.fontFamily.sans};
+  // font-family: ${({ theme }) => theme.fontFamily.sans};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   font-size: ${({ theme, level }) => theme.fontSizes[`h${level}`]};
   line-height: ${({ theme, level }) => theme.lineHeights[`h${level}`]};
@@ -23,7 +23,7 @@ export const StyledParagraph = styled(Text)<PargraphProps>`
       : sub
       ? theme.colors.grayDarker
       : theme.colors.white};
-  font-family: ${({ theme }) => theme.fontFamily.sans};
+  // font-family: ${({ theme }) => theme.fontFamily.sans};
   font-weight: ${({ theme }) => theme.fontWeights.normal};
   font-size: ${({ theme }) => theme.fontSizes.sm};
   line-height: ${({ theme, sub }) =>

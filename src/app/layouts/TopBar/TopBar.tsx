@@ -84,10 +84,10 @@ import useWallets from 'app/hooks/useWallets';
 
 const navMenus = [
   // { ...HOME, icon: <HomeIcon /> },
-  { ...HOME, icon: <HomeIcon /> },
-  { ...SOULC, icon: <SwapIcon /> },
-  { ...FARMS, icon: <FarmsIcon /> },
-  { ...VSOULC, icon: <InSpiritIcon /> },
+  { ...HOME },
+  { ...SOULC },
+  { ...FARMS },
+  { ...VSOULC },
 ];
 
 const navDropdownMenus = [LENDANDBORROW, ANALYTICS, NFTS, DOCS, GOVERNANCE];
@@ -205,7 +205,6 @@ const TopBar: FC<Props> = () => {
   const translatedMenus = navMenuItems.map((menu: any) => ({
     title: t(`${menuTranslationPath}.${menu.key}`),
     path: menu.path,
-    icon: menu.icon,
   }));
   const [navDropdownItems, setNavDropdownItems] =
     useState<navDropdownMenusType[]>(navDropdownMenus);
@@ -370,31 +369,11 @@ const TopBar: FC<Props> = () => {
               </NavDropdownWrapper>
             </MoreButtonWrapper> */}
           </MenuWrapper>
-          <HStack spacing="spacing03" justify="end" flex="1" mr="spacing04">
-            {/* {!isMobile && (
-              <StyledMenuItem
-                to={resolveRoutePath(SOULC.path)}
-                $is_active={false}
-              >
-                <Button fontSize="base" fontWeight="normal">
-                  <SoullyIcon />
-                  <Skeleton
-                    isLoaded={Boolean(spiritPrice)}
-                    startColor="grayBorderBox"
-                    endColor="bgBoxLighter"
-                    w="49px"
-                    h="24px"
-                  >
-                    <Text>${spiritPrice.toFixed(3)}</Text>
-                  </Skeleton>
-                </Button>
-              </StyledMenuItem>
-            )} */}
-
+          <HStack mr="spacing04">
             {isLoggedIn ? (
               <Button
                 onClick={handleLogout}
-                backgroundColor="bgBox"
+                backgroundColor="transparent"
                 border="none"
                 fontSize="base"
               >
@@ -414,7 +393,11 @@ const TopBar: FC<Props> = () => {
               </Button>
             )}
 
-            <Button onClick={onSettingsButtonClick}>
+            <Button
+              border="none"
+              onClick={onSettingsButtonClick}
+              backgroundColor="transparent"
+            >
               <SettingsIcon />
             </Button>
             {showSettingsModal && (

@@ -48,7 +48,7 @@ export const InputWrapper = styled.div<InputWrapperStyleProps>`
     border: none;
     color: ${({ theme }) => theme.color.white};
     font-size: ${({ theme }) => theme.fontSize.input};
-    font-family: ${({ theme }) => theme.fontFamily.sans};
+    // font-family: ${({ theme }) => theme.fontFamily.sans};
     height: 36px;
     width: 100%;
 

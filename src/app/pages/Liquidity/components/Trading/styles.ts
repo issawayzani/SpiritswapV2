@@ -47,7 +47,7 @@ export const StyledTotalTradingTitle = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius.md};
   margin: 16px 0px 0px 0px;
   color: ${({ theme }) => theme.color.white};
-  font-family: ${({ theme }) => theme.fontFamily.sans};
+  // font-family: ${({ theme }) => theme.fontFamily.sans};
 `;
 
 export const StyledTotalTradingPrice = styled.div`

@@ -8,7 +8,7 @@ export const StyledContainer = styled.span<StyleProps>`
   align-items: center;
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   font-size: ${({ theme }) => theme.fontSize.sm};
-  font-family: ${({ theme }) => theme.fontFamily.sans};
+  // font-family: ${({ theme }) => theme.fontFamily.sans};
   padding: ${({ theme }) =>
     `${theme.spacing.spacing01} ${theme.spacing.spacing02}`};
 
