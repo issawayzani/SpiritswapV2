@@ -162,3 +162,21 @@
   margin: 0 auto;
   width: 50%;
 }
+.modal-title {
+  color: var(--gray-2, #f3f2ff);
+  /* Headline/H6 */
+  margin: 0px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px; /* 140% */
+}
+.settings-text {
+  color: var(--gray-10, #a19ed3);
+  text-align: center;
+  /* Btn/small/normal */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+}

@@ -47,8 +47,13 @@ const SettingsModal = ({
   // );
 
   return (
-    <Modal title={t(`${translationPath}.title`)} onClose={onClose} {...props}>
+    <Modal onClose={onClose} {...props}>
       <BodyContainer>
+        <Label className="modal-title">Settings</Label>
+        <span className="settings-text">
+          <i className="fa-sharp fa-light fa-circle-question"></i>Lorem ipsum
+          dolor sit amet.
+        </span>
         {/* <Flex w="full" justify="space-between" align="center">
           <Label>{t(`${translationPath}.language`)}</Label>
           <Flex justify="space-between" align="center">

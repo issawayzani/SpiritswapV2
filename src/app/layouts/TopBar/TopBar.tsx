@@ -374,8 +374,8 @@ const TopBar: FC<Props> = () => {
               <Button
                 onClick={handleLogout}
                 backgroundColor="transparent"
-                border="none"
                 fontSize="base"
+                className="connect-button"
               >
                 <Image src={wallets[_connector]} w="20px" mr="8px" />
                 <Text mr="8px">{accountEllipsis}</Text>
@@ -386,6 +386,7 @@ const TopBar: FC<Props> = () => {
                 onClick={openConnectWalletModal}
                 variant="inverted"
                 fontSize="base"
+                backgroundColor="transparent"
                 className="connect-button"
               >
                 {/* <WalletIcon mr="spacing03" /> */}

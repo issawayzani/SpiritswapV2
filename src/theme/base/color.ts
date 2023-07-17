@@ -37,7 +37,7 @@ const { blue, gray, red, teal, yellow } = colorValues;
 export const colors = {
   white: gray.white,
   ciTrans15: teal.ciTrans15,
-  ci: '#7974D3',
+  ci: '#9747FF',
   ciDark: teal[600],
   dangerBg: red.dangerBg,
   danger: red[500],
