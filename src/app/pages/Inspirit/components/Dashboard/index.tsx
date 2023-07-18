@@ -92,10 +92,10 @@ export default function Dashboard() {
     lockedInSpiritEndDate &&
     lockedInSpiritEndDate.toString() !== '0';
   const { addToQueue } = Web3Monitoring();
-  const { isLoading: isClaimingRewards, claimBribeRewards } = useClaimBribes(
-    boostedV2,
-    boostedStable,
-  );
+  // const { isLoading: isClaimingRewards, claimBribeRewards } = useClaimBribes(
+  //   boostedV2,
+  //   boostedStable,
+  // );
   const { isLoading, loadingOff, loadingOn } = UseIsLoading();
 
   const { t } = useTranslation();
@@ -122,9 +122,9 @@ export default function Dashboard() {
     }
   };
 
-  const claimBribeRewardsHandler = async () => {
-    await claimBribeRewards();
-  };
+  // const claimBribeRewardsHandler = async () => {
+  //   await claimBribeRewards();
+  // };
 
   const approveSpiritAmount = async () => {
     try {
@@ -182,56 +182,56 @@ export default function Dashboard() {
 
   const [steps, setSteps] = useState<StepStateProps[]>([]);
   const [txFlowData, setTxFlowData] = useState<string[]>([]);
-  const handleTransactionFlow = (type: string) => {
-    let steps: StepStateProps[] = [];
-    let txLabels: string[] = [];
-    if (type === 'all') {
-      const claimSpirits: StepStateProps = {
-        action: claimRewards,
-        label: 'Claim SPIRIT rewards',
-        status:
-          Number(claimableSpiritRewards) === 0
-            ? TransactionStatus.SUCCESS
-            : TransactionStatus.UPCOMING,
-      };
-      const claimBribes: StepStateProps = {
-        action: claimBribeRewards,
-        label: 'Claim bribes rewards',
-        status: TransactionStatus.UPCOMING,
-      };
-      steps = [claimSpirits, claimBribes];
-      txLabels = [
-        'Claim all',
-        'Confirm all transactions to finish the claiming process.',
-      ];
-    }
-    if (type === 'rewards') {
-      const claimAction: StepStateProps = {
-        action: claimRewards,
-        label: 'Claim SPIRIT rewards',
-        status: TransactionStatus.UPCOMING,
-      };
-      const approveAction: StepStateProps = {
-        action: approveSpiritAmount,
-        label: 'Approve SPIRIT',
-        status: TransactionStatus.UPCOMING,
-      };
-      const lockAction: StepStateProps = {
-        action: lockMoreSpirit,
-        label: `Lock ${reinvestFormatted} SPIRIT for inSPIRIT`,
-        status: TransactionStatus.UPCOMING,
-      };
-      steps = [claimAction, approveAction, lockAction];
-      txLabels = [
-        'Compound SPIRIT',
-        'Confirm all transactions to finalize the compound process.',
-      ];
-    }
-    setTxFlowData(txLabels);
+  // const handleTransactionFlow = (type: string) => {
+  //   let steps: StepStateProps[] = [];
+  //   let txLabels: string[] = [];
+  //   if (type === 'all') {
+  //     const claimSpirits: StepStateProps = {
+  //       action: claimRewards,
+  //       label: 'Claim SPIRIT rewards',
+  //       status:
+  //         Number(claimableSpiritRewards) === 0
+  //           ? TransactionStatus.SUCCESS
+  //           : TransactionStatus.UPCOMING,
+  //     };
+  //     const claimBribes: StepStateProps = {
+  //       action: claimBribeRewards,
+  //       label: 'Claim bribes rewards',
+  //       status: TransactionStatus.UPCOMING,
+  //     };
+  //     steps = [claimSpirits, claimBribes];
+  //     txLabels = [
+  //       'Claim all',
+  //       'Confirm all transactions to finish the claiming process.',
+  //     ];
+  //   }
+  //   if (type === 'rewards') {
+  //     const claimAction: StepStateProps = {
+  //       action: claimRewards,
+  //       label: 'Claim SPIRIT rewards',
+  //       status: TransactionStatus.UPCOMING,
+  //     };
+  //     const approveAction: StepStateProps = {
+  //       action: approveSpiritAmount,
+  //       label: 'Approve SPIRIT',
+  //       status: TransactionStatus.UPCOMING,
+  //     };
+  //     const lockAction: StepStateProps = {
+  //       action: lockMoreSpirit,
+  //       label: `Lock ${reinvestFormatted} SPIRIT for inSPIRIT`,
+  //       status: TransactionStatus.UPCOMING,
+  //     };
+  //     steps = [claimAction, approveAction, lockAction];
+  //     txLabels = [
+  //       'Compound SPIRIT',
+  //       'Confirm all transactions to finalize the compound process.',
+  //     ];
+  //   }
+  //   setTxFlowData(txLabels);
 
-    setSteps(steps);
-    onOpen();
-  };
+  //   setSteps(steps);
+  //   onOpen();
+  // };
 
   const totalBribeRewards: number = totalRewards ? totalRewards : 0;
   const renderBanner = () => {
@@ -367,7 +367,7 @@ export default function Dashboard() {
                       isLoading={isOpen && isLoading}
                       loadingText="Compounding"
                       p="spacing03"
-                      onClick={() => handleTransactionFlow('rewards')}
+                      // onClick={() => handleTransactionFlow('rewards')}
                       disabled={!+claimableSpiritRewards || isLoading}
                     >
                       <HStack align="center">
@@ -408,8 +408,8 @@ export default function Dashboard() {
                       variant="inverted"
                       aria-label="claim bribe"
                       icon={<SparklesIcon />}
-                      onClick={claimBribeRewardsHandler}
-                      isDisabled={isClaimingRewards || totalBribeRewards === 0}
+                      // onClick={claimBribeRewardsHandler}
+                      // isDisabled={isClaimingRewards || totalBribeRewards === 0}
                     />
                   </HStack>
                 </HStack>
@@ -425,7 +425,7 @@ export default function Dashboard() {
                     w="full"
                     loadingText="Claiming"
                     p="spacing03"
-                    onClick={() => handleTransactionFlow('all')}
+                    // onClick={() => handleTransactionFlow('all')}
                   >
                     <HStack align="center">
                       <SparklesIcon />

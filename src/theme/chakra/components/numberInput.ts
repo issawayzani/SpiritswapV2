@@ -6,10 +6,10 @@ const numberInput = {
   parts: ['addon', 'field', 'element'],
   baseStyle: {
     field: {
-      bg: 'bgBoxLighter',
-      color: colors.white,
+      bg: 'rgba(29.49, 26.39, 89.25, 0.90)',
+      color: '#A9CDFF',
       borderRadius: borderRadius.sm,
-      border: '1px solid transparent',
+      border: '1px solid #2E2A8C',
       p: 'spacing02 0',
       pr: '0',
       w: {
@@ -17,8 +17,8 @@ const numberInput = {
         md: '270px',
       },
       _focus: {
-        border: '1px solid ciDark',
-        borderColor: 'ciDark',
+        border: '1px solid #2E2A8C',
+        borderColor: '#2E2A8C',
       },
       _invalid: {
         borderColor: 'error',
@@ -37,9 +37,9 @@ const numberInput = {
     primary: {
       size: 'lg',
       field: {
-        bg: 'bgBoxLighter',
-        border: '1px solid ciDark',
-        borderColor: 'ciDark',
+        bg: 'rgba(29.49, 26.39, 89.25, 0.90)',
+        border: '1px solid #2E2A8C',
+        borderColor: '#2E2A8C',
       },
     },
     noBorder: {

@@ -48,6 +48,7 @@ export const NewBribeModal = ({
     useState<string>('');
   const [selectedBribe, setSelectedBribe] = useState<string>('');
   const [inputToken, setInputToken] = useState<Token>();
+  const [tokenAddress, setTokenAddress] = useState<string>('');
   const [rewardTokens, setRewardTokens] = useState<Token[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [inputValue, setInputValue] = useState<string>('');
@@ -62,14 +63,17 @@ export const NewBribeModal = ({
 
   const handleFarmChange = (lpAddress: string) => {
     const ffarm = getFarm(lpAddress);
+    console.log(ffarm);
     if (ffarm) {
-      const farm: farmsProps = ffarm?.fulldata;
-      const farmRewards: Token[] = farm.rewardsTokens.map(rwToken =>
+      const { rewardTokens, bribe } = ffarm;
+      console.log(rewardTokens);
+      const farmRewards: Token[] = rewardTokens.map(rwToken =>
         getToken(rwToken),
       );
+      console.log(farmRewards);
       setInputToken(farmRewards[0]);
       setRewardTokens(farmRewards);
-      setSelectedBribe(farm.bribeAddress);
+      setSelectedBribe(bribe);
     }
 
     setSelectedFarmLpAddress(lpAddress);
@@ -83,12 +87,11 @@ export const NewBribeModal = ({
     return TOKEN_EMPTY;
   };
   const getFarm = (address: string) => {
+    console.log(address);
     const findedFarm = farms.find(farm => {
-      const { farmAddress }: farmsProps = farm?.fulldata;
-      return checkAddress(farmAddress, address);
+      return checkAddress(farm.plugin, address);
     });
-    if (findedFarm) return findedFarm;
-    return null;
+    return findedFarm || null;
   };
 
   const { ongoingBribeAmount, minBribeAmount } = useTokenAmountPanel({
@@ -99,11 +102,11 @@ export const NewBribeModal = ({
 
   useEffect(() => {
     if (!selectedFarmLpAddress) {
-      const initialFarm: farmsProps = farms[0]?.fulldata;
-      if (initialFarm) {
-        setSelectedFarmLpAddress(initialFarm.farmAddress);
-        setSelectedBribe(initialFarm.bribeAddress);
-        const initialRewards: Token[] = initialFarm.rewardsTokens.map(rwToken =>
+      const { plugin, bribe, rewardTokens } = farms[0];
+      if (farms[0]) {
+        setSelectedFarmLpAddress(plugin);
+        setSelectedBribe(bribe);
+        const initialRewards: Token[] = rewardTokens.map(rwToken =>
           getToken(rwToken),
         );
 
@@ -160,12 +163,15 @@ export const NewBribeModal = ({
   return (
     <Modal isOpen={isOpen} onClose={onCloseModalHandler} {...props} isCentered>
       <ModalOverlay />
-      <ModalContent maxW={'450px'}>
+      <ModalContent
+        backgroundColor="rgba(29.49, 26.39, 89.25, 0.90)"
+        maxW={'450px'}
+      >
         <Flex
           p={'spacing06'}
           pl={'spacing05'}
           alignItems="center"
-          justifyContent={'space-between'}
+          justifyContent="center"
         >
           <CardHeader
             title={t(`${translationRoot}.newBribe`)}
@@ -177,7 +183,7 @@ export const NewBribeModal = ({
             }}
             onIconClick={() => {}}
           />
-          <IconButton
+          {/* <IconButton
             size="xs"
             height="2rem"
             width="2rem"
@@ -189,12 +195,12 @@ export const NewBribeModal = ({
             }}
             icon={<CloseIcon />}
             onClick={onCloseModal}
-          />
+          /> */}
         </Flex>
 
         <VStack>
           <Flex direction="column" px="spacing06" gap="spacing04" w="100%">
-            <Text color="grayDark" w="100%">
+            <Text color="#5F97FF" w="100%" textAlign="center">
               {t(`${translationRoot}.selectFarmToBribe`)}
             </Text>
             {farms && (
@@ -207,7 +213,7 @@ export const NewBribeModal = ({
 
             {inputToken ? (
               <>
-                <Text color="grayDark" w="100%">
+                <Text color="#5F97FF" textAlign="center" w="100%">
                   {t(`${translationRoot}.selectTokenAndAmount`)}
                 </Text>
                 <NewTokenAmountPanel
@@ -221,7 +227,7 @@ export const NewBribeModal = ({
                   showPercentage
                   inputWidth="15rem"
                 />
-                <Text color="grayDark" w="100%">
+                <Text color="#A19ED3" w="100%">
                   {`Minimum bribe amount: ${minBribeAmount} ${inputToken.symbol}`}
                 </Text>
               </>
@@ -232,7 +238,11 @@ export const NewBribeModal = ({
               pb="spacing06"
               justifyContent={'space-between'}
             >
-              <Button variant="secondary" onClick={onCloseModalHandler}>
+              <Button
+                padding="9px 51px"
+                backgroundColor="#2E2A8C"
+                onClick={onCloseModalHandler}
+              >
                 {t(`${translationRoot}.cancel`)}
               </Button>
               {!account ? (
@@ -240,12 +250,14 @@ export const NewBribeModal = ({
               ) : (
                 <Button
                   disabled={getDisabled()}
+                  backgroundColor="#1D1A59"
+                  borderColor="#22ABAC"
+                  borderWidth="2px"
+                  padding="9px 51px"
                   isLoading={isLoading}
                   onClick={onConfirm}
                 >
-                  {isLoading
-                    ? 'Loading...'
-                    : t(`${translationRoot}.confirmBribe`)}
+                  {isLoading ? 'Loading...' : 'Confirm'}
                 </Button>
               )}
             </Flex>

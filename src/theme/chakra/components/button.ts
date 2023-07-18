@@ -44,8 +44,9 @@ const Button = {
   variants: {
     primary: {
       bg: ciDark,
-      _hover: { _disabled: { bgColor: ciDark, opacity: opacity.opacity04 } },
+      _hover: { _disabled: { bgColor: '#22ABAC', opacity: opacity.opacity04 } },
       _disabled: {
+        bg: '#1D1A59',
         opacity: opacity.opacity04,
       },
     },

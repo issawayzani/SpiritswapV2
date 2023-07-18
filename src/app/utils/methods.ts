@@ -43,7 +43,7 @@ import { BASE_TOKEN_ADDRESS, CHAIN_ID } from 'constants/index';
 import BigNum from 'bignumber.js';
 import allFarms, { farms, farmsV2 } from 'constants/farms';
 import { FarmConfig } from 'constants/types';
-import { BoostedFarm } from 'app/interfaces/Inspirit';
+import { BribeCard } from 'app/interfaces/Inspirit';
 import moment from 'moment';
 
 const FARM = allFarms;
@@ -585,19 +585,19 @@ export const formatUSDAmount = (value: number, symbol: string = ''): string => {
   return `${symbol}${formatNumber({ value })}`;
 };
 
-export const getUserFarms = (farms: BoostedFarm[], userFarms) => {
-  if (!userFarms || !farms) return [];
-  const userArray = Object.entries(userFarms);
+// export const getUserFarms = (farms: BoostedFarm[], userFarms) => {
+//   if (!userFarms || !farms) return [];
+//   const userArray = Object.entries(userFarms);
 
-  const userFarmsOnly = farms.filter(e => {
-    const address = e.fulldata.farmAddress;
-    let findInd = userArray.findIndex(a => {
-      return checkAddress(a[0], address);
-    });
-    return findInd !== -1;
-  });
-  return userFarmsOnly;
-};
+//   const userFarmsOnly = farms.filter(e => {
+//     const address = e.fulldata.farmAddress;
+//     let findInd = userArray.findIndex(a => {
+//       return checkAddress(a[0], address);
+//     });
+//     return findInd !== -1;
+//   });
+//   return userFarmsOnly;
+// };
 
 enum Days {
   sunday = 7,

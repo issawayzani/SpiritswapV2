@@ -1,7 +1,7 @@
 import { Grid, GridItem, HStack, Text, VStack } from '@chakra-ui/react';
 import ImageLogo from 'app/components/ImageLogo';
 import { QuestionHelper } from 'app/components/QuestionHelper';
-import { BoostedFarm } from 'app/interfaces/Inspirit';
+import { BribeCard } from 'app/interfaces/Inspirit';
 import { convertAmount, formatNumber } from 'app/utils';
 import BigNumber from 'bignumber.js';
 import { useMemo } from 'react';
@@ -15,7 +15,7 @@ const MobileRow = ({
   onNewVote,
   cleanError,
 }: {
-  farm: BoostedFarm;
+  farm;
   onNewVote: (value: string, lpAddress: string) => void;
   resetInputs: boolean;
   cleanError: () => void;

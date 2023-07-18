@@ -84,6 +84,7 @@ export interface Web3TxData {
     | 'FARM'
     | 'SWAP'
     | 'BRIBE'
+    | 'VOTE'
     | undefined;
   hash: string;
   uniqueMessage?: { text: string; secondText?: string };

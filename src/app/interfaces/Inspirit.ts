@@ -17,23 +17,19 @@ export interface FarmVoteComplete extends FarmVote {
   votesTotal: string;
 }
 
-export interface BoostedFarm {
-  bribes: string;
-  feeEarns: string;
+export interface BribeCard {
+  plugin: string;
+  bribe: string;
   liquidityPer10kInspirit: number;
-  fulldata: {
-    farmAddress: string;
-    bribeAddress: string;
-    rewardsTokens: string[];
-    bribeVotes: string;
-    rewards: BigNumber[];
-    rewardsUSD: string[];
-    userRewardsEarnsUSD: string[];
-  };
-  logo: string;
-  name: string;
-  totalVotesOnFarm: string;
-  userVotes: string;
-  value: string;
-  weight: number;
+  isAlive: boolean;
+  protocol: string; // B4
+  symbol: string; // B5
+
+  rewardTokens: string[]; // B6
+  rewardTokenDecimals: number[]; // B7
+  rewardsPerToken: BigNumber[]; // B8
+  accountRewardsEarned: BigNumber[];
+  voteWeight: BigNumber;
+  votePercent: BigNumber;
+  accountVotePercent: BigNumber;
 }

@@ -764,6 +764,13 @@
         "error": "Approve failed"
       }
     },
+    "vote": {
+      "claim": {
+        "pending": "Claiming rewards pending",
+        "success": "CLaim rewards successful",
+        "error": "Claim rewards failed"
+      }
+    },
     "swap": {
       "approve": {
         "pending": "Approving token",

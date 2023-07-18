@@ -95,8 +95,8 @@ const CardHeader = ({
     }
   };
   return (
-    <Flex align="center" sx={{ gap: '0.3rem' }}>
-      {id !== '' && (
+    <Flex justifyContent="center" align="center" sx={{ gap: '0.3rem' }}>
+      {/* {id !== '' && (
         <Button
           background="none"
           _active={{ border: 'none' }}
@@ -119,7 +119,7 @@ const CardHeader = ({
             Icon()
           )}
         </Button>
-      )}
+      )} */}
       <Heading level={2}>{title}</Heading>
       {!hideQuestionIcon && (
         <div>

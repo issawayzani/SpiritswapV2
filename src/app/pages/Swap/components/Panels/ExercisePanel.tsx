@@ -51,14 +51,14 @@ export default function ExercisePanel(props) {
     if (Number(numberInputValue) > balance) return DISABLED;
     return NOT_DISABLED;
   };
-  const approveToken = async (number, address, token) => {
+  const approveToken = async (number, address, token, abi) => {
     setLoaderText('Approving');
     try {
       const tx = await approve(
         address,
         '0x8d6abe4176f262F79317a1ec60B9C6e070a2142a',
         number,
-        'token',
+        abi,
       );
 
       const response = transactionResponse('swap.approve', {
@@ -88,11 +88,13 @@ export default function ExercisePanel(props) {
       number,
       '0xc7a80762B3dcA438E81Ef6daA92E7323BE2e7C13',
       'OTOKEN',
+      'OTOKEN',
     );
     approveOtherSuccess = await approveToken(
       number,
       '0xAa171Ad6f4eD52ED74707300aD90bDAEE8398773',
       'BASE',
+      'fakeBASE',
     );
     if (approveSuccess && approveOtherSuccess) {
       await new Promise(resolve => setTimeout(resolve, 2000));

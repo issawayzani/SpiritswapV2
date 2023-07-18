@@ -11,7 +11,7 @@ import { wallet } from 'utils/web3';
 import { isPossibleToVote } from 'utils/data';
 import { ERROR_NOT_SUM_100 } from 'constants/errors';
 import { getProvider } from 'app/connectors/EthersConnector/login';
-import { BoostedFarm } from 'app/interfaces/Inspirit';
+import { BribeCard } from 'app/interfaces/Inspirit';
 import moment from 'moment';
 
 export const getGaugeV2Contract = async (_provider = null) => {
@@ -112,23 +112,23 @@ export const submitBribe = async (
   });
 };
 
-export const claimBribes = async (
-  bribes: string[],
-  userAddress: string,
-  version,
-) => {
-  if (version === 0) {
-    const gaugeStableContract = await getGaugeStableContract();
-    return await gaugeStableContract.claimBribes(bribes, userAddress, {
-      gasLimit: DEFAULT_GAS_LIMIT,
-    });
-  }
-  const gaugeV2Contract = await getGaugeV2Contract();
+// export const claimBribes = async (
+//   bribes: string[],
+//   userAddress: string,
+//   version,
+// ) => {
+//   if (version === 0) {
+//     const gaugeStableContract = await getGaugeStableContract();
+//     return await gaugeStableContract.claimBribes(bribes, userAddress, {
+//       gasLimit: DEFAULT_GAS_LIMIT,
+//     });
+//   }
+//   const gaugeV2Contract = await getGaugeV2Contract();
 
-  return await gaugeV2Contract.claimBribes(bribes, userAddress, {
-    gasLimit: DEFAULT_GAS_LIMIT,
-  });
-};
+//   return await gaugeV2Contract.claimBribes(bribes, userAddress, {
+//     gasLimit: DEFAULT_GAS_LIMIT,
+//   });
+// };
 
 export const feeDistributorContract = async () => {
   const _connector = getProvider();
@@ -153,6 +153,59 @@ export const inspiritContract = async () => {
 
   return inspiritContract;
 };
+
+export const bribeContract = async address => {
+  const _connector = getProvider();
+  const bribeContract = await Contract(address, 'bribe', _connector, CHAIN_ID);
+
+  return bribeContract;
+};
+export const createBribe = async (bribeAddress, tokenAddress, number) => {
+  const contract = await bribeContract(bribeAddress);
+  return await contract.notifyRewardAmount(tokenAddress, number);
+};
+export const voterContract = async () => {
+  const _connector = getProvider();
+  const tokenContract = await Contract(
+    '0x6cC3217Eed6d45497b0f566522C36927da108321',
+    'voter',
+    _connector,
+    CHAIN_ID,
+  );
+
+  return tokenContract;
+};
+export const vote = async (plugins, weights) => {
+  const contract = await voterContract();
+  return await contract.vote(plugins, weights);
+};
+export const reset = async () => {
+  const contract = await voterContract();
+  return await contract.reset();
+};
+export const checkLastVoted = async userAddress => {
+  const contract = await multicallContract();
+  let userNumber;
+  try {
+    userNumber = await contract.bondingCurveData(userAddress);
+  } catch (e) {
+    console.log(e);
+    return true;
+  }
+  const number = userNumber.accountLastVoted;
+  const currentUnixTime = Math.floor(Date.now() / 1000);
+  const value = Math.floor(currentUnixTime / 604800) * 604800;
+  if (Number(number) > value) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+export const claimBribes = async bribes => {
+  const contract = await voterContract();
+  return await contract.claimBribes(bribes);
+};
 export const TokenContract = async () => {
   const _connector = getProvider();
   const tokenContract = await Contract(
@@ -163,6 +216,37 @@ export const TokenContract = async () => {
   );
 
   return tokenContract;
+};
+export const getTokenSymbol = async address => {
+  const _connector = getProvider();
+  const tokenContract = await Contract(address, 'erc20', _connector, CHAIN_ID);
+  const symbol = await tokenContract.symbol();
+  return symbol;
+};
+
+export const multicallContract = async () => {
+  const _connector = getProvider();
+  const multicallContract = await Contract(
+    '0xa871fD92a8f055141F1f53Ba6758BA61d87Fe1E8',
+    'Multicall',
+    _connector,
+    CHAIN_ID,
+  );
+
+  return multicallContract;
+};
+export const getVotePageData = async userAddress => {
+  const contract = await multicallContract();
+  const data = await contract.bondingCurveData(userAddress);
+  const accountVTOKEN = data.accountVTOKEN;
+  const accounVotingPower = data.accountVotingPower;
+  return { accountVTOKEN, accounVotingPower };
+};
+
+export const getBribeCards = async userAddress => {
+  const contract = await multicallContract();
+  const totalpools = await contract.getPlugins();
+  return await contract.getBribeCards(0, totalpools.length, userAddress);
 };
 export const VTOKENContract = async () => {
   const _connector = getProvider();
@@ -410,47 +494,47 @@ export const claimSpirit = async (claimableSpiritRewards: string) => {
     updateTarget: 'user',
   });
 };
+//used for voting
+// export const voteForBoostedDistributions = async ({
+//   vaults,
+//   version = 1,
+// }: {
+//   vaults: BoostedFarm[];
+//   version?: number;
+// }) => {
+//   const tokenList: string[] = [];
+//   const valueList: BigNum[] = [];
+//   let votingWeight = 0;
 
-export const voteForBoostedDistributions = async ({
-  vaults,
-  version = 1,
-}: {
-  vaults: BoostedFarm[];
-  version?: number;
-}) => {
-  const tokenList: string[] = [];
-  const valueList: BigNum[] = [];
-  let votingWeight = 0;
+//   vaults.forEach(vault => {
+//     const { value, fulldata } = vault;
+//     const address = fulldata.farmAddress;
+//     const weight = parseFloat(`${value}`.replace(' %', ''));
 
-  vaults.forEach(vault => {
-    const { value, fulldata } = vault;
-    const address = fulldata.farmAddress;
-    const weight = parseFloat(`${value}`.replace(' %', ''));
+//     if (weight && address) {
+//       tokenList.push(address);
+//       valueList.push(utils.parseEther(`${weight}`));
+//       votingWeight += weight;
+//     }
+//   });
 
-    if (weight && address) {
-      tokenList.push(address);
-      valueList.push(utils.parseEther(`${weight}`));
-      votingWeight += weight;
-    }
-  });
+//   if (votingWeight !== 100 || tokenList.length !== valueList.length) {
+//     throw new Error(ERROR_NOT_SUM_100);
+//   }
 
-  if (votingWeight !== 100 || tokenList.length !== valueList.length) {
-    throw new Error(ERROR_NOT_SUM_100);
-  }
+//   const contract = await gaugeContractProxy({ version });
 
-  const contract = await gaugeContractProxy({ version });
+//   const tx = await contract.vote(tokenList, valueList, {
+//     gasLimit: DEFAULT_GAS_LIMIT,
+//   });
 
-  const tx = await contract.vote(tokenList, valueList, {
-    gasLimit: DEFAULT_GAS_LIMIT,
-  });
-
-  return transactionResponse('inspirit.vote', {
-    tx: tx,
-    uniqueMessage: { text: 'Voting for boosted farms ' },
-    update: 'inspirit',
-    updateTarget: 'user',
-  });
-};
+//   return transactionResponse('inspirit.vote', {
+//     tx: tx,
+//     uniqueMessage: { text: 'Voting for boosted farms ' },
+//     update: 'inspirit',
+//     updateTarget: 'user',
+//   });
+// };
 
 export const checkLastVotes = async (
   userAddress: string,

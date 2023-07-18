@@ -87,19 +87,19 @@ const NewTokenAmountPanel = ({
   if (!tokens) {
     tokens = allTokens;
   }
-  if (bridge && chainID) {
-    const [USDC, USDT, DAI]: string[] = TOKENS_BRIDGE[chainID];
-    const filteredBridgeTokens = tokens?.filter(token => {
-      const tokenAddress = token.address;
-      if (checkAddress(tokenAddress, USDC)) return true;
-      if (checkAddress(tokenAddress, USDT)) return true;
-      if (checkAddress(tokenAddress, DAI)) return true;
-      return false;
-    });
-    if (filteredBridgeTokens?.length) {
-      tokens = filteredBridgeTokens;
-    }
-  }
+  // if (bridge && chainID) {
+  //   const [USDC, USDT, DAI]: string[] = TOKENS_BRIDGE[chainID];
+  //   const filteredBridgeTokens = tokens?.filter(token => {
+  //     const tokenAddress = token.address;
+  //     if (checkAddress(tokenAddress, USDC)) return true;
+  //     if (checkAddress(tokenAddress, USDT)) return true;
+  //     if (checkAddress(tokenAddress, DAI)) return true;
+  //     return false;
+  //   });
+  //   if (filteredBridgeTokens?.length) {
+  //     tokens = filteredBridgeTokens;
+  //   }
+  // }
   const { token: fetchedTokenWithBalance, isLoading: isLoadingBalance } =
     useTokenBalance(token?.chainId ?? 1, token?.address ?? '', context, token);
 
@@ -271,10 +271,11 @@ const NewTokenAmountPanel = ({
 
   return (
     <Flex
-      bg="bgBoxLighter"
+      bg="rgba(29.49, 26.39, 89.25, 0.90)"
       py="spacing05"
       px="spacing04"
       flexDirection="column"
+      borderColor="#2E2A8C"
       w="full"
       borderRadius="md"
       {...props}
@@ -316,7 +317,7 @@ const NewTokenAmountPanel = ({
                 paddingInline="8px"
                 placeholder="0"
                 fontSize="xl2"
-                _placeholder={{ color: 'gray' }}
+                _placeholder={{ color: '#A9CDFF' }}
               />
             </NumberInput>
           </Skeleton>
@@ -366,7 +367,7 @@ const NewTokenAmountPanel = ({
       {showBalance ? (
         <Flex w="full" align="center" justify="space-between">
           <Flex>
-            <Text as="div" fontSize="h5" color="grayDarker" mr="spacing02">
+            <Text as="div" fontSize="h5" color="#BFBED3" mr="spacing02">
               <Flex align="center" justify="center" sx={{ gap: '0.2rem' }}>
                 <Text
                   _hover={{ cursor: 'pointer' }}
@@ -384,7 +385,7 @@ const NewTokenAmountPanel = ({
             <Text
               as="div"
               fontSize="sm"
-              color="gray"
+              color="#BFBED3"
               mr="spacing04"
               cursor={showCursorPointer()}
               onClick={() => handleInput(balance)}

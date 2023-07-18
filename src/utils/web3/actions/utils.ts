@@ -12,6 +12,7 @@ export interface TransactionResponseProps {
     | 'FARM'
     | 'SWAP'
     | 'BRIBE'
+    | 'VOTE'
     | undefined;
   inputSymbol?: string;
   inputValue?: string;

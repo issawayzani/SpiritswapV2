@@ -18,9 +18,10 @@ export const FarmsDropdown = ({ farms, value, onChange, ...props }) => {
       value={value}
       disabled={!farms || farms.length === 0}
       outline={'none'}
+      borderColor="#2E2A8C"
       _focus={{
         boxShadow: 'none',
-        borderColor: 'inherit',
+        borderColor: '#2E2A8C',
       }}
     >
       {(!farms || farms.length === 0) && (
@@ -28,14 +29,11 @@ export const FarmsDropdown = ({ farms, value, onChange, ...props }) => {
       )}
 
       {farms.map(farm => {
-        const { name, fulldata } = farm;
-        const [tokenA, tokenB] = name.split(' ');
+        const { plugin, symbol } = farm;
+        // const [tokenA, tokenB] = name.split(' ');
         return (
-          <StyledOption
-            key={`${fulldata.farmAddress}-${name}`}
-            value={fulldata.farmAddress}
-          >
-            {`${tokenA} + ${tokenB}`}
+          <StyledOption key={`${symbol}`} value={plugin}>
+            {symbol}
           </StyledOption>
         );
       })}

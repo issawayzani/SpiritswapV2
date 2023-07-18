@@ -3,16 +3,15 @@ import styled from '@emotion/styled';
 
 export const StyledContainer = styled(Box)<{ ismobile?: string }>`
   padding-top: ${props => (props.ismobile ? '124px' : '168px')};
-
   padding-bottom: 175px;
   max-width: ${({ theme }) => theme.breakpoints.xl};
   margin: auto;
+
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
-    display: grid;
-    grid-template-columns: clamp(30%, 10%, 40%) 1fr;
     gap: 0.5rem;
     margin-top: 10px;
   }
+
   @media (max-width: ${({ theme }) => theme.breakpoints.xl}) {
     padding-left: 1em;
     padding-right: 1em;

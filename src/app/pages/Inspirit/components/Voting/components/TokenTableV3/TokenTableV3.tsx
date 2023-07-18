@@ -9,7 +9,7 @@ import {
   Tr,
   VStack,
 } from '@chakra-ui/react';
-import { getUserFarms } from 'app/utils';
+// import { getUserFarms } from 'app/utils';
 import { useEffect, useMemo, useState } from 'react';
 import { useAppSelector } from 'store/hooks';
 import {
@@ -28,13 +28,13 @@ import { selectSaturatedGauges } from 'store/general/selectors';
 import useMobile from 'utils/isMobile';
 import { MobileTable } from '../MobileTable';
 import useWallets from 'app/hooks/useWallets';
+import { checkLastVoted, getBribeCards } from 'utils/web3/actions/inspirit';
 
 const TokenTableV3 = ({
   errorMessage,
   handleVote,
-  farmType,
+  setErrorMessage,
   isLoading,
-  onUpdateFarm,
   selectedFarm,
   farmsSize,
   handleSort,
@@ -46,17 +46,17 @@ const TokenTableV3 = ({
   const { account, isLoggedIn } = useWallets();
   const isMobile = useMobile();
   const translationPath = 'inSpirit.voting';
-
-  const stakedFarms = useAppSelector(selectFarmsStaked);
-  const lockedSpiritBalance = useAppSelector(selectLockedInSpiritAmount);
+  const [bribeCards, setBribeCards] = useState([]);
+  // const stakedFarms = useAppSelector(selectFarmsStaked);
+  // const lockedSpiritBalance = useAppSelector(selectLockedInSpiritAmount);
   const [searchValues, setSearchValues] = useState('');
   const [showMobileTableFilters, setShowMobileTableFilters] =
     useState<boolean>(false);
   const [newVotes, setNewVotes] = useState({});
-  const onFarmSearch = e => {
-    const query = e.target.value;
-    setSearchValues(query);
-  };
+  // const onFarmSearch = e => {
+  //   const query = e.target.value;
+  //   setSearchValues(query);
+  // };
 
   const { boostedV2, boostedStable } = useAppSelector(selectSaturatedGauges);
 
@@ -70,20 +70,25 @@ const TokenTableV3 = ({
   };
 
   useEffect(() => {
-    const getBoostedFarms = async () => {
-      const userBoostedV2 = getUserFarms(boostedV2, stakedFarms);
-      const userBoostedStable = getUserFarms(boostedStable, stakedFarms);
-
-      onUpdateFarm({
-        v2Classics: sortFn(boostedV2, 'yourVote', 'des'),
-        userv2Classics: sortFn(userBoostedV2, 'yourVote', 'des'),
-        stables: sortFn(boostedStable, 'yourVote', 'des'),
-        userStables: sortFn(userBoostedStable, 'yourVote', 'des'),
-      });
+    const fetch = async () => {
+      const data = await getBribeCards(account);
+      setBribeCards(data);
     };
-    getBoostedFarms();
+    fetch();
+    // const getBoostedFarms = async () => {
+    //   const userBoostedV2 = getUserFarms(boostedV2, stakedFarms);
+    //   const userBoostedStable = getUserFarms(boostedStable, stakedFarms);
+
+    //   onUpdateFarm({
+    //     v2Classics: sortFn(boostedV2, 'yourVote', 'des'),
+    //     userv2Classics: sortFn(userBoostedV2, 'yourVote', 'des'),
+    //     stables: sortFn(boostedStable, 'yourVote', 'des'),
+    //     userStables: sortFn(userBoostedStable, 'yourVote', 'des'),
+    //   });
+    // };
+    // getBoostedFarms();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchValues, userOnly, farmType, account, boostedV2, boostedStable]);
+  }, [userOnly, account, boostedV2, boostedStable]);
 
   const filteredBribes = useMemo(() => {
     if (searchValues) {
@@ -101,15 +106,21 @@ const TokenTableV3 = ({
       });
       return newList;
     }
-    return selectedFarm;
-  }, [selectedFarm, searchValues]);
+    return bribeCards;
+  }, [bribeCards]);
 
   const [resetInputs, setResetInputs] = useState<boolean>(false);
 
-  const resetVoting = () => {
-    setResetInputs(true);
-    setNewVotes({});
+  const resetVoting = async () => {
+    const canReset = await checkLastVoted(account);
+    if (!canReset) {
+      setErrorMessage('You can only reset once per epoch');
+    } else {
+      setResetInputs(true);
+      setNewVotes({});
+    }
   };
+
   const labelData = [
     {
       id: 1,
@@ -117,46 +128,32 @@ const TokenTableV3 = ({
       sortYpe: 'globalVoting',
       onSort: handleSort,
     },
-    {
-      id: 2,
-      label: 'APR%',
-      sortYpe: 'rewards',
-      onSort: handleSort,
-    },
+    { id: 2, label: 'Votes', sortYpe: 'globalVoting', onSort: handleSort },
     {
       id: 3,
-      label: 'Rewards / 10k inSPIRIT',
-      sortYpe: 'rewards',
+      label: 'Earned',
+      sortYpe: 'userRewards',
       onSort: handleSort,
     },
     {
       id: 4,
-      label: 'Liquidity / 10k inSPIRIT',
-      sortYpe: 'liquidityPer10kInspirit',
+      label: 'Rewards/Vote',
+      sortYpe: 'rewards',
       onSort: handleSort,
     },
-    {
-      id: 5,
-      label: 'Voting Fees Earned',
-      sortYpe: 'userRewards',
-      onSort: handleSort,
-    },
-    { id: 6, label: 'Voting', sortYpe: 'globalVoting', onSort: handleSort },
-    { id: 7, label: 'Your vote (%)', sortYpe: 'yourVote', onSort: handleSort },
-  ];
 
-  const showBanner =
-    lockedSpiritBalance !== '0.0' ? (account ? false : true) : true;
+    { id: 5, label: 'Your vote (%)', sortYpe: 'yourVote', onSort: handleSort },
+  ];
 
   return (
     <VStack w="full">
-      <HeaderTable
+      {/* <HeaderTable
         onFarmSearch={onFarmSearch}
         toggleMobileTableFilters={toggleMobileTableFilters}
         toggleUserFarm={toggleUserFarm}
         userFarmsOnly={userOnly}
         farmsSize={farmsSize}
-      />
+      /> */}
       {showMobileTableFilters && (
         <ToggleFilter toggleFarms={toggleUserFarm} userFarmsOnly={userOnly} />
       )}
@@ -189,25 +186,22 @@ const TokenTableV3 = ({
             </Thead>
             <Tbody w="full">
               {filteredBribes.length
-                ? filteredBribes.map((farm, i) => (
-                    <FarmsData
-                      farm={farm}
-                      key={`farm-${farm.name}-${i}`}
-                      resetVoting={resetInputs}
-                      onNewVote={onNewVote}
-                      cleanError={cleanError}
-                    />
-                  ))
+                ? filteredBribes.map(
+                    (farm, i) =>
+                      farm.isAlive && (
+                        <FarmsData
+                          farm={farm}
+                          key={`farm-${farm.symbol}-${i}`}
+                          resetVoting={resetInputs}
+                          onNewVote={onNewVote}
+                          cleanError={cleanError}
+                        />
+                      ),
+                  )
                 : null}
             </Tbody>
           </Table>
         </TableContainer>
-      )}
-
-      {showBanner && (
-        <StyledHighlightMessage>
-          {t(`${translationPath}.generateButton`)}
-        </StyledHighlightMessage>
       )}
 
       {errorMessage && (
@@ -229,7 +223,7 @@ const TokenTableV3 = ({
           variant="primary"
           w={isMobile ? 'full' : '-moz-initial'}
           isLoading={isLoading}
-          onClick={() => handleVote(selectedFarm, newVotes)}
+          onClick={() => handleVote(filteredBribes, newVotes)}
         >
           {t(
             `${translationPath}.${isLoggedIn ? 'confirmVote' : 'notconnected'}`,
