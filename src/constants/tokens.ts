@@ -142,8 +142,64 @@ export const wBOMB = {
   decimals: 18,
   chainId: 250,
 };
+export const BASE = {
+  name: 'BASE',
+  symbol: 'BASE',
+  address: '0xAa171Ad6f4eD52ED74707300aD90bDAEE8398773',
+  decimals: 18,
+  chainId: 250,
+};
+export const TEST0 = {
+  name: 'TEST0',
+  symbol: 'TEST0',
+  address: '0x7FE495D9ff5860839951C05C1C4f8ee4e78C5c53',
+  decimals: 18,
+  chainId: 250,
+};
+export const TESTX0 = {
+  name: 'TESTX0',
+  symbol: 'TESTX0',
+  address: '0x8BCB82e96398a9C40723119aea4a3600641A5b3D',
+  decimals: 18,
+  chainId: 250,
+};
+export const TEST1 = {
+  name: 'TEST1',
+  symbol: 'TEST1',
+  address: '0x280357C11c920f070CA36A7018AFab62a7C1C2E6',
+  decimals: 18,
+  chainId: 250,
+};
+export const TESTX1 = {
+  name: 'TESTX1',
+  symbol: 'TESTX1',
+  address: '0x9257cBCeA4538f652D432EE244030378ed624d15',
+  decimals: 18,
+  chainId: 250,
+};
+export const GAME0 = {
+  name: 'GAME0',
+  symbol: 'GAME0',
+  address: '0xaCE38FE07f912B8c83bD72035e71374c2397242A',
+  decimals: 18,
+  chainId: 250,
+};
+export const GAME1 = {
+  name: 'GAME1',
+  symbol: 'GAME1',
+  address: '0x6cDBaD96E7a8321F1A4F677CF29Cc9f2305977bD',
+  decimals: 18,
+  chainId: 250,
+};
 
 export const tokens: Token[] = [
+  BASE,
+  TEST0,
+  TEST1,
+  TESTX0,
+  TESTX1,
+  GAME0,
+  GAME1,
   WCANTO,
   SOULC,
   FTM,

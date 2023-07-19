@@ -1,4 +1,4 @@
-import { BoostedFarm } from 'app/interfaces/Inspirit';
+import { BribeCard } from 'app/interfaces/Inspirit';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -58,7 +58,7 @@ const pieChartOptions = {
   },
 };
 
-const usePieChartData = ({ farmsList }: { farmsList: BoostedFarm[] }) => {
+const usePieChartData = ({ farmsList }: { farmsList: BribeCard[] }) => {
   const { t } = useTranslation();
   const translationPath = 'inSpirit.voting';
 
@@ -71,12 +71,17 @@ const usePieChartData = ({ farmsList }: { farmsList: BoostedFarm[] }) => {
       color: 'rgb(47, 92, 69)',
     };
     for (let i = 0; i < farmsList.length; i++) {
-      const { name, userVotes } = farmsList[i];
-      const value = +`${userVotes}`.replace('%', '');
-      const lpSymbol = `${name.replace(' ', '-')} LP`;
+      const { symbol, votePercent, isAlive } = farmsList[i];
+      if (!isAlive) continue;
+      const value = +`${(Number(votePercent) / 1e18).toFixed(2)}`.replace(
+        '%',
+        '',
+      );
+      console.log(value);
+      // const lpSymbol = `${symbol.replace(' ', '-')} LP`;
       if (value > 1) {
         data.push(value);
-        labels.push(lpSymbol);
+        labels.push(symbol);
       } else {
         othersVotes.value = othersVotes.value + value;
       }

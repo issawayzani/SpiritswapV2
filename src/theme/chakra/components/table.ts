@@ -21,17 +21,18 @@ const Table = {
           textAlign: 'start',
           bg: 'none',
           p: '4px 8px',
-          color: colors.grayDarker,
+          color: '#BFBED3',
+          borderBottom: '0.50px #2E2A8C solid',
           _first: { borderLeftRadius: borderRadius.sm },
           _last: { borderRightRadius: borderRadius.sm },
         },
         tr: {
           td: {
-            bg: 'bgBoxLighter',
+            bg: 'none',
             textAlign: 'center',
             lineHeight: '17px',
             p: '4px 8px',
-            borderY: `4px solid ${colors.bgBox}`,
+            // borderY: `4px solid ${colors.bgBox}`,
             _first: {
               borderLeftRadius: borderRadius.md,
               pl: '5px',

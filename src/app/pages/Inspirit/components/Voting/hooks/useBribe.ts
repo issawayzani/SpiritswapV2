@@ -2,7 +2,7 @@ import Web3Monitoring from 'app/connectors/EthersConnector/transactions';
 import { IBribeFarm } from 'app/interfaces/BribeFarm';
 import { transactionResponse } from 'utils/web3/actions/utils';
 import { BigNumber, utils } from 'ethers';
-import { approve, submitBribe } from 'utils/web3';
+import { approve, createBribe, submitBribe } from 'utils/web3';
 
 export const useBribe = () => {
   const { addToQueue } = Web3Monitoring();
@@ -25,7 +25,7 @@ export const useBribe = () => {
       );
       await txApprove.wait();
 
-      const tx = await submitBribe(bribeAddress, token.address, amountParsed);
+      const tx = await createBribe(bribeAddress, token.address, amountParsed);
       addToQueue(
         transactionResponse('inspirit.bribe', {
           tx,

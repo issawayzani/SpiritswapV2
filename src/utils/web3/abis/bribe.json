@@ -1,52 +1,23 @@
 [
   {
     "inputs": [
-      { "internalType": "address", "name": "_owner", "type": "address" },
-      { "internalType": "address", "name": "_gaugeProxy", "type": "address" },
-      { "internalType": "address", "name": "_bribeFactory", "type": "address" }
+      { "internalType": "address", "name": "_voter", "type": "address" }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
+  { "inputs": [], "name": "Bribe__InvalidZeroInput", "type": "error" },
+  { "inputs": [], "name": "Bribe__NotAuthorizedVoter", "type": "error" },
+  { "inputs": [], "name": "Bribe__NotRewardToken", "type": "error" },
+  { "inputs": [], "name": "Bribe__RewardSmallerThanDuration", "type": "error" },
+  { "inputs": [], "name": "Bribe__RewardTokenAlreadyAdded", "type": "error" },
   {
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "address",
-        "name": "oldOwner",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
-      }
-    ],
-    "name": "OwnerChanged",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
-      }
-    ],
-    "name": "OwnerNominated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "token",
+        "name": "user",
         "type": "address"
       },
       {
@@ -56,14 +27,27 @@
         "type": "uint256"
       }
     ],
-    "name": "Recovered",
+    "name": "Bribe__Deposited",
     "type": "event"
   },
   {
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
+        "internalType": "address",
+        "name": "rewardToken",
+        "type": "address"
+      }
+    ],
+    "name": "Bribe__RewardAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
         "internalType": "address",
         "name": "rewardToken",
         "type": "address"
@@ -75,7 +59,7 @@
         "type": "uint256"
       }
     ],
-    "name": "RewardAdded",
+    "name": "Bribe__RewardNotified",
     "type": "event"
   },
   {
@@ -100,7 +84,7 @@
         "type": "uint256"
       }
     ],
-    "name": "RewardPaid",
+    "name": "Bribe__RewardPaid",
     "type": "event"
   },
   {
@@ -119,26 +103,7 @@
         "type": "uint256"
       }
     ],
-    "name": "Staked",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "Withdrawn",
+    "name": "Bribe__Withdrawn",
     "type": "event"
   },
   {
@@ -151,7 +116,7 @@
   {
     "inputs": [
       { "internalType": "uint256", "name": "amount", "type": "uint256" },
-      { "internalType": "address", "name": "voter", "type": "address" }
+      { "internalType": "address", "name": "account", "type": "address" }
     ],
     "name": "_deposit",
     "outputs": [],
@@ -161,16 +126,9 @@
   {
     "inputs": [
       { "internalType": "uint256", "name": "amount", "type": "uint256" },
-      { "internalType": "address", "name": "voter", "type": "address" }
+      { "internalType": "address", "name": "account", "type": "address" }
     ],
     "name": "_withdraw",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "acceptOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -194,13 +152,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "bribeFactory",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       { "internalType": "address", "name": "account", "type": "address" },
       { "internalType": "address", "name": "_rewardsToken", "type": "address" }
@@ -211,10 +162,12 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "gaugeProxy",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "getReward",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -227,12 +180,12 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "address", "name": "voter", "type": "address" }
+    "inputs": [],
+    "name": "getRewardTokens",
+    "outputs": [
+      { "internalType": "address[]", "name": "", "type": "address[]" }
     ],
-    "name": "getRewardForOwner",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -264,43 +217,10 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_owner", "type": "address" }
-    ],
-    "name": "nominateNewOwner",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "nominatedOwner",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
       { "internalType": "address", "name": "_rewardsToken", "type": "address" },
       { "internalType": "uint256", "name": "reward", "type": "uint256" }
     ],
     "name": "notifyRewardAmount",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "owner",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "tokenAddress", "type": "address" },
-      { "internalType": "uint256", "name": "tokenAmount", "type": "uint256" }
-    ],
-    "name": "recoverERC20",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -365,6 +285,13 @@
     ],
     "name": "userRewardPerTokenPaid",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "voter",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   }

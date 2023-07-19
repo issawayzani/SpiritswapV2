@@ -17,7 +17,7 @@ export const Test = async (
 ) => {
   const multicallv3 = new web3.eth.Contract(
     multicalcontract.abi as AbiItem[],
-    '0xc89CFF765965C76A9775a44775C3f98e5F035a10',
+    '0xa871fD92a8f055141F1f53Ba6758BA61d87Fe1E8',
   );
 
   try {

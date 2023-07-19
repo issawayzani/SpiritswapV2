@@ -53,7 +53,12 @@ const Percentages: FC<Props> = ({
   return (
     <HStack w="full" spacing="spacing02" mt="spacing03">
       {buttonValues.map(value => (
-        <Button key={value} onClick={() => handleChange(value)}>
+        <Button
+          backgroundColor="#4F4AD3"
+          color="#4640D3"
+          key={value}
+          onClick={() => handleChange(value)}
+        >
           {value}
         </Button>
       ))}

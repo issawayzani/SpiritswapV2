@@ -18,26 +18,27 @@ export const Button = styled(Box)`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: none;
-  color: #ffff;
-  background-color: #100f3a;
+  border-color: #2e2a8c;
+  border: 1px solid;
+  color: #4640d3;
+  background-color: #1d1a59;
   font-size: 14px;
-  border-radius: 0.25em;
+  border-radius: 0.5em;
   text-align: center;
   transition: 100ms ease;
   width: 100%;
   user-select: none;
   @media (min-width: ${sizes.medium}px) {
     &:hover {
-      color: ${props => props.theme.colors.ci};
-      background-color: ${props => props.theme.colors.ciTrans15};
+      color: white;
+      background-color: #4f4ad3;
       cursor: pointer;
     }
   }
   @media (max-width: ${sizes.medium}px) {
     &:active {
-      color: ${props => props.theme.colors.ci};
-      background-color: ${props => props.theme.colors.ciTrans15};
+      color: white;
+      background-color: #4f4ad3;
       cursor: pointer;
     }
   }

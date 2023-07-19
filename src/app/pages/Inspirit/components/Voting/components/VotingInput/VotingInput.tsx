@@ -53,10 +53,12 @@ const VotingInput = ({
         }
         onBlur={() => setNewVote(newVote ? newVote : yourVote)}
         fontSize="sm"
-        borderColor={yourVote !== '0' ? 'ci' : 'initial'}
+        borderRadius={8}
+        // borderColor={yourVote !== '0' ? 'ci' : 'initial'}
         disabled={account ? false : true}
         textAlign="center"
         max="100"
+        background="#645FD3"
         value={newVote}
         onChange={({ target }) => handleVote(target.value)}
       />

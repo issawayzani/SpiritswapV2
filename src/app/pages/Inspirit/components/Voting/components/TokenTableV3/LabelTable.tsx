@@ -30,7 +30,7 @@ const LabelTable = ({ label, sortType, onSort, isLast, isFirst, id }) => {
             <Text align="center" justifyContent="center">
               {titles[1]}
             </Text>
-            <QuestionHelper
+            {/* <QuestionHelper
               title={
                 isRewards10kInSPIRIT
                   ? 'Rewards / 10k inSPIRIT'
@@ -41,7 +41,7 @@ const LabelTable = ({ label, sortType, onSort, isLast, isFirst, id }) => {
                   ? 'Amount of rewards earned per 10k inSPIRIT voted'
                   : ' Amount of liquidity equivalent held per 10k inSPIRIT voted'
               }
-            />
+            /> */}
           </Flex>
         </Flex>
       );
@@ -58,7 +58,6 @@ const LabelTable = ({ label, sortType, onSort, isLast, isFirst, id }) => {
         <Text
           cursor="pointer"
           fontSize="sm"
-          color="grayDarker"
           onClick={() => handleOnSort(sortType)}
         >
           {label}

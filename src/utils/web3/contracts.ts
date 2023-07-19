@@ -6,7 +6,7 @@ import {
   Contract as MulticallContract,
   Provider as MulticallProvider,
 } from 'ethcall';
-import multicallABI from './abis/Multicall.json';
+import MulticallABI from './abis/Multicall.json';
 import tokenABI from './abis/token.json';
 import fakeBASEABI from './abis/fakeBASE.json';
 import masterchefABI from './abis/masterchef.json';
@@ -25,6 +25,7 @@ import pairV2ABI from './abis/pairV2.json';
 import spiritABI from './abis/spirit.json';
 import sobVaultABI from './abis/sobVault.json';
 import sobPoolABI from './abis/sobPool.json';
+import voterABI from './abis/voter.json';
 import routerV2 from './abis/routerv2.json';
 import routerV3 from './abis/routerv3.json';
 import bribeABI from './abis/bribe.json';
@@ -54,8 +55,9 @@ export const ABIS = {
   VTOKEN: VTOKENABI,
   OTOKEN: OTOKENABI,
   VTOKENRewarder: VTOKENRewarderABI,
+  voter: voterABI,
   token: tokenABI,
-  multicall: multicallABI,
+  Multicall: MulticallABI.abi,
   masterchef: masterchefABI,
   masterchef2: masterChefABI2,
   gauge: gaugeABI,
