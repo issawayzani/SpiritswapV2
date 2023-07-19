@@ -44,7 +44,7 @@ function Voting() {
   const [bribeCards, setBribeCards] = useState<BribeCard[]>([]);
   const [accountVTOKEN, setAccountVTOKEN] = useState('');
   const [accountVotingPower, SetAccountVotingPower] = useState('');
-  const { account } = useWallets();
+  const { account, isLoggedIn } = useWallets();
   const { addToQueue } = Web3Monitoring();
   const [errorMessage, setErrorMessage] = useState('');
   const { isLoading, loadingOff, loadingOn } = UseIsLoading();
@@ -60,6 +60,7 @@ function Voting() {
     const DISABLED = true;
     const NOT_DISABLED = false;
     if (isLoadingButton) return DISABLED;
+    if (!isLoggedIn) return DISABLED;
 
     return NOT_DISABLED;
   };

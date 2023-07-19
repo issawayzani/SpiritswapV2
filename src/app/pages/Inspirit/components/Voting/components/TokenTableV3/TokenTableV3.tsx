@@ -28,7 +28,14 @@ import { selectSaturatedGauges } from 'store/general/selectors';
 import useMobile from 'utils/isMobile';
 import { MobileTable } from '../MobileTable';
 import useWallets from 'app/hooks/useWallets';
-import { checkLastVoted, getBribeCards } from 'utils/web3/actions/inspirit';
+import {
+  checkLastVoted,
+  getBribeCards,
+  reset,
+} from 'utils/web3/actions/inspirit';
+import { transactionResponse } from 'utils/web3';
+import Web3Monitoring from 'app/connectors/EthersConnector/transactions';
+import UseIsLoading from 'app/hooks/UseIsLoading';
 
 const TokenTableV3 = ({
   errorMessage,
@@ -45,6 +52,8 @@ const TokenTableV3 = ({
   const { t } = useTranslation();
   const { account, isLoggedIn } = useWallets();
   const isMobile = useMobile();
+  const [isLoadingButton, setIsLoadingButton] = useState(false);
+  const { addToQueue } = Web3Monitoring();
   const translationPath = 'inSpirit.voting';
   const [bribeCards, setBribeCards] = useState([]);
   // const stakedFarms = useAppSelector(selectFarmsStaked);
@@ -112,13 +121,31 @@ const TokenTableV3 = ({
   const [resetInputs, setResetInputs] = useState<boolean>(false);
 
   const resetVoting = async () => {
+    setIsLoadingButton(true);
     const canReset = await checkLastVoted(account);
     if (!canReset) {
       setErrorMessage('You can only reset once per epoch');
     } else {
-      setResetInputs(true);
-      setNewVotes({});
+      try {
+        const tx = await reset();
+        const response = transactionResponse('vote.reset', {
+          operation: 'VOTE',
+          tx: tx,
+          uniqueMessage: {
+            text: 'Reset vote',
+            secondText: '',
+          },
+        });
+
+        addToQueue(response);
+        await tx.wait();
+        setResetInputs(true);
+        setNewVotes({});
+      } catch {
+        setIsLoadingButton(false);
+      }
     }
+    setIsLoadingButton(false);
   };
 
   const labelData = [
@@ -211,8 +238,9 @@ const TokenTableV3 = ({
       )}
       <HStack w="full" justify={isMobile ? 'center' : 'flex-end'} p="8px">
         <Button
-          bg="none"
+          backgroundColor="#2E2A8C"
           disabled={!isLoggedIn}
+          isLoading={isLoadingButton}
           border="none"
           w={isMobile ? 'full' : '-moz-initial'}
           onClick={resetVoting}
@@ -222,12 +250,11 @@ const TokenTableV3 = ({
         <Button
           variant="primary"
           w={isMobile ? 'full' : '-moz-initial'}
+          disabled={!isLoggedIn}
           isLoading={isLoading}
           onClick={() => handleVote(filteredBribes, newVotes)}
         >
-          {t(
-            `${translationPath}.${isLoggedIn ? 'confirmVote' : 'notconnected'}`,
-          )}
+          {t(`${translationPath}.${'confirmVote'}`)}
         </Button>
       </HStack>
     </VStack>

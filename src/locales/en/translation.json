@@ -769,6 +769,16 @@
         "pending": "Claiming rewards pending",
         "success": "CLaim rewards successful",
         "error": "Claim rewards failed"
+      },
+      "vote": {
+        "pending": "Voting pending",
+        "success": "Voting successful",
+        "error": "Voting failed"
+      },
+      "reset": {
+        "pending": "Reset vote pending",
+        "success": "Reset vote successful",
+        "error": "Reset vote failed"
       }
     },
     "swap": {

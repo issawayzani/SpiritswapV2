@@ -66,8 +66,8 @@ export const StyledVoting = styled.div<{
 export const StyledPanel = styled.div`
   padding: 0.5rem;
   border-radius: ${({ theme }) => `${theme.borderRadius.md}`};
-  border: ${({ theme }) => `1px solid ${theme.colors.grayBorderBox}`};
-  background-color: ${({ theme }) => `${theme.colors.bgBox}`};
+  border: none;
+  background-color: none;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     padding: ${({ theme }) => theme.space.spacing056};
