@@ -9,6 +9,7 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
     width: 100%;
     word-break: inherit;
+    // letter-spacing:1.4px;
   }
 
   #root {

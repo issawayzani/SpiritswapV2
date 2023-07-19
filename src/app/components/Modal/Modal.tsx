@@ -54,7 +54,7 @@ const Modal = ({
       <Box ref={ref}>
         <StyledPanel {...props}>
           <TopContainer>
-            <TitleLabel>{title}</TitleLabel>
+            <TitleLabel className="modal-title">{title}</TitleLabel>
             {showClose && (
               <StyledIconButton
                 data-testid="close-action"

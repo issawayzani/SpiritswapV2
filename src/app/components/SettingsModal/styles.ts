@@ -7,8 +7,8 @@ export const BodyContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin-top: ${({ theme }) => theme.space.spacing03};
-  min-width: 300px;
+  // margin-top: ${({ theme }) => theme.space.spacing03};
+  // min-width: 300px;
 `;
 
 export const Label = styled.label`

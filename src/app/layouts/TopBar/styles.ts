@@ -175,7 +175,7 @@ export const StyledSettingsModal = styled(SettingsModal)`
   flex-shrink: 0;
   position: fixed;
   right: 8px;
-  top: 100px;
+  top: 106px;
   z-index: 1;
   border-radius: 8px;
   border: 4px solid #2e2a8c;

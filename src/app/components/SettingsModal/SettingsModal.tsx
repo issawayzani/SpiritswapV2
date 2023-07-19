@@ -47,30 +47,99 @@ const SettingsModal = ({
   // );
 
   return (
-    <Modal onClose={onClose} {...props}>
+    <Modal title={t(`${translationPath}.title`)} onClose={onClose} {...props}>
       <BodyContainer>
-        <Label className="modal-title">Settings</Label>
         <span className="settings-text">
-          <i className="fa-sharp fa-light fa-circle-question"></i>Lorem ipsum
-          dolor sit amet.
+          <i className="fa fa-question-circle-o margin"></i>Lorem ipsum dolor
+          sit amet.
         </span>
+        <span className="permissions-title">Token approval permissions</span>
+        <div className="button-margin-bottom">
+          <div className="float-left button-margin-right">
+            <Button className="setting-button" bg="transparent" border={'none'}>
+              One time approval
+            </Button>
+          </div>
+          <div className="float-left">
+            <Button className="setting-button" bg="transparent" border={'none'}>
+              Unlimited approval
+            </Button>
+          </div>
+        </div>
+        <span className="permissions-title">Transaction Settings</span>
+        <span className="subtitle-settings">Slippage Tolerance</span>
+        <div className="button-margin-bottom">
+          <div className="float-left button-margin-right">
+            <Button
+              className="setting-button tolerance-width"
+              bg="transparent"
+              border={'none'}
+            >
+              0.1%
+            </Button>
+          </div>
+          <div className="float-left button-margin-right">
+            <Button
+              className="setting-button tolerance-width"
+              bg="transparent"
+              border={'none'}
+            >
+              0.5%
+            </Button>
+          </div>
+          <div className="float-left button-margin-right">
+            <Button
+              className="setting-button tolerance-width"
+              bg="transparent"
+              border={'none'}
+            >
+              1%
+            </Button>
+          </div>
+          <div className="float-left button-margin-right">
+            <Button
+              className="setting-button tolerance-width"
+              bg="transparent"
+              border={'none'}
+            >
+              Auto%
+            </Button>
+          </div>
+          <div className="float-left">
+            <Button
+              className="setting-button tolerance-width"
+              bg="transparent"
+              border={'none'}
+            >
+              Custom
+            </Button>
+          </div>
+        </div>
+        <span className="subtitle-settings">Transaction Speed(GWEI)</span>
+        <div className="button-margin-bottom">
+          <div className="float-left button-margin-right">
+            <Button className="setting-button" bg="transparent" border={'none'}>
+              Standard
+            </Button>
+          </div>
+          <div className="float-left button-margin-right">
+            <Button className="setting-button" bg="transparent" border={'none'}>
+              Fast 164
+            </Button>
+          </div>
+          <div className="float-left">
+            <Button className="setting-button" bg="transparent" border={'none'}>
+              Rapid 236
+            </Button>
+          </div>
+        </div>
+        <Button bg="transparent" border={'none'}>
+          Reset
+        </Button>
+        <Button bg="transparent" border={'none'}>
+          Confirm
+        </Button>
         {/* <Flex w="full" justify="space-between" align="center">
-          <Label>{t(`${translationPath}.language`)}</Label>
-          <Flex justify="space-between" align="center">
-            <ImageLogo
-              symbol={selectedLanguageObject?.value}
-              type={selectedLanguageObject?.type}
-              margin="0"
-              size={'20px'}
-            />
-            <StyledSelectWithDropdown
-              items={LanguageItems}
-              onSelect={onSelectLanguage}
-              selectedId={i18n.language === 'en-US' ? 'en' : i18n.language}
-            />
-          </Flex> */}
-        {/* </Flex> */}
-        <Flex w="full" justify="space-between" align="center">
           <Label>{t(`${translationPath}.notifications`)}</Label>
           <Switch
             checked={notifications}
@@ -99,7 +168,7 @@ const SettingsModal = ({
           onClick={() => openInNewTab('https://app.spiritswap.finance/#/')}
         >
           {t(`${buttonTranslationPath}.switchV1`)}
-        </Button>
+        </Button> */}
       </BodyContainer>
     </Modal>
   );
