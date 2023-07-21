@@ -6,7 +6,7 @@ export const BodyContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  // align-items: center;
   // margin-top: ${({ theme }) => theme.space.spacing03};
   // min-width: 300px;
 `;

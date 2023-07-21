@@ -62,4 +62,6 @@ export const colors = {
   secondary: colorValues.gray[500],
   errorNotification: '#4F1621',
   defaultNotification: '#284E51',
+  bgReset: '#2E2A8C',
+  greenBorder: '#22ABAC',
 };

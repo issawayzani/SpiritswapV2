@@ -201,8 +201,9 @@
 .setting-button {
   border-radius: 8px;
   border: 1px solid var(--gray-14, #7974d3);
-  display: flex;
-  padding: 0px 20px 0px 20px;
+  /* display: flex; */
+  /* width:2%; */
+  padding: 0 28px 0 27px;
   justify-content: center;
   align-items: center;
   flex: 1 0 0;
@@ -245,7 +246,37 @@
   text-align: left;
   margin-bottom: 12px;
   float: left;
+  align-items: left !important;
 }
 .tolerance-width {
-  padding: 0px 13px 0px 13px;
+  padding: 0px 14px 0px 14px;
+}
+.token-padding {
+  padding: 0 31px 0 31px;
+}
+.green-button {
+  border: 1px solid var(--turquoise-7, #22abac);
+  margin-left: 30px;
+  letter-spacing: 1.4px;
+}
+.green-button:hover {
+  background: var(--turquoise-7, #22abac);
+  color: var(--gray-2, #f3f2ff);
+  border: 1px solid var(--turquoise-7, #22abac);
+}
+.green-button:focus,
+.green-button:active {
+  border: 1px solid var(--turquoise-7, #22abac);
+  background: var(--turquoise-6, #32cec0);
+  color: var(--gray-2, #f3f2ff);
+}
+.button-padding {
+  padding: 9px 61px 9px 61px;
+}
+.reset-button {
+  color: var(--gray-2, #f3f2ff);
+  letter-spacing: 1.4px;
+}
+.reset-button:hover {
+  background: var(--gray-18, #4f4ad3);
 }
