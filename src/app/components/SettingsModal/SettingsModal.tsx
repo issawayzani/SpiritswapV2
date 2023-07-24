@@ -10,6 +10,8 @@ import { selectUserSettings } from 'store/settings/selectors';
 import { setUserNotifications, setUserSuggestions } from 'store/settings';
 import ODNP from '@open-defi-notification-protocol/widget';
 import useWallets from 'app/hooks/useWallets';
+import { colors } from 'theme/base/color';
+import { borderRadius } from 'theme/base/borderRadius';
 
 const SettingsModal = ({
   selectedLanguageId,
@@ -55,90 +57,97 @@ const SettingsModal = ({
         </span>
         <span className="permissions-title">Token approval permissions</span>
         <div className="button-margin-bottom">
-          <div className="float-left button-margin-right">
-            <Button className="setting-button" bg="transparent" border={'none'}>
-              One time approval
-            </Button>
-          </div>
-          <div className="float-left">
-            <Button className="setting-button" bg="transparent" border={'none'}>
-              Unlimited approval
-            </Button>
-          </div>
+          <Button
+            className="setting-button button-margin-right token-padding"
+            bg="transparent"
+            border={'none'}
+          >
+            One time approval
+          </Button>
+          <Button
+            className="setting-button token-padding"
+            bg="transparent"
+            border={'none'}
+          >
+            Unlimited approval
+          </Button>
         </div>
         <span className="permissions-title">Transaction Settings</span>
         <span className="subtitle-settings">Slippage Tolerance</span>
         <div className="button-margin-bottom">
-          <div className="float-left button-margin-right">
-            <Button
-              className="setting-button tolerance-width"
-              bg="transparent"
-              border={'none'}
-            >
-              0.1%
-            </Button>
-          </div>
-          <div className="float-left button-margin-right">
-            <Button
-              className="setting-button tolerance-width"
-              bg="transparent"
-              border={'none'}
-            >
-              0.5%
-            </Button>
-          </div>
-          <div className="float-left button-margin-right">
-            <Button
-              className="setting-button tolerance-width"
-              bg="transparent"
-              border={'none'}
-            >
-              1%
-            </Button>
-          </div>
-          <div className="float-left button-margin-right">
-            <Button
-              className="setting-button tolerance-width"
-              bg="transparent"
-              border={'none'}
-            >
-              Auto%
-            </Button>
-          </div>
-          <div className="float-left">
-            <Button
-              className="setting-button tolerance-width"
-              bg="transparent"
-              border={'none'}
-            >
-              Custom
-            </Button>
-          </div>
+          <Button
+            className="setting-button tolerance-width button-margin-right"
+            bg="transparent"
+            border={'none'}
+          >
+            0.1%
+          </Button>
+          <Button
+            className="setting-button tolerance-width button-margin-right"
+            bg="transparent"
+            border={'none'}
+          >
+            0.5%
+          </Button>
+          <Button
+            className="setting-button tolerance-width button-margin-right"
+            bg="transparent"
+            border={'none'}
+          >
+            1%
+          </Button>
+          <Button
+            className="setting-button tolerance-width button-margin-right"
+            bg="transparent"
+            border={'none'}
+          >
+            Auto%
+          </Button>
+          <Button
+            className="setting-button tolerance-width"
+            bg="transparent"
+            border={'none'}
+          >
+            Custom
+          </Button>
         </div>
         <span className="subtitle-settings">Transaction Speed(GWEI)</span>
         <div className="button-margin-bottom">
-          <div className="float-left button-margin-right">
-            <Button className="setting-button" bg="transparent" border={'none'}>
-              Standard
-            </Button>
-          </div>
-          <div className="float-left button-margin-right">
-            <Button className="setting-button" bg="transparent" border={'none'}>
-              Fast 164
-            </Button>
-          </div>
-          <div className="float-left">
-            <Button className="setting-button" bg="transparent" border={'none'}>
-              Rapid 236
-            </Button>
-          </div>
+          <Button
+            className="setting-button button-margin-right"
+            bg="transparent"
+            border={'none'}
+          >
+            Standard
+          </Button>
+          <Button
+            className="setting-button button-margin-right"
+            bg="transparent"
+            border={'none'}
+          >
+            Fast 164
+          </Button>
+          <Button className="setting-button" bg="transparent" border={'none'}>
+            Rapid 236
+          </Button>
         </div>
-        <Button bg="transparent" border={'none'}>
-          Reset
-        </Button>
-        <Button bg="transparent" border={'none'}>
-          Confirm
-        </Button>
+        <div>
+          <Button
+            className="button-padding reset-button"
+            bg={colors.bgReset}
+            border={'none'}
+            borderRadius={borderRadius.mmd}
+          >
+            Reset
+          </Button>
+          <Button
+            className="green-button button-padding"
+            bg="transparent"
+            borderRadius={borderRadius.mmd}
+          >
+            Confirm
+          </Button>
+        </div>
         {/* <Flex w="full" justify="space-between" align="center">
           <Label>{t(`${translationPath}.notifications`)}</Label>
           <Switch

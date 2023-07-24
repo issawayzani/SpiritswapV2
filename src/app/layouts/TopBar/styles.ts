@@ -166,7 +166,7 @@ export const StyledSettingsModal = styled(SettingsModal)`
     right: calc((100vw - 1280px) / 2);
   }
   display: flex;
-  width: 410px;
+  // width: 410px;
   // padding: 30px 0px;
   flex-direction: column;
   justify-content: center;
