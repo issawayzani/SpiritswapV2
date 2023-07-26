@@ -13,38 +13,35 @@ import Wftm from '../../../assets/images/fantom-logo.svg';
 export default function HarvestCard(props) {
   const { addToQueue } = Web3Monitoring();
   const [isLoadingButton, setIsLoadingButton] = useState(false);
-  const [loaderText, setLoaderText] = useState('Loading Transaction');
+  const [loaderText, setLoaderText] = useState('Harvesting');
+
+  const OTOKENRewards = props.bondingCurveData?.accountEarnedOTOKEN / 1e18;
   const OTOKENPrice =
     (props.bondingCurveData?.priceOTOKEN *
-      props.bondingCurveData?.accountOTOKEN) /
-    1e18;
-  const OTOKENRewards = props.bondingCurveData?.accountEarnedOTOKEN / 1e18;
+      props.bondingCurveData?.accountEarnedOTOKEN) /
+    1e36;
+  const TOKENRewards = props.bondingCurveData?.accountEarnedTOKEN / 1e18;
   const TOKENPrice =
     (props.bondingCurveData?.priceTOKEN *
-      props.bondingCurveData?.accountTOKEN) /
-    1e18;
-  const TOKENRewards = props.bondingCurveData?.accountEarnedTOKEN / 1e18;
-  const BASEPrice =
-    (props.bondingCurveData?.priceBASE * props.bondingCurveData?.accountBASE) /
-    1e18;
+      props.bondingCurveData?.accountEarnedTOKEN) /
+    1e36;
   const BASERewards = props.bondingCurveData?.accountEarnedBASE / 1e18;
-  const VTOKENPrice =
-    (props.bondingCurveData?.priceTOKEN *
-      props.bondingCurveData?.accountVTOKEN) /
-    1e18;
-  const creditPrice =
+  const BASEPrice =
     (props.bondingCurveData?.priceBASE *
-      props.bondingCurveData?.accountBorrowCredit) /
-    1e18;
-  const debtPrice =
-    (props.bondingCurveData?.priceBASE *
-      props.bondingCurveData?.accountBorrowCredit) /
-    1e18;
+      props.bondingCurveData?.accountEarnedBASE) /
+    1e36;
+
+  const getDisabledStatus = (): boolean => {
+    const DISABLED = true;
+    const NOT_DISABLED = false;
+    if (props.check) return DISABLED;
+    if (isLoadingButton) return DISABLED;
+    if (BASERewards === 0 && TOKENRewards === 0 && OTOKENRewards === 0)
+      return DISABLED;
+    return NOT_DISABLED;
+  };
   const buttonAction = async () => {
     setIsLoadingButton(true);
-    // if (OTOKENRewards===0 && TOKENRewards===0 && BASERewards===0 ){
-
-    // }else {
     try {
       const tx = await getReward(props?.account);
       const response = transactionResponse('swap.claim', {
@@ -69,26 +66,25 @@ export default function HarvestCard(props) {
         <StatisticsPanel
           icon={Pow3r}
           name="POW3R"
-          rewards={OTOKENRewards}
-          value={props.bondingCurveData?.accountOTOKEN / 1e18}
+          value={OTOKENRewards}
           valueUSD={OTOKENPrice}
-          check={true}
+          check={props.check}
         />
 
         <StatisticsPanel
           icon={Glov3}
           name="GLOV3"
-          value={props.bondingCurveData?.accountBorrowCredit / 1e18}
-          valueUSD={creditPrice}
-          check={false}
+          value={TOKENRewards}
+          valueUSD={TOKENPrice}
+          check={props.check}
         />
 
         <StatisticsPanel
           icon={Wftm}
           name="WFTM"
-          value={props.bondingCurveData?.accountBorrowDebt / 1e18}
-          valueUSD={debtPrice}
-          check={false}
+          value={BASERewards}
+          valueUSD={BASEPrice}
+          check={props.check}
         />
 
         <Button
@@ -97,6 +93,7 @@ export default function HarvestCard(props) {
           w="full"
           className="default-button"
           onClick={buttonAction}
+          disabled={getDisabledStatus()}
           isLoading={isLoadingButton}
           loadingText={loaderText}
         >

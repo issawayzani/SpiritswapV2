@@ -11,10 +11,13 @@ export default function StatisticsPanel(props) {
           </div>
           <div className="float-right">
             <span className="item-count">
-              {props.valueUSD} {props.name}
+              {props.check ? 'Connect Wallet' : props.value}{' '}
+              {props.check ? '' : props.name}
             </span>
             <br />
-            <span className="item-price">Balance: ${props.value}</span>
+            <span className="item-price">
+              Balance: ${props.check ? '0.0' : props.valueUSD}
+            </span>
           </div>
         </div>
       </Flex>

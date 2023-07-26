@@ -235,6 +235,11 @@ export const multicallContract = async () => {
 
   return multicallContract;
 };
+export const getBondingCurveData = async userAddress => {
+  const contract = await multicallContract();
+  const data = await contract.bondingCurveData(userAddress);
+  return data;
+};
 export const getVotePageData = async userAddress => {
   const contract = await multicallContract();
   const data = await contract.bondingCurveData(userAddress);
