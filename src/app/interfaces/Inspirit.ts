@@ -24,7 +24,6 @@ export interface BribeCard {
   isAlive: boolean;
   protocol: string; // B4
   symbol: string; // B5
-
   rewardTokens: string[]; // B6
   rewardTokenDecimals: number[]; // B7
   rewardsPerToken: BigNumber[]; // B8
