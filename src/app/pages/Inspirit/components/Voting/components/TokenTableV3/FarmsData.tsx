@@ -46,9 +46,8 @@ const FarmsData = ({
     const tokenInfoPromises = rewardTokens.map(async (token, index) => {
       const name = await getTokenSymbol(token);
       const decimal = rewardTokenDecimals[index];
-      const reward = Number(
-        parseUnits(rewardsPerToken[index].toString(), decimal),
-      );
+      const divisor = Math.pow(10, decimal);
+      const reward = Number(rewardsPerToken[index]) / divisor;
       if (name) {
         return { name, reward };
       }
@@ -56,9 +55,8 @@ const FarmsData = ({
     const tokenInfoAccountPromises = rewardTokens.map(async (token, index) => {
       const name = await getTokenSymbol(token);
       const decimal = rewardTokenDecimals[index];
-      const reward = Number(
-        parseUnits(accountRewardsEarned[index].toString(), decimal),
-      );
+      const divisor = Math.pow(10, decimal);
+      const reward = Number(accountRewardsEarned[index]) / divisor;
       if (name) {
         return { name, reward };
       }

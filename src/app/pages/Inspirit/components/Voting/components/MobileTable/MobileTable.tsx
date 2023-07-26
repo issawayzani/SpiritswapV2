@@ -63,15 +63,18 @@ const MobileTable: FC<MobileTableProps> = ({
       </Grid>
       <HStack overflow="scroll">
         {filteredBribes.length
-          ? filteredBribes.map((farm, i) => (
-              <MobileRow
-                farm={farm}
-                key={`farm-${farm.name}-${i}`}
-                resetInputs={resetInputs}
-                onNewVote={onNewVote}
-                cleanError={cleanError}
-              />
-            ))
+          ? filteredBribes.map(
+              (farm, i) =>
+                farm.isAlive && (
+                  <MobileRow
+                    farm={farm}
+                    key={`farm-${farm.symbol}-${i}`}
+                    resetInputs={resetInputs}
+                    onNewVote={onNewVote}
+                    cleanError={cleanError}
+                  />
+                ),
+            )
           : null}
       </HStack>
     </HStack>
