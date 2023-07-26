@@ -36,7 +36,7 @@
   letter-spacing: 1.4px;
 }
 .width-100 {
-  width: 100%;
+  /* width: 100%; */
 }
 .item-price {
   color: var(--gray-10, #a19ed3);
@@ -142,9 +142,11 @@
   display: flex;
   padding: 10px 24px 10px 20px;
   flex-direction: column;
+  width: 100%;
   align-items: center;
   /* gap: 20px; */
   align-self: stretch;
+  width: 100%;
 }
 .menu-link:hover {
   color: #9747ff;
