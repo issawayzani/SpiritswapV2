@@ -121,19 +121,6 @@ const VotingPanel = ({
 
   return (
     <>
-      {/* <Flex justifyContent="center">
-        <Skeleton
-          startColor="grayBorderBox"
-          endColor="bgBoxLighter"
-          h="240px"
-          w="240px"
-          borderRadius="50%"
-          isLoaded={!!bribeCards.length}
-        >
-          <PieChart data={pieChartData} options={pieChartOptions} />
-        </Skeleton>
-      </Flex> */}
-
       <TokenTableV3
         errorMessage={errorMessage}
         handleVote={handleVote}
