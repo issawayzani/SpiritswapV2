@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     padding: 0 8px;
   }
+  margin-bottom: 30px;
   @media (max-width: ${({ theme }) => theme.breakpoints.xs}) {
     padding: 0;
   }

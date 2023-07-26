@@ -119,9 +119,9 @@ export const MenuButton = styled.button<MenuButtonProps>`
   letter-spacing: 1.4px;
   padding: 4px 8px;
   cursor: pointer;
-  _hover: {
-    color: '#9747FF',
-  },
+  &:hover {
+    color: ${({ theme }) => theme.color.ci};
+  }
 `;
 export const MoreButtonWrapper = styled.div`
   position: relative;
@@ -165,6 +165,14 @@ export const StyledSettingsModal = styled(SettingsModal)`
   @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
     right: calc((100vw - 1280px) / 2);
   }
+  @media (min-width: ${({ theme }) => theme.breakpoints.xs}) {
+    top: 106px;
+    right: 0px;
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.xxs}) {
+    top: 106px;
+    right: 0px;
+  }
   display: flex;
   // width: 410px;
   // padding: 30px 0px;
@@ -173,9 +181,9 @@ export const StyledSettingsModal = styled(SettingsModal)`
   align-items: center;
   gap: 24px;
   flex-shrink: 0;
-  position: fixed;
+  position: absolute;
   right: 8px;
-  top: 106px;
+  top: 158px;
   z-index: 1;
   border-radius: 8px;
   border: 4px solid #2e2a8c;

@@ -50,13 +50,7 @@ import {
 import { useAppDispatch } from 'store/hooks';
 import { setUnexpectedError } from 'store/errors';
 
-const navMenus = [
-  // { ...HOME, image: HomeIcon },
-  { ...HOME, image: HomeIcon },
-  { ...SOULC, image: SwapIcon },
-  { ...LIQUIDITY, image: LiquidityIcon },
-  { ...VSOULC, image: InSpiritIcon },
-];
+const navMenus = [{ ...HOME }, { ...SOULC }, { ...FARMS }, { ...VSOULC }];
 
 const navDropdownMenus = [
   GOVERNANCE,
@@ -68,7 +62,7 @@ const navDropdownMenus = [
 ];
 
 const NavMenuItem = ({ menu, is_active }: NavMenuProps) => {
-  const Image = menu.image;
+  // const Image = menu.image;
   const dispatch = useAppDispatch();
   const handleResetError = () => dispatch(setUnexpectedError(false));
 
@@ -78,8 +72,8 @@ const NavMenuItem = ({ menu, is_active }: NavMenuProps) => {
       $is_active={is_active}
       onClick={handleResetError}
     >
-      <Icon size="24px" icon={<Image selected={is_active} />} />
-      <MenuLabel>{menu.title}</MenuLabel>
+      {/* <Icon size="24px" icon={<Image selected={is_active} />} /> */}
+      <MenuLabel is_active={is_active}>{menu.title}</MenuLabel>
     </StyledMenuItem>
   );
 };
@@ -90,7 +84,6 @@ const Footer = () => {
   const menuTranslationPath = 'common.menu';
   const translatedNavMenus = navMenus.map(menu => ({
     title: t(`${menuTranslationPath}.${menu.key}`),
-    image: menu.image,
     path: menu.path,
   }));
   const translatedDropdownMenus = navDropdownMenus.map((menu: any) => ({
@@ -102,7 +95,7 @@ const Footer = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [outsideClicked, setOutsideClicked] = useState(false);
   const location = useLocation();
-  const [menuIndex, setMenuIndex] = useState(0);
+  const [menuIndex, setMenuIndex] = useState<number>(0);
   const ref = useRef<HTMLDivElement>(null);
   const onHideDropdownCallback = useCallback(() => {
     setShowDropdown(false);
@@ -132,7 +125,7 @@ const Footer = () => {
 
   return (
     <Wrapper>
-      <FooterDiv>
+      {/* <FooterDiv>
         <AuditedByDiv>
           <span>{t(`${translationPath}.auditedBy`)}</span>
           <HourGlassImg src={HourGlassPng} alt="hour-glass Img" />
@@ -174,7 +167,7 @@ const Footer = () => {
             <YouTubeSvg />
           </a>
         </ThirdPartyItemsDiv>
-      </FooterDiv>
+      </FooterDiv> */}
       <MenuWrapper ref={ref}>
         {translatedNavMenus.map((menu, index) => {
           const active: boolean = Math.abs(menuIndex) === index || false;
@@ -186,7 +179,7 @@ const Footer = () => {
             />
           );
         })}
-        <MoreButtonWrapper selected={showDropdown} onClick={onClickMoreButton}>
+        {/* <MoreButtonWrapper selected={showDropdown} onClick={onClickMoreButton}>
           <Icon size="24px" icon={<DotsIcon selected={showDropdown} />} />
           <MoreButtonLabel>More</MoreButtonLabel>
           <NavDropdownWrapper>
@@ -198,7 +191,7 @@ const Footer = () => {
               />
             )}
           </NavDropdownWrapper>
-        </MoreButtonWrapper>
+        </MoreButtonWrapper> */}
       </MenuWrapper>
     </Wrapper>
   );

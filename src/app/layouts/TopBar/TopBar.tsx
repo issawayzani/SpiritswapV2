@@ -105,7 +105,7 @@ const NavMenuItem = ({ menu, is_active }: NavMenuProps) => {
       $is_active={is_active}
       onClick={handleResetError}
     >
-      <MenuButton is_active={is_active}>
+      <MenuButton className="menu-link" is_active={is_active}>
         {is_active ? menu.icon : false}
         {menu.title}
       </MenuButton>

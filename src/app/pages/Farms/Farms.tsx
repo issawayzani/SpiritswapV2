@@ -41,6 +41,14 @@ import useWallets from 'app/hooks/useWallets';
 import useLogin from 'app/connectors/EthersConnector/login';
 import { FARMS as FARMS_ROUTE } from 'app/router/routes';
 
+//here
+
+import multicalcontract from 'utils/web3/abis/Multicall.json';
+import Web3 from 'web3';
+import type { AbiItem } from 'web3-utils';
+import FarnCard from './FarnCard';
+import Minting from './Minting';
+
 const translationPath = 'farms.common';
 
 export const Farms = () => {
@@ -234,6 +242,44 @@ export const Farms = () => {
     setIsLoading(false);
   };
 
+  const web3 = new Web3('https://rpc.ftm.tools/');
+  const multicallv3 = async (): Promise<any> => {
+    return new web3.eth.Contract(
+      multicalcontract.abi as AbiItem[],
+      '0xa04dF2Be495fe39235845acd5e489FA1f5e05359',
+    );
+  };
+  const [gauges, setGauges] = useState([]);
+
+  async function getGaugeCardData() {
+    const contractInstance = await multicallv3();
+    let gaugeCards = [];
+
+    gaugeCards = await contractInstance.methods
+      .getGaugeCards(0, 6, account.toString())
+      .call();
+    console.log(gaugeCards);
+    return gaugeCards;
+  }
+
+  async function getBribeCardData() {
+    const contractInstance = await multicallv3();
+    let bribeCards = [];
+
+    bribeCards = await contractInstance.methods
+      .getBribeCards(0, 6, account)
+      .call();
+    return bribeCards;
+  }
+
+  useEffect(() => {
+    async function setGaugesData() {
+      const gaugeCards = await getGaugeCardData();
+      setGauges(gaugeCards);
+    }
+    setGaugesData();
+  }, [account]);
+
   return (
     <Box minH="100vh" overflowX="hidden">
       <HelmetProvider>
@@ -241,7 +287,7 @@ export const Farms = () => {
           <title>{pageTitle}</title>
         </Helmet>
       </HelmetProvider>
-
+      /*{' '}
       <StyledContainer>
         <SpiritsBackground />
         <CardHeader
@@ -253,11 +299,10 @@ export const Farms = () => {
             showDocs: true,
           }}
         />
-        <HStack justifyContent="space-between" mt="10px">
-          <FarmRewards rewards={collectedRewards} spiritPrice={spiritPrice} />
-          {/* <EcosystemFarmButton onCreateEcosystemFarm={onCreateEcosystemFarm} /> */}
-          {/* <Button onClick={onCreateFarm}>Create Farm</Button> */}
-        </HStack>{' '}
+        <HStack justifyContent="space-between" mt="10px"></HStack>{' '}
+        <FarmRewards rewards={collectedRewards} spiritPrice={spiritPrice} />
+        {/* <EcosystemFarmButton onCreateEcosystemFarm={onCreateEcosystemFarm} /> */}
+        {/* <Button onClick={onCreateFarm}>Create Farm</Button> */}
         <div id="top" />
         {!address && (
           <FarmControls
@@ -274,7 +319,19 @@ export const Farms = () => {
             debouncedResults={debouncedResults}
           />
         )}
-        <FarmItems
+        <Minting />
+        {gauges &&
+          gauges.map(gaugeCard => {
+            const farmAlive = gaugeCard[4] ? true : false;
+            return (
+              <div>
+                {farmAlive ? (
+                  <FarnCard data={gaugeCard} key={gaugeCard[0]} />
+                ) : null}
+              </div>
+            );
+          })}
+        {/* <FarmItems
           address={address}
           handleBackToFarms={handleBackToFarms}
           handleResetFilters={handleResetFilters}
@@ -283,7 +340,7 @@ export const Farms = () => {
           farmFilters={farmFilters}
           isLoading={isLoading}
           onOpen={onOpen}
-        />
+        /> */}
       </StyledContainer>
       {farmCreate.isOpen ? (
         <FarmCreateModal
@@ -292,8 +349,10 @@ export const Farms = () => {
           isConnected={account}
         />
       ) : null}
-      {/* <EcosystemFarmModal {...ecoFarmDisclosure} /> */}
-      <ConnectWallet isOpen={isOpen} dismiss={onClose} />
+      {
+        /* <EcosystemFarmModal {...ecoFarmDisclosure} />*/
+        <ConnectWallet isOpen={isOpen} dismiss={onClose} />
+      }
     </Box>
   );
 };

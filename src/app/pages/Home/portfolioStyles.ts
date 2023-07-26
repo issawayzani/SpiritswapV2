@@ -8,8 +8,15 @@ export const SwapContainer = styled(Box)<{ isLimit: boolean }>`
   padding: ${({ theme }) => theme.space.spacing03};
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    // padding: 24px;
     margin: 0 auto;
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.xxs}) {
+    width: 100%;
+    padding: 0;
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.xs}) {
+    width: 100%;
+    padding: 0;
   }
 `;
 

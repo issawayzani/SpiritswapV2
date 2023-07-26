@@ -70,18 +70,15 @@ export const MenuWrapper = styled.div`
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     display: none;
   }
-
+  border-top: 1px solid #2e2a8c;
   display: inline-grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-column-gap: 4px;
+  grid-template-columns: repeat(4, 1fr);
   position: fixed;
-  bottom: -3px;
+  bottom: 0px;
   width: 100%;
-  padding: 4px;
+  padding: 5px;
   z-index: 1000;
   background: ${({ theme }) => theme.color.bgBox};
-  border-radius: ${({ theme }) =>
-    `${theme.borderRadius.md} ${theme.borderRadius.md} 0 0`};
 `;
 
 export const DomainWrapper = styled.div`
@@ -106,8 +103,7 @@ export const StyledMenuItem = styled(NavLink)<{ $is_active: boolean }>`
   padding: 4px 0;
   gap: 2px;
   text-decoration: none;
-  background: ${({ theme, $is_active }) =>
-    $is_active ? theme.color.ciTrans15 : 'transparent'};
+  background: transparent;
   color: ${({ theme, $is_active }) =>
     $is_active ? theme.color.ci : theme.color.white};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
@@ -137,14 +133,19 @@ export const InSpiritIcon = styled(InSpiritSvg)<MenuButtonProps>`
   color: ${({ selected, theme }) =>
     selected ? theme.color.ci : theme.color.white};
 `;
-export const MenuLabel = styled.span`
+export const MenuLabel = styled.span<{ is_active: boolean }>`
   background: transparent;
   border: none;
-  color: ${({ theme }) => theme.color.white};
+  // color: ${({ theme }) => theme.color.white};
+  color: ${({ theme, is_active }) =>
+    is_active ? theme.color.white : theme.color.ci};
   // font-family: ${({ theme }) => theme.fontFamily.sans};
-  font-size: 10px;
+  font-size: 14px;
   font-weight: ${({ theme }) => theme.fontWeight.normal};
   line-height: ${({ theme }) => theme.lineHeight.h4};
+  &:hover {
+    color: ${({ theme }) => theme.color.ci};
+  }
 `;
 
 export const MoreButtonWrapper = styled.div<MenuButtonProps>`
