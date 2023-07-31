@@ -316,3 +316,47 @@
 .reset-button:hover {
   background: var(--gray-18, #4f4ad3);
 }
+.swap-title {
+  color: #fff;
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Headline/H4 */
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 400;
+  margin: 0 auto;
+  letter-spacing: 1.4px;
+  line-height: 42px; /* 123.529% */
+}
+.swap-x {
+  color: #94caf8;
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Headline/H4 */
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 42px;
+}
+.vertical-tabs {
+  float: left;
+  border: none;
+  background: transparent;
+}
+.tab-button {
+  float: left;
+  display: flex;
+  padding: 16px 14px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  text-align: center;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+  letter-spacing: 1.4px;
+}
+.percentage-button:hover {
+  border: 0px;
+}

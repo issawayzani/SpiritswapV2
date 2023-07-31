@@ -34,11 +34,11 @@ export function App() {
   return (
     <RootPathContext.Provider value={rootPath}>
       <Helmet
-        titleTemplate={`Coveragex - $${cantoPrice.toFixed(3)}`}
-        defaultTitle={`Coveragex - $${cantoPrice.toFixed(3)}`}
+        titleTemplate={`ConvergeX - $${cantoPrice.toFixed(3)}`}
+        defaultTitle={`ConvergeX - $${cantoPrice.toFixed(3)}`}
         htmlAttributes={{ lang: i18n.language }}
       >
-        <meta name="description" content="Coveragex webapp" />
+        <meta name="description" content="ConvergeX webapp" />
       </Helmet>
       <GlobalStyleProxy />
 

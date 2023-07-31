@@ -24,30 +24,32 @@ export default function TabSelect({
   styleVariant,
   onSelect,
   w = 'fit-content',
-  mx = '20px',
+  mx = '0px',
 }: TabSelectProps) {
   return (
     <Tabs
-      size="sm"
       variant={styleIndex?.includes(index) ? styleVariant : 'unstyled'}
       onChange={index => setIndex(index)}
       index={index}
       mx={mx}
     >
-      <TabList w={w}>
+      <TabList className="vertical-tabs" w={w} aria-orientation="vertical">
         {names.map(name => (
           <Tab
-            w={w}
+            _selected={{ color: '#FFF', bg: '#2E2A8C' }}
+            _hover={{ color: '#A19ED3', bg: '#1D1A59' }}
+            className="tab-button"
             key={name}
-            fontSize="sm"
-            fontWeight="medium"
             onClick={() => onSelect && onSelect(name)}
           >
             {name}
+            {/* <span className="settings-text">
+          <i className="fa fa-question-circle-o margin"></i>Lorem ipsum dolor sit amet.
+        </span> */}
           </Tab>
         ))}
       </TabList>
-      <TabPanels>
+      <TabPanels className="vertical-tabs">
         {panels?.map(({ key, children }) => (
           <TabPanel key={key}>{children}</TabPanel>
         ))}

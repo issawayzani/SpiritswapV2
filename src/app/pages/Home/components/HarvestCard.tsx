@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Spacer } from '@chakra-ui/react';
 import { SwapContainer } from '../portfolioStyles';
-import './styles.css';
+import '../../../../styles.css';
 import { StatisticsPanel } from './Panels';
 import { getReward } from 'utils/web3/actions/inspirit';
 import { transactionResponse } from 'utils/web3';

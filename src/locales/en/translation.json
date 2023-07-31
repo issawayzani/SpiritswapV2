@@ -107,8 +107,8 @@
   "home": {
     "common": {
       "header": "Embrace your <b style='color: #60E6C5'>DeFi SPIRIT</b>",
-      "description": "The Coveragex protocol captures the essence of everything Defi 2.0 on the Fantom network, delivering a complete hub for <b style='color: white'>trading</b>, <b style='color: white'>lending</b> and <b style='color: white'>borrowing</b>, <b style='color: white'>reward sharing</b>, <b style='color: white'>staking delegations</b>, and <b style='color: white'>farming</b>.<br/><br/>Scroll below and click on <b style='color: white'>“Learn more”</b> to learn more about Coveragex unique features and lucrative investment options.",
-      "descriptionFull": "The Coveragex protocol captures the essence of everything Defi 2.0 on the Fantom network, delivering a complete hub for <b style='color: white'>trading</b>, <b style='color: white'>lending</b> and <b style='color: white'>borrowing</b>, <b style='color: white'>reward sharing</b>, <b style='color: white'>staking delegations</b>, and <b style='color: white'>farming</b>.<br/><br/>Scroll below and click on <b style='color: white'>“Learn more”</b> to learn more about Coveragex’s unique features and lucrative investment options.",
+      "description": "The ConvergeX protocol captures the essence of everything Defi 2.0 on the Fantom network, delivering a complete hub for <b style='color: white'>trading</b>, <b style='color: white'>lending</b> and <b style='color: white'>borrowing</b>, <b style='color: white'>reward sharing</b>, <b style='color: white'>staking delegations</b>, and <b style='color: white'>farming</b>.<br/><br/>Scroll below and click on <b style='color: white'>“Learn more”</b> to learn more about ConvergeX unique features and lucrative investment options.",
+      "descriptionFull": "The ConvergeX protocol captures the essence of everything Defi 2.0 on the Fantom network, delivering a complete hub for <b style='color: white'>trading</b>, <b style='color: white'>lending</b> and <b style='color: white'>borrowing</b>, <b style='color: white'>reward sharing</b>, <b style='color: white'>staking delegations</b>, and <b style='color: white'>farming</b>.<br/><br/>Scroll below and click on <b style='color: white'>“Learn more”</b> to learn more about ConvergeX’s unique features and lucrative investment options.",
       "showPortfolio": "Show Portfolio",
       "connectWallet": "Connect your wallet",
       "howTo": "How To",
@@ -130,7 +130,7 @@
     "about": {
       "swap": {
         "title": "Swap your favourite tokens",
-        "description": "Coveragex is a decentralized exchange (DEX) on the Canto Chain.</br></br>Our current AMM architecture is proprietary, combining our upgraded uniV2 AMM with our brand new stable swap. This combination delivers the unique ability to achieve lightning quick swaps at the best rates the market has to offer.",
+        "description": "ConvergeX is a decentralized exchange (DEX) on the Canto Chain.</br></br>Our current AMM architecture is proprietary, combining our upgraded uniV2 AMM with our brand new stable swap. This combination delivers the unique ability to achieve lightning quick swaps at the best rates the market has to offer.",
         "button": "Swap",
         "trading": {
           "max": "Max",

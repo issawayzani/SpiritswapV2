@@ -1,4 +1,4 @@
-import './styles.css';
+import '../../../../styles.css';
 
 const TopCard = props => {
   const roundedLTV = props.check ? props.LTV : props.LTV.toFixed(2) + '%';

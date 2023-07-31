@@ -658,17 +658,23 @@ const SwapPage = () => {
     {
       key: 1,
       children: (
-        <StakePanel account={account} bondingCurveData={BondingCurveData} />
+        <OptionsPanel account={account} bondingCurveData={BondingCurveData} />
       ),
     },
     {
       key: 2,
       children: (
-        <BorrowPanel account={account} bondingCurveData={BondingCurveData} />
+        <StakePanel account={account} bondingCurveData={BondingCurveData} />
       ),
     },
     {
       key: 3,
+      children: (
+        <BorrowPanel account={account} bondingCurveData={BondingCurveData} />
+      ),
+    },
+    {
+      key: 4,
       children: (
         <OptionsPanel account={account} bondingCurveData={BondingCurveData} />
       ),
@@ -694,12 +700,84 @@ const SwapPage = () => {
     <Box overflowX="hidden">
       <HelmetProvider>
         <Helmet>
-          <title>Coveragex - Swap</title>
-          <meta name="Coveragex" content="Swap page" />
+          <title>ConvergeX - Swap</title>
+          <meta name="ConvergeX" content="Swap page" />
         </Helmet>
       </HelmetProvider>
-
-      <Box>
+      <SwapContainer islimit={`${isLimit}`}>
+        {isLoggedIn ? (
+          <>
+            {showSettings ? (
+              <Settings
+                toggleSettings={toggleSettings}
+                txGweiCost={txGweiCost}
+                states={{
+                  showChart: states.showChart,
+                  slippage: states.slippage,
+                  speedIndex: states.speedIndex,
+                  deadline: states.deadline,
+                  approveMax: states.approveMax,
+                }}
+                handlers={{
+                  handleSlippage: handlers.handleSlippage,
+                  handleShowChart: handlers.handleShowChart,
+                  handleTxSpeed: handlers.handleTxSpeed,
+                  handleDeadline: handlers.handleDeadline,
+                  handleApproveMax: handlers.handleApproveMax,
+                  handleSpeedIndex: handlers.handleSpeedIndex,
+                  handleResetAll: handlers.handleResetAll,
+                }}
+              />
+            ) : (
+              <Stack>
+                <Heading
+                  toggleSettings={toggleSettings}
+                  // toggleChart={toggleChart}
+                  helperModal={helperContent}
+                />
+                <TabSelect
+                  index={modeIndex}
+                  setIndex={setModeIndex}
+                  styleIndex={[2]}
+                  styleVariant="danger"
+                  names={['Swap', 'Options', 'Earn', 'Lend', 'Wrapper']}
+                  panels={panels}
+                />
+              </Stack>
+            )}
+          </>
+        ) : (
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Button onClick={connect}>Connect Wallet</Button>
+          </div>
+          // <SwapConfirm
+          //   firstToken={firstToken}
+          //   secondToken={secondToken}
+          //   setSwapConfirm={setSwapConfirm}
+          //   isLimit={isLimit}
+          //   trade={trade}
+          //   showInputInUSD={showInputInUSD}
+          //   isWrapped={isWrapped()}
+          //   resetInput={() => {
+          //     setFirstToken({
+          //       ...firstToken,
+          //       value: '',
+          //     });
+          //     setSecondToken({
+          //       ...secondToken,
+          //       value: '',
+          //     });
+          //   }}
+          // />
+        )}
+      </SwapContainer>
+      {/* <Box>
         <Grid
           display={{ base: 'grid', lg: 'grid' }}
           top={isMobile ? '124px' : '170px'}
@@ -712,113 +790,9 @@ const SwapPage = () => {
           placeContent="center"
           maxW={{ md: breakpoints.xl }}
         >
-          <GridItem rowSpan={1} colSpan={2}>
-            <div className="container">
-              <TopCard
-                icon="fa-users"
-                TVL={BondingCurveData?.tvl / 1e18}
-                supplyVTOKEN={BondingCurveData?.supplyVTOKEN}
-                APR={BondingCurveData?.apr / 1e18}
-                supplyTOKEN={BondingCurveData?.supplyTOKEN / 1e18}
-                LTV={BondingCurveData?.ltv / 1e18}
-                Ratio={BondingCurveData?.ratio / 1e18}
-              />
-            </div>
-          </GridItem>
-          <GridItem rowSpan={1} colSpan={1}>
-            <Box>
-              {/* <SpiritsBackground
-                islimit={isLimit}
-                showChart={showChart}
-                showSettings={showSettings}
-              /> */}
-
-              <SwapContainer islimit={`${isLimit}`}>
-                {isLoggedIn ? (
-                  <>
-                    {showSettings ? (
-                      <Settings
-                        toggleSettings={toggleSettings}
-                        txGweiCost={txGweiCost}
-                        states={{
-                          showChart: states.showChart,
-                          slippage: states.slippage,
-                          speedIndex: states.speedIndex,
-                          deadline: states.deadline,
-                          approveMax: states.approveMax,
-                        }}
-                        handlers={{
-                          handleSlippage: handlers.handleSlippage,
-                          handleShowChart: handlers.handleShowChart,
-                          handleTxSpeed: handlers.handleTxSpeed,
-                          handleDeadline: handlers.handleDeadline,
-                          handleApproveMax: handlers.handleApproveMax,
-                          handleSpeedIndex: handlers.handleSpeedIndex,
-                          handleResetAll: handlers.handleResetAll,
-                        }}
-                      />
-                    ) : (
-                      <Stack>
-                        <Heading
-                          toggleSettings={toggleSettings}
-                          // toggleChart={toggleChart}
-                          helperModal={helperContent}
-                        />
-                        <TabSelect
-                          index={modeIndex}
-                          setIndex={setModeIndex}
-                          styleIndex={[2]}
-                          styleVariant="danger"
-                          names={['Swap', 'Stake', 'Borrow', 'Options']}
-                          panels={panels}
-                        />
-                      </Stack>
-                    )}
-                  </>
-                ) : (
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Button onClick={connect}>Connect Wallet</Button>
-                  </div>
-                  // <SwapConfirm
-                  //   firstToken={firstToken}
-                  //   secondToken={secondToken}
-                  //   setSwapConfirm={setSwapConfirm}
-                  //   isLimit={isLimit}
-                  //   trade={trade}
-                  //   showInputInUSD={showInputInUSD}
-                  //   isWrapped={isWrapped()}
-                  //   resetInput={() => {
-                  //     setFirstToken({
-                  //       ...firstToken,
-                  //       value: '',
-                  //     });
-                  //     setSecondToken({
-                  //       ...secondToken,
-                  //       value: '',
-                  //     });
-                  //   }}
-                  // />
-                )}
-              </SwapContainer>
-            </Box>
-          </GridItem>
-
-          <GridItem rowSpan={1} colSpan={1}>
-            <Box ml="10px">
-              <TopRightCard
-                account={account}
-                bondingCurveData={BondingCurveData}
-              />
-            </Box>
-          </GridItem>
+          
         </Grid>
-      </Box>
+      </Box> */}
       <ConnectWallet isOpen={isOpen} dismiss={onClose} />
     </Box>
   );
