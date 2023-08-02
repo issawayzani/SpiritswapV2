@@ -29,7 +29,8 @@ import useMobile from 'utils/isMobile';
 import { MobileTable } from '../MobileTable';
 import useWallets from 'app/hooks/useWallets';
 import { checkLastVoted, getBribeCards } from 'utils/web3/actions/inspirit';
-
+import { colors } from 'theme/base/color';
+import { borderRadius } from 'theme/base/borderRadius';
 const TokenTableV3 = ({
   errorMessage,
   handleVote,
@@ -146,7 +147,7 @@ const TokenTableV3 = ({
   ];
 
   return (
-    <VStack w="full">
+    <VStack w="full" marginTop={'50px'}>
       {/* <HeaderTable
         onFarmSearch={onFarmSearch}
         toggleMobileTableFilters={toggleMobileTableFilters}
@@ -211,15 +212,20 @@ const TokenTableV3 = ({
       )}
       <HStack w="full" justify={isMobile ? 'center' : 'flex-end'} p="8px">
         <Button
-          bg="none"
+          bg={colors.bgReset}
           disabled={!isLoggedIn}
           border="none"
+          className="button-padding reset-button"
+          borderRadius={borderRadius.mmd}
           w={isMobile ? 'full' : '-moz-initial'}
           onClick={resetVoting}
         >
           {t(`${translationPath}.resetVoting`)}
         </Button>
         <Button
+          className="green-button button-padding"
+          bg="transparent"
+          borderRadius={borderRadius.mmd}
           variant="primary"
           w={isMobile ? 'full' : '-moz-initial'}
           isLoading={isLoading}

@@ -12,8 +12,8 @@ const colorChannelMixer = (
   return channelA + channelB;
 };
 const colorMixer = (rgbA, rgbB, amountToMix, symbol) => {
-  const colorA = rgbA ? rgbA : [23, 173, 99];
-  const colorB = rgbB ? rgbB : [223, 73, 129];
+  const colorA = rgbA ? rgbA : '#4640D3';
+  const colorB = rgbB ? rgbB : '#8D89D3';
   const customAmount = symbol === 'WFTM' ? 2 : amountToMix;
   const r = colorChannelMixer(colorA[0], colorB[0], customAmount);
   const g = colorChannelMixer(colorA[1], colorB[1], customAmount);
@@ -22,12 +22,12 @@ const colorMixer = (rgbA, rgbB, amountToMix, symbol) => {
 };
 
 const TOKENS_COLORS = {
-  USDC: [247, 147, 26],
-  SPIRIT: [147, 47, 126],
-  fUSDT: [60, 60, 61],
-  MIM: [111, 139, 150],
-  DAI: [255, 255, 255],
-  FRAX: [127, 17, 224],
+  USDC: '#4640D3',
+  SPIRIT: '#8D89D3',
+  fUSDT: '#167F8B',
+  MIM: '#5F97FF',
+  DAI: '#C04AFF',
+  FRAX: '#2E2A8C',
   miMATIC: [251, 231, 185],
   WFTM: [255, 215, 0],
   BTC: [80, 231, 185],
@@ -68,7 +68,7 @@ const usePieChartData = ({ farmsList }: { farmsList: BribeCard[] }) => {
     const othersVotes = {
       name: t(`${translationPath}.others`),
       value: 0,
-      color: 'rgb(47, 92, 69)',
+      color: '#C04AFF',
     };
     for (let i = 0; i < farmsList.length; i++) {
       const { symbol, votePercent, isAlive } = farmsList[i];
@@ -93,10 +93,10 @@ const usePieChartData = ({ farmsList }: { farmsList: BribeCard[] }) => {
         {
           data,
 
-          borderColor: ['white'],
-          borderWidth: 1,
-          hoverBorderWidth: 2,
-          hoverBorderColor: ['#424348'],
+          borderColor: ['none'],
+          borderWidth: 0,
+          hoverBorderWidth: 0,
+          hoverBorderColor: ['none'],
         },
       ],
     };

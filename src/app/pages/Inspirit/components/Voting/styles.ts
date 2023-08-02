@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 
 export const StyledHeader = styledComponent.div`
   display: flex;
-  gap: ${({ theme }) => `${theme.spacing.spacing04}`};
+  // gap: ${({ theme }) => `${theme.spacing.spacing04}`};
 `;
 
 export const StyledParagraph = styledComponent(Paragraph)`

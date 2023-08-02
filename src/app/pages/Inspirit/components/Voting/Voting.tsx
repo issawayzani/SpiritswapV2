@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Heading } from 'app/components/Typography';
 import { StyledVoting, StyledPanel } from '../../styles';
 import { Select } from 'app/components/Select';
+import '../../../../../styles.css';
 import {
   checkLastVoted,
   checkLastVotes,
@@ -223,60 +224,16 @@ function Voting() {
             <HStack w={'100%'} justifyContent={'space-between'}>
               <Flex sx={{ gap: '0.3rem', flexDirection: 'column' }}>
                 <div style={{ marginBottom: 10 }}>
-                  <span
-                    style={{
-                      color: 'white',
-                      fontSize: 34,
-                      fontFamily: 'Neometric',
-                    }}
-                  >
-                    Converge
-                  </span>
-                  <span
-                    style={{
-                      color: '#94CAF8',
-                      fontSize: 34,
-                      fontFamily: 'Neometric',
-                    }}
-                  >
-                    X{' '}
-                  </span>
-                  <span
-                    style={{
-                      color: 'white',
-                      fontSize: 34,
-                      fontFamily: 'Neometric',
-                    }}
-                  >
-                    Voting
-                  </span>
+                  <div className="swap-title">
+                    Converge<span className="swap-x">X </span>Voting
+                  </div>
                 </div>
                 <div>
-                  <div
-                    style={{
-                      marginBottom: 15,
-                      width: 195.8,
-                      color: '#F3F2FF',
-                      fontSize: 14,
-                      fontFamily: 'Neometric',
-                    }}
-                  >
-                    Time Until Next Vote:
-                  </div>
-                  <div
-                    style={{
-                      color: '#C04AFF',
-                      fontSize: 34,
-                      fontFamily: 'Neometric',
-                    }}
-                  >
-                    {timeRemaining}
-                  </div>
+                  <div className="time-vote">Time Until Next Vote:</div>
+                  <div className="purple-time">{timeRemaining}</div>
                 </div>
-                <Button className={styles.button1} onClick={onCreateBribe}>
-                  <Text fontWeight="medium" fontSize="sm">
-                    New Bribe
-                  </Text>
+                <Button className="bribe-button" onClick={onCreateBribe}>
+                  <Text>New Bribe</Text>
                 </Button>
               </Flex>
 
@@ -306,13 +263,13 @@ function Voting() {
                 </Flex>
 
                 <Button
-                  className={styles.button}
+                  className="green-claim"
                   onClick={() => claimReward(bribeCards)}
                   loadingText={loaderText}
                   isLoading={isLoadingButton}
                   disabled={getDisabledStatus()}
                 >
-                  <Text className={styles.text}>Claim Voting Rewards</Text>
+                  <Text>Claim Voting Rewards</Text>
                 </Button>
               </Flex>
             </HStack>

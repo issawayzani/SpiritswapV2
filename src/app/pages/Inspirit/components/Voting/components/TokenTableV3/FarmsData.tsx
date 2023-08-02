@@ -113,36 +113,41 @@ const FarmsData = ({
   return (
     <Tr style={{ backgroundColor: 'transparent' }}>
       <Td>
-        <HStack mt="8px">
-          <Text color="#A19ED3">{protocol}</Text>
+        <HStack mt="20px">
+          <Text className="protocol-title" mb="8px">
+            {protocol}
+          </Text>
         </HStack>
         <HStack spacing={0}>
-          <ImageLogo margin="0" symbol="ftm" size="24px" />
-          <ImageLogo margin="0" symbol="ftm" size="24px" />
-          <Text color="#93BDFF">{symbol}</Text>
+          <div className="ftm-relative">
+            <ImageLogo symbol="ftm" size="27px" />
+          </div>
+          <div className="ftm-logo">
+            <ImageLogo margin="0" symbol="ftm" size="27px" />
+          </div>
+
+          <div className="symbol-text">{symbol}</div>
         </HStack>
       </Td>
       <Td>
         <HStack justify="center">
-          <Text fontSize="sm">{`${votePercentage}%`}</Text>
+          <Text className="vote-percentage">{`${votePercentage}%`}</Text>
         </HStack>
         <HStack justify="center">
-          <Text color="grayDarker" fontSize="sm">
-            {newVoteWeight} M
-          </Text>
+          <Text className="newvote-weight">{newVoteWeight} M</Text>
         </HStack>
       </Td>
       {/* <Td>
         <Text fontSize="sm">{`${rewardAPR.toFixed(2)}%`}</Text>
       </Td> */}
       {/* <Td>
-        <Text fontSize="sm">{`$${formatNumber({
+        <Text className="vote-percentage">{`$${formatNumber({
           value: Number(bribes),
         })}`}</Text>
       </Td> */}
       <Td>
         {tokenAccountInfo?.map((token, index) => (
-          <Text fontSize="sm" key={index}>
+          <Text className="vote-percentage" key={index}>
             <>
               {token.name} {token.reward}
             </>
@@ -152,7 +157,7 @@ const FarmsData = ({
 
       <Td>
         {tokenInfo?.map((token, index) => (
-          <Text fontSize="sm" key={index}>
+          <Text className="vote-percentage" key={index}>
             <>
               {token.name} {token.reward}
             </>

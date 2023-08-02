@@ -19,17 +19,15 @@ const LabelTable = ({ label, sortType, onSort, isLast, isFirst, id }) => {
         <Flex
           direction="column"
           cursor="pointer"
-          fontSize="sm"
+          // fontSize="sm"
           align="center"
           justify="center"
-          color="grayDarker"
           onClick={() => handleOnSort(sortType)}
         >
-          <Text>{titles[0]}/</Text>
+          <Text className="vote-title float-left">
+            {titles[0]}/{titles[1]}
+          </Text>
           <Flex alignItems="center">
-            <Text align="center" justifyContent="center">
-              {titles[1]}
-            </Text>
             {/* <QuestionHelper
               title={
                 isRewards10kInSPIRIT
@@ -50,6 +48,7 @@ const LabelTable = ({ label, sortType, onSort, isLast, isFirst, id }) => {
 
   return (
     <Th
+      className="vote-title"
       style={{ textAlign: `${isLast ? 'end' : isFirst ? 'start' : 'center'}` }}
     >
       {titles.length > 1 ? (
@@ -57,7 +56,7 @@ const LabelTable = ({ label, sortType, onSort, isLast, isFirst, id }) => {
       ) : (
         <Text
           cursor="pointer"
-          fontSize="sm"
+          className="vote-title"
           onClick={() => handleOnSort(sortType)}
         >
           {label}
