@@ -252,25 +252,30 @@ function Voting() {
 
               <Flex direction="column">
                 <Flex direction="row">
-                  <Text> VTOKEN Balance</Text>
+                  <Text className="vote-power"> VTOKEN Balance</Text>
                   <Spacer />
-                  <Text textAlign="right">{accountVTOKEN}</Text>
+                  <Text className="blue-number" textAlign="right">
+                    {accountVTOKEN}
+                  </Text>
                 </Flex>
-                <Flex marginTop="20px" direction="row">
-                  <Text> Voting Power: </Text>
+                <Flex marginTop="15px" direction="row">
+                  <Text className="vote-power"> Voting Power: </Text>
                   <Spacer />
-                  <Text textAlign="right">{accountVotingPower}</Text>
+                  <Text className="blue-number" textAlign="right">
+                    {accountVotingPower}
+                  </Text>
                 </Flex>
-
-                <Button
-                  className="green-claim"
-                  onClick={() => claimReward(bribeCards)}
-                  loadingText={loaderText}
-                  isLoading={isLoadingButton}
-                  disabled={getDisabledStatus()}
-                >
-                  <Text>Claim Voting Rewards</Text>
-                </Button>
+                <Flex direction="row">
+                  <Button
+                    className="green-claim"
+                    onClick={() => claimReward(bribeCards)}
+                    loadingText={loaderText}
+                    isLoading={isLoadingButton}
+                    disabled={getDisabledStatus()}
+                  >
+                    <Text>Claim Voting Rewards</Text>
+                  </Button>
+                </Flex>
               </Flex>
             </HStack>
           </Flex>

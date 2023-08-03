@@ -120,7 +120,9 @@ const CardHeader = ({
           )}
         </Button>
       )} */}
-      <Heading level={2}>{title}</Heading>
+      <Heading className="modal-title" level={2}>
+        {title}
+      </Heading>
       {!hideQuestionIcon && (
         <div>
           <QuestionHelper

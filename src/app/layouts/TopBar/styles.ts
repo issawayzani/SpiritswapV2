@@ -168,10 +168,12 @@ export const StyledSettingsModal = styled(SettingsModal)`
   @media (min-width: ${({ theme }) => theme.breakpoints.xs}) {
     top: 106px;
     right: 0px;
+    z-index: 3;
   }
   @media (min-width: ${({ theme }) => theme.breakpoints.xxs}) {
     top: 106px;
     right: 0px;
+    z-index: 3;
   }
   display: flex;
   // width: 410px;

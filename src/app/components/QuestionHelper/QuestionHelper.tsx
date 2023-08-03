@@ -26,7 +26,7 @@ const QuestionHelper: FC<Props> = ({
   text,
   importantText,
   showDocs,
-  iconWidth = '20px',
+  iconWidth = '18px',
   iconMargin = 'inherit',
 }) => {
   const { t } = useTranslation();
@@ -45,7 +45,7 @@ const QuestionHelper: FC<Props> = ({
         <ModalOverlay />
         <ModalContent mx="spacing04" style={{ border: 'none' }}>
           <ModalHeader pt="spacing04" pl="spacing04">
-            <QuestionIcon w="auto" h="22px" mr="spacing03" color="ci" />
+            <QuestionIcon w="auto" h="22px" mr="spacing03" color="#5F97FF" />
             <Text fontWeight={500} data-testid="title">
               {title}
             </Text>
@@ -116,7 +116,11 @@ const QuestionHelper: FC<Props> = ({
         m={iconMargin}
         height="auto"
       >
-        <QuestionIcon w={iconWidth} h={iconWidth} _hover={{ color: 'ci' }} />
+        <QuestionIcon
+          w={iconWidth}
+          h={iconWidth}
+          _hover={{ color: '#5F97FF' }}
+        />
       </Button>
     </>
   );

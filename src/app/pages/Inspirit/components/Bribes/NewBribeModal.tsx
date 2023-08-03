@@ -8,6 +8,7 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
+
 import { CardHeader } from 'app/components/CardHeader';
 import { IconButton, Text } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
@@ -163,15 +164,13 @@ export const NewBribeModal = ({
   return (
     <Modal isOpen={isOpen} onClose={onCloseModalHandler} {...props} isCentered>
       <ModalOverlay />
-      <ModalContent
-        backgroundColor="rgba(29.49, 26.39, 89.25, 0.90)"
-        maxW={'450px'}
-      >
+
+      <ModalContent className="bribe-modal">
         <Flex
-          p={'spacing06'}
-          pl={'spacing05'}
+          className="bribe-border"
           alignItems="center"
           justifyContent="center"
+          zIndex={3}
         >
           <CardHeader
             title={t(`${translationRoot}.newBribe`)}
@@ -183,6 +182,7 @@ export const NewBribeModal = ({
             }}
             onIconClick={() => {}}
           />
+
           {/* <IconButton
             size="xs"
             height="2rem"
@@ -197,23 +197,29 @@ export const NewBribeModal = ({
             onClick={onCloseModal}
           /> */}
         </Flex>
-
         <VStack>
           <Flex direction="column" px="spacing06" gap="spacing04" w="100%">
-            <Text color="#5F97FF" w="100%" textAlign="center">
+            <Text
+              className="letter-spacing"
+              color="#5F97FF"
+              w="100%"
+              textAlign="center"
+            >
               {t(`${translationRoot}.selectFarmToBribe`)}
             </Text>
             {farms && (
-              <FarmsDropdown
-                value={selectedFarmLpAddress}
-                farms={farms}
-                onChange={handleFarmChange}
-              />
+              <div className="border-bottom">
+                <FarmsDropdown
+                  value={selectedFarmLpAddress}
+                  farms={farms}
+                  onChange={handleFarmChange}
+                />
+              </div>
             )}
 
             {inputToken ? (
               <>
-                <Text color="#5F97FF" textAlign="center" w="100%">
+                <Text className="letter-spacing" textAlign="center" w="100%">
                   {t(`${translationRoot}.selectTokenAndAmount`)}
                 </Text>
                 <NewTokenAmountPanel
@@ -227,7 +233,7 @@ export const NewBribeModal = ({
                   showPercentage
                   inputWidth="15rem"
                 />
-                <Text color="#A19ED3" w="100%">
+                <Text className="minimum-bribe" w="100%">
                   {`Minimum bribe amount: ${minBribeAmount} ${inputToken.symbol}`}
                 </Text>
               </>

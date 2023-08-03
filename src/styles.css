@@ -36,7 +36,45 @@
   letter-spacing: 1.4px;
 }
 .width-100 {
-  /* width: 100%; */
+  @media only screen and (min-width: 640px) {
+    width: 100%;
+  }
+  @media only screen and (min-width: 768px) {
+    width: 100%;
+  }
+  @media only screen and (min-width: 1024px) {
+    width: 100%;
+  }
+  @media only screen and (min-width: 1280px) {
+    width: 100%;
+  }
+}
+.vote-dropdown {
+  color: #fff;
+}
+.border-bottom {
+  border-bottom: 1px solid var(--gray-22, #2e2a8c);
+  padding-bottom: 15px;
+}
+.bribe-modal {
+  background-color: rgba(29.49, 26.39, 89.25, 0.9);
+  max-width: 450px;
+  padding: 2rem;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-shrink: 0;
+  position: absolute;
+  z-index: 1;
+  border-radius: 8px;
+  border: 4px solid #2e2a8c;
+  background: rgba(29, 26, 89, 0.9);
+  box-shadow: 0px 34px 88px 0px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(7.5px);
+  color: var(--gray-10, #a19ed3);
 }
 .item-price {
   color: var(--gray-10, #a19ed3);
@@ -86,6 +124,28 @@
   line-height: 28px;
   margin-bottom: 6px;
   letter-spacing: 1.4px;
+}
+.minimum-bribe {
+  color: var(--gray-10, #a19ed3);
+  text-align: center;
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Btn/small/normal */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.6;
+  line-height: 24px; /* 171.429% */
+}
+.letter-spacing {
+  color: var(--blue-5, #5f97ff);
+  text-align: center;
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Btn/small/normal */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.6px;
+  line-height: 24px; /* 171.429% */
 }
 .portfolio-subtitle {
   color: #fff;
@@ -182,7 +242,6 @@
 }
 .top {
   margin-top: 133px;
-  z-index: 100;
   position: relative;
 }
 .portfolio-section {
@@ -201,6 +260,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  letter-spacing: 1.4px;
 }
 .settings-text {
   color: var(--gray-10, #a19ed3);
@@ -374,8 +434,10 @@
   border-radius: 24px;
   border: 1px solid var(--turquoise-7, #22abac);
   background: transparent;
-  margin-top: 20px;
+  margin-top: 15px;
   display: flex;
+  width: 193px;
+  float: right;
   padding: 8px 15px;
   justify-content: space-between;
   align-items: center;
@@ -448,6 +510,15 @@
   height: 42px;
   margin-top: 10px;
 }
+.bribe-button:hover {
+  color: var(--blue-2, #c5dfff);
+  background: var(--primary-4, #c04aff);
+}
+.bribe-button:focus,
+bribe-button:active {
+  color: var(--blue-2, #c5dfff);
+  background: var(--primary-4, #d07cfc);
+}
 .vote-title {
   color: var(--gray-7, #bfbed3);
   font-variant-numeric: lining-nums proportional-nums;
@@ -457,6 +528,7 @@
   font-weight: 500;
   line-height: 24px; /* 171.429% */
   letter-spacing: 1.4px;
+  padding-bottom: 10px;
 }
 .protocol-title {
   color: var(--gray-10, #a19ed3);
@@ -503,6 +575,19 @@
   line-height: 24px; /* 171.429% */
   letter-spacing: 1.4px;
 }
+.votepercentage {
+  color: var(--gray-2, #f3f2ff);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Paragraph/Semibold */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+  letter-spacing: 1.4px;
+}
+.vote-percentage:hover {
+  border: 1px solid var(--navy, #22abac);
+}
 .newvote-weight {
   color: var(--gray-10, #a19ed3);
   font-variant-numeric: lining-nums proportional-nums;
@@ -512,4 +597,17 @@
   font-weight: 400;
   line-height: 24px; /* 171.429% */
   letter-spacing: 1.4px;
+}
+.bribe-border {
+  border-bottom: 1px solid var(--gray-22, #2e2a8c);
+  /* margin-right:30px;
+  margin-left:30px;
+  margin-bottom:15px; */
+  width: 100%;
+  padding-bottom: 20px;
+}
+.vote-power {
+  font-size: 20px;
+  letter-spacing: 0.6px;
+  margin-top: 5px;
 }

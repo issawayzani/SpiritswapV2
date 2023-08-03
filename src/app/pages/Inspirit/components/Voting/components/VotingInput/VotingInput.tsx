@@ -55,7 +55,7 @@ const VotingInput = ({
         max="100"
         className="vote-percentage"
         background="#645FD3"
-        value="900"
+        value={newVote}
         onChange={({ target }) => handleVote(target.value)}
       />
       <InputRightElement>

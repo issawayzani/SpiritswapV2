@@ -270,7 +270,7 @@ export const CalculatorIcon = ({ w = md, h = md, color = ci, ...rest }) => {
 export const QuestionIcon = ({
   w = md,
   h = md,
-  color = grayDarker,
+  color = '#A19ED3',
   ...rest
 }) => {
   return <Icon {...rest} as={Question} color={color} w={w} h={h} />;
@@ -452,7 +452,7 @@ export const QuestionIconButton = ({ ...rest }) => {
       {...rest}
       variant="iconButton"
       icon={<Question />}
-      color="grayDarker"
+      color={'#a19ed3'}
       aria-label="Tooltip"
     />
   );

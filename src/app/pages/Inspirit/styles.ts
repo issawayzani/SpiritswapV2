@@ -3,7 +3,8 @@ import styled from '@emotion/styled';
 
 export const StyledContainer = styled(Box)<{ ismobile?: string }>`
   padding-top: ${props => (props.ismobile ? '106px' : '106px')};
-  padding-bottom: 175px;
+  padding-bottom: ${props => (props.ismobile ? '100px' : '30px')};
+
   max-width: ${({ theme }) => theme.breakpoints.xl};
   margin: auto;
 

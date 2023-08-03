@@ -131,7 +131,7 @@ const FarmsData = ({
       </Td>
       <Td>
         <HStack justify="center">
-          <Text className="vote-percentage">{`${votePercentage}%`}</Text>
+          <Text className="votepercentage">{`${votePercentage}%`}</Text>
         </HStack>
         <HStack justify="center">
           <Text className="newvote-weight">{newVoteWeight} M</Text>
@@ -141,13 +141,13 @@ const FarmsData = ({
         <Text fontSize="sm">{`${rewardAPR.toFixed(2)}%`}</Text>
       </Td> */}
       {/* <Td>
-        <Text className="vote-percentage">{`$${formatNumber({
+        <Text className="votepercentage">{`$${formatNumber({
           value: Number(bribes),
         })}`}</Text>
       </Td> */}
       <Td>
         {tokenAccountInfo?.map((token, index) => (
-          <Text className="vote-percentage" key={index}>
+          <Text className="votepercentage" key={index}>
             <>
               {token.name} {token.reward}
             </>
@@ -157,7 +157,7 @@ const FarmsData = ({
 
       <Td>
         {tokenInfo?.map((token, index) => (
-          <Text className="vote-percentage" key={index}>
+          <Text className="votepercentage" key={index}>
             <>
               {token.name} {token.reward}
             </>
