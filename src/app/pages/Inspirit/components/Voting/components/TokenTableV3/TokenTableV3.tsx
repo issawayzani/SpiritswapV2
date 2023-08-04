@@ -221,13 +221,12 @@ const TokenTableV3 = ({
         </Button>
         <Button
           variant="primary"
+          disabled={!isLoggedIn || isLoading}
           w={isMobile ? 'full' : '-moz-initial'}
           isLoading={isLoading}
           onClick={() => handleVote(filteredBribes, newVotes)}
         >
-          {t(
-            `${translationPath}.${isLoggedIn ? 'confirmVote' : 'notconnected'}`,
-          )}
+          {t(`${translationPath}.${'confirmVote'}`)}
         </Button>
       </HStack>
     </VStack>
