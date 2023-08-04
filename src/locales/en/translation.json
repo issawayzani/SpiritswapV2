@@ -41,6 +41,7 @@
     },
     "settingsModal": {
       "title": "Settings",
+      "setting": "Lorem ipsum dolor sit amet.",
       "language": "Language",
       "notifications": "Notifications",
       "pushNotifications": "Push notifications"
@@ -679,7 +680,8 @@
         "selectTokenAndAmount": "Select Token and amount",
         "confirmBribe": "Confirm Bribe",
         "cancel": "Cancel",
-        "close": "Close"
+        "close": "Close",
+        "help": "Select an existing farm to create a bribe for.This will incentivize more people to vote for your farm. More emissions!"
       }
     }
   },

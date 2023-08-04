@@ -306,8 +306,8 @@ const NewTokenAmountPanel = ({
                 w={inputWidth}
                 inputMode="numeric"
                 paddingInline="8px"
-                placeholder="0"
-                fontSize="xl2"
+                placeholder="0.0"
+                className="number-input"
                 _placeholder={{ color: '#A9CDFF' }}
               />
             </NumberInput>

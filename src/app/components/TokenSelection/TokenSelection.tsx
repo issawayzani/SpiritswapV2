@@ -17,13 +17,14 @@ const TokenSelection: FC<Props> = ({
       borderWidth="1px"
       borderColor="#2E2A8C"
       px="spacing02"
+      className="token-vote"
       _hover={{
         cursor: isSelectable ? 'pointer' : 'default',
       }}
       onClick={handleOpen}
     >
-      <ImageLogo symbol={symbol} src={src} size="28px" />
-      <Text fontSize="xl2">{symbol}</Text>
+      <ImageLogo symbol={symbol} src={src} size="26px" />
+      <Text className="vote-symbol">{symbol}</Text>
       {isSelectable && handleOpen && <CaretDownIcon />}
     </Flex>
   );

@@ -24,6 +24,8 @@ import { checkAddress } from 'app/utils';
 import { ethers } from 'ethers';
 import useWallets from 'app/hooks/useWallets';
 import useLogin from 'app/connectors/EthersConnector/login';
+import { colors } from 'theme/base/color';
+import { borderRadius } from 'theme/base/borderRadius';
 
 interface farmsProps {
   farmAddress: string;
@@ -172,16 +174,7 @@ export const NewBribeModal = ({
           justifyContent="center"
           zIndex={3}
         >
-          <CardHeader
-            title={t(`${translationRoot}.newBribe`)}
-            id={BRIBE}
-            helperContent={{
-              title: 'New Bribe',
-              text: 'Want more inSPIRIT votes for your farm? Select an existing farm to create a bribe for. This will incentivize more people to vote for your farm. More emissions!',
-              showDocs: false,
-            }}
-            onIconClick={() => {}}
-          />
+          <h1 className="modal-title">{t(`${translationRoot}.newBribe`)}</h1>
 
           {/* <IconButton
             size="xs"
@@ -197,8 +190,13 @@ export const NewBribeModal = ({
             onClick={onCloseModal}
           /> */}
         </Flex>
+        <div className="settings-text ">
+          <i className="fa fa-question-circle-o margin"></i>
+          {t(`${translationRoot}.help`)}
+        </div>
+
         <VStack>
-          <Flex direction="column" px="spacing06" gap="spacing04" w="100%">
+          <Flex direction="column" gap="spacing04" w="100%">
             <Text
               className="letter-spacing"
               color="#5F97FF"
@@ -239,14 +237,12 @@ export const NewBribeModal = ({
               </>
             ) : null}
 
-            <Flex
-              pt="spacing02"
-              pb="spacing06"
-              justifyContent={'space-between'}
-            >
+            <Flex pt="spacing02" justifyContent={'space-between'}>
               <Button
-                padding="9px 51px"
-                backgroundColor="#2E2A8C"
+                className="button-padding reset-button"
+                bg={colors.bgReset}
+                border={'none'}
+                borderRadius={borderRadius.mmd}
                 onClick={onCloseModalHandler}
               >
                 {t(`${translationRoot}.cancel`)}
@@ -256,10 +252,9 @@ export const NewBribeModal = ({
               ) : (
                 <Button
                   disabled={getDisabled()}
-                  backgroundColor="#1D1A59"
-                  borderColor="#22ABAC"
-                  borderWidth="2px"
-                  padding="9px 51px"
+                  className="green-button button-padding"
+                  bg="transparent"
+                  borderRadius={borderRadius.mmd}
                   isLoading={isLoading}
                   onClick={onConfirm}
                 >
