@@ -56,6 +56,7 @@ const Percentages: FC<Props> = ({
         <Button
           backgroundColor="#4F4AD3"
           color="#4640D3"
+          className="percentage-button"
           key={value}
           onClick={() => handleChange(value)}
         >

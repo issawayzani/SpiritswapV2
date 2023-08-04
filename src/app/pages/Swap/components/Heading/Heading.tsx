@@ -3,29 +3,33 @@ import { ReactComponent as BusinessProductIcon } from 'app/assets/images/busines
 import { HStack } from '@chakra-ui/react';
 import { CardHeader } from 'app/components/CardHeader';
 import { StyledIcon } from '../../styles';
-
+import '../../../../../styles.css';
 import { SWAP } from 'constants/icons';
 
 export default function Heading({ toggleSettings, helperModal }) {
   return (
     <HStack justifyContent="space-between" mb="15px">
-      <CardHeader
+      <div className="swap-title">
+        Converge<span className="swap-x">X</span>change
+      </div>
+      {/* <CardHeader
         id={SWAP}
-        title="Swap"
+        title="ConvergeXChange"
         helperContent={{
           title: helperModal.title,
           text: helperModal.text,
           showDocs: true,
         }}
-      />
+      /> */}
 
       <HStack>
-        <StyledIcon
+        Mays
+        {/* <StyledIcon
           onClick={toggleSettings}
           size="sm"
           as={SettingSwap}
           aria-label="settings"
-        />
+        /> */}
         {/* <StyledIcon
           onClick={toggleChart}
           size="sm"

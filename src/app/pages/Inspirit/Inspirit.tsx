@@ -9,6 +9,7 @@ import { StyledContainer } from './styles';
 import SpiritsBackground from './components/SpiritsBackground';
 import { GetSpiritLocked } from 'app/utils';
 import useMobile from 'utils/isMobile';
+
 const InspiritPage = () => {
   const { t } = useTranslation();
   const pageTitle = `${t('common.name')} - ${t('common.menu.inSpirit')}`;

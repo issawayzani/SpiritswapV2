@@ -270,16 +270,7 @@ const NewTokenAmountPanel = ({
   };
 
   return (
-    <Flex
-      bg="rgba(29.49, 26.39, 89.25, 0.90)"
-      py="spacing05"
-      px="spacing04"
-      flexDirection="column"
-      borderColor="#2E2A8C"
-      w="full"
-      borderRadius="md"
-      {...props}
-    >
+    <Flex flexDirection="column" w="full" {...props}>
       <HStack align="center" justify="space-between" w="100%">
         {showNumberInputField && (
           <Skeleton

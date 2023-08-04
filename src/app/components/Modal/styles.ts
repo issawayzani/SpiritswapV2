@@ -4,6 +4,7 @@ import { IconButton } from '../IconButton';
 
 export const StyledPanel = styled(Panel)`
   padding: ${({ theme }) => theme.spacing.spacing05};
+  z-index: 3;
 `;
 
 export const TopContainer = styled.div`

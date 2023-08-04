@@ -51,10 +51,9 @@ const SettingsModal = ({
   return (
     <Modal title={t(`${translationPath}.title`)} onClose={onClose} {...props}>
       <BodyContainer>
-        <span className="settings-text">
-          <i className="fa fa-question-circle-o margin"></i>Lorem ipsum dolor
-          sit amet.
-        </span>
+        {/* <span className="settings-text">
+          <i className="fa fa-question-circle-o margin"></i>Lorem ipsum dolor sit amet.
+        </span> */}
         <span className="permissions-title">Token approval permissions</span>
         <div className="button-margin-bottom">
           <Button

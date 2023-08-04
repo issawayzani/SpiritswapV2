@@ -3,13 +3,20 @@ import { Box, HStack, IconButton } from '@chakra-ui/react';
 
 export const SwapContainer = styled(Box)<{ isLimit: boolean }>`
   border-radius: 8px;
-  border: 1px solid ${({ theme }) => `${theme.colors.grayBorderBox}`};
-  background: ${({ theme }) => theme.colors.bgBox};
-  padding: ${({ theme }) => theme.space.spacing03};
-
+  // border: 1px solid ${({ theme }) => `${theme.colors.grayBorderBox}`};
+  // background: ${({ theme }) => theme.colors.bgBox};
+  // padding: ${({ theme }) => theme.space.spacing03};
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     padding: 24px;
-    margin: 0 auto;
+    margin: 106px auto;
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.xs}) {
+    padding: 24px;
+    margin: 106px auto;
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints.xxs}) {
+    padding: 24px;
+    margin: 106px auto;
   }
 `;
 

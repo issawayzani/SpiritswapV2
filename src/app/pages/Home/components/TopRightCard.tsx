@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
 import { SwapContainer } from '../portfolioStyles';
-import './styles.css';
+import '../../../../styles.css';
 import { StatisticsPanel } from './Panels';
 import xglov3 from '../../../assets/images/xglov3.svg';
 import fantom from '../../../assets/images/fantom-logo.svg';

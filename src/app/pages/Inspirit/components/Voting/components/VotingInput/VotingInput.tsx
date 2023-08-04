@@ -41,23 +41,19 @@ const VotingInput = ({
   };
 
   return (
-    <InputGroup
-      w={isMobile ? 'full' : '100px'}
-      border="1px solid #100F3A"
-      borderRadius="8px"
-      float="right"
-    >
+    <InputGroup w={isMobile ? 'full' : '100px'} float="right">
       <Input
         onFocus={({ target }) =>
           target.value === '0' ? setNewVote('') : setNewVote(target.value)
         }
         onBlur={() => setNewVote(newVote ? newVote : yourVote)}
-        fontSize="sm"
+        fontSize="14px"
         borderRadius={8}
         // borderColor={yourVote !== '0' ? 'ci' : 'initial'}
         disabled={account ? false : true}
         textAlign="center"
         max="100"
+        className="vote-percentage"
         background="#645FD3"
         value={newVote}
         onChange={({ target }) => handleVote(target.value)}
