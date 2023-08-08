@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { selectBorrowIndex } from 'store/general/selectors';
 import { useEffect, useState } from 'react';
 import { setGlobalBorrowIndex } from 'store/general';
+import SettingSwap from 'app/assets/images/setting-new.svg';
 
 export default function BorrowPanel(props) {
   const dispatch = useAppDispatch();
@@ -45,6 +46,12 @@ export default function BorrowPanel(props) {
 
   return (
     <Box mt="10px">
+      <div className="swap-token">
+        Swap Tokens{' '}
+        <span className="swap-icon">
+          <img src={SettingSwap} />
+        </span>
+      </div>
       <TabSelect
         index={borrowIndex}
         setIndex={setBorrowIndex}

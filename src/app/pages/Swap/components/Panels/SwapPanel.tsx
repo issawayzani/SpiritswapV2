@@ -32,6 +32,7 @@ import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { BuyPanel, SellPanel } from './';
 import { selectSwapIndex } from 'store/general/selectors';
 import TabSelect from 'app/components/TabSelect';
+import SettingSwap from 'app/assets/images/setting-new.svg';
 
 export default function SwapPanel({
   panelProps,
@@ -278,6 +279,12 @@ export default function SwapPanel({
 
   return (
     <Box mt="20px">
+      <div className="swap-token">
+        Swap Tokens{' '}
+        <span className="swap-icon">
+          <img src={SettingSwap} />
+        </span>
+      </div>
       <TabSelect
         index={swapIndex}
         setIndex={setSwapIndex}

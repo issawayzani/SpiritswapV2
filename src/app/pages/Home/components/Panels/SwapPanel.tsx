@@ -277,16 +277,17 @@ export default function SwapPanel({
   // };
 
   return (
-    <Box mt="20px">
-      <TabSelect
-        index={swapIndex}
-        setIndex={setSwapIndex}
-        styleIndex={[2]}
-        styleVariant="danger"
-        names={['Buy', 'Sell']}
-        panels={swapPanels}
-      />
-      {/* <NewTokenAmountPanel
+    <Flex>
+      <Box mt="20px">
+        <TabSelect
+          index={swapIndex}
+          setIndex={setSwapIndex}
+          styleIndex={[2]}
+          styleVariant="danger"
+          names={['Buy', 'Sell']}
+          panels={swapPanels}
+        />
+        {/* <NewTokenAmountPanel
         onSelect={(item: Token, onClose) => handleChangeToken(item, onClose, 0)}
         inputValue={firstToken.value || ''}
         showPercentage
@@ -338,14 +339,14 @@ export default function SwapPanel({
         }}
       /> */}
 
-      {apiCallError ? (
-        <Alert mt="16px" status="error" borderRadius="4px" bg="dangerBg">
-          <AlertIcon />
-          <AlertDescription ml="-5px">{apiCallError}</AlertDescription>
-        </Alert>
-      ) : null}
+        {apiCallError ? (
+          <Alert mt="16px" status="error" borderRadius="4px" bg="dangerBg">
+            <AlertIcon />
+            <AlertDescription ml="-5px">{apiCallError}</AlertDescription>
+          </Alert>
+        ) : null}
 
-      {/* <Button
+        {/* <Button
         size="lg"
         mt="16px"
         w="full"
@@ -356,37 +357,40 @@ export default function SwapPanel({
         {isLoggedIn ? swapLegend() : t(`home.common.connectWallet`)}
       </Button>  */}
 
-      <SimpleGrid columns={2} spacing="5px" w="full" mt="20px">
-        <Text>Slippage</Text>
-        <Skeleton
-          startColor="grayBorderBox"
-          endColor="bgBoxLighter"
-          isLoaded={!isLoading}
-        >
-          <Text textAlign="right">{quoteSlippage}</Text>
-        </Skeleton>
+        <SimpleGrid columns={2} spacing="5px" w="full" mt="20px">
+          <Text>Slippage</Text>
+          <Skeleton
+            startColor="grayBorderBox"
+            endColor="bgBoxLighter"
+            isLoaded={!isLoading}
+          >
+            <Text textAlign="right">{quoteSlippage}</Text>
+          </Skeleton>
 
-        <Flex align="center" sx={{ gap: '0.3rem' }}>
-          <Text>{t(`${settingsTranslationPath}.slippageToleranceLabel`)} </Text>
-          <QuestionHelper
-            title={t(`${settingsTranslationPath}.slippageToleranceLabel`)}
-            text={t(`${settingsTranslationPath}.slippageExplanation`)}
-          />
-        </Flex>
-        <Text textAlign="right">
-          {slippage}
-          <Button p="0" bg="transparent" border="none" minW="0">
-            <SlippageIcon
-              sx={{ margin: '0 0 0 3px' }}
-              w="16px"
-              h="16px"
-              onClick={toggleSettings}
+          <Flex align="center" sx={{ gap: '0.3rem' }}>
+            <Text>
+              {t(`${settingsTranslationPath}.slippageToleranceLabel`)}{' '}
+            </Text>
+            <QuestionHelper
+              title={t(`${settingsTranslationPath}.slippageToleranceLabel`)}
+              text={t(`${settingsTranslationPath}.slippageExplanation`)}
             />
-          </Button>
-        </Text>
-      </SimpleGrid>
+          </Flex>
+          <Text textAlign="right">
+            {slippage}
+            <Button p="0" bg="transparent" border="none" minW="0">
+              <SlippageIcon
+                sx={{ margin: '0 0 0 3px' }}
+                w="16px"
+                h="16px"
+                onClick={toggleSettings}
+              />
+            </Button>
+          </Text>
+        </SimpleGrid>
 
-      <ConnectWallet isOpen={isOpen} dismiss={onClose} />
-    </Box>
+        <ConnectWallet isOpen={isOpen} dismiss={onClose} />
+      </Box>
+    </Flex>
   );
 }

@@ -412,9 +412,10 @@
   line-height: 42px;
 }
 .vertical-tabs {
-  float: left;
-  border: none;
+  border-right: 1px solid #2e2a8c;
   background: transparent;
+  margin-right: 24px;
+  padding-right: 24px;
 }
 .tab-button {
   float: left;
@@ -426,6 +427,24 @@
   border-radius: 6px;
   text-align: center;
   font-variant-numeric: lining-nums proportional-nums;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+  letter-spacing: 1.4px;
+}
+.panel-button {
+  border-radius: 24px;
+  background: var(--turquoise-7, #22abac);
+  display: flex;
+  padding: 10px 0px;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 0;
+  color: var(--gray-2, #f3f2ff);
+  text-align: center;
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Paragraph/Semibold */
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -642,4 +661,24 @@ bribe-button:active {
   font-weight: 400;
   line-height: 24px; /* 171.429% */
   letter-spacing: 1.4px;
+}
+.swap-token {
+  color: #fff;
+  text-align: center;
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Headline/H6 */
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px; /* 140% */
+  margin-right: 24px;
+  letter-spacing: 0.6px;
+}
+.swap-icon img {
+  display: inherit;
+  margin-left: 24px;
+}
+.panel-list {
+  width: 100%;
+  margin-top: 24px;
 }

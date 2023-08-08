@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { selectStakeIndex } from 'store/general/selectors';
 import { useEffect, useState } from 'react';
 import { setGlobalStakeIndex } from 'store/general';
+import SettingSwap from 'app/assets/images/setting-new.svg';
 
 export default function StakePanel(props) {
   const dispatch = useAppDispatch();
@@ -46,6 +47,12 @@ export default function StakePanel(props) {
 
   return (
     <Box mt="10px">
+      <div className="swap-token">
+        Swap Tokens{' '}
+        <span className="swap-icon">
+          <img src={SettingSwap} />
+        </span>
+      </div>
       <TabSelect
         index={stakeIndex}
         setIndex={setStakeIndex}

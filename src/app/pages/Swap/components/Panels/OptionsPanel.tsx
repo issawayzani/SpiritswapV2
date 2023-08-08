@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { selectOptionsIndex } from 'store/general/selectors';
 import { useEffect, useState } from 'react';
 import { setGlobalOptionsIndex } from 'store/general';
+import SettingSwap from 'app/assets/images/setting-new.svg';
 
 export default function OptionsPanel(props) {
   const dispatch = useAppDispatch();
@@ -39,6 +40,12 @@ export default function OptionsPanel(props) {
 
   return (
     <Box mt="10px">
+      <div className="swap-token">
+        Swap Tokens{' '}
+        <span className="swap-icon">
+          <img src={SettingSwap} />
+        </span>
+      </div>
       <TabSelect
         index={optionsIndex}
         setIndex={setOptionsIndex}

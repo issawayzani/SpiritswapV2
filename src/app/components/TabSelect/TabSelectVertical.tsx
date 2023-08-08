@@ -1,7 +1,11 @@
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@chakra-ui/react';
 
 interface TabSelectProps {
-  names: string[];
+  names?: {
+    key: number;
+    name: string;
+    text: string;
+  }[];
   panels?: {
     key: number;
     children: React.ReactNode;
@@ -15,7 +19,7 @@ interface TabSelectProps {
   onSelect?: (value: string) => void;
 }
 
-export default function TabSelect({
+export default function TabSelectVertical({
   names,
   panels,
   setIndex,
@@ -28,24 +32,28 @@ export default function TabSelect({
 }: TabSelectProps) {
   return (
     <Tabs
+      orientation="vertical"
+      display="flex"
+      gridTemplateColumns="auto 1fr"
       variant={styleIndex?.includes(index) ? styleVariant : 'unstyled'}
       onChange={index => setIndex(index)}
       index={index}
       mx={mx}
     >
-      <TabList className="panel-list">
-        {names.map(name => (
+      <TabList className="vertical-tabs" w={w} aria-orientation="vertical">
+        {names?.map(({ key, name, text }) => (
           <Tab
             _selected={{ color: '#FFF', bg: '#2E2A8C' }}
             _hover={{ color: '#A19ED3', bg: '#1D1A59' }}
-            className="panel-button"
-            key={name}
+            className="tab-button"
+            key={key}
             onClick={() => onSelect && onSelect(name)}
           >
             {name}
-            {/* <span className="settings-text">
-          <i className="fa fa-question-circle-o margin"></i>Lorem ipsum dolor sit amet.
-        </span> */}
+            <span className="settings-text">
+              <i className="fa fa-question-circle-o margin"></i>
+              {text}
+            </span>
           </Tab>
         ))}
       </TabList>

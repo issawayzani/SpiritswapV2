@@ -23,7 +23,6 @@ export default function Heading({ toggleSettings, helperModal }) {
       /> */}
 
       <HStack>
-        Mays
         {/* <StyledIcon
           onClick={toggleSettings}
           size="sm"

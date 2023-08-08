@@ -5,19 +5,13 @@ export const SwapContainer = styled(Box)<{ isLimit: boolean }>`
   border-radius: 8px;
   // border: 1px solid ${({ theme }) => `${theme.colors.grayBorderBox}`};
   // background: ${({ theme }) => theme.colors.bgBox};
+  margin: 133px auto;
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
   // padding: ${({ theme }) => theme.space.spacing03};
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: 24px;
-    margin: 106px auto;
-  }
-  @media (min-width: ${({ theme }) => theme.breakpoints.xs}) {
-    padding: 24px;
-    margin: 106px auto;
-  }
-  @media (min-width: ${({ theme }) => theme.breakpoints.xxs}) {
-    padding: 24px;
-    margin: 106px auto;
-  }
 `;
 
 export const StyledIcon = styled(IconButton)`

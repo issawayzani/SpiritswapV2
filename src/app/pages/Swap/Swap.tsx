@@ -29,6 +29,7 @@ import {
 } from './components/Panels';
 import { RouteContainer, SwapContainer } from './styles';
 import TabSelect from 'app/components/TabSelect';
+import TabSelectVertical from 'app/components/TabSelect/TabSelectVertical';
 import { useTranslation } from 'react-i18next';
 import { ArrowRightIcon1 } from 'app/assets/icons';
 import { Token } from 'app/interfaces/General';
@@ -680,6 +681,33 @@ const SwapPage = () => {
       ),
     },
   ];
+  const names = [
+    {
+      key: 0,
+      name: 'Swap',
+      text: 'Lorem ipsum dolor sit amet.',
+    },
+    {
+      key: 1,
+      name: 'Options',
+      text: 'Lorem ipsum dolor sit amet.',
+    },
+    {
+      key: 2,
+      name: 'Earn',
+      text: 'Lorem ipsum dolor sit amet.',
+    },
+    {
+      key: 3,
+      name: 'Lend',
+      text: 'Lorem ipsum dolor sit amet.',
+    },
+    {
+      key: 4,
+      name: 'Wrapper',
+      text: 'Lorem ipsum dolor sit amet.',
+    },
+  ];
 
   const [isLessThan1100px] = useMediaQuery('(max-width: 1100px)');
 
@@ -735,12 +763,12 @@ const SwapPage = () => {
                   // toggleChart={toggleChart}
                   helperModal={helperContent}
                 />
-                <TabSelect
+                <TabSelectVertical
                   index={modeIndex}
                   setIndex={setModeIndex}
                   styleIndex={[2]}
                   styleVariant="danger"
-                  names={['Swap', 'Options', 'Earn', 'Lend', 'Wrapper']}
+                  names={names}
                   panels={panels}
                 />
               </Stack>
