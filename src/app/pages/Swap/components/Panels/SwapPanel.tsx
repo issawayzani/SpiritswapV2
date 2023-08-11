@@ -87,6 +87,18 @@ export default function SwapPanel({
       ),
     },
   ];
+  const tabNames = [
+    {
+      key: 0,
+      name: 'Buy',
+      className: 'panel-button-left',
+    },
+    {
+      key: 1,
+      name: 'Sell',
+      className: 'panel-button-right',
+    },
+  ];
   useEffect(() => {
     dispatch(setGlobalSwapIndex(swapIndex));
   }, [swapIndex, globalSwapIndex]);
@@ -278,7 +290,7 @@ export default function SwapPanel({
   // };
 
   return (
-    <Box mt="20px">
+    <Box className="position-relative">
       <div className="swap-token">
         Swap Tokens{' '}
         <span className="swap-icon">
@@ -290,7 +302,7 @@ export default function SwapPanel({
         setIndex={setSwapIndex}
         styleIndex={[2]}
         styleVariant="danger"
-        names={['Buy', 'Sell']}
+        names={tabNames}
         panels={swapPanels}
       />
       {/* <NewTokenAmountPanel

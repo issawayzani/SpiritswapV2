@@ -41,6 +41,23 @@ export default function StakePanel(props) {
       ),
     },
   ];
+  const tabNames = [
+    {
+      key: 0,
+      name: 'Stake',
+      className: 'panel-button-left',
+    },
+    {
+      key: 1,
+      name: 'Unstake',
+      className: 'panel-button-right',
+    },
+    {
+      key: 2,
+      name: 'Burn',
+      className: 'panel-button-right',
+    },
+  ];
   useEffect(() => {
     dispatch(setGlobalStakeIndex(stakeIndex));
   }, [stakeIndex, globalStakeIndex]);
@@ -58,7 +75,7 @@ export default function StakePanel(props) {
         setIndex={setStakeIndex}
         styleIndex={[2]}
         styleVariant="danger"
-        names={['Stake', 'Unstake', 'Burn']}
+        names={tabNames}
         panels={stakePanels}
       />
     </Box>

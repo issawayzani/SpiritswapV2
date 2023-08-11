@@ -7,7 +7,6 @@
   /* background: #100F3A; */
   /* border: 1px solid #100F3A; Border color */
   /* border-radius: 8px; Border radius */
-  padding: 5px; /* Padding inside the container */
 }
 .container {
   /* display: flex; */
@@ -17,7 +16,7 @@
 .item {
   font-size: medium;
   background: none !important;
-  padding: 8px;
+  padding: 0.9%;
   letter-spacing: 1.4px;
 }
 .item-count {
@@ -414,8 +413,8 @@
 .vertical-tabs {
   border-right: 1px solid #2e2a8c;
   background: transparent;
-  margin-right: 24px;
-  padding-right: 24px;
+  margin-right: 2%;
+  padding-right: 2%;
 }
 .tab-button {
   float: left;
@@ -433,15 +432,57 @@
   line-height: 24px; /* 171.429% */
   letter-spacing: 1.4px;
 }
-.panel-button {
+.panel-button-left {
+  width: 50%;
+  position: absolute;
   border-radius: 24px;
-  background: var(--turquoise-7, #22abac);
+  top: 50px;
+  background: var(--turquoise-7, #1d1a59);
+  display: flex;
+  left: 0px;
+  padding: 10px 0px;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 0;
+  color: var(--gray-2, #a19ed3);
+  text-align: center;
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Paragraph/Semibold */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+  letter-spacing: 1.4px;
+  z-index: 2;
+}
+.panel-button-left:hover {
+  z-index: 3;
+}
+.panel-button-left:active,
+.panel-button-left[selected] {
+  z-index: 3;
+}
+.panel-button-right:hover {
+  z-index: 3;
+}
+.panel-button-right:active,
+.panel-button-right[selected] {
+  z-index: 3;
+}
+.panel-button-right {
+  position: absolute;
+  left: 45%;
+  z-index: 1;
+  width: 50%;
+  top: 50px;
+  border-radius: 24px;
+  background: var(--turquoise-7, #1d1a59);
   display: flex;
   padding: 10px 0px;
   justify-content: center;
   align-items: center;
   flex: 1 0 0;
-  color: var(--gray-2, #f3f2ff);
+  color: var(--gray-2, #a19ed3);
   text-align: center;
   font-variant-numeric: lining-nums proportional-nums;
   /* Paragraph/Semibold */
@@ -671,14 +712,20 @@ bribe-button:active {
   font-style: normal;
   font-weight: 400;
   line-height: 28px; /* 140% */
-  margin-right: 24px;
+  margin-right: 2%;
   letter-spacing: 0.6px;
 }
 .swap-icon img {
   display: inherit;
-  margin-left: 24px;
+  margin-left: 2%;
 }
 .panel-list {
   width: 100%;
-  margin-top: 24px;
+  margin-top: 80px;
+}
+.position-relative {
+  position: relative;
+}
+.panel-padding {
+  padding: 0 0 0 2%;
 }

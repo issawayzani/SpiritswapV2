@@ -234,16 +234,8 @@ export default function BuyPanel(props) {
   return (
     <Box>
       <p> You're paying</p>
-
-      <Flex
-        bg="bgBoxLighter"
-        py="spacing05"
-        px="spacing04"
-        flexDirection="column"
-        w="full"
-        borderRadius="md"
-        {...props}
-      >
+      <span>Available Balance: 0.00 TKN</span>
+      <Flex bg="transparent" flexDirection="column" w="full" {...props}>
         <HStack align="center" justify="space-between" w="100%">
           {isLoadingInput ? (
             <Spinner /> // Show the spinner if isLoading is true
@@ -348,15 +340,7 @@ export default function BuyPanel(props) {
       </Center>
       <p> To receive</p>
 
-      <Flex
-        bg="bgBoxLighter"
-        py="spacing05"
-        px="spacing04"
-        flexDirection="column"
-        w="full"
-        borderRadius="md"
-        {...props}
-      >
+      <Flex bg="transparent" flexDirection="column" w="full" {...props}>
         <HStack align="center" justify="space-between" w="100%">
           {isLoadingOutput ? (
             <Spinner /> // Show the spinner if isLoading is true

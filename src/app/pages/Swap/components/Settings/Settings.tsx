@@ -164,7 +164,7 @@ export default function Settings({
       <TabSelect
         index={speedIndex}
         setIndex={handleSpeedIndex}
-        names={Object.values(SPEED_PRICES)}
+        price={Object.values(SPEED_PRICES)}
         w="full"
         mx="0"
         onSelect={handleTxSpeed}
@@ -246,7 +246,7 @@ export default function Settings({
       <TabSelect
         index={BRIDGE_MODE_ID[bridgeMode || 0]}
         setIndex={() => {}}
-        names={Object.values(BRIDGE_MODE)}
+        price={Object.values(BRIDGE_MODE)}
         w="full"
         onSelect={handleBridgeMode}
       />{' '}

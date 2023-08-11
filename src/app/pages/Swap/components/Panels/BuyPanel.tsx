@@ -234,14 +234,13 @@ export default function BuyPanel(props) {
   return (
     <Box>
       <p> You're paying</p>
+      <span>Available Balance: 0.00 TKN</span>
 
       <Flex
-        bg="bgBoxLighter"
+        bg="transparent"
         py="spacing05"
-        px="spacing04"
         flexDirection="column"
         w="full"
-        borderRadius="md"
         {...props}
       >
         <HStack align="center" justify="space-between" w="100%">
@@ -349,12 +348,10 @@ export default function BuyPanel(props) {
       <p> To receive</p>
 
       <Flex
-        bg="bgBoxLighter"
+        bg="transparent"
         py="spacing05"
-        px="spacing04"
         flexDirection="column"
         w="full"
-        borderRadius="md"
         {...props}
       >
         <HStack align="center" justify="space-between" w="100%">

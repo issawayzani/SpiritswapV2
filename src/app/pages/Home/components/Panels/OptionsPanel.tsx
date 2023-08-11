@@ -33,6 +33,18 @@ export default function OptionsPanel(props) {
       ),
     },
   ];
+  const tabNames = [
+    {
+      key: 0,
+      name: 'Exercise',
+      className: 'panel-button-left',
+    },
+    {
+      key: 1,
+      name: 'Redeem',
+      className: 'panel-button-right',
+    },
+  ];
   useEffect(() => {
     dispatch(setGlobalOptionsIndex(optionsIndex));
   }, [optionsIndex, globalOptionsIndex]);
@@ -44,7 +56,7 @@ export default function OptionsPanel(props) {
         setIndex={setOptionsIndex}
         styleIndex={[2]}
         styleVariant="danger"
-        names={['Exercise', 'Redeem']}
+        names={tabNames}
         panels={optionsPanels}
       />
     </Box>

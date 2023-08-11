@@ -259,6 +259,18 @@ export default function SwapPanel({
       isOutput: isOutput,
     });
   };
+  const tabNames = [
+    {
+      key: 0,
+      name: 'Buy',
+      className: 'panel-button-left',
+    },
+    {
+      key: 1,
+      name: 'Sell',
+      className: 'panel-button-right',
+    },
+  ];
 
   useEffect(
     () => setErrorMessage({ msg: '', relevantTokens: [] }),
@@ -284,7 +296,7 @@ export default function SwapPanel({
           setIndex={setSwapIndex}
           styleIndex={[2]}
           styleVariant="danger"
-          names={['Buy', 'Sell']}
+          names={tabNames}
           panels={swapPanels}
         />
         {/* <NewTokenAmountPanel

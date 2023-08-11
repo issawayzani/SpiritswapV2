@@ -1,7 +1,12 @@
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@chakra-ui/react';
 
 interface TabSelectProps {
-  names: string[];
+  names?: {
+    key: number;
+    name: string;
+    className: string;
+  }[];
+  price?: string[];
   panels?: {
     key: number;
     children: React.ReactNode;
@@ -17,6 +22,7 @@ interface TabSelectProps {
 
 export default function TabSelect({
   names,
+  price,
   panels,
   setIndex,
   index,
@@ -34,12 +40,12 @@ export default function TabSelect({
       mx={mx}
     >
       <TabList className="panel-list">
-        {names.map(name => (
+        {names?.map(({ key, name, className }) => (
           <Tab
-            _selected={{ color: '#FFF', bg: '#2E2A8C' }}
-            _hover={{ color: '#A19ED3', bg: '#1D1A59' }}
-            className="panel-button"
-            key={name}
+            _selected={{ color: '#F3F2FF', bg: '#22ABAC', zIndex: '3' }}
+            _hover={{ color: '#F3F2FF', bg: '#22ABAC', zIndex: '3' }}
+            className={className}
+            key={key}
             onClick={() => onSelect && onSelect(name)}
           >
             {name}
@@ -51,7 +57,9 @@ export default function TabSelect({
       </TabList>
       <TabPanels>
         {panels?.map(({ key, children }) => (
-          <TabPanel key={key}>{children}</TabPanel>
+          <TabPanel className="panel-padding" key={key}>
+            {children}
+          </TabPanel>
         ))}
       </TabPanels>
     </Tabs>

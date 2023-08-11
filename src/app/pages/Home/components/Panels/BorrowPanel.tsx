@@ -39,6 +39,18 @@ export default function BorrowPanel(props) {
       ),
     },
   ];
+  const tabNames = [
+    {
+      key: 0,
+      name: 'Borrow',
+      className: 'panel-button-left',
+    },
+    {
+      key: 1,
+      name: 'Repay',
+      className: 'panel-button-right',
+    },
+  ];
   useEffect(() => {
     dispatch(setGlobalBorrowIndex(borrowIndex));
   }, [borrowIndex, globalBorrowIndex]);
@@ -50,7 +62,7 @@ export default function BorrowPanel(props) {
         setIndex={setBorrowIndex}
         styleIndex={[2]}
         styleVariant="danger"
-        names={['Borrow', 'Repay']}
+        names={tabNames}
         panels={borrowPanels}
       />
     </Box>
