@@ -34,6 +34,7 @@ export default function TabSelect({
 }: TabSelectProps) {
   return (
     <Tabs
+      border={0}
       variant={styleIndex?.includes(index) ? styleVariant : 'unstyled'}
       onChange={index => setIndex(index)}
       index={index}

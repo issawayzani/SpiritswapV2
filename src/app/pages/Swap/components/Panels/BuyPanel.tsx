@@ -233,9 +233,14 @@ export default function BuyPanel(props) {
   };
   return (
     <Box>
-      <p> You're paying</p>
-      <span>Available Balance: 0.00 TKN</span>
-
+      <Flex>
+        <div className="float-left w-100">
+          <div className="panel-text float-left"> You're paying</div>
+          <div className="panel-text float-right">
+            Available Balance: 0.00 TKN
+          </div>
+        </div>
+      </Flex>
       <Flex
         bg="transparent"
         py="spacing05"
@@ -257,7 +262,9 @@ export default function BuyPanel(props) {
               <NumberInput
                 clampValueOnBlur={false}
                 max={balance}
+                bg="transparent"
                 border="none"
+                className="number-input"
                 value={numberInputValue}
                 onChange={value => {
                   if (Number(value) <= balance) {
@@ -295,7 +302,10 @@ export default function BuyPanel(props) {
                   paddingInline="8px"
                   placeholder="0"
                   fontSize="xl2"
-                  _placeholder={{ color: 'gray' }}
+                  border="none"
+                  className="number-input"
+                  bg="transparent"
+                  _placeholder={{ color: '#A9CDFF' }}
                 />
               </NumberInput>
             </Skeleton>
@@ -369,6 +379,7 @@ export default function BuyPanel(props) {
                 clampValueOnBlur={false}
                 max={balance}
                 border="none"
+                className="number-input"
                 value={numberOutputValue}
                 onChange={value => {
                   if (Number(value) <= balance && value !== '0') {
@@ -405,15 +416,16 @@ export default function BuyPanel(props) {
                   paddingInline="8px"
                   placeholder="0"
                   fontSize="xl2"
-                  _placeholder={{ color: 'gray' }}
+                  className="number-input"
+                  _placeholder={{ color: '#A9CDFF' }}
                 />
               </NumberInput>
             </Skeleton>
           )}
 
           <TokenSelection
-            symbol={'SOUL'}
-            src={resolveRoutePath(`images/tokens/SOULC.png`)}
+            symbol={'WFTM'}
+            src={resolveRoutePath(`images/tokens/FTM.png`)}
           />
         </HStack>
 
