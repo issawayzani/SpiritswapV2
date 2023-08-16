@@ -747,3 +747,72 @@ bribe-button:active {
 .w-100 {
   width: 100%;
 }
+.swapicon {
+  border-radius: 8px;
+  padding: 8px;
+  border: 1px solid #2e2a8c;
+  background: #100f3a;
+  position: relative;
+  z-index: 2;
+}
+.border-line {
+  height: 1px;
+  background: #2e2a8c;
+  width: 100%;
+  z-index: 1;
+  position: absolute;
+}
+.small-price {
+  color: var(--gray-7, #bfbed3);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Caption/small 12-16/regular */
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px; /* 133.333% */
+}
+.buy-button {
+  border-radius: 16px;
+  border: 1px solid #afc6e9;
+  display: flex;
+  /* background:transparent; */
+  justify-content: center;
+  align-items: center;
+  color: var(--blue-3, #a9cdff);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Headline/H6 */
+  height: 45px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px; /* 140% */
+  gap: 10px;
+  align-self: stretch;
+}
+.buy-button:hover {
+  background: var(--gray-24, #1d1a59);
+  border: 0px;
+  color: #f3f2ff;
+}
+.buy-button:active,
+.buy-button:focus {
+  color: #f3f2ff;
+  background: var(--gray-24, #2e2a8c);
+  border: 0px;
+}
+.bottommargin {
+  margin-bottom: 18px;
+  margin-top: 10px;
+}
+.topmargin {
+  margin-top: 10px;
+}
+.slippage {
+  color: var(--gray-17, #5a54d3);
+  font-variant-numeric: lining-nums proportional-nums;
+  /* Btn/small/normal */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+}

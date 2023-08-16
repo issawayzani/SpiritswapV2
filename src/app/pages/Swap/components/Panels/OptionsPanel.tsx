@@ -1,6 +1,7 @@
-import { Box, Stack } from '@chakra-ui/react';
+import { Box, Stack, Button } from '@chakra-ui/react';
 import TabSelect from 'app/components/TabSelect';
 import { ExercisePanel, RedeemPanel } from './';
+import { SwapProps } from '../../Swap.d';
 
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { selectOptionsIndex } from 'store/general/selectors';
@@ -34,6 +35,7 @@ export default function OptionsPanel(props) {
       ),
     },
   ];
+  const { toggleSettings }: SwapProps = props;
   const tabNames = [
     {
       key: 0,
@@ -51,11 +53,13 @@ export default function OptionsPanel(props) {
   }, [optionsIndex, globalOptionsIndex]);
 
   return (
-    <Box mt="10px">
+    <Box className="position-relative">
       <div className="swap-token">
         Swap Tokens{' '}
         <span className="swap-icon">
-          <img src={SettingSwap} />
+          <Button p="0" bg="transparent" border="none" minW="0">
+            <img src={SettingSwap} onClick={toggleSettings} />
+          </Button>
         </span>
       </div>
       <TabSelect

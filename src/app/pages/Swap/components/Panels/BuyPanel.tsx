@@ -9,8 +9,11 @@ import {
   Skeleton,
   Spinner,
   Text,
+  SimpleGrid,
 } from '@chakra-ui/react';
-import { SwapIconButton } from 'app/assets/icons';
+import { SwapProps } from '../../Swap.d';
+import { SlippageIcon, SwapIconButton } from 'app/assets/icons';
+import UseIsLoading from 'app/hooks/UseIsLoading';
 import { formatAmount } from 'app/utils';
 import { buyToken } from 'utils/web3/actions/inspirit';
 import { formatUnits, parseUnits } from 'ethers/lib/utils';
@@ -20,6 +23,7 @@ import { TokenSelection } from 'app/components/TokenSelection';
 import { resolveRoutePath } from 'app/router/routes';
 import { getRoundedSFs, validateInput } from 'app/utils';
 import { useEffect, useState } from 'react';
+import SwapIconNew from 'app/assets/images/swap-icon.svg';
 import {
   approve,
   Test,
@@ -28,18 +32,24 @@ import {
 } from 'utils/web3';
 import { BigNumber } from 'ethers';
 import Web3Monitoring from 'app/connectors/EthersConnector/transactions';
+import { useTranslation } from 'react-i18next';
 
 export default function BuyPanel(props) {
   const [isLoadingOutput, setIsLoadingOutput] = useState(false);
   const [isLoadingInput, setIsLoadingInput] = useState(false);
+  const { isLoading: txLoading, loadingOff, loadingOn } = UseIsLoading();
   const { addToQueue } = Web3Monitoring();
+  const settingsTranslationPath = 'swap.settings';
   const [isLoadingButton, setIsLoadingButton] = useState(false);
   const [buyIn, setBuyIn] = useState(false);
+  const [quoteSlippage, setQuoteSlippage] = useState(0);
   const [buyOut, setBuyOut] = useState(false);
   const [numberInputValue, setNumberInputValue] = useState('0');
   const [numberOutputValue, setNumberOutputValue] = useState('0');
   const balance = props.bondingCurveData?.accountBASE / 1e18;
   const balanceToken = props.bondingCurveData?.accountTOKEN / 1e18;
+  const { t } = useTranslation();
+  const { slippage, isLoading, toggleSettings }: SwapProps = props;
   const priceBase =
     (props.bondingCurveData?.priceBASE * Number(numberInputValue)) / 1e36;
   const priceToken =
@@ -241,9 +251,10 @@ export default function BuyPanel(props) {
           </div>
         </div>
       </Flex>
+
       <Flex
         bg="transparent"
-        py="spacing05"
+        className="bottommargin"
         flexDirection="column"
         w="full"
         {...props}
@@ -262,7 +273,6 @@ export default function BuyPanel(props) {
               <NumberInput
                 clampValueOnBlur={false}
                 max={balance}
-                bg="transparent"
                 border="none"
                 className="number-input"
                 value={numberInputValue}
@@ -308,6 +318,7 @@ export default function BuyPanel(props) {
                   _placeholder={{ color: '#A9CDFF' }}
                 />
               </NumberInput>
+              <Text className="small-price">= $0.00</Text>
             </Skeleton>
           )}
 
@@ -353,13 +364,20 @@ export default function BuyPanel(props) {
       </Flex>
 
       <Center>
-        <SwapIconButton horizontalRotateOnMdScreenSize={false} m="8px auto" />
+        <div className="border-line"></div>
+        <img src={SwapIconNew} className="swapicon" />
       </Center>
-      <p> To receive</p>
-
+      <Flex mt="5">
+        <div className="float-left w-100">
+          <div className="panel-text float-left"> You receive</div>
+          <div className="panel-text float-right">
+            Available Balance: 0.00 TKN
+          </div>
+        </div>
+      </Flex>
       <Flex
         bg="transparent"
-        py="spacing05"
+        className="topmargin"
         flexDirection="column"
         w="full"
         {...props}
@@ -420,6 +438,7 @@ export default function BuyPanel(props) {
                   _placeholder={{ color: '#A9CDFF' }}
                 />
               </NumberInput>
+              <Text className="small-price">= $0.00</Text>
             </Skeleton>
           )}
 
@@ -455,15 +474,39 @@ export default function BuyPanel(props) {
 
         {/* {children} */}
       </Flex>
+      <SimpleGrid columns={2} w="full" mb="5">
+        <Text className="slippage">Slippage</Text>
+        <Skeleton
+          startColor="grayBorderBox"
+          endColor="bgBoxLighter"
+          isLoaded={!isLoading}
+        >
+          <Text className="slippage" textAlign="right">
+            {quoteSlippage}
+          </Text>
+        </Skeleton>
+
+        <Flex align="center" sx={{ gap: '0.3rem' }}>
+          <Text className="slippage">
+            {t(`${settingsTranslationPath}.slippageToleranceLabel`)}{' '}
+          </Text>
+          {/* <QuestionHelper
+            title={t(`${settingsTranslationPath}.slippageToleranceLabel`)}
+            text={t(`${settingsTranslationPath}.slippageExplanation`)}
+          /> */}
+        </Flex>
+        <Text className="slippage" textAlign="right">
+          {slippage}
+        </Text>
+      </SimpleGrid>
       <Button
         disabled={getDisabledStatus()}
         isLoading={isLoadingButton}
-        size="lg"
-        mt="16px"
+        className="buy-button"
         w="full"
         onClick={buttonAction}
       >
-        Buy
+        Buy WFTM
       </Button>
     </Box>
   );

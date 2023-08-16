@@ -9,6 +9,7 @@ import {
   Skeleton,
   Spinner,
   Text,
+  IconButton,
 } from '@chakra-ui/react';
 import { SwapIconButton } from 'app/assets/icons';
 import { formatAmount } from 'app/utils';
@@ -20,6 +21,7 @@ import { TokenSelection } from 'app/components/TokenSelection';
 import { resolveRoutePath } from 'app/router/routes';
 import { getRoundedSFs, validateInput } from 'app/utils';
 import { useEffect, useState } from 'react';
+import SwapIconNew from 'app/assets/images/swap-icon.svg';
 import {
   approve,
   Test,
@@ -336,7 +338,7 @@ export default function BuyPanel(props) {
       </Flex>
 
       <Center>
-        <SwapIconButton horizontalRotateOnMdScreenSize={false} m="8px auto" />
+        <img className="swapicon" src={SwapIconNew} />
       </Center>
       <p> To receive</p>
 

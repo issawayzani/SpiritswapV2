@@ -355,6 +355,7 @@ export const SwapIconButton = ({
   return (
     <IconButton
       {...rest}
+      className="swap-icon"
       variant="iconButton"
       icon={<Swap />}
       color="ci"

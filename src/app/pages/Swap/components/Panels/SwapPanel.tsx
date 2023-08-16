@@ -294,7 +294,9 @@ export default function SwapPanel({
       <div className="swap-token">
         Swap Tokens{' '}
         <span className="swap-icon">
-          <img src={SettingSwap} />
+          <Button p="0" bg="transparent" border="none" minW="0">
+            <img src={SettingSwap} onClick={toggleSettings} />
+          </Button>
         </span>
       </div>
       <TabSelect
@@ -374,36 +376,6 @@ export default function SwapPanel({
       >
         {isLoggedIn ? swapLegend() : t(`home.common.connectWallet`)}
       </Button>  */}
-
-      <SimpleGrid columns={2} spacing="5px" w="full" mt="20px">
-        <Text>Slippage</Text>
-        <Skeleton
-          startColor="grayBorderBox"
-          endColor="bgBoxLighter"
-          isLoaded={!isLoading}
-        >
-          <Text textAlign="right">{quoteSlippage}</Text>
-        </Skeleton>
-
-        <Flex align="center" sx={{ gap: '0.3rem' }}>
-          <Text>{t(`${settingsTranslationPath}.slippageToleranceLabel`)} </Text>
-          <QuestionHelper
-            title={t(`${settingsTranslationPath}.slippageToleranceLabel`)}
-            text={t(`${settingsTranslationPath}.slippageExplanation`)}
-          />
-        </Flex>
-        <Text textAlign="right">
-          {slippage}
-          <Button p="0" bg="transparent" border="none" minW="0">
-            <SlippageIcon
-              sx={{ margin: '0 0 0 3px' }}
-              w="16px"
-              h="16px"
-              onClick={toggleSettings}
-            />
-          </Button>
-        </Text>
-      </SimpleGrid>
 
       <ConnectWallet isOpen={isOpen} dismiss={onClose} />
     </Box>

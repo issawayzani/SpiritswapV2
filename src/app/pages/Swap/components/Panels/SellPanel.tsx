@@ -9,8 +9,13 @@ import {
   Skeleton,
   Spinner,
   Text,
+  SimpleGrid,
 } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
+import { SwapProps } from '../../Swap.d';
+import UseIsLoading from 'app/hooks/UseIsLoading';
 import { SwapIconButton } from 'app/assets/icons';
+import SwapIconNew from 'app/assets/images/swap-icon.svg';
 import { buyToken, sellToken } from 'utils/web3/actions/inspirit';
 import { formatUnits, parseUnits } from 'ethers/lib/utils';
 import { Percentages } from 'app/components/Percentages';
@@ -33,11 +38,15 @@ export default function SellPanel(props) {
   const [isLoadingInput, setIsLoadingInput] = useState(false);
   const [isLoadingButton, setIsLoadingButton] = useState(false);
   const [SellIn, setBuyIn] = useState(false);
+  const settingsTranslationPath = 'swap.settings';
+  const { t } = useTranslation();
   const { addToQueue } = Web3Monitoring();
   const [numberInputValue, setNumberInputValue] = useState('0');
   const [numberOutputValue, setNumberOutputValue] = useState('0');
   const balance = props.bondingCurveData?.accountBASE / 1e18;
+  const { isLoading: txLoading, loadingOff, loadingOn } = UseIsLoading();
   const balanceToken = props.bondingCurveData?.accountTOKEN / 1e18;
+  const [quoteSlippage, setQuoteSlippage] = useState(0);
   const maxMarketSell = props.bondingCurveData?.maxMarketSell / 1e18;
   const max = Math.min(balanceToken || maxMarketSell);
   const priceBase =
@@ -66,7 +75,7 @@ export default function SellPanel(props) {
 
     return NOT_DISABLED;
   };
-
+  const { slippage, isLoading }: SwapProps = props;
   const quote = async (input, slippage, check) => {
     const newSlippage = 1000 - slippage * 10;
     const validInput = validateInput(input, 18);
@@ -226,15 +235,20 @@ export default function SellPanel(props) {
   };
   return (
     <Box>
-      <p> You're paying</p>
+      <Flex>
+        <div className="float-left w-100">
+          <div className="panel-text float-left"> You're paying</div>
+          <div className="panel-text float-right">
+            Available Balance: 0.00 TKN
+          </div>
+        </div>
+      </Flex>
 
       <Flex
-        bg="bgBoxLighter"
-        py="spacing05"
-        px="spacing04"
+        bg="transparent"
+        className="bottommargin"
         flexDirection="column"
         w="full"
-        borderRadius="md"
         {...props}
       >
         <HStack align="center" justify="space-between" w="100%">
@@ -251,6 +265,7 @@ export default function SellPanel(props) {
               <NumberInput
                 clampValueOnBlur={false}
                 max={max}
+                className="number-input"
                 border="none"
                 value={numberInputValue}
                 onChange={value => {
@@ -287,17 +302,20 @@ export default function SellPanel(props) {
                   w="full"
                   inputMode="numeric"
                   paddingInline="8px"
-                  placeholder="0"
                   fontSize="xl2"
-                  _placeholder={{ color: 'gray' }}
+                  border="none"
+                  className="number-input"
+                  bg="transparent"
+                  _placeholder={{ color: '#A9CDFF' }}
                 />
               </NumberInput>
+              <Text className="small-price">= $0.00</Text>
             </Skeleton>
           )}
 
           <TokenSelection
-            symbol={'SOUL'}
-            src={resolveRoutePath(`images/tokens/SOULC.png`)}
+            symbol={'WFTM'}
+            src={resolveRoutePath(`images/tokens/ftm.png`)}
           />
         </HStack>
 
@@ -331,22 +349,28 @@ export default function SellPanel(props) {
             setNumberInputValue(value);
           }}
           decimals={18}
-          symbol={'SOUL'}
+          symbol={'WFTM'}
           balance={max.toString()}
         />
       </Flex>
 
       <Center>
-        <SwapIconButton horizontalRotateOnMdScreenSize={false} m="8px auto" />
+        <div className="border-line"></div>
+        <img src={SwapIconNew} className="swapicon" />
       </Center>
-      <p> To receive</p>
+      <Flex mt="5">
+        <div className="float-left w-100">
+          <div className="panel-text float-left"> You receive</div>
+          <div className="panel-text float-right">
+            Available Balance: 0.00 TKN
+          </div>
+        </div>
+      </Flex>
       <Flex
         bg="bgBoxLighter"
-        py="spacing05"
-        px="spacing04"
+        className="topmargin"
         flexDirection="column"
         w="full"
-        borderRadius="md"
         {...props}
       >
         <HStack align="center" justify="space-between" w="100%">
@@ -364,6 +388,7 @@ export default function SellPanel(props) {
                 clampValueOnBlur={false}
                 max={max + 0.5 * 1e18}
                 border="none"
+                className="number-input"
                 value={numberOutputValue === '0' ? '' : numberOutputValue}
                 onChange={value => {
                   if (Number(value) <= max + 0.5 * 1e18) {
@@ -400,9 +425,11 @@ export default function SellPanel(props) {
                   paddingInline="8px"
                   placeholder="0"
                   fontSize="xl2"
-                  _placeholder={{ color: 'gray' }}
+                  className="number-input"
+                  _placeholder={{ color: '#A9CDFF' }}
                 />
               </NumberInput>
+              <Text className="small-price">= $0.00</Text>
             </Skeleton>
           )}
 
@@ -438,15 +465,39 @@ export default function SellPanel(props) {
 
         {/* {children} */}
       </Flex>
+      <SimpleGrid columns={2} w="full" mb="5">
+        <Text className="slippage">Slippage</Text>
+        <Skeleton
+          startColor="grayBorderBox"
+          endColor="bgBoxLighter"
+          isLoaded={!isLoading}
+        >
+          <Text className="slippage" textAlign="right">
+            {quoteSlippage}
+          </Text>
+        </Skeleton>
+
+        <Flex align="center" sx={{ gap: '0.3rem' }}>
+          <Text className="slippage">
+            {t(`${settingsTranslationPath}.slippageToleranceLabel`)}{' '}
+          </Text>
+          {/* <QuestionHelper
+          title={t(`${settingsTranslationPath}.slippageToleranceLabel`)}
+          text={t(`${settingsTranslationPath}.slippageExplanation`)}
+        /> */}
+        </Flex>
+        <Text className="slippage" textAlign="right">
+          {slippage}
+        </Text>
+      </SimpleGrid>
       <Button
         disabled={getDisabledStatus()}
         isLoading={isLoadingButton}
-        size="lg"
-        mt="16px"
         w="full"
+        className="buy-button"
         onClick={buttonAction}
       >
-        Sell
+        Sell WFTM
       </Button>
     </Box>
   );
