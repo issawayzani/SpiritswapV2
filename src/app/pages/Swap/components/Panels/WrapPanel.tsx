@@ -11,54 +11,55 @@ import {
   Text,
   SimpleGrid,
 } from '@chakra-ui/react';
-import { useTranslation } from 'react-i18next';
 import { SwapProps } from '../../Swap.d';
+import { SlippageIcon, SwapIconButton } from 'app/assets/icons';
 import UseIsLoading from 'app/hooks/UseIsLoading';
-import { SwapIconButton } from 'app/assets/icons';
-import SwapIconNew from 'app/assets/images/swap-icon.svg';
-import { buyToken, sellToken } from 'utils/web3/actions/inspirit';
+import { formatAmount } from 'app/utils';
+import { buyToken } from 'utils/web3/actions/inspirit';
 import { formatUnits, parseUnits } from 'ethers/lib/utils';
 import { Percentages } from 'app/components/Percentages';
 import { PriceDiffIndicator } from 'app/components/PriceDiffIndicator';
 import { TokenSelection } from 'app/components/TokenSelection';
 import { resolveRoutePath } from 'app/router/routes';
-import { formatAmount, getRoundedSFs, validateInput } from 'app/utils';
+import { getRoundedSFs, validateInput } from 'app/utils';
 import { useEffect, useState } from 'react';
+import SwapIconNew from 'app/assets/images/swap-icon.svg';
 import {
   approve,
   Test,
   checkBaseAllowance,
-  checkTokenAllowance,
   transactionResponse,
 } from 'utils/web3';
+import { BigNumber } from 'ethers';
 import Web3Monitoring from 'app/connectors/EthersConnector/transactions';
+import { useTranslation } from 'react-i18next';
 
-export default function SellPanel(props) {
+export default function WrapPanel(props) {
   const [isLoadingOutput, setIsLoadingOutput] = useState(false);
   const [isLoadingInput, setIsLoadingInput] = useState(false);
-  const [isLoadingButton, setIsLoadingButton] = useState(false);
-  const [SellIn, setBuyIn] = useState(false);
-  const settingsTranslationPath = 'swap.settings';
-  const { t } = useTranslation();
+  const { isLoading: txLoading, loadingOff, loadingOn } = UseIsLoading();
   const { addToQueue } = Web3Monitoring();
+  const settingsTranslationPath = 'swap.settings';
+  const [isLoadingButton, setIsLoadingButton] = useState(false);
+  const [buyIn, setBuyIn] = useState(false);
+  const [quoteSlippage, setQuoteSlippage] = useState(0);
+  const [buyOut, setBuyOut] = useState(false);
   const [numberInputValue, setNumberInputValue] = useState('0');
   const [numberOutputValue, setNumberOutputValue] = useState('0');
   const balance = props.bondingCurveData?.accountBASE / 1e18;
-  const { isLoading: txLoading, loadingOff, loadingOn } = UseIsLoading();
   const balanceToken = props.bondingCurveData?.accountTOKEN / 1e18;
-  const [quoteSlippage, setQuoteSlippage] = useState(0);
-  const maxMarketSell = props.bondingCurveData?.maxMarketSell / 1e18;
-  const max = Math.min(balanceToken || maxMarketSell);
+  const { t } = useTranslation();
+  const { slippage, isLoading, toggleSettings }: SwapProps = props;
   const priceBase =
     (props.bondingCurveData?.priceBASE * Number(numberInputValue)) / 1e36;
   const priceToken =
     (props.bondingCurveData?.priceTOKEN * Number(numberOutputValue)) / 1e36;
-  const [quoteSellIn, setQuoteSellIn] = useState({
+  const [quoteBuyIn, setQuoteBuyIn] = useState({
     output: 0,
     slippage: 0,
     minOutput: 0,
   });
-  const [quoteSellOut, setQuoteSellOut] = useState({
+  const [quoteBuyOut, setQuoteBuyOut] = useState({
     output: 0,
     slippage: 0,
     minOutput: 0,
@@ -71,20 +72,20 @@ export default function SellPanel(props) {
     if (numberOutputValue === '0' || numberOutputValue === '') return DISABLED;
     if (Number(numberInputValue) === 0) return DISABLED;
     if (isLoadingButton) return DISABLED;
-    if (Number(numberInputValue) > max) return DISABLED;
+    if (Number(numberInputValue) > balance) return DISABLED;
 
     return NOT_DISABLED;
   };
-  const { slippage, isLoading }: SwapProps = props;
+
   const quote = async (input, slippage, check) => {
     const newSlippage = 1000 - slippage * 10;
     const validInput = validateInput(input, 18);
 
     const result = await Test(props.account, validInput, newSlippage);
     if (check) {
-      return result?.quoteSellIn;
+      return result?.quoteBuyIn;
     } else {
-      return result?.quoteSellOut;
+      return result?.quoteBuyOut;
     }
   };
 
@@ -96,6 +97,7 @@ export default function SellPanel(props) {
     let result;
     setIsLoadingInput(true);
     setBuyIn(false);
+    setBuyOut(true);
     try {
       result = await quote(input, props.slippage, false);
     } catch (e) {
@@ -104,7 +106,7 @@ export default function SellPanel(props) {
       return;
     }
     if (result) {
-      setQuoteSellOut({
+      setQuoteBuyOut({
         output: result.output,
         slippage: result.slippage,
         minOutput: result.minOutput,
@@ -117,12 +119,15 @@ export default function SellPanel(props) {
   };
 
   const setOutputValue = async input => {
+    console.log(input);
+    console.log(Number(input));
     if (input === '') {
       setNumberOutputValue('');
       return;
     }
     let result;
     setBuyIn(true);
+    setBuyOut(false);
     setIsLoadingOutput(true);
     try {
       result = await quote(input, props.slippage, true);
@@ -132,7 +137,7 @@ export default function SellPanel(props) {
       return;
     }
     if (result) {
-      setQuoteSellIn({
+      setQuoteBuyIn({
         output: result.output,
         slippage: result.slippage,
         minOutput: result.minOutput,
@@ -143,14 +148,15 @@ export default function SellPanel(props) {
     }
     setIsLoadingOutput(false);
   };
+
   const approveToken = async number => {
     try {
       // setIsApproving(true);
       const tx = await approve(
-        '0x8d6abe4176f262F79317a1ec60B9C6e070a2142a',
+        '0xAa171Ad6f4eD52ED74707300aD90bDAEE8398773',
         '0x8d6abe4176f262F79317a1ec60B9C6e070a2142a',
         number,
-        'token',
+        'fakeBASE',
       );
 
       const response = transactionResponse('swap.approve', {
@@ -158,7 +164,7 @@ export default function SellPanel(props) {
         tx: tx,
         uniqueMessage: {
           text: 'Approving',
-          secondText: 'TOKEN',
+          secondText: 'BASE',
         },
       });
 
@@ -172,21 +178,20 @@ export default function SellPanel(props) {
 
   const buttonAction = async () => {
     let approveSuccess: boolean | undefined = true;
+    setIsLoadingButton(true);
     let number;
     let minOutput;
     let output;
     let numberInput;
-    setIsLoadingButton(true);
-
-    if (SellIn) {
+    if (buyIn) {
       number = parseUnits(numberInputValue, 18);
-      minOutput = quoteSellIn.minOutput;
-      output = quoteSellIn.output;
+      minOutput = quoteBuyIn.minOutput;
+      output = quoteBuyIn.output;
       numberInput = numberInputValue;
     } else {
       number = parseUnits(numberOutputValue, 18);
-      minOutput = quoteSellOut.minOutput;
-      output = quoteSellOut.output;
+      minOutput = quoteBuyOut.minOutput;
+      output = quoteBuyOut.output;
       numberInput = numberOutputValue;
     }
     try {
@@ -194,7 +199,7 @@ export default function SellPanel(props) {
 
       if (approveSuccess) {
         await new Promise(resolve => setTimeout(resolve, 2000));
-        const allowance = await checkTokenAllowance(
+        const allowance = await checkBaseAllowance(
           props.account,
           '0x8d6abe4176f262F79317a1ec60B9C6e070a2142a',
         );
@@ -206,18 +211,21 @@ export default function SellPanel(props) {
               'Insufficient allowance. Please approve a higher allowance.',
             );
           } else {
-            const tx = await sellToken(
+            const tx = await buyToken(
               number,
               minOutput,
               props.deadline,
               props.account,
             );
+
             const response = transactionResponse('swap.process', {
               operation: 'SWAP',
               tx: tx,
-              inputSymbol: 'Token',
-              inputValue: formatAmount(numberInput, 18),
-              outputSymbol: 'WFTM',
+              inputSymbol: 'WFTM',
+              inputValue: buyIn
+                ? formatAmount(numberInputValue, 18)
+                : formatAmount(numberOutputValue, 18),
+              outputSymbol: 'TOKEN',
               outputValue: formatAmount(output, 18),
             });
             addToQueue(response);
@@ -237,7 +245,7 @@ export default function SellPanel(props) {
     <Box>
       <Flex>
         <div className="float-left w-100">
-          <div className="panel-text float-left"> You're paying</div>
+          <div className="panel-text float-left"> You're wrapping</div>
           <div className="panel-text float-right">
             Available Balance: {balance} TKN
           </div>
@@ -264,12 +272,12 @@ export default function SellPanel(props) {
             >
               <NumberInput
                 clampValueOnBlur={false}
-                max={max}
-                className="number-input"
+                max={balance}
                 border="none"
+                className="number-input"
                 value={numberInputValue}
                 onChange={value => {
-                  if (Number(value) <= max) {
+                  if (Number(value) <= balance) {
                     const validInput = validateInput(value, 18);
                     if (validInput === '0') {
                       setNumberInputValue('0.');
@@ -279,7 +287,7 @@ export default function SellPanel(props) {
                     if (Number(validInput) === 0) {
                       setNumberOutputValue('');
                     } else {
-                      setOutputValue(validInput);
+                      setOutputValue(value);
                     }
                   }
                 }}
@@ -302,6 +310,7 @@ export default function SellPanel(props) {
                   w="full"
                   inputMode="numeric"
                   paddingInline="8px"
+                  placeholder="0"
                   fontSize="xl2"
                   border="none"
                   className="number-input"
@@ -315,7 +324,7 @@ export default function SellPanel(props) {
 
           <TokenSelection
             symbol={'WFTM'}
-            src={resolveRoutePath(`images/tokens/ftm.png`)}
+            src={resolveRoutePath(`images/tokens/FTM.png`)}
           />
         </HStack>
 
@@ -337,7 +346,7 @@ export default function SellPanel(props) {
                 cursor="pointer"
                 onClick={handleBalanceClick}
               >
-                Balance: {max}
+                Balance: {balance}
               </Text>
             </Skeleton>
           </Flex>
@@ -350,7 +359,7 @@ export default function SellPanel(props) {
           }}
           decimals={18}
           symbol={'WFTM'}
-          balance={max.toString()}
+          balance={balance.toString()}
         />
       </Flex>
 
@@ -367,7 +376,7 @@ export default function SellPanel(props) {
         </div>
       </Flex>
       <Flex
-        bg="bgBoxLighter"
+        bg="transparent"
         className="topmargin"
         flexDirection="column"
         w="full"
@@ -386,12 +395,12 @@ export default function SellPanel(props) {
             >
               <NumberInput
                 clampValueOnBlur={false}
-                max={max + 0.5 * 1e18}
+                max={balance}
                 border="none"
                 className="number-input"
-                value={numberOutputValue === '0' ? '' : numberOutputValue}
+                value={numberOutputValue}
                 onChange={value => {
-                  if (Number(value) <= max + 0.5 * 1e18) {
+                  if (Number(value) <= balance && value !== '0') {
                     const validInput = validateInput(value, 18);
                     if (validInput === '0') {
                       setNumberOutputValue('0.');
@@ -401,7 +410,7 @@ export default function SellPanel(props) {
                     if (Number(validInput) === 0) {
                       setNumberInputValue('');
                     } else {
-                      setInputValue(validInput);
+                      setInputValue(value);
                     }
                   }
                 }}
@@ -444,60 +453,36 @@ export default function SellPanel(props) {
             <Flex>
               <Text as="div" fontSize="h5" color="grayDarker" mr="spacing02">
                 <Flex align="center" justify="center" sx={{ gap: '0.2rem' }}>
-                  <Text>≈ ${priceBase}</Text>
+                  <Text>≈ ${priceToken}</Text>
                 </Flex>
               </Text>
             </Flex>
             <Skeleton isLoaded={true}>
               <Text as="div" fontSize="sm" color="gray" mr="spacing04">
-                Balance: {balance}
+                Balance: {balanceToken}
               </Text>
             </Skeleton>
           </Flex>
         ) : null}
 
         {/* <Percentages
-            onChange={value => handleInput(value.value)}
-            decimals={18}
-            symbol={'SOULC'}
-            balance={'0'}
-          /> */}
+          onChange={value => handleInput(value.value)}
+          decimals={18}
+          symbol={'SOULC'}
+          balance={'0'}
+        /> */}
 
         {/* {children} */}
       </Flex>
-      <SimpleGrid columns={2} w="full" mb="5">
-        <Text className="slippage">Slippage</Text>
-        <Skeleton
-          startColor="grayBorderBox"
-          endColor="bgBoxLighter"
-          isLoaded={!isLoading}
-        >
-          <Text className="slippage" textAlign="right">
-            {quoteSlippage}
-          </Text>
-        </Skeleton>
 
-        <Flex align="center" sx={{ gap: '0.3rem' }}>
-          <Text className="slippage">
-            {t(`${settingsTranslationPath}.slippageToleranceLabel`)}{' '}
-          </Text>
-          {/* <QuestionHelper
-          title={t(`${settingsTranslationPath}.slippageToleranceLabel`)}
-          text={t(`${settingsTranslationPath}.slippageExplanation`)}
-        /> */}
-        </Flex>
-        <Text className="slippage" textAlign="right">
-          {slippage}
-        </Text>
-      </SimpleGrid>
       <Button
         disabled={getDisabledStatus()}
         isLoading={isLoadingButton}
-        w="full"
         className="buy-button"
+        w="full"
         onClick={buttonAction}
       >
-        Sell WFTM
+        Wrap WFTM
       </Button>
     </Box>
   );

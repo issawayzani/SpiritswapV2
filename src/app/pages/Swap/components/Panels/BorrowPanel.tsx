@@ -1,4 +1,4 @@
-import { Box, Stack } from '@chakra-ui/react';
+import { Box, Stack, Center, Button } from '@chakra-ui/react';
 import TabSelect from 'app/components/TabSelect';
 import { BorrowRepayPanel } from './';
 
@@ -7,6 +7,8 @@ import { selectBorrowIndex } from 'store/general/selectors';
 import { useEffect, useState } from 'react';
 import { setGlobalBorrowIndex } from 'store/general';
 import SettingSwap from 'app/assets/images/setting-new.svg';
+import SwapIconNew from 'app/assets/images/swap-icon.svg';
+import { SwapProps } from '../../Swap.d';
 
 export default function BorrowPanel(props) {
   const dispatch = useAppDispatch();
@@ -14,6 +16,7 @@ export default function BorrowPanel(props) {
   const [borrowIndex, setBorrowIndex] = useState<number>(
     globalBorrowIndex || 0,
   );
+  const { toggleSettings }: SwapProps = props;
   const borrowPanels = [
     {
       key: 0,
@@ -57,11 +60,19 @@ export default function BorrowPanel(props) {
   }, [borrowIndex, globalBorrowIndex]);
 
   return (
-    <Box mt="10px">
+    <Box className="position-relative">
       <div className="swap-token">
         Swap Tokens{' '}
         <span className="swap-icon">
-          <img src={SettingSwap} />
+          <Button
+            p="0"
+            bg="transparent"
+            border="none"
+            minW="0"
+            _active={{ border: 'none' }}
+          >
+            <img src={SettingSwap} onClick={toggleSettings} />
+          </Button>
         </span>
       </div>
       <TabSelect

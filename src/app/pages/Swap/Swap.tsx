@@ -26,6 +26,7 @@ import {
   StakePanel,
   BorrowPanel,
   OptionsPanel,
+  WrapperPanel,
 } from './components/Panels';
 import { RouteContainer, SwapContainer } from './styles';
 import TabSelect from 'app/components/TabSelect';
@@ -677,7 +678,12 @@ const SwapPage = () => {
     {
       key: 4,
       children: (
-        <OptionsPanel account={account} bondingCurveData={BondingCurveData} />
+        <WrapperPanel
+          panelProps={panelProps}
+          deadline={states.deadline}
+          bondingCurveData={BondingCurveData}
+          isWrapped={isWrapped()}
+        />
       ),
     },
   ];

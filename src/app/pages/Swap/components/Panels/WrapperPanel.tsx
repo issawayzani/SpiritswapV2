@@ -29,7 +29,7 @@ import useWallets from 'app/hooks/useWallets';
 import { openInNewTab } from 'app/utils/redirectTab';
 import { setGlobalOptionsIndex, setGlobalSwapIndex } from 'store/general';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
-import { BuyPanel, SellPanel } from './';
+import { WrapPanel, UnWrapPanel } from '.';
 import { selectSwapIndex } from 'store/general/selectors';
 import TabSelect from 'app/components/TabSelect';
 import SettingSwap from 'app/assets/images/setting-new.svg';
@@ -65,7 +65,7 @@ export default function SwapPanel({
     {
       key: 0,
       children: (
-        <BuyPanel
+        <WrapPanel
           deadline={deadline}
           setQuoteSlippage={setQuoteSlippage}
           slippage={slippage}
@@ -77,7 +77,7 @@ export default function SwapPanel({
     {
       key: 1,
       children: (
-        <SellPanel
+        <UnWrapPanel
           deadline={deadline}
           setQuoteSlippage={setQuoteSlippage}
           slippage={slippage}
@@ -90,12 +90,12 @@ export default function SwapPanel({
   const tabNames = [
     {
       key: 0,
-      name: 'Buy',
+      name: 'Wrap',
       className: 'panel-button-left',
     },
     {
       key: 1,
-      name: 'Sell',
+      name: 'Unwrap',
       className: 'panel-button-right',
     },
   ];

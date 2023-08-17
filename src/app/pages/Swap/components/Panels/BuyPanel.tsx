@@ -247,7 +247,7 @@ export default function BuyPanel(props) {
         <div className="float-left w-100">
           <div className="panel-text float-left"> You're paying</div>
           <div className="panel-text float-right">
-            Available Balance: 0.00 TKN
+            Available Balance: {balance} TKN
           </div>
         </div>
       </Flex>
@@ -371,7 +371,7 @@ export default function BuyPanel(props) {
         <div className="float-left w-100">
           <div className="panel-text float-left"> You receive</div>
           <div className="panel-text float-right">
-            Available Balance: 0.00 TKN
+            Available Balance: {balance} TKN
           </div>
         </div>
       </Flex>

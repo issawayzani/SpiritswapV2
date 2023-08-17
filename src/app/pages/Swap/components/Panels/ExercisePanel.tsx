@@ -10,7 +10,10 @@ import {
   Spacer,
   Text,
 } from '@chakra-ui/react';
-import { PlusIcon, SwapIconButton } from 'app/assets/icons';
+import PlusIcon from 'app/assets/images/plus-icon.svg';
+import SwapIconNew from 'app/assets/images/swap-icon.svg';
+import DashLine from 'app/assets/images/dash-line.svg';
+import { SwapIconButton } from 'app/assets/icons';
 import { Percentages } from 'app/components/Percentages';
 import { PriceDiffIndicator } from 'app/components/PriceDiffIndicator';
 import { TokenSelection } from 'app/components/TokenSelection';
@@ -143,15 +146,20 @@ export default function ExercisePanel(props) {
   };
   return (
     <Box>
-      <p> You're paying</p>
+      <Flex>
+        <div className="float-left w-100">
+          <div className="panel-text float-left"> You're paying</div>
+          <div className="panel-text float-right">
+            Available Balance: {balance} TKN
+          </div>
+        </div>
+      </Flex>
 
       <Flex
-        bg="bgBoxLighter"
-        py="spacing05"
-        px="spacing04"
+        bg="transparent"
+        className="bottommargin"
         flexDirection="column"
         w="full"
-        borderRadius="md"
         {...props}
       >
         <HStack align="center" justify="space-between" w="100%">
@@ -167,6 +175,7 @@ export default function ExercisePanel(props) {
                 clampValueOnBlur={false}
                 max={balance}
                 border="none"
+                className="number-input"
                 value={numberInputValue}
                 onChange={value => {
                   if (Number(value) <= balance) {
@@ -195,16 +204,17 @@ export default function ExercisePanel(props) {
                   inputMode="numeric"
                   paddingInline="8px"
                   placeholder="0"
-                  fontSize="xl2"
-                  _placeholder={{ color: 'gray' }}
+                  className="number-input"
+                  _placeholder={{ color: '#A9CDFF' }}
                 />
               </NumberInput>
+              <Text className="small-price">= $0.00</Text>
             </Skeleton>
           )}
 
           <TokenSelection
-            symbol={'oSOUL'}
-            src={resolveRoutePath(`images/tokens/SOULC.png`)}
+            symbol={'WFTM'}
+            src={resolveRoutePath(`images/tokens/FTM.png`)}
           />
         </HStack>
 
@@ -242,23 +252,83 @@ export default function ExercisePanel(props) {
             setNumberInputValue(value);
           }}
           decimals={18}
-          symbol={'FTM'}
+          symbol={'WFTM'}
           balance={balance.toString()}
         />
 
         {/* {children} */}
       </Flex>
       <Center>
-        <PlusIcon horizontalRotateOnMdScreenSize={false} m="8px auto" />
+        <img src={DashLine} className="dotted-line" />
+        <img src={PlusIcon} className="plusicon" />
       </Center>
-      <p>And </p>
+      <Flex mt="5">
+        <div className="float-left w-100">
+          <div className="panel-text float-left"></div>
+          <div className="panel-text float-right">
+            Available Balance: {balance} TKN
+          </div>
+        </div>
+      </Flex>
+      <HStack align="center" justify="space-between" w="100%">
+        {true && (
+          <Skeleton
+            startColor="grayBorderBox"
+            endColor="bgBoxLighter"
+            w="60%"
+            isLoaded={true}
+            flexGrow={1}
+          >
+            <NumberInput
+              clampValueOnBlur={false}
+              isDisabled
+              border="none"
+              className="number-input"
+              value={numberInputValue}
+              // onChange={value => handleInput(value)}
+              // onKeyDown={e => {
+              //   if (e.code === 'End' || e.code === 'Home') {
+              //     return handleInput(inputValue);
+              //   }
+              // }}
+              // isInvalid={!!errorMessage}
+            >
+              <NumberInputField
+                w="full"
+                inputMode="numeric"
+                paddingInline="8px"
+                placeholder="0"
+                fontSize="xl2"
+                className="number-input"
+                _placeholder={{ color: '#A9CDFF' }}
+              />
+            </NumberInput>
+            <Text className="small-price">= $0.00</Text>
+          </Skeleton>
+        )}
+
+        <TokenSelection
+          symbol={'WFTM'}
+          src={resolveRoutePath(`images/tokens/FTM.png`)}
+        />
+      </HStack>
+      <Center mb="5">
+        <div className="border-line"></div>
+        <img src={SwapIconNew} className="swapicon" />
+      </Center>
+      <Flex mt="5">
+        <div className="float-left w-100">
+          <div className="panel-text float-left"> You receive</div>
+          <div className="panel-text float-right">
+            Available Balance: {numberInputValue} TKN
+          </div>
+        </div>
+      </Flex>
       <Flex
-        bg="bgBoxLighter"
-        py="spacing05"
-        px="spacing04"
+        bg="transparent"
+        className="topmargin"
         flexDirection="column"
         w="full"
-        borderRadius="md"
         {...props}
       >
         <HStack align="center" justify="space-between" w="100%">
@@ -273,8 +343,8 @@ export default function ExercisePanel(props) {
               <NumberInput
                 clampValueOnBlur={false}
                 isDisabled
-                // max={maxValue}
                 border="none"
+                className="number-input"
                 value={numberInputValue}
                 // onChange={value => handleInput(value)}
                 // onKeyDown={e => {
@@ -290,14 +360,16 @@ export default function ExercisePanel(props) {
                   paddingInline="8px"
                   placeholder="0"
                   fontSize="xl2"
-                  _placeholder={{ color: 'gray' }}
+                  className="number-input"
+                  _placeholder={{ color: '#A9CDFF' }}
                 />
               </NumberInput>
+              <Text className="small-price">= $0.00</Text>
             </Skeleton>
           )}
 
           <TokenSelection
-            symbol={'FTM'}
+            symbol={'WFTM'}
             src={resolveRoutePath(`images/tokens/FTM.png`)}
           />
         </HStack>
@@ -329,30 +401,32 @@ export default function ExercisePanel(props) {
         {/* {children} */}
       </Flex>
 
-      <Flex>
-        <p>To recieve </p>
-        <Spacer />
-        <p> {numberInputValue} SOUL </p>
-      </Flex>
-      <Flex>
+      {/* <Flex mt="5">
+        <div className="float-left w-100">
+          <div className="panel-text float-left"> You receive</div>
+          <div className="panel-text float-right">
+            Available Balance: 0.00 TKN
+          </div>
+        </div>
+      </Flex> */}
+      {/* <Flex>
         <Spacer />
         <Text as="div" fontSize="h5" color="grayDarker" mr="spacing02">
           <Flex align="center" justify="center" sx={{ gap: '0.2rem' }}>
             <Text>≈ ${priceToken}</Text>
           </Flex>
         </Text>
-      </Flex>
+      </Flex> */}
 
       <Button
-        size="lg"
-        mt="16px"
         w="full"
+        className="buy-button"
         onClick={buttonAction}
         disabled={getDisabledStatus()}
         loadingText={loaderText}
         isLoading={isLoadingButton}
       >
-        Redeem
+        Exercise WFTM
       </Button>
     </Box>
   );

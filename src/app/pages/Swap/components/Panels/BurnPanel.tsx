@@ -8,6 +8,7 @@ import {
   Skeleton,
   Spacer,
   Text,
+  Center,
 } from '@chakra-ui/react';
 import { Percentages } from 'app/components/Percentages';
 import { PriceDiffIndicator } from 'app/components/PriceDiffIndicator';
@@ -17,6 +18,7 @@ import { resolveRoutePath } from 'app/router/routes';
 import { getRoundedSFs, validateInput } from 'app/utils';
 import { parseUnits } from 'ethers/lib/utils';
 import { useState } from 'react';
+import SwapIconNew from 'app/assets/images/swap-icon.svg';
 import {
   approve,
   burn,
@@ -112,17 +114,16 @@ export default function BurnPanel(props) {
   };
   return (
     <Box>
-      <p>You're burning</p>
+      <Flex>
+        <div className="float-left w-100">
+          <div className="panel-text float-left"> You're burning</div>
+          <div className="panel-text float-right">
+            Available Balance:{balance} TKN
+          </div>
+        </div>
+      </Flex>
 
-      <Flex
-        bg="bgBoxLighter"
-        py="spacing05"
-        px="spacing04"
-        flexDirection="column"
-        w="full"
-        borderRadius="md"
-        {...props}
-      >
+      <Flex bg="transparent" flexDirection="column" w="full" {...props}>
         <HStack align="center" justify="space-between" w="100%">
           {true && (
             <Skeleton
@@ -136,6 +137,7 @@ export default function BurnPanel(props) {
                 clampValueOnBlur={false}
                 max={balance}
                 border="none"
+                className="number-input"
                 value={numberInputValue}
                 onChange={value => {
                   if (Number(value) <= balance) {
@@ -165,15 +167,19 @@ export default function BurnPanel(props) {
                   paddingInline="8px"
                   placeholder="0"
                   fontSize="xl2"
-                  _placeholder={{ color: 'gray' }}
+                  border="none"
+                  className="number-input"
+                  bg="transparent"
+                  _placeholder={{ color: '#A9CDFF' }}
                 />
               </NumberInput>
+              <Text className="small-price">= $0.00</Text>
             </Skeleton>
           )}
 
           <TokenSelection
-            symbol={'oSOUL'}
-            src={resolveRoutePath(`images/tokens/SOULC.png`)}
+            symbol={'WFTM'}
+            src={resolveRoutePath(`images/tokens/ftm.png`)}
           />
         </HStack>
 
@@ -200,10 +206,25 @@ export default function BurnPanel(props) {
             setNumberInputValue(value);
           }}
           decimals={18}
-          symbol={'oSOUL'}
+          symbol={'WFTM'}
           balance={balance.toString()}
         />
-        <Flex>
+        <Center mt="5">
+          <div className="border-line"></div>
+          <img src={SwapIconNew} className="swapicon" />
+        </Center>
+        <Flex mt="5">
+          <div className="float-left w-100">
+            <div className="panel-text float-left">
+              {' '}
+              To update voting power to
+            </div>
+            <div className="panel-text float-right">
+              Current Voting Power: {votingPower} TKN
+            </div>
+          </div>
+        </Flex>
+        {/* <Flex>
           <p>To recieve </p>
           <Spacer />
           <p> {numberInputValue ? numberInputValue : '0'} Voting Power </p>
@@ -215,18 +236,76 @@ export default function BurnPanel(props) {
               <Text>Current: {votingPower}</Text>
             </Flex>
           </Text>
-        </Flex>
+        </Flex> */}
       </Flex>
+      <HStack align="center" justify="space-between" w="100%">
+        {true && (
+          <Skeleton
+            startColor="grayBorderBox"
+            endColor="bgBoxLighter"
+            w="60%"
+            isLoaded={true}
+            flexGrow={1}
+          >
+            <NumberInput
+              clampValueOnBlur={false}
+              max={balance}
+              border="none"
+              className="number-input"
+              value={numberInputValue}
+              onChange={value => {
+                if (Number(value) <= balance) {
+                  const validInput = validateInput(value, 18);
+                  if (validInput === '0') {
+                    setNumberInputValue('0.');
+                  } else {
+                    setNumberInputValue(validInput);
+                  }
+                }
+              }}
+              onKeyDown={event => {
+                if (event.key === 'Backspace' && numberInputValue === '0.') {
+                  setNumberInputValue('');
+                } else if (
+                  event.key === 'Backspace' &&
+                  numberInputValue.startsWith('.') &&
+                  numberInputValue.length === 2
+                ) {
+                  setNumberInputValue('');
+                }
+              }}
+            >
+              <NumberInputField
+                w="full"
+                inputMode="numeric"
+                paddingInline="8px"
+                placeholder="0"
+                fontSize="xl2"
+                border="none"
+                className="number-input"
+                bg="transparent"
+                _placeholder={{ color: '#A9CDFF' }}
+              />
+            </NumberInput>
+            <Text className="small-price">= $0.00</Text>
+          </Skeleton>
+        )}
+
+        <TokenSelection
+          symbol={'WFTM'}
+          src={resolveRoutePath(`images/tokens/ftm.png`)}
+        />
+      </HStack>
       <Button
-        size="lg"
-        mt="16px"
+        className="buy-button"
         w="full"
+        mt="5"
         onClick={buttonAction}
         disabled={getDisabledStatus()}
         loadingText={loaderText}
         isLoading={isLoadingButton}
       >
-        Burn
+        Burn WFTM
       </Button>
     </Box>
   );

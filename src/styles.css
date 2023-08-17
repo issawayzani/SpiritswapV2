@@ -455,6 +455,15 @@
   letter-spacing: 1.4px;
   z-index: 2;
 }
+.panel-button-left.stake-button {
+  width: 37%;
+}
+.panel-button-right.stake-button {
+  width: 37%;
+}
+.panel-button-left.stake-button.middle {
+  left: 31%;
+}
 .panel-button-left:hover {
   z-index: 3;
 }
@@ -471,7 +480,7 @@
 }
 .panel-button-right {
   position: absolute;
-  left: 45%;
+  right: 0;
   z-index: 1;
   width: 55%;
   top: 50px;
@@ -755,9 +764,18 @@ bribe-button:active {
   position: relative;
   z-index: 2;
 }
+.plusicon {
+  position: relative;
+  z-index: 2;
+}
 .border-line {
   height: 1px;
   background: #2e2a8c;
+  width: 100%;
+  z-index: 1;
+  position: absolute;
+}
+.dotted-line {
   width: 100%;
   z-index: 1;
   position: absolute;

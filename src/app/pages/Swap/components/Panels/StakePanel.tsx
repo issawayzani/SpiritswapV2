@@ -1,4 +1,4 @@
-import { Box, Stack } from '@chakra-ui/react';
+import { Box, Stack, Button } from '@chakra-ui/react';
 import TabSelect from 'app/components/TabSelect';
 import { DepositPanel, WithdrawPanel, BurnPanel, OptionsPanel } from './';
 
@@ -7,11 +7,13 @@ import { selectStakeIndex } from 'store/general/selectors';
 import { useEffect, useState } from 'react';
 import { setGlobalStakeIndex } from 'store/general';
 import SettingSwap from 'app/assets/images/setting-new.svg';
+import { SwapProps } from '../../Swap.d';
 
 export default function StakePanel(props) {
   const dispatch = useAppDispatch();
   const globalStakeIndex = useAppSelector(selectStakeIndex);
   const [stakeIndex, setStakeIndex] = useState<number>(globalStakeIndex || 0);
+  const { toggleSettings }: SwapProps = props;
   const stakePanels = [
     {
       key: 0,
@@ -45,17 +47,17 @@ export default function StakePanel(props) {
     {
       key: 0,
       name: 'Stake',
-      className: 'panel-button-left',
+      className: 'panel-button-left stake-button',
     },
     {
       key: 1,
       name: 'Unstake',
-      className: 'panel-button-right',
+      className: 'panel-button-left stake-button middle',
     },
     {
       key: 2,
       name: 'Burn',
-      className: 'panel-button-right',
+      className: 'panel-button-right stake-button',
     },
   ];
   useEffect(() => {
@@ -63,11 +65,19 @@ export default function StakePanel(props) {
   }, [stakeIndex, globalStakeIndex]);
 
   return (
-    <Box mt="10px">
+    <Box className="position-relative">
       <div className="swap-token">
         Swap Tokens{' '}
         <span className="swap-icon">
-          <img src={SettingSwap} />
+          <Button
+            p="0"
+            bg="transparent"
+            border="none"
+            minW="0"
+            _active={{ border: 'none' }}
+          >
+            <img src={SettingSwap} onClick={toggleSettings} />
+          </Button>
         </span>
       </div>
       <TabSelect

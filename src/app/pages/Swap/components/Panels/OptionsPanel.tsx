@@ -57,7 +57,13 @@ export default function OptionsPanel(props) {
       <div className="swap-token">
         Swap Tokens{' '}
         <span className="swap-icon">
-          <Button p="0" bg="transparent" border="none" minW="0">
+          <Button
+            p="0"
+            bg="transparent"
+            border="none"
+            minW="0"
+            _active={{ border: 'none' }}
+          >
             <img src={SettingSwap} onClick={toggleSettings} />
           </Button>
         </span>

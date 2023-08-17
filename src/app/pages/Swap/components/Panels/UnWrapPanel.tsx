@@ -33,7 +33,7 @@ import {
 } from 'utils/web3';
 import Web3Monitoring from 'app/connectors/EthersConnector/transactions';
 
-export default function SellPanel(props) {
+export default function UnWrapPanel(props) {
   const [isLoadingOutput, setIsLoadingOutput] = useState(false);
   const [isLoadingInput, setIsLoadingInput] = useState(false);
   const [isLoadingButton, setIsLoadingButton] = useState(false);
@@ -237,7 +237,7 @@ export default function SellPanel(props) {
     <Box>
       <Flex>
         <div className="float-left w-100">
-          <div className="panel-text float-left"> You're paying</div>
+          <div className="panel-text float-left"> You're unwrapping</div>
           <div className="panel-text float-right">
             Available Balance: {balance} TKN
           </div>
@@ -465,31 +465,6 @@ export default function SellPanel(props) {
 
         {/* {children} */}
       </Flex>
-      <SimpleGrid columns={2} w="full" mb="5">
-        <Text className="slippage">Slippage</Text>
-        <Skeleton
-          startColor="grayBorderBox"
-          endColor="bgBoxLighter"
-          isLoaded={!isLoading}
-        >
-          <Text className="slippage" textAlign="right">
-            {quoteSlippage}
-          </Text>
-        </Skeleton>
-
-        <Flex align="center" sx={{ gap: '0.3rem' }}>
-          <Text className="slippage">
-            {t(`${settingsTranslationPath}.slippageToleranceLabel`)}{' '}
-          </Text>
-          {/* <QuestionHelper
-          title={t(`${settingsTranslationPath}.slippageToleranceLabel`)}
-          text={t(`${settingsTranslationPath}.slippageExplanation`)}
-        /> */}
-        </Flex>
-        <Text className="slippage" textAlign="right">
-          {slippage}
-        </Text>
-      </SimpleGrid>
       <Button
         disabled={getDisabledStatus()}
         isLoading={isLoadingButton}
@@ -497,7 +472,7 @@ export default function SellPanel(props) {
         className="buy-button"
         onClick={buttonAction}
       >
-        Sell WFTM
+        Unwrap WFTM
       </Button>
     </Box>
   );
