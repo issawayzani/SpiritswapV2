@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { setGlobalOptionsIndex } from 'store/general';
 import SettingSwap from 'app/assets/images/setting-new.svg';
 
-export default function OptionsPanel(props) {
+export default function OptionsPanel(props, panelProps) {
   const dispatch = useAppDispatch();
   const globalOptionsIndex = useAppSelector(selectOptionsIndex);
   const [optionsIndex, setOptionsIndex] = useState<number>(
@@ -35,7 +35,7 @@ export default function OptionsPanel(props) {
       ),
     },
   ];
-  const { toggleSettings }: SwapProps = props;
+  const { toggleSettings }: SwapProps = panelProps;
   const tabNames = [
     {
       key: 0,

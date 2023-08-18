@@ -21,7 +21,7 @@ export const StyledSlider = styled.span`
   right: 0;
   bottom: 0;
 
-  background: ${({ theme }) => theme.color.ciTrans15};
+  background: ${({ theme }) => '#2E2A8C'};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
 
   -webkit-transition: 0.4s;
@@ -33,7 +33,7 @@ export const StyledSlider = styled.span`
     left: ${({ theme }) => theme.spacing.spacing02};
     bottom: ${({ theme }) => theme.spacing.spacing02};
 
-    background-color: ${({ theme }) => theme.color.white};
+    background-color: ${({ theme }) => '#F3F2FF'};
     border-radius: ${({ theme }) => theme.borderRadius.sm};
 
     height: ${({ theme }) => theme.spacing.spacing05};
@@ -59,6 +59,6 @@ export const StyledInput = styled.input.attrs({ type: 'checkbox' })`
     -webkit-transform: translateX(16px);
     -ms-transform: translateX(16px);
     transform: translateX(16px);
-    background-color: ${({ theme }) => theme.color.ci};
+    background-color: ${({ theme }) => theme.color.ciTrans15};
   }
 `;

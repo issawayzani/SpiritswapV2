@@ -660,19 +660,37 @@ const SwapPage = () => {
     {
       key: 1,
       children: (
-        <OptionsPanel account={account} bondingCurveData={BondingCurveData} />
+        <OptionsPanel
+          account={account}
+          panelProps={panelProps}
+          deadline={states.deadline}
+          bondingCurveData={BondingCurveData}
+          isWrapped={isWrapped()}
+        />
       ),
     },
     {
       key: 2,
       children: (
-        <StakePanel account={account} bondingCurveData={BondingCurveData} />
+        <StakePanel
+          account={account}
+          panelProps={panelProps}
+          deadline={states.deadline}
+          bondingCurveData={BondingCurveData}
+          isWrapped={isWrapped()}
+        />
       ),
     },
     {
       key: 3,
       children: (
-        <BorrowPanel account={account} bondingCurveData={BondingCurveData} />
+        <BorrowPanel
+          account={account}
+          panelProps={panelProps}
+          deadline={states.deadline}
+          bondingCurveData={BondingCurveData}
+          isWrapped={isWrapped()}
+        />
       ),
     },
     {

@@ -16,7 +16,7 @@ export default function TabSelectInput({
 }: TabSelectProps) {
   return (
     <Tabs index={index} variant={customInput ? 'unSelected' : 'unstyled'}>
-      <TabList w="full" p="4px" gap="8px">
+      <TabList className="tab-list" w="full" p="4px" gap="8px">
         {SLIPPAGE_TOLERANCES.map(name => (
           <Tab
             w="22%"
@@ -24,11 +24,15 @@ export default function TabSelectInput({
             onClick={() =>
               handleCustomInput(SLIPPAGE_TOLERANCES[SLIPPAGE_ID[name]])
             }
-            fontSize="sm"
-            color="gray"
+            className="subtitle-settings swapsettings"
             _selected={{
               bg: 'ciTrans15',
-              color: 'ci',
+              color: '#F3F2FF',
+              borderRadius: 'md',
+            }}
+            _hover={{
+              bg: 'ciTrans15',
+              color: '#F3F2FF',
               borderRadius: 'md',
             }}
           >
@@ -40,6 +44,7 @@ export default function TabSelectInput({
           max={50}
           onFocus={() => handleCustomInput('0')}
           value={customInput}
+          className="swapInput"
           isInvalid={+customInput >= warningSlip}
           onChange={customInput => handleCustomInput(customInput)}
         >
@@ -48,12 +53,12 @@ export default function TabSelectInput({
             placeholder="Custom"
             textAlign="center"
             fontSize="sm"
-            color="ci"
+            className="swapInput"
             w="full"
             paddingInline="0px"
             sx={{
               '::placeholder': {
-                color: 'gray',
+                color: '#f3f2ff',
               },
             }}
           />

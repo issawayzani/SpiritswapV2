@@ -15,6 +15,7 @@ import {
 import { DEFAULT_DEADLINE } from 'utils/swap';
 import { Switch } from 'app/components/Switch';
 import TabSelect from 'app/components/TabSelect';
+import TabSelectOld from 'app/components/TabSelectOld';
 import TabSelectInput from '../TabSelectInput';
 import { useTranslation } from 'react-i18next';
 import { SLIPPAGE_ID, SLIPPAGE_TOLERANCES, SPEED_PRICES } from 'utils/swap';
@@ -24,6 +25,8 @@ import { CardHeader } from 'app/components/CardHeader';
 import { ARROWBACK } from 'constants/icons';
 import { useState } from 'react';
 import { BRIDGE_MODE, BRIDGE_MODE_ID, WARNSLIP } from 'constants/index';
+import { colors } from 'theme/base/color';
+import { borderRadius } from 'theme/base/borderRadius';
 
 export default function Settings({
   isBridge,
@@ -100,7 +103,10 @@ export default function Settings({
         />
       </HStack>
       <Button
-        color="ci"
+        bg={colors.bgReset}
+        border={'none'}
+        borderRadius={borderRadius.mmd}
+        className="reset-button"
         variant="iconButton"
         onClick={handleResetDefaults}
         fontWeight="medium"
@@ -113,9 +119,9 @@ export default function Settings({
   const slippageSection = () => (
     <>
       <HStack justifyContent="space-between" mt="17.5px" mb="4px">
-        <Text lineHeight="1.25rem" fontSize="sm" color="gray">
+        <Text className="subtitle-settings">
           {t(`${translationsPath}.slippageToleranceLabel`)}
-          <QuestionHelper
+          {/* <QuestionHelper
             title={t(`${translationsPath}.helperTitle`)}
             text={[
               t(`${translationsPath}.helperP1`),
@@ -125,9 +131,9 @@ export default function Settings({
             ]}
             iconWidth="16px"
             iconMargin="0 0 0 8px"
-          />
+          /> */}
         </Text>
-        <Text fontSize="sm" color="gray" fontWeight="medium">
+        <Text className="subtitle-settings">
           {slippage === 'Auto' ? slippage : `${slippage}%`}
         </Text>
       </HStack>
@@ -143,9 +149,9 @@ export default function Settings({
   const TrxSpeedSection = () => (
     <>
       <HStack justifyContent="space-between" mt="12px" mb="4px">
-        <Text fontSize="sm" color="gray">
+        <Text className="subtitle-settings">
           {t(`${translationsPath}.transactionSpeed`)} (GWEI)
-          <QuestionHelper
+          {/* <QuestionHelper
             title={t(`${translationsPath}.helperTitle`)}
             text={[
               t(`${translationsPath}.helperP1`),
@@ -155,16 +161,14 @@ export default function Settings({
             ]}
             iconWidth="16px"
             iconMargin="0 0 0 8px"
-          />
+          /> */}
         </Text>
-        <Text fontSize="sm" fontWeight="medium" color="gray">
-          {txGweiCost} (GWEI)
-        </Text>
+        <Text className="subtitle-settings">{txGweiCost} (GWEI)</Text>
       </HStack>
-      <TabSelect
+      <TabSelectOld
         index={speedIndex}
         setIndex={handleSpeedIndex}
-        price={Object.values(SPEED_PRICES)}
+        names={Object.values(SPEED_PRICES)}
         w="full"
         mx="0"
         onSelect={handleTxSpeed}
@@ -174,9 +178,9 @@ export default function Settings({
 
   const DeadLineSection = () => (
     <HStack justifyContent="space-between" mt="12px">
-      <Text fontSize="sm" color="gray">
+      <Text className="subtitle-settings">
         {t(`${translationsPath}.transactionDeadlineLabel`)}
-        <QuestionHelper
+        {/* <QuestionHelper
           title={t(`${translationsPath}.helperTitle`)}
           text={[
             t(`${translationsPath}.helperP1`),
@@ -186,12 +190,12 @@ export default function Settings({
           ]}
           iconWidth="16px"
           iconMargin="0 0 0 8px"
-        />
+        /> */}
       </Text>
       <HStack w="90px">
-        <InputGroup bgColor="bgInput" borderRadius="8px">
+        <InputGroup className="timer-button">
           <InputLeftAddon ps="8px" pe="10px">
-            <TimerClockIcon color="grayDarker" width="24px" />
+            <TimerClockIcon color="#f3f2ff" width="24px" />
           </InputLeftAddon>
           <NumberInput
             step={1}
@@ -202,6 +206,7 @@ export default function Settings({
             }}
             max={60}
             min={6}
+            bgColor="transparent"
             borderColor="none"
             variant="noBorder"
             defaultValue={10}
@@ -210,14 +215,15 @@ export default function Settings({
               ps="0"
               pe="10px"
               w="100%"
-              color="ci"
+              color="#F3F2FF"
               fontSize="sm"
               borderColor="none"
-              bgColor="bgInput"
+              className="timer-input"
+              bgColor="transparent"
             />
-            <NumberInputStepper>
-              <NumberIncrementStepper />
-              <NumberDecrementStepper />
+            <NumberInputStepper border="none">
+              <NumberIncrementStepper border="none" />
+              <NumberDecrementStepper border="none" />
             </NumberInputStepper>
           </NumberInput>
         </InputGroup>
@@ -228,9 +234,9 @@ export default function Settings({
   const BridgeModeSection = () => (
     <>
       <HStack justifyContent="space-between" mt="17.5px" mb="4px">
-        <Text lineHeight="1.25rem" fontSize="sm" color="gray">
+        <Text className="subtitle-settings">
           Bridge Mode
-          <QuestionHelper
+          {/* <QuestionHelper
             title={t(`${translationsPath}.helperTitle`)}
             text={[
               t(`${translationsPath}.helperP1`),
@@ -240,13 +246,13 @@ export default function Settings({
             ]}
             iconWidth="16px"
             iconMargin="0 0 0 8px"
-          />
+          /> */}
         </Text>
       </HStack>
-      <TabSelect
+      <TabSelectOld
         index={BRIDGE_MODE_ID[bridgeMode || 0]}
         setIndex={() => {}}
-        price={Object.values(BRIDGE_MODE)}
+        names={Object.values(BRIDGE_MODE)}
         w="full"
         onSelect={handleBridgeMode}
       />{' '}
@@ -255,9 +261,9 @@ export default function Settings({
 
   const ApproveMaxSection = () => (
     <HStack justifyContent="space-between" mt="12px">
-      <Text fontSize="sm" color="gray">
+      <Text className="subtitle-settings">
         {t(`${translationsPath}.approveMaxLabel`)}
-        <QuestionHelper
+        {/* <QuestionHelper
           title={t(`${translationsPath}.helperTitle`)}
           text={[
             t(`${translationsPath}.helperP1`),
@@ -267,7 +273,7 @@ export default function Settings({
           ]}
           iconWidth="16px"
           iconMargin="0 0 0 8px"
-        />
+        /> */}
       </Text>
       <HStack>
         <Switch
@@ -282,7 +288,7 @@ export default function Settings({
 
   return (
     <>
-      <Flex align="stretch" direction="column">
+      <Flex align="stretch" direction="column" className="swap-settings">
         {HeaderSection()}
         {slippageSection()}
 
